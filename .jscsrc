@@ -1,0 +1,8 @@
+{
+    "preset": "google",
+    "fileExtensions": [".js"],
+    "extract": [".php", ".html"],
+    "maxErrors": 10,
+    "fix": false,
+    "es3": true
+}
