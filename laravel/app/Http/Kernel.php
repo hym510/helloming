@@ -15,6 +15,8 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        // uncomment this line for to print sql query to console
+        // \Soloslee\PrintSqlQuery\PrintSqlQuery::class,
     ];
 
     /**
