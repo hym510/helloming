@@ -29,14 +29,4 @@ class CreateTables extends Migration
             $table->unique('wechat_id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('users');
-    }
 }
