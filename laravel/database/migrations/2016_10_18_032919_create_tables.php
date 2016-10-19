@@ -20,12 +20,12 @@ class CreateTables extends Migration
             $table->string('avatar')->nullable();
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->unsignedInteger('job_id');
-            $table->string('token', 64);
+            $table->string('api_token', 64);
             $table->string('wechat_id', 64)->nullable();
             $table->timestamp('created_at');
 
             $table->unique('phone');
-            $table->unique('token');
+            $table->unique('api_token');
             $table->unique('wechat_id');
         });
     }
