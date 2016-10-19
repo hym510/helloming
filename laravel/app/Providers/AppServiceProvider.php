@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            'App\Contracts\Token\ApiToken',
+            'App\Library\Token\ApiToken'
+        );
     }
 }
