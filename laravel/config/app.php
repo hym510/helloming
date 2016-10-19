@@ -227,6 +227,7 @@ return [
 
         'ApiToken' => App\Facades\ApiToken::class,
         'Json' => Soloslee\JsonResponse\Facades\JsonResponse::class,
+        'Smser' => App\Facades\Smser::class,
 
     ],
 
