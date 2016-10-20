@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use Json;
 use Smser;
 use App\Models\User;
+use App\Models\PhoneNumber;
 use App\Http\Requests\SigninRequest;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +13,7 @@ class AuthController extends Controller
 {
     public function postSignin(SigninRequest $request)
     {
-        if (! User::isExist(['phone' => $request->phone])) {
+        if (! PhoneNumber::isExist($request->phone)) {
             return Json::error(
                 'A user with the specified mobile phone number was not found.', 213
             );
