@@ -7,6 +7,7 @@ use Smser;
 use App\Models\User;
 use App\Models\PhoneNumber;
 use App\Http\Requests\SigninRequest;
+use App\Http\Requests\SignupRequest;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -24,5 +25,16 @@ class AuthController extends Controller
         }
 
         return Json::success(User::updateToken($request->phone));
+    }
+
+    public function postSignup(SignupRequest $request)
+    {
+        if (PhoneNumber::isExist($request->phone)) {
+            return Json::error(
+                'Mobile phone number has already been taken.', 214
+            );
+        }
+
+        return Json::success(User::signup($request->input()));
     }
 }
