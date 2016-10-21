@@ -23,4 +23,33 @@ class User extends Model
 
         return $user->toArray();
     }
+
+    public static function signup(array $data)
+    {
+        $apiToken = ApiToken::genToken();
+        if (! array_key_exists('avatar', $data)) {
+            $data['avatar'] = null;
+        }
+        $user = static::create([
+            'avatar' => $data['avatar'],
+            'phone' => $data['phone'],
+            'name' => $data['name'],
+            'gender' => $data['gender'],
+            'job_id' => $data['job_id'],
+            'api_token' => $apiToken,
+        ]);
+        $userArray = static::where('id', $user->id)->first([
+                'avatar', 'experience', 'vip_experience',
+                'state', 'name', 'height', 'weight', 'gender',
+                'online_time', 'job_id', 'zodiac', 'power',
+                'action'
+            ])->toArray();
+        Redis::pipeline()->hset('api_tokens', $apiToken, $user->id)
+            ->sadd('phone_numbers', $data['phone'])
+            ->hmset('user:'.$user->id, $userArray)
+            ->execute();
+        $userArray['api_token'] = $apiToken;
+
+        return $userArray;
+    }
 }
