@@ -13,4 +13,9 @@ class ProfileController extends Controller
     {
         return Json::success(User::getProfile($request->userId));
     }
+
+    public function postUpdate(Request $request)
+    {
+        return Json::success(User::updateProfile($request->userId, $request->input()));
+    }
 }
