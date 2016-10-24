@@ -225,7 +225,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'ApiToken' => App\Facades\ApiToken::class,
+        'AuthToken' => App\Facades\AuthToken::class,
         'Json' => Soloslee\JsonResponse\Facades\JsonResponse::class,
         'Smser' => App\Facades\Smser::class,
 
