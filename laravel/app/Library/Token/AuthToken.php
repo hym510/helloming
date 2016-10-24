@@ -2,9 +2,9 @@
 
 namespace App\Library\Token;
 
-use App\Contracts\Token\ApiToken as ApiTokenContract;
+use App\Contracts\Token\AuthToken as AuthTokenContract;
 
-class ApiToken implements ApiTokenContract
+class AuthToken implements AuthTokenContract
 {
     public function genToken()
     {
