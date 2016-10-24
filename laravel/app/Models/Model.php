@@ -10,7 +10,7 @@ abstract class Model extends BaseModel
 
     public $timestamps = false;
 
-    public static function isExist(array $columns, $id = null)
+    public static function isExist(array $columns, $id = null): bool
     {
         return static::when($id, function ($q) use ($id) {
                 return $q->where('id', '<>', $id);
@@ -26,7 +26,7 @@ abstract class Model extends BaseModel
         }
     }
 
-    public static function getValues($id, array $keys)
+    public static function getValues($id, array $keys): BaseModel
     {
         return static::where('id', $id)->first($keys);
     }

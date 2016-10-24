@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Profile;
 
 use Json;
 use App\Models\User;
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller

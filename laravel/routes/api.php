@@ -16,4 +16,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('auth/signin', ['uses' => 'AuthController@postSignin']);
         Route::post('auth/signup', ['uses' => 'AuthController@postSignup']);
     });
+    Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
+        Route::post('profile/detail', ['uses' => 'ProfileController@getDetail']);
+    });
 });
