@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Token;
 
-interface ApiToken
+interface AuthToken
 {
     public function genToken();
 }
