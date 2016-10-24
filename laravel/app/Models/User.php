@@ -51,4 +51,18 @@ class User extends Model
 
         return $user->toArray();
     }
+
+    public static function updateProfile($id, array $data): array
+    {
+        static::where('id', $id)->update($data);
+        $userArray = static::where('id', $id)->first([
+                'avatar', 'experience', 'vip_experience',
+                'state', 'name', 'height', 'weight', 'gender',
+                'online_time', 'job_id', 'zodiac', 'power',
+                'action'
+            ])->toArray();
+        Redis::hmset('user:'.$id, $userArray);
+
+        return $userArray;
+    }
 }
