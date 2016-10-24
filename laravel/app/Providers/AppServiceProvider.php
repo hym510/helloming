@@ -29,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
-            'App\Contracts\Token\ApiToken',
-            'App\Library\Token\ApiToken'
+            'App\Contracts\Token\AuthToken',
+            'App\Library\Token\AuthToken'
         );
     }
 }
