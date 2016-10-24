@@ -34,12 +34,12 @@ class CreateTables extends Migration
                 ])->nullable();
             $table->unsignedSmallInteger('power')->default(0);
             $table->unsignedSmallInteger('action')->default(0);
-            $table->string('api_token', 64);
+            $table->string('auth_token', 64);
             $table->string('wechat_id', 64)->nullable();
             $table->timestamp('created_at');
 
             $table->unique('phone');
-            $table->unique('api_token');
+            $table->unique('auth_token');
             $table->unique('wechat_id');
         });
     }
