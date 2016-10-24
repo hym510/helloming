@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Redis;
-use ApiToken;
+use AuthToken;
 
 class User extends Model
 {
@@ -11,14 +11,14 @@ class User extends Model
 
     public static function updateToken($phone)
     {
-        $apiToken = ApiToken::genToken();
+        $authToken = AuthToken::genToken();
         $user = static::where('phone', $phone)->first([
-            'id', 'name', 'avatar', 'api_token as old_api_token'
+            'id', 'name', 'avatar', 'auth_token as old_auth_token'
         ]);
-        static::where('phone', $phone)->update(['api_token' => $apiToken]);
-        $user->api_token = $apiToken;
-        Redis::pipeline()->hdel('api_tokens', $user->old_api_token)
-            ->hset('api_tokens', $apiToken, $user->id)
+        static::where('phone', $phone)->update(['auth_token' => $authToken]);
+        $user->auth_token = $authToken;
+        Redis::pipeline()->hdel('auth_tokens', $user->old_auth_token)
+            ->hset('auth_token', $authToken, $user->id)
             ->execute();
 
         return $user->toArray();
@@ -26,7 +26,7 @@ class User extends Model
 
     public static function signup(array $data)
     {
-        $apiToken = ApiToken::genToken();
+        $authToken = AuthToken::genToken();
         if (! array_key_exists('avatar', $data)) {
             $data['avatar'] = null;
         }
@@ -36,7 +36,7 @@ class User extends Model
             'name' => $data['name'],
             'gender' => $data['gender'],
             'job_id' => $data['job_id'],
-            'api_token' => $apiToken,
+            'auth_token' => $authToken,
         ]);
         $userArray = static::where('id', $user->id)->first([
                 'avatar', 'experience', 'vip_experience',
@@ -44,11 +44,11 @@ class User extends Model
                 'online_time', 'job_id', 'zodiac', 'power',
                 'action'
             ])->toArray();
-        Redis::pipeline()->hset('api_tokens', $apiToken, $user->id)
+        Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
             ->sadd('phone_numbers', $data['phone'])
             ->hmset('user:'.$user->id, $userArray)
             ->execute();
-        $userArray['api_token'] = $apiToken;
+        $userArray['auth_token'] = $authToken;
 
         return $userArray;
     }
