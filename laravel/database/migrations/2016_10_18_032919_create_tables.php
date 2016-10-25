@@ -61,5 +61,14 @@ class CreateTables extends Migration
             $table->json('upgrade');
             $table->string('icon');
         });
+
+        Schema::create('items', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->unsignedSmallInteger('priority');
+            $table->enum('type', ['currency', 'props', 'building', 'nei_dan']);
+            $table->string('icon');
+            $table->string('info')->nullable();
+        });
     }
 }
