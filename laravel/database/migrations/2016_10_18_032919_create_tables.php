@@ -70,5 +70,18 @@ class CreateTables extends Migration
             $table->string('icon');
             $table->string('info')->nullable();
         });
+
+        Schema::create('user_items', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+            $table->unsignedInteger('item_id');
+            $table->foreign('item_id')
+                ->references('id')->on('items')
+                ->onDelete('cascade');
+            $table->unsignedSmallInteger('quantity');
+        });
     }
 }
