@@ -34,6 +34,9 @@ class CreateTables extends Migration
                 ])->nullable();
             $table->unsignedSmallInteger('power')->default(0);
             $table->unsignedSmallInteger('action')->default(0);
+            $table->unsignedSmallInteger('equipment1_level')->default(1);
+            $table->unsignedSmallInteger('equipment2_level')->default(1);
+            $table->unsignedSmallInteger('equipment3_level')->default(1);
             $table->string('auth_token', 64);
             $table->string('wechat_id', 64)->nullable();
             $table->timestamp('created_at');
