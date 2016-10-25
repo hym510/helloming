@@ -46,6 +46,11 @@ class CreateTables extends Migration
             $table->unique('wechat_id');
         });
 
+        Schema::create('equipment', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+        });
+
         Schema::create('equipment_attr', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedSmallInteger('level');
