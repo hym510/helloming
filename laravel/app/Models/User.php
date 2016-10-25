@@ -21,11 +21,11 @@ class User extends Model
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
-                'id', 'avatar', 'experience', 'vip_experience',
-                'state', 'name', 'height', 'weight', 'gender',
-                'age', 'online_time', 'job_id', 'zodiac',
-                'power', 'action'
-            ])->toArray();
+            'id', 'avatar', 'experience', 'vip_experience',
+            'state', 'name', 'height', 'weight', 'gender',
+            'age', 'online_time', 'job_id', 'zodiac',
+            'power', 'action'
+        ])->toArray();
 
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
             ->sadd('phone_numbers', $data['phone'])
@@ -65,11 +65,11 @@ class User extends Model
         static::where('id', $id)->update($data);
 
         $userArray = static::where('id', $id)->first([
-                'avatar', 'experience', 'vip_experience',
-                'state', 'name', 'height', 'weight', 'gender',
-                'age', 'online_time', 'job_id', 'zodiac',
-                'power', 'action'
-            ])->toArray();
+            'avatar', 'experience', 'vip_experience',
+            'state', 'name', 'height', 'weight', 'gender',
+            'age', 'online_time', 'job_id', 'zodiac',
+            'power', 'action'
+        ])->toArray();
 
         Redis::hmset('user:'.$id, $userArray);
 

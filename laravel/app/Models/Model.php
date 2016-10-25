@@ -13,14 +13,14 @@ abstract class Model extends BaseModel
     public static function isExist(array $columns, $id = null): bool
     {
         return static::when($id, function ($q) use ($id) {
-                return $q->where('id', '<>', $id);
-            })
-            ->where($columns)->take(1)->count() > 0;
+            return $q->where('id', '<>', $id);
+        })->where($columns)->take(1)->count() > 0;
     }
 
     public static function getValue($id, $key)
     {
         $row = static::find($id, [$key]);
+
         if ($row) {
             return $row->{$key};
         }
