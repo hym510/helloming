@@ -45,5 +45,16 @@ class CreateTables extends Migration
             $table->unique('auth_token');
             $table->unique('wechat_id');
         });
+
+        Schema::create('equipment_attr', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedSmallInteger('level');
+            $table->boolean('max_level')->default(false);
+            $table->unsignedSmallInteger('power');
+            $table->unsignedSmallInteger('job_id');
+            $table->enum('position', [1, 2, 3]);
+            $table->json('upgrade');
+            $table->string('icon');
+        });
     }
 }
