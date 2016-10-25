@@ -94,5 +94,12 @@ class CreateTables extends Migration
             $table->boolean('kill_limit_time');
             $table->string('rescource');
         });
+
+        Schema::create('treasures', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->unsignedSmallInteger('time');
+            $table->string('icon');
+        });
     }
 }
