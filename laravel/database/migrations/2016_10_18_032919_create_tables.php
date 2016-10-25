@@ -83,5 +83,16 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->unsignedSmallInteger('quantity');
         });
+
+        Schema::create('monsters', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->enum('type', ['normal', 'boss']);
+            $table->unsignedSmallInteger('level');
+            $table->unsignedSmallInteger('hp');
+            $table->boolean('kill_limit');
+            $table->boolean('kill_limit_time');
+            $table->string('rescource');
+        });
     }
 }
