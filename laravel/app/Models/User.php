@@ -67,8 +67,8 @@ class User extends Model
         $userArray = static::where('id', $id)->first([
                 'avatar', 'experience', 'vip_experience',
                 'state', 'name', 'height', 'weight', 'gender',
-                'online_time', 'job_id', 'zodiac', 'power',
-                'action'
+                'age', 'online_time', 'job_id', 'zodiac',
+                'power', 'action'
             ])->toArray();
 
         Redis::hmset('user:'.$id, $userArray);
