@@ -6,7 +6,7 @@ class UserItem extends Model
 {
     protected $table = 'user_items';
 
-    public static function getAll($userId, $type)
+    public static function getAll($userId, $type): array
     {
         return static::join('items', 'user_items.item_id', '=', 'items.id')
             ->where('user_items.user_id', $userId)
@@ -15,6 +15,7 @@ class UserItem extends Model
             ->get([
                 'user_items.id', 'items.name', 'items.icon',
                 'items.info', 'user_items.quantity'
-            ]);
+            ])
+            ->toArray();
     }
 }
