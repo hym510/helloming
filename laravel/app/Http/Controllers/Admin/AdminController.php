@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function getData($id)
     {
-        $admin = Admin::findORFail($id);
+        $admin = Admin::findOrFail($id);
 
         return view('admin.adminer.edit', compact('admin'));
     }
@@ -41,9 +41,8 @@ class AdminController extends Controller
 
     public function postUpdate(AdminRequest $request, $id)
     {
-        $data = $request->getData();
         $admin = Admin::findOrFail($id);
-        $admin->updata($data);
+        $admin->updata($request->all());
 
         return redirect()->action('Admin\AdminController@getIndex');
     }

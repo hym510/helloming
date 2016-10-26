@@ -20,9 +20,4 @@ abstract class Request extends FormRequest
 
         return parent::response($errors);
     }
-
-    public function getData()
-    {
-        return $this->only(array_keys($this->rules()));
-    }
 }
