@@ -1,0 +1,34 @@
+.newsInfo:hover {
+    background: #eee;
+    color: #333;
+    z-index: 999;
+}
+.newsInfo {
+
+    position: relative;
+    z-index: 0;
+}
+.newsInfo span {
+
+    display: none;
+}
+.newsInfo:hover span {
+    display: block;
+    position: absolute;
+    min-width:60px;
+    top: 28px;
+    left:100px;
+    border: 1px solid #cccccc;
+    background: rgba(201, 212, 211, 0.35);
+    color: black;
+    padding: 5px;
+    text-align: left;
+    overflow: hidden;
+}
+.newInfoTruncation {
+    width:320px;
+    white-space:nowrap;
+    word-break:keep-all;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

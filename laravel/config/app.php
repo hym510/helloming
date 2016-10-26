@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -228,6 +229,9 @@ return [
         'AuthToken' => App\Facades\AuthToken::class,
         'Json' => Soloslee\JsonResponse\Facades\JsonResponse::class,
         'Smser' => App\Facades\Smser::class,
+
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

@@ -40,4 +40,28 @@ abstract class Model extends BaseModel
     {
         static::where('id', $id)->update($columns);
     }
+
+    public function setAttributes(array $attributes)
+    {
+        foreach ($attributes as $k => $v) {
+            $this->setAttribute($k, $v);
+        }
+
+        return $this;
+    }
+
+    public function mergeAttributesOld()
+    {
+        $old = [];
+        if (old()) {
+            $old = old();
+            foreach ($old as $k => $v) {
+                if (empty($v) && $v != '0') {
+                    unset($old[$k]);
+                }
+            }
+        }
+
+        return $this->setAttributes(array_merge($this->getAttributes(), $old));
+    }
 }
