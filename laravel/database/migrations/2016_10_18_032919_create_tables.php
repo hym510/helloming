@@ -72,7 +72,7 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedSmallInteger('priority');
-            $table->enum('type', ['currency', 'props', 'building', 'nei_dan']);
+            $table->enum('type', ['currency', 'tool', 'building', 'nei_dan']);
             $table->string('icon');
             $table->string('info')->nullable();
         });
