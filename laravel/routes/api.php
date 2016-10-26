@@ -17,6 +17,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('auth/signup', ['uses' => 'AuthController@postSignup']);
     });
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
+        Route::get('backpack/tool', ['uses' => 'BackpackController@getTool']);
         Route::get('profile/detail', ['uses' => 'ProfileController@getDetail']);
         Route::post('profile/update', ['uses' => 'ProfileController@postUpdate']);
     });

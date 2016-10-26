@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Api\Profile;
 
 use App\Models\UserItem;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class BackpackController extends Controller
 {
-    public function getItem(Request $request)
+    public function getTool(Request $request)
     {
-        return Json::success(User::getProfile($request->userId));
-    }
-
-    public function postUpdate(Request $request)
-    {
-        return Json::success(User::updateProfile($request->userId, $request->input()));
+        return Json::success(UserItem::getAll($request->userId, 'tool'));
     }
 }
