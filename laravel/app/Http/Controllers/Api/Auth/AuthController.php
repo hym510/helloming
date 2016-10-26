@@ -6,9 +6,9 @@ use Json;
 use Smser;
 use App\Models\User;
 use App\Models\PhoneNumber;
-use App\Http\Requests\SigninRequest;
-use App\Http\Requests\SignupRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\SigninRequest;
+use App\Http\Requests\Api\SignupRequest;
 
 class AuthController extends Controller
 {
