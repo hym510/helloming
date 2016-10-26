@@ -101,5 +101,12 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('time');
             $table->string('icon');
         });
+
+        Schema::create('fortune_chests', function (Blueprint $table) {
+            $table->increments('id');
+            $table->boolean('cost');
+            $table->enum('cost_type', ['nothing', 'gold', 'diamond']);
+            $table->json('prize');
+        });
     }
 }
