@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Hash;
+use Json;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ResetPasswordRequest;
 
@@ -19,6 +20,6 @@ class ResetPasswordController extends Controller
     {
         auth()->user()->update(['password' => Hash::make($request->password)]);
 
-        return $this->success('更改成功');
+        return Json::success();
     }
 }

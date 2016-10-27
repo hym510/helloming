@@ -14,10 +14,6 @@
     @yield('style_link')
     <link type="text/css" rel="stylesheet" href="assets/css/admin.min.css">
     @yield('style')
-        <!--[if lt IE 9]>
-    <script type="text/javascript" src="/assets/js/html5shiv.min.js"></script>
-    <script type="text/javascript" src="/assets/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body class="menubar-hoverable header-fixed menubar-pin">
 @yield('body')

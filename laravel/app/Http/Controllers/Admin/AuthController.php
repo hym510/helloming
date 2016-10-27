@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function postLogin(LoginRequest $request)
     {
-        if (auth()->guard('admin')->attempt($request->input(), $request->is_remember)) {
+        if (auth()->guard('admin')->attempt($request->expecet('_token'), $request->is_remember)) {
             return redirect()->action('Admin\HomeController@getIndex');
         }
 

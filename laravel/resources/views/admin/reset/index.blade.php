@@ -26,13 +26,13 @@
                             </div>
                         </div>
                     </div>
-                </div><!--end .card-body -->
+                </div>
                 <div class="card-actionbar">
                     <div class="card-actionbar-row">
                         <button type="submit" class="btn ink-reaction btn-raised btn-primary">提交</button>
                     </div>
-                </div><!--end .card-actionbar -->
-            </form><!--end .card -->
+                </div>
+            </form>
         </div>
     </section>
 @stop

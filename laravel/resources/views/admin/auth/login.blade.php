@@ -14,7 +14,7 @@
                     <br/>
                     <span class="text-lg text-bold text-primary">find后台</span>
                     <br/><br/>
-                    <form class="form" action="/auth/logint" accept-charset="utf-8" method="post">
+                    <form class="form" accept-charset="utf-8" method="post">
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <input type="text" class="form-control" id="name" name="email">

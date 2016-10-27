@@ -26,5 +26,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
     Route::post('admin/update/{id}', ['uses' => 'AdminController@postUpdate']);
     Route::get('admin/data/{id}', ['uses' => 'AdminController@getData']);
     Route::get('admin/delete/{id}', ['uses' => 'AdminController@getDelete']);
+
+    Route::get('users/', ['uses' => 'UsersController@getIndex']);
+    Route::get('users/delete/{id}/{type}', ['uses' => 'UsersController@getDelete']);
+    Route::get('users/show/{id}', ['uses' => 'UsersController@getShow']);
 });
+
 

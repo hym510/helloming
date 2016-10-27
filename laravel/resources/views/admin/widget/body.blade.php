@@ -51,6 +51,12 @@
                             <span class="title">管理员管理</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\UsersController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">玩家管理</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
