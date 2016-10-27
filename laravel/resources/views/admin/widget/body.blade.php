@@ -22,10 +22,16 @@
             <div class="headerbar-right">
                 <ul class="header-nav header-nav-profile">
                     <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                            <span class="profile-info">
+                                {{ auth()->user()->email }}
+                                <small>{{ auth()->user()->name }}</small>
+                            </span>
+                        </a>
                         <ul class="dropdown-menu animation-dock">
-                            <li><a href="">重置密码</a></li>
+                            <li><a href="{{ action('Admin\ResetPasswordController@getReset') }}">重置密码</a></li>
                             <li class="divider"></li>
-                            <li><a href=""><i class="fa fa-fw fa-power-off text-danger" aria-hidden="true"></i> 退出</a></li>
+                            <li><a href="{{ action('Admin\AuthController@getLogout') }}"><i class="fa fa-fw fa-power-off text-danger" aria-hidden="true"></i> 退出</a></li>
                         </ul>
                     </li>
                 </ul>

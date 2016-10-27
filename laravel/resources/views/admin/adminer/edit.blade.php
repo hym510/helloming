@@ -25,6 +25,9 @@
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control">
                                 <label>密码</label>
+                                @if ($admin->id)
+                                <div class="help-block">不填写不修改密码</div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password_confirmation" class="form-control">

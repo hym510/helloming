@@ -41,8 +41,10 @@ class AdminController extends Controller
 
     public function postUpdate(AdminRequest $request, $id)
     {
+        $email = $request->email;
+        $password = Hash::make($request->password);
         $admin = Admin::findOrFail($id);
-        $admin->updata($request->all());
+        $admin->update(['email' => $email, 'password' => $password]);
 
         return redirect()->action('Admin\AdminController@getIndex');
     }

@@ -50,6 +50,7 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('email');
             $table->string('password');
+            $table->rememberToken();
         });
 
         Schema::create('jobs', function (Blueprint $table) {
