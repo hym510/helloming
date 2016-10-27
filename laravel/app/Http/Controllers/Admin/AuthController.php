@@ -14,9 +14,10 @@ class AuthController extends Controller
 
     public function postLogin(LoginRequest $request)
     {
-        if(auth()->guard('admin')->attempt($request->input(), $request->is_remember)){
+        if (auth()->guard('admin')->attempt($request->input(), $request->is_remember)) {
             return redirect()->action('Admin\HomeController@getIndex');
         }
+
         return back()->withErrors('账号或者密码错误');
     }
 

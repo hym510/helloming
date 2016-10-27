@@ -10,7 +10,7 @@ class ResetPasswordRequest extends Request
     {
         return [
             'email' => 'required',
-            'password'  => 'required_with:password_confirmation|confirmed|min:6',
+            'password' => 'required_with:password_confirmation|confirmed|min:6',
             'password_confirmation' => 'required_with:password',
         ];
     }

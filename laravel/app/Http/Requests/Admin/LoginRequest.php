@@ -9,8 +9,8 @@ class LoginRequest extends Request
     public function rules()
     {
         return [
-            'email'     => 'required',
-            'password'  => 'required|min:3|max:32',
+            'email' => 'required',
+            'password' => 'required|min:3|max:32',
         ];
     }
 
