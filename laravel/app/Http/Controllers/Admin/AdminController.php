@@ -32,19 +32,21 @@ class AdminController extends Controller
 
     public function postStore(AdminRequest $request)
     {
-        $email = $request->email;
-        $password = Hash::make($request->password);
-        Admin::create(['email' => $email, 'password' => $password]);
+        Admin::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
 
         return redirect()->action('Admin\AdminController@getIndex');
     }
 
     public function postUpdate(AdminRequest $request, $id)
     {
-        $email = $request->email;
-        $password = Hash::make($request->password);
         $admin = Admin::findOrFail($id);
-        $admin->update(['email' => $email, 'password' => $password]);
+        $admin->update([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
 
         return redirect()->action('Admin\AdminController@getIndex');
     }

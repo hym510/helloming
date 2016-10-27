@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ResetPasswordRequest;
 
@@ -16,7 +17,7 @@ class ResetPasswordController extends Controller
 
     public function putReset(ResetPasswordRequest $request)
     {
-        auth()->user()->update(['password' => bcrypt($request->password)]);
+        auth()->user()->update(['password' => Hash::make($request->password)]);
 
         return $this->success('更改成功');
     }
