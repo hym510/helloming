@@ -120,5 +120,16 @@ class CreateTables extends Migration
             $table->enum('cost_type', ['nothing', 'gold', 'diamond']);
             $table->json('prize');
         });
+
+        Schema::create('shops', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('item_id');
+            $table->foreign('item_id')
+                ->references('id')->on('items')
+                ->onDelete('cascade');
+            $table->enum('type', ['tool', 'building', 'nei_dan']);
+            $table->unsignedSmallInteger('priority');
+            $table->unsignedSmallInteger('price');
+        });
     }
 }
