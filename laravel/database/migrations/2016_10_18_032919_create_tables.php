@@ -102,7 +102,7 @@ class CreateTables extends Migration
 
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['monster', 'mine', 'fortune_chest']);
+            $table->enum('type', ['monster', 'mine', 'fortune']);
             $table->unsignedInteger('monster_id')->nullable();
             $table->unsignedInteger('mine_id')->nullable();
             $table->unsignedSmallInteger('exp');
@@ -129,7 +129,7 @@ class CreateTables extends Migration
             $table->string('icon');
         });
 
-        Schema::create('fortune_chests', function (Blueprint $table) {
+        Schema::create('fortunes', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('cost');
             $table->enum('cost_type', ['nothing', 'gold', 'diamond']);

@@ -36,7 +36,7 @@ class UsersController extends Controller
 
     public function postStore(UsersRequest $request)
     {
-        $user = $request->except('_token');
+        $user = $request->inputData();
         User::create($user);
 
         return redirect()->action('Admin\UsersController@getIndex');
