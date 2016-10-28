@@ -20,4 +20,9 @@ abstract class Request extends FormRequest
 
         return parent::response($errors);
     }
+
+    public function inputData()
+    {
+        return $this->except('_token');
+    }
 }
