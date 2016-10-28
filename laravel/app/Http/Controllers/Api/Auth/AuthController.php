@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Api\Auth;
 
 use Json;
 use Smser;
-use App\Models\User;
-use App\Models\PhoneNumber;
+use App\Models\{PhoneNumber, User};
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\SigninRequest;
-use App\Http\Requests\Api\SignupRequest;
+use App\Http\Requests\Api\{SigninRequest, SignupRequest};
 
 class AuthController extends Controller
 {
