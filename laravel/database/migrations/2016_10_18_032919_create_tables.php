@@ -110,7 +110,7 @@ class CreateTables extends Migration
             $table->string('rescource');
         });
 
-        Schema::create('treasures', function (Blueprint $table) {
+        Schema::create('mines', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->unsignedSmallInteger('time');
