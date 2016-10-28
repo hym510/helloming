@@ -34,6 +34,9 @@ class CreateTables extends Migration
                 ])->nullable();
             $table->unsignedSmallInteger('power')->default(0);
             $table->unsignedSmallInteger('action')->default(0);
+            $table->unsignedSmallInteger('gold')->default(0);
+            $table->unsignedSmallInteger('shoe')->default(0);
+            $table->unsignedSmallInteger('diamond')->default(0);
             $table->unsignedSmallInteger('equipment1_level')->default(1);
             $table->unsignedSmallInteger('equipment2_level')->default(1);
             $table->unsignedSmallInteger('equipment3_level')->default(1);
