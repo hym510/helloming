@@ -78,4 +78,9 @@ class User extends Model
 
         return $userArray;
     }
+
+    public function job()
+    {
+        return $this->belongsTo(Job::class, 'job_id');
+    }
 }

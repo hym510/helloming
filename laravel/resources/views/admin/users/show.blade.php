@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->height }}
+                                {{ $user->height.'cm' }}
                             </div>
                             <label>玩家身高</label>
                         </div>
@@ -73,7 +73,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->job_id }}
+                                {{ $user->job->title }}
                             </div>
                             <label>玩家职业</label>
                         </div>

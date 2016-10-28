@@ -30,6 +30,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
     Route::get('users/', ['uses' => 'UsersController@getIndex']);
     Route::get('users/delete/{id}/{type}', ['uses' => 'UsersController@getDelete']);
     Route::get('users/show/{id}', ['uses' => 'UsersController@getShow']);
+    Route::get('users/edit', ['uses' => 'UsersController@getEdit']);
+    Route::post('users/store', ['uses' => 'UsersController@postStore']);
 });
 
 
