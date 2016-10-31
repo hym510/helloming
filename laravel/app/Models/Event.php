@@ -6,6 +6,11 @@ class Event extends Model
 {
     protected $table = 'events';
 
+    public function getPrizeAttribute($value)
+    {
+        return json_decode($value);
+    }
+
     public static function random($level): array
     {
         $events = static::where('unlock_level', $level)
