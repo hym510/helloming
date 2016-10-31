@@ -12,6 +12,11 @@ class User extends Model
 
     protected $table = 'users';
 
+    public function job()
+    {
+        return $this->belongsTo(Job::class, 'job_id');
+    }
+
     public static function signup(array $data): array
     {
         $authToken = AuthToken::genToken();
@@ -24,10 +29,10 @@ class User extends Model
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
-            'id', 'avatar', 'experience', 'vip_experience',
-            'state', 'name', 'height', 'weight', 'gender',
-            'age', 'online_time', 'job_id', 'zodiac',
-            'power', 'action'
+            'avatar', 'exp', 'vip_exp', 'state',
+            'name', 'height', 'weight', 'gender',
+            'age', 'online_time', 'job_id',
+            'zodiac', 'power', 'action'
         ])->toArray();
 
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
@@ -52,6 +57,7 @@ class User extends Model
         $user = static::where('phone', $phone)->first([
             'id', 'name', 'avatar', 'api_token as old_api_token'
         ]);
+
         $user->api_token = $apiToken;
 
         static::where('phone', $phone)->update(['api_token' => $apiToken]);
@@ -68,10 +74,10 @@ class User extends Model
         static::where('id', $id)->update($data);
 
         $userArray = static::where('id', $id)->first([
-            'avatar', 'experience', 'vip_experience',
-            'state', 'name', 'height', 'weight', 'gender',
-            'age', 'online_time', 'job_id', 'zodiac',
-            'power', 'action'
+            'avatar', 'exp', 'vip_exp', 'state',
+            'name', 'height', 'weight', 'gender',
+            'age', 'online_time', 'job_id',
+            'zodiac', 'power', 'action'
         ])->toArray();
 
         Redis::hmset('user:'.$id, $userArray);
@@ -79,8 +85,19 @@ class User extends Model
         return $userArray;
     }
 
-    public function job()
+    public static function power($id, $atk): bool
     {
-        return $this->belongsTo(Job::class, 'job_id');
+        $power = static::getValue($id, 'power');
+
+        if ($power >= $atk) {
+            $power -= $atk;
+
+            static::where('id', $id)->decrement('power', $atk);
+            Redis::hincrby('user:'.$id, 'power', -$atk);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
