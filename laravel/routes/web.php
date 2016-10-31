@@ -15,7 +15,7 @@ Route::group(['namespace' => 'Admin'], function () {
     Route::post('auth/login', ['uses' => 'AuthController@postLogin']);
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function () {
     Route::get('admin/logout', ['uses' => 'AuthController@getLogout']);
     Route::get('admin/home', ['uses' => 'HomeController@getIndex']);
     Route::get('admin/resetpwd', ['uses' => 'ResetPasswordController@getReset']);
