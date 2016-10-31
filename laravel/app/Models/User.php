@@ -29,9 +29,9 @@ class User extends Model
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
-            'avatar', 'exp', 'vip_exp', 'state',
-            'name', 'height', 'weight', 'gender',
-            'age', 'online_time', 'job_id',
+            'avatar', 'level', 'exp', 'vip_exp',
+            'state', 'name', 'height', 'weight',
+            'gender', 'age', 'online_time', 'job_id',
             'zodiac', 'power', 'action'
         ])->toArray();
 
@@ -74,9 +74,9 @@ class User extends Model
         static::where('id', $id)->update($data);
 
         $userArray = static::where('id', $id)->first([
-            'avatar', 'exp', 'vip_exp', 'state',
-            'name', 'height', 'weight', 'gender',
-            'age', 'online_time', 'job_id',
+            'avatar', 'level', 'exp', 'vip_exp',
+            'state', 'name', 'height', 'weight',
+            'gender', 'age', 'online_time', 'job_id',
             'zodiac', 'power', 'action'
         ])->toArray();
 
