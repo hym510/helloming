@@ -119,7 +119,7 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('level');
             $table->unsignedSmallInteger('hp');
             $table->boolean('kill_limit');
-            $table->boolean('kill_limit_time');
+            $table->unsignedSmallInteger('kill_limit_time');
             $table->string('icon');
         });
 
