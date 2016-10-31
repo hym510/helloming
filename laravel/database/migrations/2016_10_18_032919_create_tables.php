@@ -17,8 +17,8 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('avatar')->nullable();
             $table->string('phone', 11);
-            $table->unsignedInteger('experience')->default(0);
-            $table->unsignedInteger('vip_experience')->default(0);
+            $table->unsignedInteger('exp')->default(0);
+            $table->unsignedInteger('vip_exp')->default(0);
             $table->unsignedTinyInteger('state')->default(0);
             $table->string('name', 32);
             $table->unsignedTinyInteger('height')->default(0);
