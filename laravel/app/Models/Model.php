@@ -26,42 +26,18 @@ abstract class Model extends BaseModel
         }
     }
 
-    public static function getValues($id, array $keys): BaseModel
+    public static function getValues($id, array $keys): array
     {
-        return static::where('id', $id)->first($keys);
+        return static::where('id', $id)->first($keys)->toArray();
     }
 
-    public static function getKeyValue($key, $value, array $keys)
+    public static function getKeyValue($key, $value, array $keys): array
     {
-        return static::where($key, $value)->first($keys);
+        return static::where($key, $value)->first($keys)->toArray();
     }
 
     public static function updateValue($id, array $columns)
     {
         static::where('id', $id)->update($columns);
-    }
-
-    public function setAttributes(array $attributes)
-    {
-        foreach ($attributes as $k => $v) {
-            $this->setAttribute($k, $v);
-        }
-
-        return $this;
-    }
-
-    public function mergeAttributesOld()
-    {
-        $old = [];
-        if (old()) {
-            $old = old();
-            foreach ($old as $k => $v) {
-                if (empty($v) && $v != '0') {
-                    unset($old[$k]);
-                }
-            }
-        }
-
-        return $this->setAttributes(array_merge($this->getAttributes(), $old));
     }
 }
