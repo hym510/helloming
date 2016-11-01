@@ -227,11 +227,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'AuthToken' => App\Facades\AuthToken::class,
-        'Json' => Soloslee\JsonResponse\Facades\JsonResponse::class,
-        'Smser' => App\Facades\Smser::class,
-
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Json' => Soloslee\JsonResponse\Facades\JsonResponse::class,
+        'Pusher' => App\Facades\Pusher::class,
+        'Smser' => App\Facades\Smser::class,
 
     ],
 
