@@ -9,7 +9,7 @@ if (! function_exists('is_lucky')) {
      */
     function is_lucky($percent)
     {
-        if (rand(1, 100) < $percent) {
+        if (rand(1, 100) <= $percent) {
             return true;
         } else {
             return false;
