@@ -10,11 +10,11 @@ abstract class Model extends BaseModel
 
     public $timestamps = false;
 
-    public static function isExist(array $columns, $id = null): bool
+    public static function isExist(array $column, $id = null): bool
     {
         return static::when($id, function ($q) use ($id) {
             return $q->where('id', '<>', $id);
-        })->where($columns)->take(1)->count() > 0;
+        })->where($column)->take(1)->count() > 0;
     }
 
     public static function getValue($id, $key)
@@ -31,8 +31,8 @@ abstract class Model extends BaseModel
         return static::where($column)->first($key)->toArray();
     }
 
-    public static function updateValue($id, array $columns)
+    public static function updateValue($id, array $column)
     {
-        static::where('id', $id)->update($columns);
+        static::where('id', $id)->update($column);
     }
 }
