@@ -140,6 +140,23 @@ class CreateTables extends Migration
             $table->json('prize');
         });
 
+        Schema::create('host_mining', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+            $table->unsignedInteger('event_id');
+            $table->foreign('event_id')
+                ->references('id')->on('events')
+                ->onDelete('cascade');
+            $table->unsignedInteger('mine_id');
+            $table->foreign('mine_id')
+                ->references('id')->on('mines')
+                ->onDelete('cascade');
+            $table->timestamp('created_at');
+        });
+
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('item_id');
