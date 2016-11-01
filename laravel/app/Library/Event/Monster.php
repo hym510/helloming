@@ -15,18 +15,18 @@ class Monster
         if (Monster::atk($event['monster_id'], $atk) && User::power($userId, $atk)) {
             User::where('id', $userId)->increment('exp', $event['exp']);
 
+            $prizeIds = array();
+
             foreach ($event['prize'] as $p) {
-                $prize = array();
-
                 if (is_lucky($p[1])) {
-                    UserItem::getPrize($p[0]);
-                    $prize[] = $p[1];
+                    $prizeIds[] = $p[0];
                 }
-
-                $items = Item::whereIn('id', $prize)->get(['name', 'icon'])->toArray();
-
-                return ['exp' => $event['exp'], 'prize' => $items];
             }
+
+            UserItem::getPrize($prizeIds, $userId);
+            $items = Item::whereIn('id', $prizeIds)->get(['name', 'icon'])->toArray();
+
+            return ['exp' => $event['exp'], 'prize' => $items];
         } else {
             return [];
         }
