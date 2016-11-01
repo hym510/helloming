@@ -98,7 +98,7 @@ class CreateTables extends Migration
             $table->foreign('item_id')
                 ->references('id')->on('items')
                 ->onDelete('cascade');
-            $table->unsignedSmallInteger('quantity');
+            $table->unsignedSmallInteger('quantity')->default(1);
         });
 
         Schema::create('events', function (Blueprint $table) {
