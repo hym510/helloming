@@ -87,11 +87,7 @@ class User extends Model
 
     public static function power($id, $atk): bool
     {
-        $power = static::getValue($id, 'power');
-
-        if ($power >= $atk) {
-            $power -= $atk;
-
+        if (Redis::hget('user:'.$id, 'power') >= $atk) {
             static::where('id', $id)->decrement('power', $atk);
             Redis::hincrby('user:'.$id, 'power', -$atk);
 
