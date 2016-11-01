@@ -96,4 +96,15 @@ class User extends Model
             return false;
         }
     }
+
+    public static function free($id): bool
+    {
+        $space = Redis::hmget('user:'.$id, 'space', 'take_up');
+
+        if ($space[0] > $space[1]) {
+            return true;
+        }
+
+        return false;
+    }
 }
