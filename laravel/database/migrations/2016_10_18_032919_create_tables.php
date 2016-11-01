@@ -131,6 +131,7 @@ class CreateTables extends Migration
             $table->string('name');
             $table->unsignedSmallInteger('time');
             $table->string('icon');
+            $table->unsignedSmallInteger('consume_diamond');
         });
 
         Schema::create('fortunes', function (Blueprint $table) {
