@@ -24,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
+            'App\Contracts\Push\Pusher',
+            'App\Library\Pusher\LeanCloud'
+        );
+
+        $this->app->singleton(
             'App\Contracts\Sms\Smser',
             'App\Library\Smser\Smser'
         );

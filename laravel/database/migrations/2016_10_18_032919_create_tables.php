@@ -168,5 +168,11 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('priority');
             $table->unsignedSmallInteger('price');
         });
+
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('message');
+            $table->timestamps();
+        });
     }
 }

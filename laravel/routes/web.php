@@ -32,6 +32,16 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::get('users/show/{id}', ['uses' => 'UsersController@getShow']);
     Route::get('users/edit', ['uses' => 'UsersController@getEdit']);
     Route::post('users/store', ['uses' => 'UsersController@postStore']);
+
+    Route::get('item/', ['uses' => 'ItemsController@getIndex']);
+    Route::get('item/edit', ['uses' => 'ItemsController@getEdit']);
+    Route::get('item/fix/{id}', ['uses' => 'ItemsController@getData']);
+    Route::get('item/delete/{id}', ['uses' => 'ItemsController@getDelete']);
+    Route::get('item/update/{id}', ['uses' => 'ItemsController@postUpdate']);
+    Route::post('item/store', ['uses' => 'ItemsController@postStore']);
+
+    Route::get('msg/', ['uses' => 'PushMsgController@getPushMsg']);
+    Route::post('pushmsg', ['uses' => 'PushMsgController@postPushMsg']);
 });
 
 

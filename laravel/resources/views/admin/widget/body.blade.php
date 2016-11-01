@@ -57,6 +57,18 @@
                             <span class="title">玩家管理</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\ItemsController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">道具管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ action('Admin\PushMsgController@getPushMsg') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">全局推送</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
