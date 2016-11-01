@@ -26,11 +26,6 @@ abstract class Model extends BaseModel
         }
     }
 
-    public static function getValues($id, array $keys): array
-    {
-        return static::where('id', $id)->first($keys)->toArray();
-    }
-
     public static function getKeyValue(array $column, array $key): array
     {
         return static::where($column)->first($key)->toArray();
