@@ -45,9 +45,38 @@ class User extends Model
         return $userArray;
     }
 
+    public static function mining($id)
+    {
+        static::where('id', $id)->increment('take_up', 1);
+        Redis::hincrby('user:'.$id, 'take_up', 1);
+    }
+
     public static function getProfile($id): array
     {
         return Redis::hgetall('user:'.$id);
+    }
+
+    public static function power($id, $atk): bool
+    {
+        if (Redis::hget('user:'.$id, 'power') >= $atk) {
+            static::where('id', $id)->decrement('power', $atk);
+            Redis::hincrby('user:'.$id, 'power', -$atk);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function free($id): bool
+    {
+        $space = Redis::hmget('user:'.$id, 'space', 'take_up');
+
+        if ($space[0] > $space[1]) {
+            return true;
+        }
+
+        return false;
     }
 
     public static function updateToken($phone): array
@@ -82,28 +111,5 @@ class User extends Model
         Redis::hmset('user:'.$id, $userArray);
 
         return $userArray;
-    }
-
-    public static function power($id, $atk): bool
-    {
-        if (Redis::hget('user:'.$id, 'power') >= $atk) {
-            static::where('id', $id)->decrement('power', $atk);
-            Redis::hincrby('user:'.$id, 'power', -$atk);
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static function free($id): bool
-    {
-        $space = Redis::hmget('user:'.$id, 'space', 'take_up');
-
-        if ($space[0] > $space[1]) {
-            return true;
-        }
-
-        return false;
     }
 }
