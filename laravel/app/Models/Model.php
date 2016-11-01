@@ -31,9 +31,9 @@ abstract class Model extends BaseModel
         return static::where('id', $id)->first($keys)->toArray();
     }
 
-    public static function getKeyValue($key, $value, array $keys): array
+    public static function getKeyValue(array $column, array $key): array
     {
-        return static::where($key, $value)->first($keys)->toArray();
+        return static::where($column)->first($key)->toArray();
     }
 
     public static function updateValue($id, array $columns)
