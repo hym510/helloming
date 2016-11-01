@@ -32,7 +32,7 @@ class User extends Model
             'avatar', 'level', 'exp', 'vip_exp',
             'state', 'name', 'height', 'weight',
             'gender', 'age', 'online_time', 'job_id',
-            'zodiac', 'power', 'action'
+            'zodiac', 'space', 'take_up', 'power', 'action'
         ])->toArray();
 
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
