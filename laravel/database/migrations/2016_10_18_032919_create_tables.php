@@ -33,6 +33,7 @@ class CreateTables extends Migration
                     'taurus', 'gemini', 'cancer', 'leo', 'virgo',
                     'libra', 'scorpio', 'sagittarius', 'capricorn'
                 ])->nullable();
+            $table->unsignedTinyInteger('space')->default(3);
             $table->unsignedSmallInteger('power')->default(0);
             $table->unsignedSmallInteger('action')->default(0);
             $table->unsignedSmallInteger('gold')->default(0);
