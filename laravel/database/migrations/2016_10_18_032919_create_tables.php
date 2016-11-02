@@ -105,10 +105,11 @@ class CreateTables extends Migration
 
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['monster', 'mine', 'fortune']);
+            $table->enum('type', ['mine', 'monster', 'fortune']);
             $table->unsignedTinyInteger('level');
-            $table->unsignedInteger('monster_id')->nullable();
             $table->unsignedInteger('mine_id')->nullable();
+            $table->unsignedInteger('monster_id')->nullable();
+            $table->unsignedInteger('fortune_id')->nullable();
             $table->unsignedSmallInteger('exp');
             $table->unsignedTinyInteger('unlock_level');
             $table->json('prize')->nullable();
