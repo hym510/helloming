@@ -8,9 +8,14 @@ class Monster
 {
     public function atk($eventId, $atk, $userId): array
     {
-        $event = Event::getValues($eventId, [
-            'type', 'monster_id', 'mine_id', 'exp', 'prize'
-        ]);
+        $event = Event::getKeyValue(
+            [['id', $eventId], ['type', 'monster']],
+            ['monster_id', 'exp', 'prize']
+        );
+
+        if (! $event) {
+            return [];
+        }
 
         if (Monster::atk($event['monster_id'], $atk) && User::power($userId, $atk)) {
             User::where('id', $userId)->increment('exp', $event['exp']);
