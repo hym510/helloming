@@ -48,6 +48,9 @@
                     </tbody>
                     @endforeach
                 </table>
+                <div class="text-center" data-total="{{ $users->total() }}">
+                    {!! $users->links() !!}
+                </div>
             </div>
         </div>
     </div>

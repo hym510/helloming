@@ -42,6 +42,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
 
     Route::get('msg/', ['uses' => 'PushMsgController@getPushMsg']);
     Route::post('pushmsg', ['uses' => 'PushMsgController@postPushMsg']);
+
+    Route::get('monsters/', ['uses' => 'MonstersController@getIndex']);
+    Route::get('monsters/add', ['uses' => 'MonstersController@getAdd']);
+    Route::get('monsters/edit/{id}', ['uses' => 'MonstersController@getEdit']);
+    Route::post('admin/store', ['uses' => 'MonstersController@postStore']);
+    Route::post('admin/update/{id}', ['uses' => 'MonstersController@postUpdate']);
+    Route::get('admin/delete/{id}', ['uses' => 'MonstersController@getDelete']);
 });
 
 

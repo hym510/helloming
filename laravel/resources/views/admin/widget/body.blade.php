@@ -69,6 +69,12 @@
                             <span class="title">全局推送</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\MonstersController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">打怪事件</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
