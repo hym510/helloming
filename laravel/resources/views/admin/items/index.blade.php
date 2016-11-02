@@ -7,7 +7,7 @@
             <div class="card-head">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="{{ url()->current() }}">列表</a></li>
-                    <li><a href="{{ action('Admin\ItemsController@getEdit')}}">添加</a></li>
+                    <li><a href="{{ action('Admin\ItemsController@getAdd')}}">添加</a></li>
                 </ul>
             </div>
             <div class="card-body">
@@ -41,7 +41,7 @@
                             <td>{{ $item->priority }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $item->id }}">删除</a>
-                                <a href="{{ action('Admin\ItemsController@getData', $item->id) }}" class="btn btn-xs btn-default-bright">修改</a>
+                                <a href="{{ action('Admin\ItemsController@getEdit', $item->id) }}" class="btn btn-xs btn-default-bright">修改</a>
                             </td>
                         </tr>
                     @endforeach

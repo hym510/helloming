@@ -27,11 +27,9 @@ class UsersController extends Controller
         return view('admin.users.show', compact('user'));
     }
 
-    public function getEdit(User $user)
+    public function getAdd()
     {
-        $user = $user->mergeAttributesOld();
-
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit');
     }
 
     public function postStore(UsersRequest $request)

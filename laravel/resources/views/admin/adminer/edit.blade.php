@@ -7,10 +7,10 @@
                 <div class="card-head">
                     <ul class="nav nav-tabs nav-justified">
                         <li><a href="{{ action('Admin\AdminController@getIndex') }}">列表</a></li>
-                        <li class="active"><a href="{{ url()->current() }}">{{ $admin->id ? '修改' : '添加'}}</a></li>
+                        <li class="active"><a href="{{ url()->current() }}">{{ isset($admin) ? '修改' : '添加'}}</a></li>
                     </ul>
                 </div>
-                @if ($admin->id)
+                @if (isset($admin))
                     {!! Form::open([ 'method' => 'post', 'action' => ['Admin\AdminController@postUpdate', $admin->id], 'class' => 'form'])!!}
                 @else
                     {!! Form::open([ 'method' => 'post', 'action' => 'Admin\AdminController@postStore', 'class' => 'form'])!!}
@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control">
                                 <label>密码</label>
-                                @if ($admin->id)
+                                @if (isset($admin))
                                 <div class="help-block">不填写不修改密码</div>
                                 @endif
                             </div>

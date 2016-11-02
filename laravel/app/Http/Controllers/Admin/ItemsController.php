@@ -19,14 +19,12 @@ class ItemsController extends Controller
         return view('admin.items.index', compact('items'));
     }
 
-    public function getEdit(Item $item)
+    public function getAdd()
     {
-        $item = $item->mergeAttributesOld();
-
-        return view('admin.items.edit', compact('item'));
+        return view('admin.items.edit');
     }
 
-    public function getData($id)
+    public function getEdit($id)
     {
         $item = Item::findOrFail($id);
 

@@ -21,21 +21,21 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::get('admin/resetpwd', ['uses' => 'ResetPasswordController@getReset']);
     Route::put('admin/updatepwd', ['uses' => 'ResetPasswordController@putReset']);
     Route::get('admin/auth', ['uses' => 'AdminController@getIndex']);
-    Route::get('admin/edit', ['uses' => 'AdminController@getEdit']);
+    Route::get('admin/add', ['uses' => 'AdminController@getAdd']);
     Route::post('admin/store', ['uses' => 'AdminController@postStore']);
     Route::post('admin/update/{id}', ['uses' => 'AdminController@postUpdate']);
-    Route::get('admin/data/{id}', ['uses' => 'AdminController@getData']);
+    Route::get('admin/edit/{id}', ['uses' => 'AdminController@getEdit']);
     Route::get('admin/delete/{id}', ['uses' => 'AdminController@getDelete']);
 
     Route::get('users/', ['uses' => 'UsersController@getIndex']);
     Route::get('users/delete/{id}/{type}', ['uses' => 'UsersController@getDelete']);
     Route::get('users/show/{id}', ['uses' => 'UsersController@getShow']);
-    Route::get('users/edit', ['uses' => 'UsersController@getEdit']);
+    Route::get('users/add', ['uses' => 'UsersController@getAdd']);
     Route::post('users/store', ['uses' => 'UsersController@postStore']);
 
     Route::get('item/', ['uses' => 'ItemsController@getIndex']);
-    Route::get('item/edit', ['uses' => 'ItemsController@getEdit']);
-    Route::get('item/fix/{id}', ['uses' => 'ItemsController@getData']);
+    Route::get('item/add', ['uses' => 'ItemsController@getAdd']);
+    Route::get('item/edit/{id}', ['uses' => 'ItemsController@getEdit']);
     Route::get('item/delete/{id}', ['uses' => 'ItemsController@getDelete']);
     Route::get('item/update/{id}', ['uses' => 'ItemsController@postUpdate']);
     Route::post('item/store', ['uses' => 'ItemsController@postStore']);

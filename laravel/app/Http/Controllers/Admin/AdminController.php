@@ -16,14 +16,12 @@ class AdminController extends Controller
         return view('admin.adminer.index', compact('admins'));
     }
 
-    public function getEdit(Admin $admin)
+    public function getAdd()
     {
-        $admin = $admin->mergeAttributesOld();
-
-        return view('admin.adminer.edit', compact('admin'));
+        return view('admin.adminer.edit');
     }
 
-    public function getData($id)
+    public function getEdit($id)
     {
         $admin = Admin::findOrFail($id);
 

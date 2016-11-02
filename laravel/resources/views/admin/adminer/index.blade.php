@@ -7,7 +7,7 @@
             <div class="card-head">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="{{ url()->current() }}">列表</a></li>
-                    <li><a href="{{ action('Admin\AdminController@getEdit') }}">添加</a></li>
+                    <li><a href="{{ action('Admin\AdminController@getAdd') }}">添加</a></li>
                 </ul>
             </div>
             <div class="card-body">
@@ -26,7 +26,7 @@
                             <td>{{ $admin->email }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $admin->id }}">删除</a>
-                                <a href="{{ action('Admin\AdminController@getData', $admin->id) }}" class="btn btn-xs btn-default-bright">修改</a>
+                                <a href="{{ action('Admin\AdminController@getEdit', $admin->id) }}" class="btn btn-xs btn-default-bright">修改</a>
                             </td>
                         </tr>
                     @endforeach

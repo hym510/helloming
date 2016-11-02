@@ -6,8 +6,8 @@
         <div class="card">
             <div class="card-head">
                 <ul class="nav nav-tabs nav-justified">
-                    <li><a href="{{ url()->current() }}">列表</a></li>
-                    <li class="active"><a href="{{ action('Admin\UsersController@getEdit') }}">添加</a></li>
+                    <li class="active"><a href="{{ url()->current() }}">列表</a></li>
+                    <li><a href="{{ action('Admin\UsersController@getAdd') }}">添加</a></li>
                 </ul>
             </div>
             <div class="card-body">
