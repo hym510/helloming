@@ -138,7 +138,7 @@ class CreateTables extends Migration
         Schema::create('fortunes', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('cost');
-            $table->enum('cost_type', ['nothing', 'gold', 'diamond']);
+            $table->enum('cost_type', ['item', 'gold', 'diamond', 'none']);
             $table->json('prize');
         });
 
