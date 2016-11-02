@@ -111,7 +111,7 @@ class CreateTables extends Migration
             $table->unsignedInteger('mine_id')->nullable();
             $table->unsignedSmallInteger('exp');
             $table->unsignedTinyInteger('unlock_level');
-            $table->json('prize');
+            $table->json('prize')->nullable();
             $table->string('info');
         });
 
