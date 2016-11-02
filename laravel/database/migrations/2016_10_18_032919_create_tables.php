@@ -173,7 +173,7 @@ class CreateTables extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('message');
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 }
