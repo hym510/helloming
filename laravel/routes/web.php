@@ -56,6 +56,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::post('mines/store', ['uses' => 'MinesController@postStore']);
     Route::post('mines/update/{id}', ['uses' => 'MinesController@postUpdate']);
     Route::get('mines/delete/{id}', ['uses' => 'MinesController@getDelete']);
+
+    Route::get('fortunes/', ['uses' => 'FortunesController@getIndex']);
+    Route::get('fortunes/add', ['uses' => 'FortunesController@getAdd']);
+    Route::get('fortunes/edit/{id}', ['uses' => 'FortunesController@getEdit']);
+    Route::post('fortunes/store', ['uses' => 'FortunesController@postStore']);
+    Route::post('fortunes/update/{id}', ['uses' => 'FortunesController@postUpdate']);
+    Route::get('fortunes/delete/{id}', ['uses' => 'FortunesController@getDelete']);
 });
 
 

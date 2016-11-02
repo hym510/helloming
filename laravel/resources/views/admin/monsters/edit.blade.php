@@ -30,7 +30,11 @@
                             <label>怪物名称</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="type" class="form-control" value="{{ $monster->type or '' }}">
+                            <select name="type" class="form-control" data-val="{{ $monster->type or '' }}">
+                                <option value="empty">类型为空</option>
+                                <option value="normal">普通类型</option>
+                                <option value="boss">boss类型</option>
+                            </select>
                             <label>怪物类型</label>
                         </div>
                         <div class="form-group">
@@ -38,7 +42,7 @@
                             <label>怪物等级</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="hp" class="form-control" value="{{ $monster->hp or ''}}">
+                            <input type="text" name="hp" class="form-control" value="{{ $monster->hp or '' }}">
                             <label>怪物血量</label>
                         </div>
                         <div class="form-group">
@@ -49,7 +53,7 @@
                             <label>是否限时击杀</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="kill_limit_time" class="form-control" value="{{ $monster->kill_limit_time or ''}}">
+                            <input type="text" name="kill_limit_time" class="form-control" value="{{ $monster->kill_limit_time or ''}}" placeholder='秒'>
                             <label>限时击杀时间</label>
                         </div>
                     </div>

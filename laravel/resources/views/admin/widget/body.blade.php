@@ -81,6 +81,12 @@
                             <span class="title">挖矿事件</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\FortunesController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">宝箱事件</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
