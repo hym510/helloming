@@ -13,13 +13,12 @@ class Event extends Model
 
     public static function random($level): array
     {
-        return static::where('unlock_level', $level)
+        return static::where('unlock_level', '<=', $level)
             ->orderByRaw('RAND()')
             ->limit(6)
             ->get([
-                'id', 'type', 'level',
-                'mine_id', 'monster_id',
-                'fortune_id', 'info'
+                'id', 'type', 'mine_id',
+                'monster_id', 'fortune_id', 'info'
             ])
             ->toArray();
     }
