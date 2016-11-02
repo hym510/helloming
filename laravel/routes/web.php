@@ -46,9 +46,16 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::get('monsters/', ['uses' => 'MonstersController@getIndex']);
     Route::get('monsters/add', ['uses' => 'MonstersController@getAdd']);
     Route::get('monsters/edit/{id}', ['uses' => 'MonstersController@getEdit']);
-    Route::post('admin/store', ['uses' => 'MonstersController@postStore']);
-    Route::post('admin/update/{id}', ['uses' => 'MonstersController@postUpdate']);
-    Route::get('admin/delete/{id}', ['uses' => 'MonstersController@getDelete']);
+    Route::post('monsters/store', ['uses' => 'MonstersController@postStore']);
+    Route::post('monsters/update/{id}', ['uses' => 'MonstersController@postUpdate']);
+    Route::get('monsters/delete/{id}', ['uses' => 'MonstersController@getDelete']);
+
+    Route::get('mines/', ['uses' => 'MinesController@getIndex']);
+    Route::get('mines/add', ['uses' => 'MinesController@getAdd']);
+    Route::get('mines/edit/{id}', ['uses' => 'MinesController@getEdit']);
+    Route::post('mines/store', ['uses' => 'MinesController@postStore']);
+    Route::post('mines/update/{id}', ['uses' => 'MinesController@postUpdate']);
+    Route::get('mines/delete/{id}', ['uses' => 'MinesController@getDelete']);
 });
 
 

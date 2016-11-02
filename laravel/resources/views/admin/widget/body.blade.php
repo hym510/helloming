@@ -75,6 +75,12 @@
                             <span class="title">打怪事件</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\MinesController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">挖矿事件</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
