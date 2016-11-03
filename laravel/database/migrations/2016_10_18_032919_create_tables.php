@@ -138,6 +138,10 @@ class CreateTables extends Migration
         Schema::create('fortunes', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('cost_type', ['item', 'gold', 'diamond', 'none']);
+            $table->unsignedInteger('item_id')->nullable();
+            $table->foreign('item_id')
+                ->references('id')->on('items')
+                ->onDelete('cascade');
             $table->unsignedTinyInteger('cost');
             $table->json('prize');
         });
