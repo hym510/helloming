@@ -3,7 +3,7 @@
 namespace App\Library\Event;
 
 use Redis;
-use App\Models\{Event, Fortune, Mine, Monster};
+use App\Models\{Chest, Event, Mine, Monster};
 
 class Event
 {
@@ -15,14 +15,14 @@ class Event
             if ($event['type'] == 'mine') {
                 $event['mine'] = Mine::find($event['mine_id'])->toArray();
                 unset($event['monster_id']);
-                unset($event['fortune_id']);
+                unset($event['chest_id']);
             } elseif ($event['type'] == 'monster') {
                 $event['monster'] = Monster::find($event['monster_id'])->toArray();
                 unset($event['mine_id']);
-                unset($event['fortune_id']);
-            } elseif ($event['type'] == 'fortune') {
-                $event['fortune'] = Fortune::getKeyValue(
-                    [['id', $event['fortune_id']]], ['cost_type', 'cost']
+                unset($event['chest_id']);
+            } elseif ($event['type'] == 'chest') {
+                $event['chest'] = Chest::getKeyValue(
+                    [['id', $event['chest_id']]], ['cost_type', 'cost']
                 );
                 unset($event['mine_id']);
                 unset($event['monster_id']);
