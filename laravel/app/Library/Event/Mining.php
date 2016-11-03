@@ -17,13 +17,13 @@ class Mining
             ['mine_id']
         );
 
-        if ($event) {
-            User::mining($userId);
-            HostMining::start($userId, $eventId, $event['mine_id']);
-
-            return true;
+        if (! $event) {
+            return false;
         }
 
-        return false;
+        User::mining($userId);
+        HostMining::start($userId, $eventId, $event['mine_id']);
+
+        return true;
     }
 }
