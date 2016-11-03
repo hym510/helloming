@@ -43,10 +43,10 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('equipment1_level')->default(1);
             $table->unsignedSmallInteger('equipment2_level')->default(1);
             $table->unsignedSmallInteger('equipment3_level')->default(1);
+            $table->boolean('activate')->default(true);
             $table->string('auth_token', 64)->nullable();
             $table->string('wechat_id', 64)->nullable();
             $table->timestamp('created_at');
-            $table->softDeletes();
 
             $table->unique('phone');
             $table->unique('auth_token');
