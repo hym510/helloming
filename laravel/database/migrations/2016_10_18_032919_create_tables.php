@@ -70,10 +70,6 @@ class CreateTables extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-        });
-
-        Schema::create('equipment_attr', function (Blueprint $table) {
-            $table->increments('id');
             $table->unsignedSmallInteger('level');
             $table->boolean('max_level')->default(false);
             $table->unsignedSmallInteger('power');
