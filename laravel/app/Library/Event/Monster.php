@@ -17,23 +17,23 @@ class Monster
             return [];
         }
 
-        if (Monster::atk($event['monster_id'], $atk) && User::power($userId, $atk)) {
-            User::where('id', $userId)->increment('exp', $event['exp']);
-
-            $prizeIds = array();
-
-            foreach ($event['prize'] as $p) {
-                if (is_lucky($p[1])) {
-                    $prizeIds[] = $p[0];
-                }
-            }
-
-            UserItem::getPrize($prizeIds, $userId);
-            $items = Item::whereIn('id', $prizeIds)->get(['name', 'icon'])->toArray();
-
-            return ['exp' => $event['exp'], 'prize' => $items];
-        } else {
+        if (! Monster::atk($event['monster_id'], $atk) || ! User::power($userId, $atk)) {
             return [];
         }
+
+        User::where('id', $userId)->increment('exp', $event['exp']);
+
+        $prizeIds = array();
+
+        foreach ($event['prize'] as $p) {
+            if (is_lucky($p[1])) {
+                $prizeIds[] = $p[0];
+            }
+        }
+
+        UserItem::getPrize($prizeIds, $userId);
+        $items = Item::whereIn('id', $prizeIds)->get(['name', 'icon'])->toArray();
+
+        return ['exp' => $event['exp'], 'prize' => $items];
     }
 }
