@@ -56,11 +56,11 @@ class User extends Model
         return Redis::hgetall('user:'.$id);
     }
 
-    public static function power($id, $atk): bool
+    public static function enough($id, $type, $cost): bool
     {
-        if (Redis::hget('user:'.$id, 'power') >= $atk) {
-            static::where('id', $id)->decrement('power', $atk);
-            Redis::hincrby('user:'.$id, 'power', -$atk);
+        if (Redis::hget('user:'.$userId, $type) >= $cost) {
+            static::where('id', $id)->decrement($type, $cost);
+            Redis::hincrby('user:'.$id, $type, -$cost);
 
             return true;
         } else {
