@@ -105,7 +105,7 @@ class CreateTables extends Migration
 
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['mine', 'monster', 'fortune']);
+            $table->enum('type', ['mine', 'monster', 'chest']);
             $table->unsignedTinyInteger('level');
             $table->unsignedInteger('mine_id')->nullable();
             $table->foreign('mine_id')
@@ -115,9 +115,9 @@ class CreateTables extends Migration
             $table->foreign('monster_id')
                 ->references('id')->on('monsters')
                 ->onDelete('cascade');
-            $table->unsignedInteger('fortune_id')->nullable();
-            $table->foreign('fortune_id')
-                ->references('id')->on('fortunes')
+            $table->unsignedInteger('chest_id')->nullable();
+            $table->foreign('chest_id')
+                ->references('id')->on('chests')
                 ->onDelete('cascade');
             $table->unsignedSmallInteger('exp');
             $table->unsignedTinyInteger('unlock_level');
@@ -144,7 +144,7 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('consume_diamond');
         });
 
-        Schema::create('fortunes', function (Blueprint $table) {
+        Schema::create('chests', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('cost_type', ['item', 'gold', 'diamond', 'none']);
             $table->unsignedInteger('item_id')->nullable();
