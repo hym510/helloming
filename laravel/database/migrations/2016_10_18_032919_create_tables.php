@@ -36,6 +36,7 @@ class CreateTables extends Migration
             $table->unsignedTinyInteger('space')->default(3);
             $table->unsignedTinyInteger('take_up')->default(0);
             $table->unsignedSmallInteger('power')->default(0);
+            $table->unsignedSmallInteger('remain_power')->default(0);
             $table->unsignedSmallInteger('action')->default(0);
             $table->unsignedSmallInteger('gold')->default(0);
             $table->unsignedSmallInteger('shoe')->default(0);
