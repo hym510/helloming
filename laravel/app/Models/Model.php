@@ -28,7 +28,13 @@ abstract class Model extends BaseModel
 
     public static function getKeyValue(array $column, array $key): array
     {
-        return static::where($column)->first($key)->toArray();
+        $model = static::where($column)->first($key);
+
+        if ($model) {
+            return $model->toArray();
+        } else {
+            return [];
+        }
     }
 
     public static function updateValue($id, array $column)
