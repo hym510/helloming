@@ -17,7 +17,7 @@ class Monster
             return [];
         }
 
-        if (! Monster::atk($event['monster_id'], $atk) || ! User::power($userId, $atk)) {
+        if (! Monster::atk($event['monster_id'], $atk) || ! User::enough($userId, 'power', $atk)) {
             return [];
         }
 
