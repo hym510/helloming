@@ -58,7 +58,7 @@ class User extends Model
 
     public static function enough($id, $type, $cost): bool
     {
-        if (Redis::hget('user:'.$userId, $type) >= $cost) {
+        if (Redis::hget('user:'.$id, $type) >= $cost) {
             static::where('id', $id)->decrement($type, $cost);
             Redis::hincrby('user:'.$id, $type, -$cost);
 
