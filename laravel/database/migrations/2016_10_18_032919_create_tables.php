@@ -121,6 +121,7 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->unsignedSmallInteger('exp');
             $table->unsignedTinyInteger('unlock_level');
+            $table->unsignedTinyInteger('weight');
             $table->json('prize')->nullable();
             $table->string('info');
         });
