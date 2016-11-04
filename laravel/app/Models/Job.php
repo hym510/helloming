@@ -10,6 +10,13 @@ class Job extends Model
 
     public static function getAll(): array
     {
-        return json_decode(Redis::get('jobs'));
+        if ($jobs = Redis::get('jobs')) {
+            return json_decode($jobs);
+        } else {
+            $jobs = Job::all()->toArray();
+            Redis::set('jobs', json_encode($jobs));
+
+            return $jobs;
+        }
     }
 }
