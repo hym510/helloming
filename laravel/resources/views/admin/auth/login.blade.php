@@ -2,7 +2,6 @@
 
 @section('body')
 <section class="section-account">
-    <!-- 公司标志 -->
     <div class="spacer">
         <div class="logo"><img src=""></div>
     </div>
