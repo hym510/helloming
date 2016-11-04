@@ -16,12 +16,22 @@ class User extends Model
 
     public static function signup(array $data): array
     {
-        $authToken = AuthToken::genToken();
-
         if (! isset($data['avatar'])) {
             $data['avatar'] = null;
         }
 
+        $equipment = Equipment::where('level', 1)
+            ->where('job_id', $data['job_id'])
+            ->limit(3)
+            ->get(['power']);
+        $data['power'] = 0;
+
+        foreach ($equipment as $e) {
+            $data['power'] += $e['power'];
+        }
+
+        $data['remain_power'] = $data['power'];
+        $authToken = AuthToken::genToken();
         $data['auth_token'] = $authToken;
         $user = static::create($data);
 
@@ -29,7 +39,9 @@ class User extends Model
             'avatar', 'level', 'exp', 'vip_exp',
             'state', 'name', 'height', 'weight',
             'gender', 'age', 'online_time', 'job_id',
-            'zodiac', 'space', 'take_up', 'power', 'action'
+            'zodiac', 'space', 'take_up', 'power',
+            'remain_power', 'action', 'gold',
+            'diamond'
         ])->toArray();
 
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
