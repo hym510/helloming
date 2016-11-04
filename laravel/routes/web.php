@@ -63,6 +63,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::post('fortunes/store', ['uses' => 'FortunesController@postStore']);
     Route::post('fortunes/update/{id}', ['uses' => 'FortunesController@postUpdate']);
     Route::get('fortunes/delete/{id}', ['uses' => 'FortunesController@getDelete']);
+
+    Route::get('events/', ['uses' => 'EventsController@getIndex']);
+    Route::get('events/add', ['uses' => 'EventsController@getAdd']);
+    Route::post('events/store', ['uses' => 'EventsController@postStore']);
+    Route::post('events/update/{id}', ['uses' => 'EventsController@postUpdate']);
+    Route::get('events/edit/{id}', ['uses' => 'EventsController@getEdit']);
+    Route::get('events/delete/{id}', ['uses' => 'EventsController@getDelete']);
+
 });
 
 

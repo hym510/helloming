@@ -22,4 +22,36 @@ class Event extends Model
             ])
             ->toArray();
     }
+
+    public function getTypeNameAttribute()
+    {
+        switch ($this->type) {
+            case 'monster':
+                $type = '打怪事件';
+                break;
+            case 'mine':
+                $type = '挖矿事件';
+                break;
+            case 'foreach':
+                $type = '宝箱事件';
+                break;
+
+        }
+        return $type;
+    }
+
+    public function monster()
+    {
+        return $this->belongsTo(Monster::class);
+    }
+
+    public function mine()
+    {
+        return $this->belongsTo(Mine::class);
+    }
+
+    public function fortune()
+    {
+        return $this->belongsTo(Fortune::class);
+    }
 }

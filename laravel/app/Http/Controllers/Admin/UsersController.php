@@ -14,6 +14,7 @@ class UsersController extends Controller
             return $q->where('phone', request('keyword'))
                 ->orWhere('name', request('keyword'));
         })
+        ->where('activate', 1)
         ->paginate()
         ->appends(request()->all());
 
@@ -45,11 +46,13 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         switch ($type) {
             case 'delete':
-                $user->delete();
+                $user->update(['activate' => 0]);
                 break;
             case 'forcedelete':
                 $user->forceDelete();
                 break;
         }
+
+        return redirect()->action('Admin\UsersController@getIndex');
     }
 }
