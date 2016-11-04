@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Event;
 use Json;
 use App\Library\Event\Event;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 
 class EventController extends Controller
 {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Event;
 use Json;
 use Illuminate\Http\Request;
 use App\Library\Event\Monster;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 
 class MonsterController extends Controller
 {
