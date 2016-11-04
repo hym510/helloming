@@ -17,7 +17,7 @@ class Event extends Model
             ->orderByRaw('RAND()')
             ->limit(6)
             ->get([
-                'id', 'type', 'mine_id',
+                'id', 'type', 'level', 'mine_id',
                 'monster_id', 'fortune_id', 'info'
             ])
             ->toArray();
