@@ -17,7 +17,7 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('avatar')->nullable();
             $table->string('phone', 11);
-            $table->unsignedTinyInteger('level')->default(0);
+            $table->unsignedTinyInteger('level')->default(1);
             $table->unsignedMediumInteger('exp')->default(0);
             $table->unsignedMediumInteger('vip_exp')->default(0);
             $table->unsignedTinyInteger('state')->default(0);
@@ -101,29 +101,6 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('quantity')->default(1);
         });
 
-        Schema::create('events', function (Blueprint $table) {
-            $table->increments('id');
-            $table->enum('type', ['mine', 'monster', 'chest']);
-            $table->unsignedTinyInteger('level');
-            $table->unsignedInteger('mine_id')->nullable();
-            $table->foreign('mine_id')
-                ->references('id')->on('mines')
-                ->onDelete('cascade');
-            $table->unsignedInteger('monster_id')->nullable();
-            $table->foreign('monster_id')
-                ->references('id')->on('monsters')
-                ->onDelete('cascade');
-            $table->unsignedInteger('chest_id')->nullable();
-            $table->foreign('chest_id')
-                ->references('id')->on('chests')
-                ->onDelete('cascade');
-            $table->unsignedSmallInteger('exp');
-            $table->unsignedTinyInteger('unlock_level');
-            $table->unsignedTinyInteger('weight');
-            $table->json('prize')->nullable();
-            $table->string('info');
-        });
-
         Schema::create('monsters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -152,6 +129,29 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->unsignedTinyInteger('cost');
             $table->json('prize');
+        });
+
+        Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
+            $table->enum('type', ['mine', 'monster', 'chest']);
+            $table->unsignedTinyInteger('level');
+            $table->unsignedInteger('mine_id')->nullable();
+            $table->foreign('mine_id')
+                ->references('id')->on('mines')
+                ->onDelete('cascade');
+            $table->unsignedInteger('monster_id')->nullable();
+            $table->foreign('monster_id')
+                ->references('id')->on('monsters')
+                ->onDelete('cascade');
+            $table->unsignedInteger('chest_id')->nullable();
+            $table->foreign('chest_id')
+                ->references('id')->on('chests')
+                ->onDelete('cascade');
+            $table->unsignedSmallInteger('exp');
+            $table->unsignedTinyInteger('unlock_level');
+            $table->unsignedTinyInteger('weight');
+            $table->json('prize')->nullable();
+            $table->string('info');
         });
 
         Schema::create('host_mining', function (Blueprint $table) {
