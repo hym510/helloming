@@ -33,6 +33,7 @@ class User extends Model
         $data['remain_power'] = $data['power'];
         $authToken = AuthToken::genToken();
         $data['auth_token'] = $authToken;
+        $data['created_at'] = date('Y-m-d H:i:s');
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
