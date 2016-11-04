@@ -11,9 +11,7 @@ class MiningController extends Controller
 {
     public function getStart(Mining $mining, Request $request, $eventId)
     {
-        $success = $mining->start($eventId, $request->userId);
-
-        if (! $success) {
+        if (! $mining->start($eventId, $request->userId)) {
             return Json::error('Not enough space available.', 401);
         }
 
