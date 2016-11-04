@@ -11,9 +11,9 @@
                     </ul>
                 </div>
                 @if (isset($event))
-                    {!! Form::open([ 'method' => 'post', 'action' => ['Admin\EventsController@postUpdate', $event->id], 'class' => 'form'])!!}
+                    {!! Form::open([ 'method' => 'post', 'action' => ['Admin\EventsController@postUpdate', $event->id], 'class' => 'form']) !!}
                 @else
-                    {!! Form::open([ 'method' => 'post', 'action' => 'Admin\EventsController@postStore', 'class' => 'form'])!!}
+                    {!! Form::open([ 'method' => 'post', 'action' => 'Admin\EventsController@postStore', 'class' => 'form']) !!}
                 @endif
                 <div class="card-body form">
                     <div class="row">

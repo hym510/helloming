@@ -46,7 +46,7 @@
 </section>
 @stop
 @section('script')
-    @if(env('APP_DEBUG'))
+    @if (env('APP_DEBUG'))
     <script type="text/javascript">
         if($('[name="email"]').val() == ''){
             $('[name="email"]').val('admin@gg.cn');

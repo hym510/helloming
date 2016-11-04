@@ -11,9 +11,9 @@
                 </ul>
             </div>
             @if (isset($item))
-                {!! Form::open([ 'method' => 'post', 'action' => ['Admin\ItemsController@postUpdate', $item->id], 'class' => 'form'])!!}
+                {!! Form::open([ 'method' => 'post', 'action' => ['Admin\ItemsController@postUpdate', $item->id], 'class' => 'form']) !!}
             @else
-                {!! Form::open([ 'method' => 'post', 'action' => 'Admin\ItemsController@postStore', 'class' => 'form'])!!}
+                {!! Form::open([ 'method' => 'post', 'action' => 'Admin\ItemsController@postStore', 'class' => 'form']) !!}
             @endif
             <div class="card-body form">
                 <div class="row">
