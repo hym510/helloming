@@ -32,11 +32,12 @@ class Event extends Model
             case 'mine':
                 $type = '挖矿事件';
                 break;
-            case 'foreach':
+            case 'chest':
                 $type = '宝箱事件';
                 break;
 
         }
+
         return $type;
     }
 
