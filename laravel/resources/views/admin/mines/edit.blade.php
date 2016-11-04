@@ -33,6 +33,10 @@
                             <input type="text" name="time" class="form-control" value="{{ $mine->time or ''}}" placeholder="秒">
                             <label>开矿时间</label>
                         </div>
+                        <div class="form-group">
+                            <input type="text" name="consume_diamond" class="form-control" value="{{ $mine->consume_diamond or '' }}">
+                            <label>消耗钻石</label>
+                        </div>
                     </div>
                 </div>
                 <div class="card-actionbar">

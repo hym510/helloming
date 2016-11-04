@@ -57,12 +57,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::post('mines/update/{id}', ['uses' => 'MinesController@postUpdate']);
     Route::get('mines/delete/{id}', ['uses' => 'MinesController@getDelete']);
 
-    Route::get('fortunes/', ['uses' => 'FortunesController@getIndex']);
-    Route::get('fortunes/add', ['uses' => 'FortunesController@getAdd']);
-    Route::get('fortunes/edit/{id}', ['uses' => 'FortunesController@getEdit']);
-    Route::post('fortunes/store', ['uses' => 'FortunesController@postStore']);
-    Route::post('fortunes/update/{id}', ['uses' => 'FortunesController@postUpdate']);
-    Route::get('fortunes/delete/{id}', ['uses' => 'FortunesController@getDelete']);
+    Route::get('chests/', ['uses' => 'ChestsController@getIndex']);
+    Route::get('chests/add', ['uses' => 'ChestsController@getAdd']);
+    Route::get('chests/edit/{id}', ['uses' => 'ChestsController@getEdit']);
+    Route::post('chests/store', ['uses' => 'ChestsController@postStore']);
+    Route::post('chests/update/{id}', ['uses' => 'ChestsController@postUpdate']);
+    Route::get('chests/delete/{id}', ['uses' => 'ChestsController@getDelete']);
 
     Route::get('events/', ['uses' => 'EventsController@getIndex']);
     Route::get('events/add', ['uses' => 'EventsController@getAdd']);

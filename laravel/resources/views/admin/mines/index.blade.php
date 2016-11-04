@@ -25,6 +25,7 @@
                             <th>矿物名称</th>
                             <th>矿物图片</th>
                             <th>开矿时间</th>
+                            <th>消耗钻石</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@
                             <td>{{ $mine->name }}</td>
                             <td><img src="{{ $mine->icon }}" height="50px"></td>
                             <td>{{ $mine->time}}</td>
+                            <td>{{ $mine->consume_diamond }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $mine->id }}">删除</a>
                                 <a href="{{ action('Admin\MinesController@getEdit', $mine->id) }}" class="btn btn-xs btn-default-bright">修改</a>

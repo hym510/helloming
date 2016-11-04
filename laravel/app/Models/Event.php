@@ -35,7 +35,6 @@ class Event extends Model
             case 'chest':
                 $type = '宝箱事件';
                 break;
-
         }
 
         return $type;

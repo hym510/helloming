@@ -68,3 +68,22 @@
     </div>
 </section>
 @stop
+
+@section('script')
+<script type="text/javascript">
+    $(function() {
+        var dTime = $('input[name="kill_limit_time"]').parent();
+        $('select[name="kill_limit"]').on('change', function() {
+            switch ($(this).val()) {
+                case '1':
+                dTime.css('display', 'block');
+                break;
+                case '0':
+                dTime.css('display', 'none');
+                break;
+            }
+        }).triggerHandler('change');
+    });
+
+</script>
+@stop

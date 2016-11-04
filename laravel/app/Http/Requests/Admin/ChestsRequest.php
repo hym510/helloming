@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 
-class FortunesRequest extends Request
+class ChestsRequest extends Request
 {
     public function rules()
     {

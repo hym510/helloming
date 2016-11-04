@@ -7,7 +7,7 @@
             <div class="card-head">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="{{ url()->current() }}">列表</a></li>
-                    <li><a href="{{ action('Admin\FortunesController@getAdd')}}">添加</a></li>
+                    <li><a href="{{ action('Admin\ChestsController@getAdd')}}">添加</a></li>
                 </ul>
             </div>
             <div class="card-body">
@@ -29,22 +29,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($fortunes as $fortune)
+                    @foreach($chests as $chest)
                         <tr>
-                            <td>{{ $fortune->id }}</td>
-                            <td>{{ $fortune->prize }}</td>
-                            <td>{{ $fortune->cost_type }}</td>
-                            <td>{{ $fortune->cost }}</td>
+                            <td>{{ $chest->id }}</td>
+                            <td>{{ $chest->prize }}</td>
+                            <td>{{ $chest->type_name }}</td>
+                            <td>{{ $chest->cost }}</td>
                             <td>
-                                <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $fortune->id }}">删除</a>
-                                <a href="{{ action('Admin\FortunesController@getEdit', $fortune->id) }}" class="btn btn-xs btn-default-bright">修改</a>
+                                <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $chest->id }}">删除</a>
+                                <a href="{{ action('Admin\ChestsController@getEdit', $chest->id) }}" class="btn btn-xs btn-default-bright">修改</a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center" data-total="{{ $fortunes->total() }}">
-                    {!! $fortunes->links() !!}
+                <div class="text-center" data-total="{{ $chests->total() }}">
+                    {!! $chests->links() !!}
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             btn: ['确定','取消'],
             yes: function(index) {
                 layer.close(index);
-                $.get("{{ action('Admin\FortunesController@getDelete', ['id' => '']) }}/" + id, function() {
+                $.get("{{ action('Admin\ChestsController@getDelete', ['id' => '']) }}/" + id, function() {
                     layer.alert('删除成功', function() {
                         location.reload();
                     })

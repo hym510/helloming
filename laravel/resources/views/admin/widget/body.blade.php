@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ action('Admin\FortunesController@getIndex') }}">
+                        <a href="{{ action('Admin\ChestsController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-paw"></i></div>
                             <span class="title">宝箱事件</span>
                         </a>

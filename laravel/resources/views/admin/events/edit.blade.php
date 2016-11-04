@@ -22,7 +22,7 @@
                                 <select name="type" class="form-control" value="{{ $event->type_Name or '' }}">
                                     <option value="monster">打怪事件</option>
                                     <option value="mine">挖矿事件</option>
-                                    <option value="fortune">宝箱事件</option>
+                                    <option value="chest">宝箱事件</option>
                                 </select>
                                 <label>事件类型</label>
                             </div>
@@ -39,7 +39,7 @@
                                 <label>读取挖矿</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="fortune_id" class="form-control" value="{{ $event->fortune_id or '' }}">
+                                <input type="text" name="chest_id" class="form-control" value="{{ $event->chest_id or '' }}">
                                 <label>宝箱事件</label>
                             </div>
                             <div class="form-group">
@@ -57,6 +57,10 @@
                             <div class="form-group">
                                  <textarea name="info" class="form-control" rows="2">{{ $event->info or '' }}</textarea>
                                 <label>事件描述</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="weight" class="form-control" value="{{ $event->weight or '' }}">
+                                <label>权重</label>
                             </div>
                         </div>
                     </div>
@@ -76,21 +80,21 @@
     $(function() {
         var dMonster = $('input[name="monster_id"]').parent();
         var dMine = $('input[name="mine_id"]').parent();
-        var dFortune = $('input[name="fortune_id"]').parent();
+        var dChest = $('input[name="chest_id"]').parent();
         $('select[name="type"]').on('change', function() {
             switch ($(this).val()) {
                 case 'monster':
                     dMonster.css('display', 'block');
                     dMine.css('display', 'none');
-                    dFortune.css('display', 'none');
+                    dChest.css('display', 'none');
                     break;
                 case 'mine':
                     dMine.css('display', 'block');
                     dMonster.css('display', 'none');
-                    dFortune.css('display', 'none');
+                    dChest.css('display', 'none');
                     break;
-                case 'fortune':
-                    dFortune.css('display', 'block');
+                case 'chest':
+                    dChest.css('display', 'block');
                     dMine.css('display', 'none');
                     dMonster.css('display', 'none');
                     break;
