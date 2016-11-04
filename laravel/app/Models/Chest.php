@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class Fortune extends Model
+class Chest extends Model
 {
-    protected $table = 'fortunes';
+    protected $table = 'chests';
 
     public function getPrizeAttribute($value)
     {
