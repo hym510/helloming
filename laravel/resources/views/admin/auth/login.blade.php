@@ -45,16 +45,3 @@
     </div>
 </section>
 @stop
-@section('script')
-    @if (env('APP_DEBUG'))
-    <script type="text/javascript">
-        if($('[name="email"]').val() == ''){
-            $('[name="email"]').val('admin@gg.cn');
-        }
-        if($('[name="password"]').val() == ''){
-            $('[name="password"]').val('666666');
-        }
-        $('[name="remember"]').prop('checked','checked');
-    </script>
-    @endif
-@stop
