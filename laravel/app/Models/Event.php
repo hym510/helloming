@@ -18,7 +18,7 @@ class Event extends Model
             ->limit(6)
             ->get([
                 'id', 'type', 'level', 'mine_id',
-                'monster_id', 'fortune_id', 'info'
+                'monster_id', 'chest_id', 'info'
             ])
             ->toArray();
     }
