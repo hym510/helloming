@@ -28,14 +28,14 @@ class AuthController extends Controller
 
     public function postSignin(SigninRequest $request)
     {
+        if (! Smser::verifySmsCode($request->phone, $request->code)) {
+            return Json::error('Invalid SMS code.', 603);
+        }
+
         if (! PhoneNumber::isExist($request->phone)) {
             return Json::error(
                 'A user with the specified mobile phone number was not found.', 213
             );
-        }
-
-        if (! Smser::verifySmsCode($request->phone, $request->code)) {
-            return Json::error('Invalid SMS code.', 603);
         }
 
         return Json::success(User::updateToken($request->phone));
