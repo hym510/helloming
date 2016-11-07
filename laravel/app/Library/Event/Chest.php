@@ -2,11 +2,11 @@
 
 namespace App\Library\Event;
 
-use App\Models\{Chest, Event, User, UserItem};
+use App\Models\{Chest, Event, Item, User, UserItem};
 
 class Chest
 {
-    public function open($eventId, $userId): bool
+    public function open($eventId, $userId): array
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'chest']],
@@ -14,7 +14,7 @@ class Chest
         );
 
         if (! $event) {
-            return false;
+            return [];
         }
 
         $chest = Chest::getKeyValue(
@@ -32,23 +32,23 @@ class Chest
                 UserItem::where('user_id', $userId)
                     ->where('item_id', $chest['item_id'])
                     ->decrement('quantity', $chest['cost']);
-
-                UserItem::manyPrize($chest['prize'], $userId);
-
-                return true;
+            } else {
+                return [];
             }
-        } elseif ($chest['cost_type'] == 'gold' && User::enough($userId, 'gold', $chest['cost'])) {
-            UserItem::manyPrize($chest['prize'], $userId);
-
-            return true;
-        } elseif ($chest['cost_type'] == 'diamond' && User::enough($userId, 'diamond', $chest['cost'])) {
-            UserItem::manyPrize($chest['prize'], $userId);
-
-            return true;
-        } elseif ($chest['cost_type'] == 'none') {
-            UserItem::manyPrize($chest['prize'], $userId);
-
-            return true;
+        } elseif ($chest['cost_type'] == 'gold' && ! User::enough($userId, 'gold', $chest['cost'])) {
+            return [];
+        } elseif ($chest['cost_type'] == 'diamond' && ! User::enough($userId, 'diamond', $chest['cost'])) {
+            return [];
         }
+
+        $prizeIds = UserItem::manyPrize($chest['prize'], $userId);
+        $items = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon']);
+
+        foreach ($chest['prize'] as $p) {
+            $item = $items->where('id', $p[0])->first();
+            $item->quantity = $p[1];
+        }
+
+        return $items->toArray();
     }
 }
