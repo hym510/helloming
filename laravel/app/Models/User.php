@@ -91,21 +91,24 @@ class User extends Model
 
     public static function updateToken($phone): array
     {
-        $apiToken = ApiToken::genToken();
+        $authToken = AuthToken::genToken();
 
         $user = static::where('phone', $phone)->first([
-            'id', 'name', 'avatar', 'api_token as old_api_token'
+            'id', 'auth_token as old_auth_token'
         ]);
 
-        $user->api_token = $apiToken;
+        $user->auth_token = $authToken;
 
-        static::where('phone', $phone)->update(['api_token' => $apiToken]);
+        static::where('phone', $phone)->update(['auth_token' => $authToken]);
 
-        Redis::pipeline()->hdel('api_tokens', $user->old_api_token)
-            ->hset('api_tokens', $apiToken, $user->id)
+        Redis::pipeline()->hdel('auth_tokens', $user->old_auth_token)
+            ->hset('auth_tokens', $authToken, $user->id)
             ->execute();
 
-        return $user->toArray();
+        $profile = Redis::hgetall('user:'.$user->id);
+        $profile['auth_token'] = $authToken;
+
+        return $profile;
     }
 
     public static function updateProfile($id, array $data): array
@@ -113,9 +116,8 @@ class User extends Model
         static::where('id', $id)->update($data);
 
         $userArray = static::where('id', $id)->first([
-            'avatar', 'name', 'height',
-            'weight', 'gender', 'age',
-            'job_id', 'zodiac'
+            'avatar', 'name', 'height', 'weight',
+            'gender', 'age', 'job_id', 'zodiac'
         ])->toArray();
 
         Redis::hmset('user:'.$id, $userArray);
