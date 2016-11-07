@@ -17,6 +17,8 @@ class Monster
             return [];
         }
 
+        $atk *= 10;
+
         if (! Monster::atk($event['monster_id'], $atk) || ! User::enough($userId, 'remain_power', $atk)) {
             return [];
         }
@@ -32,7 +34,7 @@ class Monster
         }
 
         UserItem::getPrize($prizeIds, $userId);
-        $items = Item::whereIn('id', $prizeIds)->get(['name', 'icon'])->toArray();
+        $items = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon'])->toArray();
 
         return ['exp' => $event['exp'], 'prize' => $items];
     }
