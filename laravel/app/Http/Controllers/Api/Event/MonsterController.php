@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Api\Event;
 
+use Auth;
 use Json;
-use Illuminate\Http\Request;
 use App\Library\Event\Monster;
 use Illuminate\Routing\Controller;
+use App\Http\Requests\Api\MonsterRequest;
 
 class MonsterController extends Controller
 {
-    public function getAtk(Monster $monster, Request $request, $eventId, $atk)
+    public function postAtk(Monster $monster, MonsterRequest $request)
     {
-        $success = $monster->atk($eventId, $atk, $request->userId);
+        $success = $monster->atk($request->event_id, $request->atk, Auth::user()->user);
 
         if (! $success) {
             return Json::error('Lack of physical strength.', 501);
