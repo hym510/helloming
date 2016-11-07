@@ -37,11 +37,11 @@ class User extends Model
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
-            'avatar', 'level', 'exp', 'vip_exp',
-            'state', 'name', 'height', 'weight',
-            'gender', 'age', 'online_time', 'job_id',
-            'zodiac', 'space', 'take_up', 'power',
-            'remain_power', 'action', 'gold',
+            'id', 'avatar', 'level', 'exp',
+            'vip_exp', 'state', 'name', 'height',
+            'weight', 'gender', 'age', 'online_time',
+            'job_id', 'zodiac', 'space', 'take_up',
+            'power', 'remain_power', 'action', 'gold',
             'diamond'
         ])->toArray();
 
