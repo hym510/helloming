@@ -64,7 +64,7 @@ class CreateTables extends Migration
 
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('name');
         });
 
         Schema::create('equipment', function (Blueprint $table) {
