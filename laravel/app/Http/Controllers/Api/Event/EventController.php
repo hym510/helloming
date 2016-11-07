@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 class EventController extends Controller
 {
-    public function getIndex(Event $event, Request $request)
+    public function getRefresh(Event $event, Request $request)
     {
         return Json::success($event->random($request->userId));
     }

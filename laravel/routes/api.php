@@ -24,7 +24,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {
         Route::get('chest/open/{eventId}', ['uses' => 'ChestController@getOpen']);
-        Route::get('event', ['uses' => 'EventController@getIndex']);
+        Route::get('event/refresh', ['uses' => 'EventController@getRefresh']);
         Route::get('mining/start/{eventId}', ['uses' => 'MiningController@getStart']);
         Route::get('monster/atk/{eventId}/{atk}', ['uses' => 'MonsterController@getAtk']);
     });
