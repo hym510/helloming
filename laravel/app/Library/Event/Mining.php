@@ -27,7 +27,7 @@ class Mining
         return true;
     }
 
-    public function finish($hostMiningId, $userId): array
+    public function complete($hostMiningId, $userId): array
     {
         $hostMining = HostMining::getKeyValue(
             [['id', $hostMiningId], ['user_id', $userId]],
