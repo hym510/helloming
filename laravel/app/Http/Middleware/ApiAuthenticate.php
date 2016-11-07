@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use Auth;
 use Json;
 use Redis;
 use Closure;
+use App\Models\AuthenUser;
 
 class ApiAuthenticate
 {
@@ -16,7 +18,7 @@ class ApiAuthenticate
             return Json::error('Invalid auth token.', 104);
         }
 
-        $request->userId = $userId;
+        Auth::setUser(new AuthenUser($userId));
 
         return $next($request);
     }
