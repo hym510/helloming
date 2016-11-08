@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api\Profile;
 
+use Auth;
+use Json;
 use App\Models\UserItem;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class BackpackController extends Controller
 {
-    public function getTool(Request $request)
+    public function getTool()
     {
-        return Json::success(UserItem::getAll($request->userId, 'tool'));
+        return Json::success(UserItem::getAll(Auth::user()->user, 'tool'));
     }
 }
