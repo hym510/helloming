@@ -11,9 +11,10 @@ class EventsRequest extends Request
         return [
             'type' => 'required',
             'level' => 'required|numeric',
+            'prize' => 'json',
             'mine_id' => 'numeric',
             'monster_id' => 'numeric',
-            'chest' => 'required|numeric',
+            'chest_id' => 'numeric',
             'exp' => 'required|numeric',
             'unlock_level' => 'required|numeric',
             'weight' => 'required|numeric',

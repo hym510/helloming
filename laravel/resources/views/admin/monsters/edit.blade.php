@@ -20,10 +20,10 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="form-control-static">
-                                <img src="" class="upload-img" data-name="icon" height="120">
+                                <img src="{{ $monster->icon or config('main.placeholders.default_img') }}" class="upload-img" data-name="icon" height="120">
                             </div>
-                                <input type="hidden" name="icon" value="{{ $monster->icon or '' }}" required>
-                                <label>封面图</label>
+                            <input type="hidden" name="icon" value="{{ $monster->icon or '' }}" required>
+                            <label>封面图</label>
                         </div>
                         <div class="form-group">
                             <input type="text" name="name" class="form-control" value="{{ $monster->name or '' }}">

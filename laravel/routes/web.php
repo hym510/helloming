@@ -71,6 +71,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
     Route::get('events/edit/{id}', ['uses' => 'EventsController@getEdit']);
     Route::get('events/delete/{id}', ['uses' => 'EventsController@getDelete']);
 
+    Route::get('equipments/', ['uses' => 'EquipmentsController@getIndex']);
+    Route::get('equipments/add', ['uses' => 'EquipmentsController@getAdd']);
+    Route::post('equipments/store', ['uses' => 'EquipmentsController@postStore']);
+    Route::post('equipments/update/{id}', ['uses' => 'EquipmentsController@postUpdate']);
+    Route::get('equipments/edit/{id}', ['uses' => 'EquipmentsController@getEdit']);
+    Route::get('equipments/delete/{id}', ['uses' => 'EquipmentsController@getDelete']);
+
 });
 
 

@@ -16,6 +16,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <div class="form-control-static">
+                                    <img src="{{ $user->icon or config('main.placeholders.default_img') }}" class="upload-img" data-name="icon" height="120px">
+                                </div>
+                                <input type="hidden" name="icon" value="{{ $user->icon or '' }}">
+                                <label>图像</label>
+                            </div>
+                            <div class="form-group">
                                 <input type="text" name="name" class="form-control" value="{{ $user->name or ''}}">
                                 <label>姓名</label>
                             </div>

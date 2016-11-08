@@ -47,13 +47,13 @@
                 <ul id="main-menu" class="gui-controls">
                     <li>
                         <a href="{{ action('Admin\AdminController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-folder"></i></div>
                             <span class="title">管理员管理</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\UsersController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-users"></i></div>
                             <span class="title">玩家管理</span>
                         </a>
                     </li>
@@ -71,19 +71,19 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\MonstersController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-bell"></i></div>
                             <span class="title">打怪事件</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\MinesController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-star"></i></div>
                             <span class="title">挖矿事件</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\ChestsController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-diamond"></i></div>
                             <span class="title">宝箱事件</span>
                         </a>
                     </li>
@@ -91,6 +91,12 @@
                         <a href="{{ action('Admin\EventsController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-paw"></i></div>
                             <span class="title">事件管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ action('Admin\EquipmentsController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">装备管理</span>
                         </a>
                     </li>
                 </ul>

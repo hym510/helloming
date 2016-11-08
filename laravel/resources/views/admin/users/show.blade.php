@@ -9,31 +9,31 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->id }}
+                                {{ $user->id or '' }}
                             </div>
                             <label>编号</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->name }}
+                                {{ $user->name or '' }}
                             </div>
                             <label>玩家姓名</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->gender }}
+                                {{ $user->gender or '' }}
                             </div>
                             <label>玩家性别</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->age }}
+                                {{ $user->age or '' }}
                             </div>
                             <label>玩家年龄</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                <img src="{{ $user->avatar }}">
+                                <img src="{{ $user->avatar or '' }}">
                             </div>
                             <label>玩家图像</label>
                         </div>
@@ -41,31 +41,31 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->experience }}
+                                {{ $user->experience or '' }}
                             </div>
                             <label>经验</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->vip_experience }}
+                                {{ $user->vip_experience or '' }}
                             </div>
                             <label>会员经验</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->height.'cm' }}
+                                {{ $user->height or '' }}
                             </div>
                             <label>玩家身高</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->weight }}
+                                {{ $user->weight or '' }}
                             </div>
                             <label>玩家体重</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->online_time }}
+                                {{ $user->online_time or '' }}
                             </div>
                             <label>在线时间</label>
                         </div>
@@ -73,19 +73,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->job->title }}
+                                {{ $user->job }}
                             </div>
                             <label>玩家职业</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->zodiac }}
+                                {{ $user->zodiac or '' }}
                             </div>
                             <label>玩家星座</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->power }}
+                                {{ $user->power or '' }}
                             </div>
                             <label>玩家人气</label>
                         </div>

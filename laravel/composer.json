@@ -10,7 +10,8 @@
         "laravel/framework": "5.3.*",
         "soloslee/json-response": "^1.0",
         "soloslee/print-sql-query": "^1.0",
-        "laravelcollective/html": "5.3.*"
+        "laravelcollective/html": "5.3.*",
+        "qiniu/php-sdk": "7.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

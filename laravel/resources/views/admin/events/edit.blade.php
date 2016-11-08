@@ -43,7 +43,7 @@
                                 <label>宝箱事件</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="prize" class="form-control" value="{{ $event->prize or '' }}">
+                                <input type="text" name="prize" class="form-control" value="{{ $event->prize or '' }}" placeholder="">
                                 <label>奖励道具</label>
                             </div>
                             <div class="form-group">
