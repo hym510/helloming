@@ -2,7 +2,7 @@
 
 namespace App\Library\Event;
 
-use App\Models\{Event, HostMining, Item, Mine, User, UserItem};
+use App\Models\{Event, HostEvent, Item, Mine, User, UserItem};
 
 class Mining
 {
@@ -23,22 +23,22 @@ class Mining
 
         User::mining($userId);
 
-        return HostMining::start($userId, $eventId, $event['mine_id']);
+        return HostEvent::start($userId, $eventId, $event['mine_id']);
     }
 
-    public function complete($hostMiningId, $userId): array
+    public function complete($hostEventId, $userId): array
     {
-        $hostMining = HostMining::getKeyValue(
-            [['id', $hostMiningId], ['user_id', $userId]],
+        $hostEvent = HostEvent::getKeyValue(
+            [['id', $hostEventId], ['user_id', $userId]],
             ['event_id', 'mine_id']
         );
 
-        if (! $hostMining) {
+        if (! $hostEvent) {
             return [];
         }
 
         $mine = Mine::getKeyValue(
-            [['id', $hostMining['mine_id']]],
+            [['id', $hostEvent['mine_id']]],
             ['consume_diamond']
         );
 
@@ -50,9 +50,9 @@ class Mining
             return [];
         }
 
-        HostMining::where('id', $hostMiningId)->delete();
+        HostEvent::where('id', $hostEventId)->delete();
         $event = Event::getKeyValue(
-            [['id', $hostMining['event_id']], ['type', 'mine']],
+            [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize']
         );
         User::addExp($userId, $event['exp']);
