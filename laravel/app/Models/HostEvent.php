@@ -6,7 +6,7 @@ class HostEvent extends Model
 {
     protected $table = 'host_events';
 
-    public static function start($userId, $eventId, $mineId)
+    public static function start($userId, $eventId, $mineId): array
     {
         $model = static::create([
             'user_id' => $userId, 'event_id' => $eventId,
@@ -14,5 +14,13 @@ class HostEvent extends Model
         ]);
 
         return ['host_event_id' => $model->id];
+    }
+
+    public static function getMine($userId): array
+    {
+        return static::join('mines', 'host_events.mine_id', '=', 'mines.id')
+            ->where('host_events.user_id', $userId)
+            ->get(['mines.time', 'mines.icon', 'host_events.created_at'])
+            ->toArray();
     }
 }
