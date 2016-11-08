@@ -124,4 +124,10 @@ class User extends Model
 
         return $userArray;
     }
+
+    public static function addExp($id, $exp)
+    {
+        static::where('id', $id)->increment('exp', $exp);
+        Redis::hincrby('user:'.$id, 'exp', $exp);
+    }
 }
