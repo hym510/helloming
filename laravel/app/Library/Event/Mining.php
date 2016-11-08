@@ -6,7 +6,7 @@ use App\Models\{Event, HostMining, Item, Mine, User, UserItem};
 
 class Mining
 {
-    public function start($eventId, $userId): bool
+    public function start($eventId, $userId): array
     {
         if (! User::free($userId)) {
             return false;
@@ -18,13 +18,12 @@ class Mining
         );
 
         if (! $event) {
-            return false;
+            return [];
         }
 
         User::mining($userId);
-        HostMining::start($userId, $eventId, $event['mine_id']);
 
-        return true;
+        return HostMining::start($userId, $eventId, $event['mine_id']);
     }
 
     public function complete($hostMiningId, $userId): array
