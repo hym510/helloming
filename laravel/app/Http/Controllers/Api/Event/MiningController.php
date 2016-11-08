@@ -20,9 +20,9 @@ class MiningController extends Controller
         return Json::success($success);
     }
 
-    public function getComplete(Mining $mining, $hostMiningId)
+    public function getComplete(Mining $mining, $hostEventId)
     {
-        $success = $mining->complete($hostMiningId, Auth::user()->user);
+        $success = $mining->complete($hostEventId, Auth::user()->user);
 
         if (! $success) {
             return Json::error('Diamonds are not enough.', 601);

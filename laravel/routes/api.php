@@ -26,7 +26,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('chest/open/{eventId}', ['uses' => 'ChestController@getOpen']);
         Route::get('event/refresh', ['uses' => 'EventController@getRefresh']);
         Route::get('mining/start/{eventId}', ['uses' => 'MiningController@getStart']);
-        Route::get('mining/complete/{hostMiningId}', ['uses' => 'MiningController@getComplete']);
+        Route::get('mining/complete/{hostEventId}', ['uses' => 'MiningController@getComplete']);
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
     });
 
