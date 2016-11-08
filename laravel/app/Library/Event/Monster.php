@@ -23,7 +23,7 @@ class Monster
             return [];
         }
 
-        User::where('id', $userId)->increment('exp', $event['exp']);
+        User::addExp($userId, $event['exp']);
 
         $prizeIds = array();
 
