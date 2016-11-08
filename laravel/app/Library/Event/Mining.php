@@ -9,7 +9,7 @@ class Mining
     public function start($eventId, $userId): array
     {
         if (! User::free($userId)) {
-            return false;
+            return [];
         }
 
         $event = Event::getKeyValue(
