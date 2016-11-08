@@ -8,9 +8,11 @@ class HostMining extends Model
 
     public static function start($userId, $eventId, $mineId)
     {
-        static::create([
+        $model = static::create([
             'user_id' => $userId, 'event_id' => $eventId,
             'mine_id' => $mineId, 'created_at' => date('Y-m-d H:i:s')
         ]);
+
+        return ['host_mining_id' => $model->id];
     }
 }
