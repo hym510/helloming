@@ -24,6 +24,7 @@ class Chest extends Model
                 $type = '消耗钻石';
                 break;
         }
+
         return $type;
     }
 }
