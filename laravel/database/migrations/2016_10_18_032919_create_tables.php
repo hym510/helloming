@@ -154,7 +154,7 @@ class CreateTables extends Migration
             $table->string('info');
         });
 
-        Schema::create('host_mining', function (Blueprint $table) {
+        Schema::create('host_events', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')
