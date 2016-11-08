@@ -53,8 +53,10 @@ class Mining
         HostMining::where('id', $hostMiningId)->delete();
         $event = Event::getKeyValue(
             [['id', $hostMining['event_id']], ['type', 'mine']],
-            ['prize']
+            ['exp', 'prize']
         );
+        User::addExp($userId, $event['exp']);
+
         $prizeIds = array();
 
         foreach ($event['prize'] as $p) {
