@@ -13,6 +13,6 @@ class HostEvent extends Model
             'mine_id' => $mineId, 'created_at' => date('Y-m-d H:i:s')
         ]);
 
-        return ['host_mining_id' => $model->id];
+        return ['host_event_id' => $model->id];
     }
 }
