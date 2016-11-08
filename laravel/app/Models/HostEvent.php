@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class HostMining extends Model
+class HostEvent extends Model
 {
-    protected $table = 'host_mining';
+    protected $table = 'host_events';
 
     public static function start($userId, $eventId, $mineId)
     {
