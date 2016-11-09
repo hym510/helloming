@@ -67,6 +67,8 @@ class Mining
 
         HostEvent::where('id', $hostEventId)->delete();
 
+        User::freeSpace($userId);
+
         $event = Event::getKeyValue(
             [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize']
