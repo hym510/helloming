@@ -29,10 +29,14 @@ class HostMining
         }
 
         HostEvent::where('id', $this->hostEventId)->delete();
+
+        User::freeSpace($hostEvent['user_id']);
+
         $event = Event::getKeyValue(
             [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize']
         );
+
         User::addExp($hostEvent['user_id'], $event['exp']);
 
         $prizeIds = array();
