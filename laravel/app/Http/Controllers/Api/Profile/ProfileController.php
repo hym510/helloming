@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Api\Profile;
 
+use Auth;
 use Json;
-use App\Models\User;
+use Redis;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class ProfileController extends Controller
 {
-    public function getDetail(Request $request)
+    public function getDetail()
     {
-        return Json::success(User::getProfile($request->userId));
+        return Json::success(Redis::hgetall('user:'.Auth::user()->user));
     }
 
     public function postUpdate(Request $request)
