@@ -17,6 +17,6 @@ class ProfileController extends Controller
 
     public function postUpdate(Request $request)
     {
-        return Json::success(User::updateProfile($request->userId, $request->input()));
+        return Json::success(User::updateProfile(Auth::user()->user, $request->input()));
     }
 }
