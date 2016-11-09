@@ -11,14 +11,8 @@ use App\Http\Requests\Api\{SigninRequest, SignupRequest};
 
 class AuthController extends Controller
 {
-    public function postSignupSms(Request $request)
+    public function postSignSms(Request $request)
     {
-        if (PhoneNumber::isExist($request->phone)) {
-            return Json::error(
-                'Mobile phone number has already been taken.', 214
-            );
-        }
-
         if (Smser::requestSmsCode($request->phone)) {
             return Json::success();
         } else {
