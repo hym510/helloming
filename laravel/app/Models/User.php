@@ -130,4 +130,10 @@ class User extends Model
         static::where('id', $id)->increment('exp', $exp);
         Redis::hincrby('user:'.$id, 'exp', $exp);
     }
+
+    public static function freeSpace($id)
+    {
+        static::where('id', $id)->decrement('take_up', 1);
+        Redis::hincrby('user:'.$id, 'take_up', -1);
+    }
 }
