@@ -35,7 +35,6 @@ class EventsController extends Controller
     {
         $data = [];
         $event = $request->inputData();
-        $event['prize'] = json_encode($event['prize']);
         switch ($request->type) {
             case 'monster':
                 $data = Monster::find($event['monster_id'])->toArray();

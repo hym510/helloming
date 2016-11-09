@@ -18,7 +18,6 @@
 <body class="menubar-hoverable header-fixed menubar-pin">
 @yield('body')
 <script src="assets/js/ganguo-admin.min.js"></script>
-<script src="assets/lib/single_file/autosize.min.js"></script>
 <script src="assets/js/layer.js"></script>
 <script src="assets/js/admin.js"></script>
 @yield('script_link')

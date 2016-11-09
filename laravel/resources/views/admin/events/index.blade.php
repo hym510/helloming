@@ -42,7 +42,7 @@
                             <td>{{ $event->monster_id or '' }}</td>
                             <td>{{ $event->mine_id or '' }}</td>
                             <td>{{ $event->fortune_id or '' }}</td>
-                            <td>{{ $event->prize or '' }}</td>
+                            <td>{{ json_encode($event->prize) }}</td>
                             <td>{{ $event->exp or ''}}</td>
                             <td>{{ $event->unlock_level or '' }}</td>
                             <td>{{ $event->info }}</td>
