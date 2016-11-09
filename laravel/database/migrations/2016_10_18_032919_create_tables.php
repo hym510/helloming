@@ -177,7 +177,7 @@ class CreateTables extends Migration
             $table->foreign('item_id')
                 ->references('id')->on('items')
                 ->onDelete('cascade');
-            $table->enum('type', ['tool', 'building', 'nei_dan']);
+            $table->enum('type', ['currency', 'tool', 'building', 'nei_dan']);
             $table->unsignedSmallInteger('priority');
             $table->unsignedSmallInteger('price');
         });
