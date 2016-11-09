@@ -2,6 +2,9 @@
 
 namespace App\Library\Event;
 
+use Carbon\Carbon;
+use App\Jobs\HostMining;
+use Illuminate\Contracts\Bus\Dispatcher;
 use App\Models\{Event, HostEvent, Item, Mine, User, UserItem};
 
 class Mining
@@ -21,9 +24,21 @@ class Mining
             return [];
         }
 
+        $mine = Mine::getKeyValue(
+            [['id', $event['mine_id']]],
+            ['time']
+        );
+
         User::mining($userId);
 
-        return HostEvent::start($userId, $eventId, $event['mine_id']);
+        $hostEvent = HostEvent::start($userId, $eventId, $event['mine_id']);
+
+        $job = (new HostMining($hostEvent['host_event_id']))
+                    ->delay(Carbon::now()->addSeconds($mine['time']));
+
+        app(Dispatcher::class)->dispatch($job);
+
+        return $event;
     }
 
     public function complete($hostEventId, $userId): array
@@ -51,6 +66,7 @@ class Mining
         }
 
         HostEvent::where('id', $hostEventId)->delete();
+
         $event = Event::getKeyValue(
             [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize']
@@ -66,6 +82,7 @@ class Mining
         }
 
         UserItem::getPrize($prizeIds, $userId);
+
         $items = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon'])->toArray();
 
         return $items;

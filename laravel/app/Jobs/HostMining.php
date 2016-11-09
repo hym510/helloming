@@ -4,9 +4,10 @@ namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\{Event, HostEvent, User, UserItem};
 
-class HostMining
+class HostMining implements ShouldQueue
 {
     use InteractsWithQueue, Queueable;
 
