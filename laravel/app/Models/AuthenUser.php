@@ -9,10 +9,15 @@ class AuthenUser implements AuthenticatableContract
 {
     use Authenticatable;
 
-    public $user;
+    protected $user;
 
-    public function __construct($userId)
+    public function __construct($user)
     {
-       $this->user = $userId;
-   }
+       $this->user = $user;
+    }
+
+    public function __get($name)
+    {
+        return $this->$name;
+    }
 }
