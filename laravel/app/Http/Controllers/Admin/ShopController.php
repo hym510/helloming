@@ -2,50 +2,46 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Item;
 use App\Models\Shop;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ShopRequest;
 
 class ShopController extends Controller
 {
     public function getIndex()
     {
-        $shops = Shop::when(request('keyword'), function ($q) {
-            return $q->where('name', request('keyword'));
-        })
-        ->paginate()
-        ->appends(request()->all());
+        $shops = Shop::get();
 
         return view('admin.shop.index', compact('shops'));
     }
 
-    public function getAdd()
+    public function getAdd(Item $item)
     {
-        return view('admin.shop.edit');
+        $items = $item->get();
+
+        return view('admin.shop.add', compact('items'));
     }
 
-    public function getEdit($id)
+    public function postStore($id,  Shop $shop)
     {
-        $shop = Shop::findOrFail($id);
-
-        return view('admin.shop.edit', compact('shop'));
-    }
-
-    public function postUpdate(ShopRequest $request, $id)
-    {
-        $data = $request->inputData();
-        $shop = Shop::findOrFail($id);
-        $shop->update($data);
+        $item = Item::findOrFail($id);
+        $shop['item_id'] = $item['id'];
+        $shop['type'] = $item['type'];
+        $shop['priority'] = $item['priority'];
+        $shop->save();
 
         return redirect()->action('Admin\ShopController@getIndex');
     }
 
-    public function postStore(ShopRequest $request)
+    public function getSetPrice($id, $value)
     {
-        $data = $request->inputData();
-        Shop::create($data);
-
-        return redirect()->action('Admin\ShopController@getIndex');
+        if (is_numeric($value)) {
+            $price = Shop::findOrFail($id);
+            $price->price = floor($value);
+            $price->save();
+        } else {
+            return response()->json(['message' => 403]);
+        }
     }
 
     public function getDelete($id)

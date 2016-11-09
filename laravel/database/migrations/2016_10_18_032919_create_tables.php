@@ -179,7 +179,7 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->enum('type', ['currency', 'tool', 'building', 'nei_dan']);
             $table->unsignedSmallInteger('priority');
-            $table->unsignedSmallInteger('price');
+            $table->unsignedSmallInteger('price')->nullable();
         });
 
         Schema::create('notifications', function (Blueprint $table) {

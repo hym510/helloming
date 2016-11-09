@@ -80,7 +80,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function ()
 
     Route::get('shop/', ['uses' => 'ShopController@getIndex']);
     Route::get('shop/add', ['uses' => 'ShopController@getAdd']);
-    Route::post('shop/store', ['uses' => 'ShopController@postStore']);
+    Route::get('shop/price/{id}/{value}', ['uses' => 'ShopController@getSetPrice']);
+    Route::post('shop/store/{id}', ['uses' => 'ShopController@postStore']);
     Route::post('shop/update/{id}', ['uses' => 'ShopController@postUpdate']);
     Route::get('shop/edit/{id}', ['uses' => 'ShopController@getEdit']);
     Route::get('shop/delete/{id}', ['uses' => 'ShopController@getDelete']);

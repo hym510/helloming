@@ -11,20 +11,13 @@
                 </ul>
             </div>
             <div class="card-body">
-                <form class="form-inline" method="get">
-                    <div class="form-group">
-                        <input type="text" name="keyword" class="form-control" value="{{ request('keyword') }}">
-                        <label>搜索</label>
-                    </div>
-                    <button type="submit" class="btn btn-default-bright">查找</button>
-                </form>
                 <table class="table table-hover table-striped table-condensed">
                     <thead>
                         <tr>
                             <th>道具id</th>
                             <th>道具类型</th>
                             <th>道具位置</th>
-                            <th>道具位置</th>
+                            <th>道具价格</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -32,20 +25,17 @@
                         @foreach($shops as $shop)
                         <tr>
                             <td>{{ $shop->item_id }}</td>
-                            <td>{{ $shop->type }}</td>
+                            <td>{{ $shop->type_name }}</td>
                             <td>{{ $shop->priority }}</td>
                             <td>{{ $shop->price }}</td>
                             <td>
+                                <a href="javascript:;" class="btn btn-xs btn-default-bright price" data-id="{{ $shop->id }}">设置价格</a>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $shop->id }}">删除</a>
-                                <a href="{{ action('Admin\ShopController@getEdit', $shop->id) }}" class="btn btn-xs btn-default-bright">修改</a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <div class="text-center" data-total="{{ $shops->total() }}">
-                {!! $shops->links() !!}
-                </div>
             </div>
         </div>
     </div>
@@ -70,6 +60,32 @@ $('.del').click(function() {
             }
         })
     });
+
+    $('.price').click(function (){
+        var id = $(this).data('id');
+        layer.prompt({
+            formType: 0,
+            value: '',
+            title: '请输入价格',
+        }, function(value, index, elem){
+            if(value < 0 || isNaN(value)){
+                layer.alert('请输入数字');
+                return false;
+            }
+            layer.close(index);
+            $.get("{{ action('Admin\ShopController@getSetPrice',['id' => '', 'value' => '']) }}/"+ id +"/"+ value, function (data){
+                if(data.message == 403){
+                    layer.alert('请输入数字');
+                    return false;
+                } else {
+                    layer.alert('设置成功', function(){
+                        location.reload();
+                    });
+                }
+            });
+        })
+    });
+
 </script>
 @stop
 

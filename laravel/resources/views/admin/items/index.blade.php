@@ -37,7 +37,7 @@
                             <td>{{ $item->name }}</td>
                             <td><img src="{{ $item->icon }}" height="50px"></td>
                             <td>{{ $item->info }}</td>
-                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->type_name }}</td>
                             <td>{{ $item->priority }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $item->id }}">删除</a>
