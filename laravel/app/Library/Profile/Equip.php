@@ -64,13 +64,13 @@ class Equip
 
         User::equipUpgrade($userId, $equipPos);
 
-        $equip = Equipment::getKeyValue(
+        $upgEquip = Equipment::getKeyValue(
             [['level', $user[$equipPos] + 1],
              ['job_id', $user['job_id']],
              ['position', $position]],
             ['power', 'icon']
         );
 
-        return ['success', $equip];
+        return ['success', $upgEquip];
     }
 }
