@@ -135,4 +135,10 @@ class User extends Model
         static::where('id', $id)->decrement('take_up', 1);
         Redis::hincrby('user:'.$id, 'take_up', -1);
     }
+
+    public static function equipUpgrade($id, $position)
+    {
+        static::where('id', $id)->increment($position, 1);
+        Redis::hincrby('user:'.$id, $position, 1);
+    }
 }
