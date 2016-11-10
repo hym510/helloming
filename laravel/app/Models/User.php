@@ -112,11 +112,14 @@ class User extends Model
 
     public static function updateProfile($id, array $data): array
     {
+        unset($data['gender']);
+        unset($data['job_id']);
+
         static::where('id', $id)->update($data);
 
         $userArray = static::where('id', $id)->first([
-            'avatar', 'name', 'height', 'weight',
-            'gender', 'age', 'job_id', 'zodiac'
+            'avatar', 'name', 'height',
+            'weight', 'age', 'zodiac'
         ])->toArray();
 
         Redis::hmset('user:'.$id, $userArray);
