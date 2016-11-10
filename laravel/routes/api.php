@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
         Route::get('backpack/tool', ['uses' => 'BackpackController@getTool']);
+        Route::get('equip/upgrade/{position}', ['uses' => 'EquipController@getUpgrade']);
         Route::get('profile/detail', ['uses' => 'ProfileController@getDetail']);
         Route::post('profile/update', ['uses' => 'ProfileController@postUpdate']);
     });
