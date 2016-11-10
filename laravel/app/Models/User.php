@@ -37,12 +37,11 @@ class User extends Model
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
-            'id', 'avatar', 'level', 'exp',
-            'vip_exp', 'state', 'name', 'height',
-            'weight', 'gender', 'age', 'online_time',
-            'job_id', 'zodiac', 'space', 'take_up',
-            'power', 'remain_power', 'action', 'gold',
-            'diamond'
+            'id', 'avatar', 'level', 'exp', 'vip_exp',
+            'state', 'name', 'height', 'weight', 'gender',
+            'age', 'online_time', 'job_id', 'zodiac', 'space',
+            'take_up', 'power', 'remain_power', 'action', 'gold', 'diamond',
+            'equipment1_level', 'equipment2_level', 'equipment3_level', 'activate'
         ])->toArray();
 
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
