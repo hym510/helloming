@@ -18,6 +18,10 @@ class ApiAuthenticate
             return Json::error('Invalid auth token.', 104);
         }
 
+        if (! Redis::hget('user:'.$userId, 'activate')) {
+            return Json::error('User account has been frozen.', 114);
+        }
+
         Auth::setUser(new AuthenUser($userId));
 
         return $next($request);
