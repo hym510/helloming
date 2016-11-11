@@ -10,9 +10,9 @@ use App\Http\Requests\Api\MonsterRequest;
 
 class MonsterController extends Controller
 {
-    public function postAtk(Monster $monster, MonsterRequest $request)
+    public function postAtk(MonsterRequest $request)
     {
-        $success = $monster->atk($request->event_id, $request->atk, Auth::user()->user);
+        $success = Monster::atk($request->event_id, $request->atk, Auth::user()->user);
 
         if (! $success) {
             return Json::error('Lack of physical strength.', 501);
