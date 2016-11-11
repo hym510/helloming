@@ -7,7 +7,7 @@ use App\Models\{Chest, Event, Mine, Monster};
 
 class Event
 {
-    public function random($userId): array
+    public static function random($userId): array
     {
         $events = Event::random(Redis::hget('user:'.$userId, 'level'));
 
