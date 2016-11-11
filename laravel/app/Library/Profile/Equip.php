@@ -6,7 +6,7 @@ use App\Models\{Equipment, User, UserItem};
 
 class Equip
 {
-    public function upgrade($userId, $position): array
+    public static function upgrade($userId, $position): array
     {
         $equipPos = 'equipment'.$position.'_level';
 
