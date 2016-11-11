@@ -9,8 +9,8 @@ use Illuminate\Routing\Controller;
 
 class HostController extends Controller
 {
-    public function getMine(Mining $mining)
+    public function getMine()
     {
-        return Json::success($mining->host(Auth::user()->user));
+        return Json::success(Mining::host(Auth::user()->user));
     }
 }
