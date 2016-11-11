@@ -6,7 +6,7 @@ use App\Models\{Chest, Event, Item, User, UserItem};
 
 class Chest
 {
-    public function open($eventId, $userId): array
+    public static function open($eventId, $userId): array
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'chest']],
