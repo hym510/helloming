@@ -41,7 +41,7 @@ class Mining
         return $event;
     }
 
-    public function complete($hostEventId, $userId): array
+    public static function complete($hostEventId, $userId): array
     {
         $hostEvent = HostEvent::getKeyValue(
             [['id', $hostEventId], ['user_id', $userId]],
