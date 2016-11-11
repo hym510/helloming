@@ -9,7 +9,7 @@ use App\Models\{Event, HostEvent, Item, Mine, User, UserItem};
 
 class Mining
 {
-    public function start($eventId, $userId): array
+    public static function start($eventId, $userId): array
     {
         if (! User::free($userId)) {
             return [];
