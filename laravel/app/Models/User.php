@@ -144,4 +144,10 @@ class User extends Model
         static::where('id', $id)->increment($position, 1);
         Redis::hincrby('user:'.$id, $position, 1);
     }
+
+    public static function bindOpenid($id, $openid)
+    {
+        static::where('id', $id)->update('wechat_id', $openid);
+        Redis::hset('user:'.$id, 'wechat_id', $openid);
+    }
 }
