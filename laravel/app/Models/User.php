@@ -124,7 +124,7 @@ class User extends Model
 
         Redis::hmset('user:'.$id, $userArray);
 
-        return $userArray;
+        return Redis::hgetall('user:'.$id);
     }
 
     public static function addExp($id, $exp)
