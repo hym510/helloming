@@ -90,7 +90,7 @@ class Mining
         return $items;
     }
 
-    public function host($userId): array
+    public static function host($userId): array
     {
         return HostEvent::getMine($userId);
     }
