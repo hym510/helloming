@@ -9,9 +9,9 @@ use Illuminate\Routing\Controller;
 
 class EquipController extends Controller
 {
-    public function getUpgrade(Equip $equip, $position)
+    public function getUpgrade($position)
     {
-        $success = $equip->upgrade(Auth::user()->user, $position);
+        $success = Equip::upgrade(Auth::user()->user, $position);
 
         switch ($success[0]) {
             case 'max':
