@@ -9,8 +9,8 @@ use Illuminate\Routing\Controller;
 
 class EventController extends Controller
 {
-    public function getRefresh(Event $event)
+    public function getRefresh()
     {
-        return Json::success($event->random(Auth::user()->user));
+        return Json::success(Event::random(Auth::user()->user));
     }
 }
