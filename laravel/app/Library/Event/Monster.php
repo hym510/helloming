@@ -6,7 +6,7 @@ use App\Models\{Event, Item, Monster, User, UserItem};
 
 class Monster
 {
-    public function atk($eventId, $atk, $userId): array
+    public static function atk($eventId, $atk, $userId): array
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'monster']],
