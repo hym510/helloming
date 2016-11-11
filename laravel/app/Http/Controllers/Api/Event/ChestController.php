@@ -9,9 +9,9 @@ use Illuminate\Routing\Controller;
 
 class ChestController extends Controller
 {
-    public function getOpen(Chest $chest, $eventId)
+    public function getOpen($eventId)
     {
-        $success = $chest->open($eventId, Auth::user()->user);
+        $success = Chest::open($eventId, Auth::user()->user);
 
         if (! $success) {
             return Json::error('Lack of material resources.', 501);
