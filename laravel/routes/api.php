@@ -36,6 +36,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('equip/upgrade/{position}', ['uses' => 'EquipController@getUpgrade']);
         Route::get('profile/detail', ['uses' => 'ProfileController@getDetail']);
         Route::post('profile/update', ['uses' => 'ProfileController@postUpdate']);
-        Route::get('wechat/bind/{openid}', ['uses' => 'WechatController@getBind']);
+        Route::post('wechat/bind', ['uses' => 'WechatController@postBind']);
     });
 });
