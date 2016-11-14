@@ -22,4 +22,11 @@ class WechatController extends Controller
             return Json::error('An openid has bound to this account.', 216);
         }
     }
+
+    public function getUnbind()
+    {
+        User::unbindOpenid(Auth::user()->user);
+
+        return Json::success();
+    }
 }
