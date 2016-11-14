@@ -37,5 +37,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('profile/detail', ['uses' => 'ProfileController@getDetail']);
         Route::post('profile/update', ['uses' => 'ProfileController@postUpdate']);
         Route::post('wechat/bind', ['uses' => 'WechatController@postBind']);
+        Route::get('wechat/unbind', ['uses' => 'WechatController@getUnbind']);
     });
 });

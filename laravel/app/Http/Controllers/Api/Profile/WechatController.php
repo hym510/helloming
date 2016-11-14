@@ -25,8 +25,6 @@ class WechatController extends Controller
 
     public function getUnbind()
     {
-        User::unbindOpenid(Auth::user()->user);
-
-        return Json::success();
+        return Json::success(User::unbindOpenid(Auth::user()->user));
     }
 }
