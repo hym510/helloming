@@ -7,9 +7,13 @@ use App\Models\{Chest, Event, Mine, Monster};
 
 class Event
 {
-    public static function random($userId): array
+    public static function random($userId, $count): array
     {
-        $events = Event::random(Redis::hget('user:'.$userId, 'level'));
+        if ($count >= 6) {
+            return [];
+        }
+
+        $events = Event::random(Redis::hget('user:'.$userId, 'level'), $count);
 
         foreach ($events as &$event) {
             if ($event['type'] == 'mine') {
