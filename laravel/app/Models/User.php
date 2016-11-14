@@ -159,4 +159,13 @@ class User extends Model
             return true;
         }
     }
+
+    public static function unbindOpenid($id)
+    {
+        static::where('id', $id)->update([
+            'wechat_id' => null,
+            'withdraw_password' => null
+        ]);
+        Redis::hset('user:'.$id, 'wechat_id', null);
+    }
 }
