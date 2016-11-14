@@ -6,12 +6,17 @@ use Auth;
 use Json;
 use App\Models\User;
 use Illuminate\Routing\Controller;
+use App\Http\Requests\Api\WechatRequest;
 
 class WechatController extends Controller
 {
-    public function getBind($openid)
+    public function postBind(WechatRequest $request)
     {
-        if (User::bindOpenid(Auth::user()->user, $openid)) {
+        $bound = User::bindOpenid(
+            Auth::user()->user, $request->openid, $request->withdraw_password
+        );
+
+        if ($bound) {
             return Json::success();
         } else {
             return Json::error('An openid has bound to this account.', 216);
