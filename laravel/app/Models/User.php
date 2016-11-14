@@ -145,9 +145,15 @@ class User extends Model
         Redis::hincrby('user:'.$id, $position, 1);
     }
 
-    public static function bindOpenid($id, $openid)
+    public static function bindOpenid($id, $openid): bool
     {
-        static::where('id', $id)->update('wechat_id', $openid);
-        Redis::hset('user:'.$id, 'wechat_id', $openid);
+        if (Redis::hget('user:'.$id, 'wechat_id')) {
+            return false;
+        } else {
+            static::where('id', $id)->update(['wechat_id' => $openid]);
+            Redis::hset('user:'.$id, 'wechat_id', $openid);
+
+            return true;
+        }
     }
 }
