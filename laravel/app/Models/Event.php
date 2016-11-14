@@ -43,11 +43,11 @@ class Event extends Model
         return $type;
     }
 
-    public static function random($level): array
+    public static function random($level, $count): array
     {
         return static::where('unlock_level', '<=', $level)
             ->orderByRaw('RAND()')
-            ->limit(6)
+            ->limit(6 - $count)
             ->get([
                 'id', 'type', 'level', 'mine_id',
                 'monster_id', 'chest_id', 'info'
