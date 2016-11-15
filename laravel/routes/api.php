@@ -39,4 +39,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('wechat/bind', ['uses' => 'WechatController@postBind']);
         Route::get('wechat/unbind', ['uses' => 'WechatController@getUnbind']);
     });
+
+    Route::group(['namespace' => 'Withdraw', 'middleware' => ['auth.api']], function () {
+        Route::get('withdraw/{gold}', ['uses' => 'WithdrawController@sendRedpack']);
+    });
 });
