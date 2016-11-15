@@ -2,13 +2,14 @@
 
 namespace App\Library\Withdraw;
 
+use Redis;
 use Config;
 use App\Models\User;
 use EasyWeChat\Foundation\Application;
 
 class Wechat
 {
-    public static function sendRedpack($openId, $gold): bool
+    public static function sendRedpack($userId, $openId, $gold): bool
     {
         $mchId = Config::get('wechat.mch_id');
 
@@ -33,6 +34,11 @@ class Wechat
             'remark' => '无',
         ];
 
-        return $luckyMoney->sendNormal($luckyMoneyData);
+        if ($luckyMoney->sendNormal($luckyMoneyData)) {
+            User::where('id', $userId)->decrement('gold', $gold);
+            Redis::hincrby('user:'.$userId, 'gold', -$gold);
+        }
+
+        return true;
     }
 }
