@@ -15,7 +15,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Auth'], function () {
         Route::post('auth/signin', ['uses' => 'AuthController@postSignin']);
         Route::post('auth/signup', ['uses' => 'AuthController@postSignup']);
-        Route::post('auth/signup/sms', ['uses' => 'AuthController@postSignupSms']);
+        Route::post('auth/sign/sms', ['uses' => 'AuthController@postSignSms']);
     });
 
     Route::group(['namespace' => 'Data'], function () {
