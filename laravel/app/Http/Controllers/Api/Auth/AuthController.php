@@ -20,9 +20,9 @@ class AuthController extends Controller
         }
     }
 
-    public function postSignin(SigninRequest $request)
+    public function postSignin(Smser $smser, SigninRequest $request)
     {
-        if (! Smser::verifySmsCode($request->phone, $request->code)) {
+        if (! $smser->verifySmsCode($request->phone, $request->code)) {
             return Json::error('Invalid SMS code.', 603);
         }
 
