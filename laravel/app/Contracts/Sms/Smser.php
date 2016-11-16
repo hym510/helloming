@@ -4,7 +4,7 @@ namespace App\Contracts\Sms;
 
 interface Smser
 {
-    public function requestSmsCode($phone): bool;
+    public static function requestSmsCode($phone): bool;
 
-    public function verifySmsCode($phone, $code): bool;
+    public static function verifySmsCode($phone, $code): bool;
 }
