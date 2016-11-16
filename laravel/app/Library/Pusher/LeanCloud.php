@@ -7,23 +7,25 @@ use App\Contracts\Push\Pusher as PusherContract;
 
 class LeanCloud implements PusherContract
 {
-    public function headers($master = false, $json = true): array
+    protected $url;
+
+    protected $headers = [];
+
+    public function __construct($master = false)
     {
+        $this->url = Config::get('leancloud.url');
+
         if ($master) {
             $appKey = Config::get('leancloud.master_key').',master';
         } else {
             $appKey = Config::get('leancloud.app_key');
         }
 
-        $appId = Config::get('leancloud.app_id');
-        $headers[] = 'X-LC-Id:'.$appId;
-        $headers[] = 'X-LC-Key:'.$appKey;
-
-        if ($json) {
-            $headers[] = 'Content-Type:application/json';
-        }
-
-        return $headers;
+        array_push($this->headers,
+            'Content-Type:application/json',
+            'X-LC-Id:'.Config::get('leancloud.app_id'),
+            'X-LC-Key:'.$appKey
+        );
     }
 
     public function pushOne($userId, array $data)
