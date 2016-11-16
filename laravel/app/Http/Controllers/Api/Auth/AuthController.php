@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use Json;
-use Smser;
+use App\Library\Smser\Smser;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\{PhoneNumber, User};
