@@ -65,13 +65,11 @@ class LeanCloud implements PusherContract
     public function pushMany(array $userIds, array $data)
     {
         $userIds = '('.implode(', ', $userIds).')';
-        $data['action'] = 'cn.find.action';
-        $data['badge'] = 'Increment';
         $url = Config::get('leancloud.url').'/1.1/push';
         $pushData = json_encode([
             'cql' => 'select * from _Installation where user_id in '.$userIds,
             'prod' => Config::get('leancloud.prod'),
-            'data' => $data,
+            'data' => $this->setting,
             'expiration_interval' => '86400'
         ]);
         $headers = $this->headers();
@@ -81,7 +79,14 @@ class LeanCloud implements PusherContract
         curl_setopt($ch, CURLOPT_POSTFIELDS, $pushData);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_exec($ch);
-        curl_close($ch);
+
+        try {
+            $result = curl_exec($ch);
+            curl_close($ch);
+        } catch(Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 }
