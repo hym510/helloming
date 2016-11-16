@@ -11,9 +11,9 @@ use App\Http\Requests\Api\{SigninRequest, SignupRequest};
 
 class AuthController extends Controller
 {
-    public function postSignSms(Request $request)
+    public function postSignSms(Smser $smser, Request $request)
     {
-        if (Smser::requestSmsCode($request->phone)) {
+        if ($smser->requestSmsCode($request->phone)) {
             return Json::success();
         } else {
             return Json::error('Fails to send message.', 602);
