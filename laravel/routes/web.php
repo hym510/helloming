@@ -74,9 +74,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
     Route::get('equipments/add', ['uses' => 'EquipmentsController@getAdd']);
     Route::post('equipments/store', ['uses' => 'EquipmentsController@postStore']);
-    Route::post('equipments/update/{id}', ['uses' => 'EquipmentsController@postUpdate']);
-    Route::get('equipments/edit/{id}', ['uses' => 'EquipmentsController@getEdit']);
-    Route::get('equipments/delete/{id}', ['uses' => 'EquipmentsController@getDelete']);
+    Route::post('equipments/update/{equipId}', ['uses' => 'EquipmentsController@postUpdate']);
+    Route::get('equipments/edit/{equipId}', ['uses' => 'EquipmentsController@getEdit']);
+    Route::get('equipments/delete/{equipId}', ['uses' => 'EquipmentsController@getDelete']);
 
     Route::get('shop', ['uses' => 'ShopController@getIndex']);
     Route::get('shop/add', ['uses' => 'ShopController@getAdd']);

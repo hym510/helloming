@@ -24,9 +24,9 @@ class EquipmentsController extends Controller
         return view('admin.equipments.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($equipId)
     {
-        $equipment = Equipment::findOrFail($id);
+        $equipment = Equipment::findOrFail($equipId);
 
         return view('admin.equipments.edit', compact('equipment'));
     }
@@ -38,17 +38,16 @@ class EquipmentsController extends Controller
         return redirect()->action('Admin\EquipmentsController@getIndex');
     }
 
-    public function postUpdate(EquipmentsRequest $request, $id)
+    public function postUpdate(EquipmentsRequest $request, $equipId)
     {
-        $equipment = Equipment::findOrFail($id);
-        $equipment->update($request->inputData());
+        Equipment::where('id', $equipId)->update($request->inputData());
 
         return redirect()->action('Admin\EquipmentsController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($equipId)
     {
-        Equipment::findOrFail($id)->delete();
+        Equipment::where('id', $equipId)->delete();
 
         return redirect()->action('Admin\EquipmentsController@getIndex');
     }
