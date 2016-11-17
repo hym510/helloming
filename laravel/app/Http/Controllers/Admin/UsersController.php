@@ -41,16 +41,14 @@ class UsersController extends Controller
         return redirect()->action('Admin\UsersController@getIndex');
     }
 
-    public function getDelete($id, $type)
+    public function getDelete($userId, $type)
     {
-        $user = User::findOrFail($id);
-
         switch ($type) {
             case 'delete':
-                $user->update(['activate' => 0]);
+                User::where('id', $userId)->update(['activate' => 0]);
                 break;
             case 'forcedelete':
-                $user->forceDelete();
+                User::where('id', $userId)->forceDelete();
                 break;
         }
 

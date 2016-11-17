@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('admin/delete/{id}', ['uses' => 'AdminController@getDelete']);
 
     Route::get('users', ['uses' => 'UsersController@getIndex']);
-    Route::get('users/delete/{id}/{type}', ['uses' => 'UsersController@getDelete']);
+    Route::get('users/delete/{userId}/{type}', ['uses' => 'UsersController@getDelete']);
     Route::get('users/show/{id}', ['uses' => 'UsersController@getShow']);
     Route::get('users/add', ['uses' => 'UsersController@getAdd']);
     Route::post('users/store', ['uses' => 'UsersController@postStore']);
