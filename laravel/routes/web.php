@@ -52,10 +52,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('mines', ['uses' => 'MinesController@getIndex']);
     Route::get('mines/add', ['uses' => 'MinesController@getAdd']);
-    Route::get('mines/edit/{id}', ['uses' => 'MinesController@getEdit']);
+    Route::get('mines/edit/{mineId}', ['uses' => 'MinesController@getEdit']);
     Route::post('mines/store', ['uses' => 'MinesController@postStore']);
-    Route::post('mines/update/{id}', ['uses' => 'MinesController@postUpdate']);
-    Route::get('mines/delete/{id}', ['uses' => 'MinesController@getDelete']);
+    Route::post('mines/update/{mineId}', ['uses' => 'MinesController@postUpdate']);
+    Route::get('mines/delete/{mineId}', ['uses' => 'MinesController@getDelete']);
 
     Route::get('chests', ['uses' => 'ChestsController@getIndex']);
     Route::get('chests/add', ['uses' => 'ChestsController@getAdd']);

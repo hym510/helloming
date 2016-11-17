@@ -24,32 +24,30 @@ class MinesController extends Controller
         return view('admin.mines.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($mineId)
     {
-        $mine = Mine::findOrFail($id);
+        $mine = Mine::findOrFail($mineId);
 
         return view('admin.mines.edit', compact('mine'));
     }
 
     public function postStore(MinesRequest $request)
     {
-        $mine = $request->inputData();
-        Mine::create($mine);
+        Mine::create($request->inputData());
 
         return redirect()->action('Admin\MinesController@getIndex');
     }
 
-    public function postUpdate(MinesRequest $request, $id)
+    public function postUpdate(MinesRequest $request, $mineId)
     {
-        $mine = Mine::findOrFail($id);
-        $mine->update($request->inputData());
+        Mine::where('id', $mineId)->update($request->inputData());
 
         return redirect()->action('Admin\MinesController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($mineId)
     {
-        Mine::findOrFail($id)->delete();
+        Mine::where('id', $mineId)->delete();
 
         return redirect()->action('Admin\MinesController@getIndex');
     }
