@@ -35,9 +35,7 @@ class ShopController extends Controller
     public function getSetPrice($id, $value)
     {
         if (is_numeric($value)) {
-            $price = Shop::findOrFail($id);
-            $price->price = floor($value);
-            $price->save();
+            Shop::where('id', $id)->update(['price' => floor($value)]);
         } else {
             return response()->json(['message' => 403]);
         }
@@ -45,7 +43,7 @@ class ShopController extends Controller
 
     public function getDelete($id)
     {
-        Shop::findOrFail($id)->delete();
+        Shop::where('id', $id)->delete();
 
         return redirect()->action('Admin\ShopController@getIndex');
     }
