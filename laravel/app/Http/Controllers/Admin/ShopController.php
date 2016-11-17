@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Item;
-use App\Models\Shop;
+use App\Models\{Item, Shop};
 use App\Http\Controllers\Controller;
 
 class ShopController extends Controller

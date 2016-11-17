@@ -41,9 +41,8 @@ class MinesController extends Controller
 
     public function postUpdate(MinesRequest $request, $id)
     {
-        $data = $request->inputData();
         $mine = Mine::findOrFail($id);
-        $mine->update($data);
+        $mine->update($request->inputData());
 
         return redirect()->action('Admin\MinesController@getIndex');
     }

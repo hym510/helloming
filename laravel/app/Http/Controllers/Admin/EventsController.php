@@ -64,9 +64,8 @@ class EventsController extends Controller
 
     public function postUpdate(EventsRequest $request, $id)
     {
-        $data = $request->inputData();
         $event = Event::findOrFail($id);
-        $event->update($data);
+        $event->update($request->inputData());
 
         return redirect()->action('Admin\EventsController@getIndex');
     }

@@ -33,17 +33,15 @@ class ItemsController extends Controller
 
     public function postStore(ItemRequest $request)
     {
-        $item = $request->inputData();
-        Item::create($item);
+        Item::create($request->inputData());
 
         return redirect()->action('Admin\ItemsController@getIndex');
     }
 
     public function postUpdate(ItemRequest $request, $id)
     {
-        $data = $request->inputData();
         $item = Item::findOrFail($id);
-        $item->update($data);
+        $item->update($request->inputData());
 
         return redirect()->action('Admin\ItemsController@getIndex');
     }

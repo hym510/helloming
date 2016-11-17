@@ -33,17 +33,15 @@ class EquipmentsController extends Controller
 
     public function postStore(EquipmentsRequest $request)
     {
-        $equipments = $request->inputData();
-        Equipment::create($equipments);
+        Equipment::create($request->inputData());
 
         return redirect()->action('Admin\EquipmentsController@getIndex');
     }
 
     public function postUpdate(EquipmentsRequest $request, $id)
     {
-        $data = $request->inputData();
         $equipment = Equipment::findOrFail($id);
-        $equipment->update($data);
+        $equipment->update($request->inputData());
 
         return redirect()->action('Admin\EquipmentsController@getIndex');
     }

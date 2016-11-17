@@ -33,17 +33,15 @@ class ChestsController extends Controller
 
     public function postStore(ChestsRequest $request)
     {
-        $chests = $request->inputData();
-        Chest::create($chests);
+        Chest::create($request->inputData());
 
         return redirect()->action('Admin\ChestsController@getIndex');
     }
 
     public function postUpdate(ChestsRequest $request, $id)
     {
-        $data = $request->inputData();
         $chest = Chest::findOrFail($id);
-        $chest->update($data);
+        $chest->update($request->inputData());
 
         return redirect()->action('Admin\ChestsController@getIndex');
     }

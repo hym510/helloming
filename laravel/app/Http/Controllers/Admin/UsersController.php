@@ -35,8 +35,7 @@ class UsersController extends Controller
 
     public function postStore(UsersRequest $request)
     {
-        $user = $request->inputData();
-        User::create($user);
+        User::create($request->inputData());
 
         return redirect()->action('Admin\UsersController@getIndex');
     }

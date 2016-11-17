@@ -44,9 +44,8 @@ class MonstersController extends Controller
 
     public function postUpdate(MonstersRequest $request, $id)
     {
-        $data = $request->inputData();
         $monster = Monster::findOrFail($id);
-        $monster->update($data);
+        $monster->update($request->inputData());
 
         return redirect()->action('Admin\MonstersController@getIndex');
     }
