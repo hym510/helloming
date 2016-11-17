@@ -35,6 +35,7 @@ class EventsController extends Controller
     {
         $data = [];
         $event = $request->inputData();
+
         switch ($request->type) {
             case 'monster':
                 $data = Monster::find($event['monster_id'])->toArray();
@@ -55,6 +56,7 @@ class EventsController extends Controller
                 unset($event['monster_id']);
                 break;
         }
+
         Event::create($event);
 
         return redirect()->action('Admin\EventsController@getIndex');

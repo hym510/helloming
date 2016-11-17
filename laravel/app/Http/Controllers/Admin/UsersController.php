@@ -44,6 +44,7 @@ class UsersController extends Controller
     public function getDelete($id, $type)
     {
         $user = User::findOrFail($id);
+
         switch ($type) {
             case 'delete':
                 $user->update(['activate' => 0]);

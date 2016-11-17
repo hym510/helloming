@@ -11,7 +11,7 @@ class MonstersRequest extends Request
         return [
             'monster' => 'required|min:2|max:16',
             'icon' => 'required',
-            'type'  => 'required',
+            'type' => 'required',
             'level' => 'numeric',
             'hp' => 'numeric',
             'kill_limit_time' => 'numeric',

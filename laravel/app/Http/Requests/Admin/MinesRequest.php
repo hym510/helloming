@@ -9,9 +9,9 @@ class MinesRequest extends Request
     public function rules()
     {
         return [
-            'icon'  => 'required',
-            'name'  => 'required|min:2|max:16',
-            'time'  => 'numeric',
+            'icon' => 'required',
+            'name' => 'required|min:2|max:16',
+            'time' => 'numeric',
             'consume_diamond' => 'numeric',
         ];
     }
