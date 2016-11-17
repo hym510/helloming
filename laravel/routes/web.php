@@ -59,10 +59,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('chests', ['uses' => 'ChestsController@getIndex']);
     Route::get('chests/add', ['uses' => 'ChestsController@getAdd']);
-    Route::get('chests/edit/{id}', ['uses' => 'ChestsController@getEdit']);
+    Route::get('chests/edit/{chestId}', ['uses' => 'ChestsController@getEdit']);
     Route::post('chests/store', ['uses' => 'ChestsController@postStore']);
-    Route::post('chests/update/{id}', ['uses' => 'ChestsController@postUpdate']);
-    Route::get('chests/delete/{id}', ['uses' => 'ChestsController@getDelete']);
+    Route::post('chests/update/{chestId}', ['uses' => 'ChestsController@postUpdate']);
+    Route::get('chests/delete/{chestId}', ['uses' => 'ChestsController@getDelete']);
 
     Route::get('events', ['uses' => 'EventsController@getIndex']);
     Route::get('events/add', ['uses' => 'EventsController@getAdd']);

@@ -24,9 +24,9 @@ class ChestsController extends Controller
         return view('admin.chests.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($chestId)
     {
-        $chest = Chest::findOrFail($id);
+        $chest = Chest::findOrFail($chestId);
 
         return view('admin.chests.edit', compact('chest'));
     }
@@ -38,17 +38,16 @@ class ChestsController extends Controller
         return redirect()->action('Admin\ChestsController@getIndex');
     }
 
-    public function postUpdate(ChestsRequest $request, $id)
+    public function postUpdate(ChestsRequest $request, $chestId)
     {
-        $chest = Chest::findOrFail($id);
-        $chest->update($request->inputData());
+        Chest::where('id', $chestId)->update($request->inputData());
 
         return redirect()->action('Admin\ChestsController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($chestId)
     {
-        Chest::findOrFail($id)->delete();
+        Chest::where('id', $chestId)->delete();
 
         return redirect()->action('Admin\ChestsController@getIndex');
     }
