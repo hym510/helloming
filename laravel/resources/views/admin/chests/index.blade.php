@@ -11,13 +11,6 @@
                 </ul>
             </div>
             <div class="card-body">
-                <form class="form-inline" method="get">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="keyword" value="{{ request('keyword') }}" placeholder="宝箱id">
-                        <label>搜索</label>
-                    </div>
-                    <button type="submit" class="btn btn-default-bright">查找</button>
-                </form>
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
@@ -43,9 +36,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center" data-total="{{ $chests->total() }}">
-                    {!! $chests->links() !!}
-                </div>
             </div>
         </div>
     </div>

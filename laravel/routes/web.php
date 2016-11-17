@@ -69,6 +69,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::post('monsters/update/{monsterId}', ['uses' => 'MonstersController@postUpdate']);
     Route::get('monsters/delete/{monsterId}', ['uses' => 'MonstersController@getDelete']);
 
+    Route::get('helper/qiniu-token', ['uses' => 'HelperController@getQiniuToken']);
+
+    Route::get('events', ['uses' => 'EventsController@getIndex']);
+    Route::get('events/add', ['uses' => 'EventsController@getAdd']);
+    Route::post('events/store', ['uses' => 'EventsController@postStore']);
+    Route::post('events/update/{eventId}', ['uses' => 'EventsController@postUpdate']);
+    Route::get('events/edit/{eventId}', ['uses' => 'EventsController@getEdit']);
+    Route::get('events/delete/{eventId}', ['uses' => 'EventsController@getDelete']);
+
     Route::get('msg', ['uses' => 'PushMsgController@getPushMsg']);
     Route::post('pushmsg', ['uses' => 'PushMsgController@postPushMsg']);
 
@@ -76,8 +85,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('shop/add', ['uses' => 'ShopController@getAdd']);
     Route::get('shop/price/{id}/{value}', ['uses' => 'ShopController@getSetPrice']);
     Route::post('shop/store/{id}', ['uses' => 'ShopController@postStore']);
-    Route::post('shop/update/{id}', ['uses' => 'ShopController@postUpdate']);
-    Route::get('shop/edit/{id}', ['uses' => 'ShopController@getEdit']);
     Route::get('shop/delete/{id}', ['uses' => 'ShopController@getDelete']);
 
     Route::get('users', ['uses' => 'UsersController@getIndex']);

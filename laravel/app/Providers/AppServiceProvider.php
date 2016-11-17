@@ -37,5 +37,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Token\AuthToken',
             'App\Library\Token\AuthToken'
         );
+
+        $this->app->singleton(
+            'qiniu', 'App\Library\Qiniu\Qiniu'
+        );
     }
 }

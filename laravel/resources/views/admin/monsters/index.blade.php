@@ -38,11 +38,11 @@
                             <td>{{ $monster->id }}</td>
                             <td>{{ $monster->name }}</td>
                             <td><img src="{{ $monster->icon }}" height="50px"></td>
-                            <td>{{ $monster->type }}</td>
+                            <td>{{ $monster->type_name }}</td>
                             <td>{{ $monster->level }}</td>
                             <td>{{ $monster->hp }}</td>
-                            <td>{{ $monster->kill_limit }}</td>
-                            <td>{{ $monster->kill_limit_time }}</td>
+                            <td>{{ $monster->kill_limit ? '是' : '否' }}</td>
+                            <td>{{ $monster->kill_limit_time.'秒' }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $monster->id }}">删除</a>
                                 <a href="{{ action('Admin\MonstersController@getEdit', $monster->id) }}" class="btn btn-xs btn-default-bright">修改</a>

@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select name="type" class="form-control" value="{{ $event->type_Name or '' }}">
+                                <select name="type" class="form-control" value="{{ $event->type_name or '' }}">
                                     <option value="monster">打怪事件</option>
                                     <option value="mine">挖矿事件</option>
                                     <option value="chest">宝箱事件</option>
@@ -43,7 +43,7 @@
                                 <label>宝箱事件</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="prize" class="form-control" value="{{ $event->prize or '' }}" placeholder="">
+                                <input type="text" name="prize" class="form-control" value="{{ $prize or '' }}" placeholder="[[a,1],[b,2]]">
                                 <label>奖励道具</label>
                             </div>
                             <div class="form-group">

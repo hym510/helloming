@@ -10,11 +10,7 @@ class EventsController extends Controller
 {
     public function getIndex()
     {
-        $events = Event::when(request('keyword'), function ($q) {
-            return $q->where('type', request('keyword'));
-        })
-        ->paginate()
-        ->appends(request()->all());
+        $events = Event::get();
 
         return view('admin.events.index', compact('events'));
     }
@@ -27,16 +23,41 @@ class EventsController extends Controller
     public function getEdit($eventId)
     {
         $event = Event::findOrFail($eventId);
+        $prize = json_encode($event->prize);
 
-        return view('admin.events.edit', compact('event'));
+        return view('admin.events.edit', compact('event', 'prize'));
     }
 
     public function postStore(EventsRequest $request)
     {
-        $data = [];
-        $event = $request->inputData();
+        $data = $request->inputData();
+        $event = $this->typeName($data);
+        Event::create($event);
 
-        switch ($request->type) {
+        return redirect()->action('Admin\EventsController@getIndex');
+    }
+
+    public function postUpdate(EventsRequest $request, $eventId)
+    {
+        $data = $request->inputData();
+        $event = $this->typeName($data);
+        $eve = Event::findOrFail($eventId);
+        $eve->update($event);
+
+        return redirect()->action('Admin\EventsController@getIndex');
+    }
+
+    public function getDelete($eventId)
+    {
+        Event::where('id', $eventId)->delete();
+
+        return redirect()->action('Admin\EventsController@getIndex');
+    }
+
+    protected function typeName(array $event):array
+    {
+        $data = [];
+        switch ($event['type']) {
             case 'monster':
                 $data = Monster::find($event['monster_id'])->toArray();
                 $event['id'] = $data['id'];
@@ -57,22 +78,6 @@ class EventsController extends Controller
                 break;
         }
 
-        Event::create($event);
-
-        return redirect()->action('Admin\EventsController@getIndex');
-    }
-
-    public function postUpdate(EventsRequest $request, $eventId)
-    {
-        Event::where('id', $eventId)->update($request->inputData());
-
-        return redirect()->action('Admin\EventsController@getIndex');
-    }
-
-    public function getDelete($eventId)
-    {
-        Event::where('id', $eventId)->delete();
-
-        return redirect()->action('Admin\EventsController@getIndex');
+        return $event;
     }
 }

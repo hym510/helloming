@@ -11,13 +11,6 @@
                 </ul>
             </div>
             <div class="card-body">
-                <form class="form-inline" method="get">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="keyword" value="{{ request('keyword') }}" placeholder="事件类型">
-                        <label>搜索</label>
-                    </div>
-                    <button type="submit" class="btn btn-default-bright">查找</button>
-                </form>
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
@@ -38,14 +31,14 @@
                     @foreach ($events as $event)
                         <tr>
                             <td>{{ $event->id }}</td>
-                            <td>{{ $event->type_Name }}</td>
+                            <td>{{ $event->type_name }}</td>
                             <td>{{ $event->monster_id or '' }}</td>
                             <td>{{ $event->mine_id or '' }}</td>
                             <td>{{ $event->fortune_id or '' }}</td>
                             <td>{{ json_encode($event->prize) }}</td>
                             <td>{{ $event->exp or ''}}</td>
                             <td>{{ $event->unlock_level or '' }}</td>
-                            <td>{{ $event->info }}</td>
+                            <td>{{ mb_substr($event->info, 0, 8).'......'}}</td>
                             <td>{{ $event->weight }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $event->id }}">删除</a>
@@ -55,9 +48,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center" data-total="{{ $events->total() }}">
-                    {!! $events->links() !!}
-                </div>
             </div>
         </div>
     </div>

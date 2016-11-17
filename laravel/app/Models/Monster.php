@@ -16,4 +16,15 @@ class Monster extends Model
             return false;
         }
     }
+
+    public function getTypeNameAttribute()
+    {
+        if ($this->type == 'boss') {
+            $type = 'boss怪';
+        } else {
+            $type = '普通怪';
+        }
+
+        return $type;
+    }
 }

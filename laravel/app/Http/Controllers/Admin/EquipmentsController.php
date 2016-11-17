@@ -11,7 +11,7 @@ class EquipmentsController extends Controller
     public function getIndex()
     {
         $equipments = Equipment::when(request('keyword'), function ($q) {
-            return $q->where('id', request('keyword'));
+            return $q->where('name', request('keyword'));
         })
         ->paginate()
         ->appends(request()->all());

@@ -34,7 +34,12 @@
                             <label>道具描述</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="type" class="form-control" value="{{ $item->type or '' }}">
+                            <select name="type" class="form-control" value="{{ $item->type or '' }}">
+                                <option value="currency">金币</option>
+                                <option value="tool">工具</option>
+                                <option value="building">建筑</option>
+                                <option value="nei_dan">内丹</option>
+                            </select>
                             <label>道具类型</label>
                         </div>
                         <div class="form-group">
@@ -52,4 +57,27 @@
         </div>
     </div>
 </section>
+@stop
+
+@section('script_link')
+    <script src="assets/lib/plupload/plupload.full.min.js"></script>
+@stop
+
+@section('script')
+<script type="text/javascript">
+    $(function() {
+        Helper.plupload(function () {
+            $('.upload-img').each(function () {
+                var o = $(this);
+                o.plupload({
+                    success: function (json) {
+                        o.attr('src', json.url);
+                        $('[name="' + o.data('name') + '"]').val(json.url);
+                    }
+                });
+            });
+        });
+    });
+
+</script>
 @stop

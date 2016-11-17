@@ -36,7 +36,7 @@
                     @foreach($equipments as $equipment)
                         <tr>
                             <td>{{ $equipment->name }}</td>
-                            <td>{{ $equipment->icon }}</td>
+                            <td><img src="{{ $equipment->icon }}" height="50px"></td>
                             <td>{{ $equipment->level }}</td>
                             <td>{{ $equipment->max_level }}</td>
                             <td>{{ $equipment->power }}</td>

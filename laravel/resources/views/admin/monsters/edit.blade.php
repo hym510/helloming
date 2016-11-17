@@ -20,10 +20,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="form-control-static">
-                            <label>
                                 <img src="{{ $monster->icon or config('main.placeholders.default_img') }}" class="upload-img" data-name="icon" height="120">
-                                <input type="file" name="" style="display:none">
-                            </label>
                             </div>
                             <input type="hidden" name="icon" value="{{ $monster->icon or '' }}" required>
                             <label>封面图</label>
@@ -34,7 +31,6 @@
                         </div>
                         <div class="form-group">
                             <select name="type" class="form-control" data-val="{{ $monster->type or '' }}">
-                                <option value="empty">类型为空</option>
                                 <option value="normal">普通类型</option>
                                 <option value="boss">boss类型</option>
                             </select>
@@ -50,8 +46,8 @@
                         </div>
                         <div class="form-group">
                             <select name="kill_limit" class="form-control" data-val="{{ $monster->kill_limit or ''}}">
-                                <option value="1">是</option>
                                 <option value="0">否</option>
+                                <option value="1">是</option>
                             </select>
                             <label>是否限时击杀</label>
                         </div>
@@ -72,6 +68,10 @@
 </section>
 @stop
 
+@section('script_link')
+    <script src="assets/lib/plupload/plupload.full.min.js"></script>
+@stop
+
 @section('script')
 <script type="text/javascript">
     $(function() {
@@ -79,13 +79,25 @@
         $('select[name="kill_limit"]').on('change', function() {
             switch ($(this).val()) {
                 case '1':
-                dTime.css('display', 'block');
-                break;
+                    dTime.show();
+                    break;
                 case '0':
-                dTime.css('display', 'none');
-                break;
+                    dTime.hide();
+                    break;
             }
         }).triggerHandler('change');
+
+        Helper.plupload(function () {
+            $('.upload-img').each(function () {
+                var o = $(this);
+                o.plupload({
+                    success: function (json) {
+                        o.attr('src', json.url);
+                        $('[name="' + o.data('name') + '"]').val(json.url);
+                    }
+                });
+            });
+        });
     });
 
 </script>

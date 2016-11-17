@@ -42,7 +42,7 @@
                             <label>职业id</label>
                         </div>
                         <div class="form-group">
-                            <select name="type" class="form-control" data-val="{{ $equipment->position or '' }}">
+                            <select name="position" class="form-control" data-val="{{ $equipment->position or '' }}">
                                 <option value="1">位置1</option>
                                 <option value="2">位置2</option>
                                 <option value="3">位置3</option>
@@ -64,6 +64,29 @@
         </div>
     </div>
 </section>
+@stop
+
+@section('script_link')
+    <script src="assets/lib/plupload/plupload.full.min.js"></script>
+@stop
+
+@section('script')
+<script type="text/javascript">
+    $(function() {
+        Helper.plupload(function () {
+            $('.upload-img').each(function () {
+                var o = $(this);
+                o.plupload({
+                    success: function (json) {
+                        o.attr('src', json.url);
+                        $('[name="' + o.data('name') + '"]').val(json.url);
+                    }
+                });
+            });
+        });
+    });
+
+</script>
 @stop
 
 

@@ -18,7 +18,7 @@ class EventsRequest extends Request
             'exp' => 'required|numeric',
             'unlock_level' => 'required|numeric',
             'weight' => 'required|numeric',
-            'info' => 'required|numeric',
+            'info' => 'required',
         ];
     }
 }

@@ -10,11 +10,7 @@ class ChestsController extends Controller
 {
     public function getIndex()
     {
-        $chests = Chest::when(request('keyword'), function ($q) {
-            return $q->where('id', request('keyword'));
-        })
-        ->paginate()
-        ->appends(request()->all());
+        $chests = Chest::get();
 
         return view('admin.chests.index', compact('chests'));
     }
