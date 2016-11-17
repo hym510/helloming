@@ -24,9 +24,9 @@ class ItemsController extends Controller
         return view('admin.items.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($itemId)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::findOrFail($itemId);
 
         return view('admin.items.edit', compact('item'));
     }
@@ -38,17 +38,16 @@ class ItemsController extends Controller
         return redirect()->action('Admin\ItemsController@getIndex');
     }
 
-    public function postUpdate(ItemRequest $request, $id)
+    public function postUpdate(ItemRequest $request, $itemId)
     {
-        $item = Item::findOrFail($id);
-        $item->update($request->inputData());
+        Item::where('id', $itemId)->update($request->inputData());
 
         return redirect()->action('Admin\ItemsController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($itemId)
     {
-        Item::findOrFail($id)->delete();
+        Item::findOrFail($itemId)->delete();
 
         return redirect()->action('Admin\ItemsController@getIndex');
     }

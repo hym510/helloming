@@ -35,9 +35,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('item', ['uses' => 'ItemsController@getIndex']);
     Route::get('item/add', ['uses' => 'ItemsController@getAdd']);
-    Route::get('item/edit/{id}', ['uses' => 'ItemsController@getEdit']);
-    Route::get('item/delete/{id}', ['uses' => 'ItemsController@getDelete']);
-    Route::get('item/update/{id}', ['uses' => 'ItemsController@postUpdate']);
+    Route::get('item/edit/{itemId}', ['uses' => 'ItemsController@getEdit']);
+    Route::get('item/delete/{itemId}', ['uses' => 'ItemsController@getDelete']);
+    Route::get('item/update/{itemId}', ['uses' => 'ItemsController@postUpdate']);
     Route::post('item/store', ['uses' => 'ItemsController@postStore']);
 
     Route::get('msg', ['uses' => 'PushMsgController@getPushMsg']);
