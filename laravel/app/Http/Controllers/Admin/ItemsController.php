@@ -47,7 +47,7 @@ class ItemsController extends Controller
 
     public function getDelete($itemId)
     {
-        Item::findOrFail($itemId)->delete();
+        Item::where('id', $itemId)->delete();
 
         return redirect()->action('Admin\ItemsController@getIndex');
     }
