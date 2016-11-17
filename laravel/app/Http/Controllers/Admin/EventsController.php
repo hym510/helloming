@@ -24,9 +24,9 @@ class EventsController extends Controller
         return view('admin.events.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($eventId)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::findOrFail($eventId);
 
         return view('admin.events.edit', compact('event'));
     }
@@ -62,17 +62,16 @@ class EventsController extends Controller
         return redirect()->action('Admin\EventsController@getIndex');
     }
 
-    public function postUpdate(EventsRequest $request, $id)
+    public function postUpdate(EventsRequest $request, $eventId)
     {
-        $event = Event::findOrFail($id);
-        $event->update($request->inputData());
+        Event::where('id', $eventId)->update($request->inputData());
 
         return redirect()->action('Admin\EventsController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($eventId)
     {
-        Event::findOrFail($id)->delete();
+        Event::where('id', $eventId)->delete();
 
         return redirect()->action('Admin\EventsController@getIndex');
     }

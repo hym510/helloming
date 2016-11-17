@@ -67,9 +67,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('events', ['uses' => 'EventsController@getIndex']);
     Route::get('events/add', ['uses' => 'EventsController@getAdd']);
     Route::post('events/store', ['uses' => 'EventsController@postStore']);
-    Route::post('events/update/{id}', ['uses' => 'EventsController@postUpdate']);
-    Route::get('events/edit/{id}', ['uses' => 'EventsController@getEdit']);
-    Route::get('events/delete/{id}', ['uses' => 'EventsController@getDelete']);
+    Route::post('events/update/{eventId}', ['uses' => 'EventsController@postUpdate']);
+    Route::get('events/edit/{eventId}', ['uses' => 'EventsController@getEdit']);
+    Route::get('events/delete/{eventId}', ['uses' => 'EventsController@getDelete']);
 
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
     Route::get('equipments/add', ['uses' => 'EquipmentsController@getAdd']);
