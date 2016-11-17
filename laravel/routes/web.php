@@ -23,9 +23,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('admin/auth', ['uses' => 'AdminController@getIndex']);
     Route::get('admin/add', ['uses' => 'AdminController@getAdd']);
     Route::post('admin/store', ['uses' => 'AdminController@postStore']);
-    Route::post('admin/update/{id}', ['uses' => 'AdminController@postUpdate']);
-    Route::get('admin/edit/{id}', ['uses' => 'AdminController@getEdit']);
-    Route::get('admin/delete/{id}', ['uses' => 'AdminController@getDelete']);
+    Route::post('admin/update/{adminId}', ['uses' => 'AdminController@postUpdate']);
+    Route::get('admin/edit/{adminId}', ['uses' => 'AdminController@getEdit']);
+    Route::get('admin/delete/{adminId}', ['uses' => 'AdminController@getDelete']);
 
     Route::get('users', ['uses' => 'UsersController@getIndex']);
     Route::get('users/delete/{userId}/{type}', ['uses' => 'UsersController@getDelete']);

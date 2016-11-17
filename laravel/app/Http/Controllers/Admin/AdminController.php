@@ -21,9 +21,9 @@ class AdminController extends Controller
         return view('admin.adminer.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($adminId)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = Admin::findOrFail($adminId);
 
         return view('admin.adminer.edit', compact('admin'));
     }
@@ -38,10 +38,9 @@ class AdminController extends Controller
         return redirect()->action('Admin\AdminController@getIndex');
     }
 
-    public function postUpdate(AdminRequest $request, $id)
+    public function postUpdate(AdminRequest $request, $adminId)
     {
-        $admin = Admin::findOrFail($id);
-        $admin->update([
+        Admin::where('id', $adminId)->update([
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
@@ -49,9 +48,9 @@ class AdminController extends Controller
         return redirect()->action('Admin\AdminController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($adminId)
     {
-        Admin::findOrFail($id)->delete();
+        Admin::findOrFail($adminId)->delete();
 
         return redirect()->action('Admin\AdminController@getIndex');
     }
