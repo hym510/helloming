@@ -50,7 +50,7 @@ class AdminController extends Controller
 
     public function getDelete($adminId)
     {
-        Admin::findOrFail($adminId)->delete();
+        Admin::where('id', $adminId)->delete();
 
         return redirect()->action('Admin\AdminController@getIndex');
     }
