@@ -45,10 +45,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('monsters', ['uses' => 'MonstersController@getIndex']);
     Route::get('monsters/add', ['uses' => 'MonstersController@getAdd']);
-    Route::get('monsters/edit/{id}', ['uses' => 'MonstersController@getEdit']);
+    Route::get('monsters/edit/{monsterId}', ['uses' => 'MonstersController@getEdit']);
     Route::post('monsters/store', ['uses' => 'MonstersController@postStore']);
-    Route::post('monsters/update/{id}', ['uses' => 'MonstersController@postUpdate']);
-    Route::get('monsters/delete/{id}', ['uses' => 'MonstersController@getDelete']);
+    Route::post('monsters/update/{monsterId}', ['uses' => 'MonstersController@postUpdate']);
+    Route::get('monsters/delete/{monsterId}', ['uses' => 'MonstersController@getDelete']);
 
     Route::get('mines', ['uses' => 'MinesController@getIndex']);
     Route::get('mines/add', ['uses' => 'MinesController@getAdd']);

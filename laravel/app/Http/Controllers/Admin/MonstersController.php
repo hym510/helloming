@@ -24,9 +24,9 @@ class MonstersController extends Controller
         return view('admin.monsters.edit');
     }
 
-    public function getEdit($id)
+    public function getEdit($monsterId)
     {
-        $monster = Monster::findOrFail($id);
+        $monster = Monster::findOrFail($monsterId);
 
         return view('admin.monsters.edit', compact('monster'));
     }
@@ -42,17 +42,16 @@ class MonstersController extends Controller
         return redirect()->action('Admin\MonstersController@getIndex');
     }
 
-    public function postUpdate(MonstersRequest $request, $id)
+    public function postUpdate(MonstersRequest $request, $monsterId)
     {
-        $monster = Monster::findOrFail($id);
-        $monster->update($request->inputData());
+        Monster::where('id', $monsterId)->update($request->inputData());
 
         return redirect()->action('Admin\MonstersController@getIndex');
     }
 
-    public function getDelete($id)
+    public function getDelete($monsterId)
     {
-        Monster::findOrFail($id)->delete();
+        Monster::where('id', $monsterId)->delete();
 
         return redirect()->action('Admin\MonstersController@getIndex');
     }
