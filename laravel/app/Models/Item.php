@@ -6,7 +6,7 @@ class Item extends Model
 {
     protected $table = 'items';
 
-    public function getTypeNameAttribute()
+    public function getTypeNameAttribute(): string
     {
         switch ($this->type) {
             case 'currency':

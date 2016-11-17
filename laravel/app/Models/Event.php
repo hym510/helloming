@@ -26,7 +26,7 @@ class Event extends Model
         return json_decode($value);
     }
 
-    public function getTypeNameAttribute()
+    public function getTypeNameAttribute(): string
     {
         switch ($this->type) {
             case 'monster':

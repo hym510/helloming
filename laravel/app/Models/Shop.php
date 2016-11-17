@@ -6,7 +6,7 @@ class Shop extends Model
 {
     protected $table = 'shops';
 
-    public function getTypeNameAttribute()
+    public function getTypeNameAttribute(): string
     {
         switch ($this->type) {
             case 'currency':
