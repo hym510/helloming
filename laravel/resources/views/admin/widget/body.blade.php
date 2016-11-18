@@ -65,7 +65,7 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\PushMsgController@getPushMsg') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-comment"></i></div>
                             <span class="title">全局推送</span>
                         </a>
                     </li>
@@ -89,19 +89,19 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\EventsController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-gears"></i></div>
                             <span class="title">事件管理</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\EquipmentsController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-cubes"></i></div>
                             <span class="title">装备管理</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\ShopController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <div class="gui-icon"><i class="fa fa-shopping-cart"></i></div>
                             <span class="title">商店管理</span>
                         </a>
                     </li>

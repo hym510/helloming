@@ -43,7 +43,7 @@
                                 <label>宝箱事件</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="prize" class="form-control" value="{{ $prize or '' }}" placeholder="[[a,1],[b,2]]">
+                                <input type="text" name="prize" class="form-control" value="{{ $prize or '' }}" placeholder="[[道具a,1],[道具b,2],...]表示道具a有1%几率获得,道具b有2%几率获得,省略号表示可以继续添加道具和几率">
                                 <label>奖励道具</label>
                             </div>
                             <div class="form-group">
