@@ -13,4 +13,9 @@ class HostController extends Controller
     {
         return Json::success(Mining::host(Auth::user()->user));
     }
+
+    public function getPrize()
+    {
+        return Json::success(Mining::prize(Auth::user()->user));
+    }
 }
