@@ -2,6 +2,7 @@
 
 namespace App\Library\Event;
 
+use Redis;
 use Carbon\Carbon;
 use App\Jobs\HostMining;
 use Illuminate\Contracts\Bus\Dispatcher;
@@ -93,5 +94,10 @@ class Mining
     public static function host($userId): array
     {
         return HostEvent::getMine($userId);
+    }
+
+    public static function prize($userId): array
+    {
+        return json_decode('['.Redis::getset('prize:'.$userId, '').']');
     }
 }
