@@ -2,10 +2,11 @@
 
 namespace App\Jobs;
 
+use Redis;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\{Event, HostEvent, User, UserItem};
+use App\Models\{Event, HostEvent, Item, User, UserItem};
 
 class HostMining implements ShouldQueue
 {
@@ -46,6 +47,15 @@ class HostMining implements ShouldQueue
             if (is_lucky($p[1])) {
                 $prizeIds[] = $p[0];
             }
+        }
+
+        $prize = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon'])->toArray();
+        $prize = array('event_id' => $hostEvent['event_id']) + $prize;
+
+        if (Redis::exists('prize:'.$hostEvent['user_id'])) {
+            Redis::append('prize:'.$hostEvent['user_id'], ','.json_encode($prize));
+        } else {
+            Redis::append('prize:'.$hostEvent['user_id'], json_encode($prize));
         }
 
         UserItem::getPrize($prizeIds, $hostEvent['user_id']);
