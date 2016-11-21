@@ -80,6 +80,12 @@ class CreateTables extends Migration
             $table->string('icon');
         });
 
+        Schema::create('equipment_evaluate', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedTinyInteger('level');
+            $table->string('icon');
+        });
+
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
