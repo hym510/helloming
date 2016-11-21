@@ -37,11 +37,11 @@ class User extends Model
         $user = static::create($data);
 
         $userArray = static::where('id', $user->id)->first([
-            'id', 'avatar', 'level', 'exp', 'vip_exp',
-            'state', 'name', 'height', 'weight', 'gender',
-            'age', 'online_time', 'job_id', 'zodiac', 'space',
-            'take_up', 'power', 'remain_power', 'action', 'gold', 'diamond',
-            'equipment1_level', 'equipment2_level', 'equipment3_level', 'activate'
+            'id', 'avatar', 'level', 'exp', 'vip_exp', 'state',
+            'name', 'height', 'weight', 'gender', 'age', 'online_time',
+            'job_id', 'zodiac', 'space', 'take_up',  'power',  'remain_power',
+            'action', 'remain_action', 'gold', 'diamond', 'equipment1_level',
+            'equipment2_level', 'equipment3_level', 'activate'
         ])->toArray();
 
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
@@ -131,18 +131,27 @@ class User extends Model
     {
         $data = Redis::pipeline()
             ->get('level_attributes')
-            ->hget('user:'.$id, 'level', 'exp')
+            ->hmget('user:'.$id, 'level', 'exp')
             ->execute();
+
         $levelAttr = json_decode($data[0]);
         $userAttr = $data[1];
         $userExp = $userAttr[1] + $exp;
-        if ($userExp >= $levelAttr[$userAttr[0] - 1]['exp']) {
-            static::where('id', $id)->increment('exp', $exp);
+
+        if ($userExp >= $levelAttr[$userAttr[0] - 1]->exp) {
+            static::where('id', $id)->update([
+                'level' => $userAttr[0] + 1,
+                'exp' => $userExp,
+                'power' => $levelAttr[$userAttr[0] - 1]->power,
+                'action' => $levelAttr[$userAttr[0] - 1]->action
+
+            ]);
+
             Redis::pipeline()
                 ->hincrby('user:'.$id, 'level', 1)
                 ->hincrby('user:'.$id, 'exp', $exp)
-                ->hmset('user:'.$id, 'power', $levelAttr[$userAttr[0] - 1]['action'],
-                    'action', $levelAttr[$userAttr[0] - 1]['action']
+                ->hmset('user:'.$id, 'power', $levelAttr[$userAttr[0] - 1]->action,
+                    'action', $levelAttr[$userAttr[0] - 1]->action
                 )
                 ->execute();
         } else {
@@ -172,6 +181,7 @@ class User extends Model
                 'wechat_id' => $openid,
                 'wechat_password' => Hash::make($withdrawPassword)
             ]);
+
             Redis::hset('user:'.$id, 'wechat_id', $openid);
 
             return true;
@@ -184,6 +194,7 @@ class User extends Model
             'wechat_id' => null,
             'withdraw_password' => null
         ]);
+
         Redis::hset('user:'.$id, 'wechat_id', null);
     }
 }
