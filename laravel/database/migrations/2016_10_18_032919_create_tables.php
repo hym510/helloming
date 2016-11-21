@@ -63,6 +63,16 @@ class CreateTables extends Migration
             $table->rememberToken();
         });
 
+        Schema::create('user_attributes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedTinyInteger('level');
+            $table->unsignedMediumInteger('exp');
+            $table->unsignedSmallInteger('power');
+            $table->unsignedSmallInteger('action');
+
+            $table->unique('level');
+        });
+
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
