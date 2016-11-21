@@ -129,8 +129,26 @@ class User extends Model
 
     public static function addExp($id, $exp)
     {
-        static::where('id', $id)->increment('exp', $exp);
-        Redis::hincrby('user:'.$id, 'exp', $exp);
+        $data = Redis::pipeline()
+            ->get('level_attributes')
+            ->hget('user:'.$id, 'level', 'exp')
+            ->execute();
+        $levelAttr = json_decode($data[0]);
+        $userAttr = $data[1];
+        $userExp = $userAttr[1] + $exp;
+        if ($userExp >= $levelAttr[$userAttr[0] - 1]['exp']) {
+            static::where('id', $id)->increment('exp', $exp);
+            Redis::pipeline()
+                ->hincrby('user:'.$id, 'level', 1)
+                ->hincrby('user:'.$id, 'exp', $exp)
+                ->hmset('user:'.$id, 'power', $levelAttr[$userAttr[0] - 1]['action'],
+                    'action', $levelAttr[$userAttr[0] - 1]['action']
+                )
+                ->execute();
+        } else {
+            static::where('id', $id)->increment('exp', $exp);
+            Redis::hincrby('user:'.$id, 'exp', $exp);
+        }
     }
 
     public static function freeSpace($id)
