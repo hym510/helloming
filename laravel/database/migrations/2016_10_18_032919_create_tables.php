@@ -100,6 +100,7 @@ class CreateTables extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->enum('quality', [1, 2, 3, 4, 5]);
             $table->unsignedSmallInteger('priority');
             $table->enum('type', ['currency', 'tool', 'building', 'nei_dan']);
             $table->string('icon');
