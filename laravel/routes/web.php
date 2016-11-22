@@ -92,6 +92,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('users/show/{userId}', ['uses' => 'UsersController@getShow']);
     Route::get('users/add', ['uses' => 'UsersController@getAdd']);
     Route::post('users/store', ['uses' => 'UsersController@postStore']);
+
+    Route::get('level', ['uses' => 'LevelController@getIndex']);
+    Route::get('level/add', ['uses' => 'LevelController@getAdd']);
+    Route::get('level/edit/{levelId}', ['uses' => 'LevelController@getEdit']);
+    Route::post('level/store', ['uses' => 'LevelController@postStore']);
+    Route::post('level/update/{levelId}', ['uses' => 'LevelController@postUpdate']);
+    Route::get('level/delete/{levelId}', ['uses' => 'LevelController@getDelete']);
+
 });
 
 

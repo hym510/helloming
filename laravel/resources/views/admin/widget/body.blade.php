@@ -105,6 +105,12 @@
                             <span class="title">商店管理</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\LevelController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-location-arrow"></i></div>
+                            <span class="title">等级管理</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

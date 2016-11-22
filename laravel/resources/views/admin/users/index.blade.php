@@ -45,8 +45,8 @@
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright forcedel" data-id="{{ $user->id }}" data-type="delete">冻结</a>
                             </td>
                         </tr>
-                    </tbody>
                     @endforeach
+                    </tbody>
                 </table>
                 <div class="text-center" data-total="{{ $users->total() }}">
                     {!! $users->links() !!}
