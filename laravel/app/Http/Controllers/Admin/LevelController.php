@@ -29,18 +29,14 @@ class LevelController extends Controller
 
     public function postUpdate(LevelRequest $request, $levelId)
     {
-        $data = $request->inputData();
-        $level = LevelAttr::findOrFail($levelId);
-        $level->update($data);
+        LevelAttr::where('id', $levelId)->update($request->inputData());
 
         return redirect()->action('Admin\LevelController@getIndex');
     }
 
     public function postStore(LevelRequest $request)
     {
-        $data = $request->inputData();
-
-        LevelAttr::create($data);
+        LevelAttr::create($request->inputData());
 
         return redirect()->action('Admin\LevelController@getIndex');
     }
