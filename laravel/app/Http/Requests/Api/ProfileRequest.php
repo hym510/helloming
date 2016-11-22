@@ -12,9 +12,7 @@ class ProfileRequest extends Request
             'height' => 'between:1,3',
             'weight' => 'between:1,3',
             'age' => 'between:1,3',
-            'zodiac' => 'in:aquarius, pisces, aries,
-                        taurus, gemini, cancer, leo, virgo,
-                        libra, scorpio, sagittarius, capricorn',
+            'zodiac' => 'in:aquarius,pisces,aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn',
         ];
     }
 }
