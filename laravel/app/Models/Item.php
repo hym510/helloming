@@ -25,4 +25,27 @@ class Item extends Model
 
         return $type;
     }
+
+    public function getQualityNameAttribute(): string
+    {
+        switch ($this->quality) {
+            case '1':
+                $quality= '绿色';
+                break;
+            case '2':
+                $quality = '蓝色';
+                break;
+            case '3':
+                $quality = '紫色';
+                break;
+            case '4':
+                $quality = '橙色';
+                break;
+            case '5':
+                $quality = '红色';
+                break;
+        }
+
+        return $quality;
+    }
 }

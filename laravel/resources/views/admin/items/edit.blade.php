@@ -30,6 +30,16 @@
                             <label>道具名称</label>
                         </div>
                         <div class="form-group">
+                            <select name="quality" class="form-control" value="{{ $item->quality or '' }}">
+                                <option value="1">绿色</option>
+                                <option value="2">蓝色</option>
+                                <option value="3">紫色</option>
+                                <option value="4">橙色</option>
+                                <option value="5">红色</option>
+                            </select>
+                            <label>道具类型</label>
+                        </div>
+                        <div class="form-group">
                             <input type="text" name="info" class="form-control" value="{{ $item->info or '' }}">
                             <label>道具描述</label>
                         </div>

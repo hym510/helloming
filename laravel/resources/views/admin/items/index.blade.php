@@ -24,6 +24,7 @@
                             <th>编号</th>
                             <th>道具名称</th>
                             <th>道具图标</th>
+                            <th>道具品质</th>
                             <th>道具描述</th>
                             <th>道具类型</th>
                             <th>道具排序</th>
@@ -36,6 +37,7 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             <td><img src="{{ $item->icon }}" height="50px"></td>
+                            <td>{{ $item->quality_Name }}</td>
                             <td>{{ $item->info }}</td>
                             <td>{{ $item->type_name }}</td>
                             <td>{{ $item->priority }}</td>
