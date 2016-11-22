@@ -34,9 +34,11 @@ class MonstersController extends Controller
     public function postStore(MonstersRequest $request)
     {
         $data = $request->inputData();
+
         if ($data['kill_limit'] == '0') {
             unset($data['kill_limit_time']);
         }
+
         Monster::create($data);
 
         return redirect()->action('Admin\MonstersController@getIndex');
@@ -45,9 +47,11 @@ class MonstersController extends Controller
     public function postUpdate(MonstersRequest $request, $monsterId)
     {
         $data = $request->inputData();
+
         if ($data['kill_limit'] == '0') {
             unset($data['kill_limit_time']);
         }
+
         Monster::where('id', $monsterId)->update($data);
 
         return redirect()->action('Admin\MonstersController@getIndex');
