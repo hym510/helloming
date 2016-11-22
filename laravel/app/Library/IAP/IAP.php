@@ -9,16 +9,16 @@ class IAP
     public static function getReceiptData($receipt, $isSandbox = false)
     {
         if ($isSandbox) {
-            $endpoint = 'https://sandbox.itunes.apple.com/verifyReceipt';
+            $endPoint = 'https://sandbox.itunes.apple.com/verifyReceipt';
         } else {
-            $endpoint = 'https://buy.itunes.apple.com/verifyReceipt';
+            $endPoint = 'https://buy.itunes.apple.com/verifyReceipt';
         }
 
         $postData = json_encode(
             array('receipt-data' => $receipt)
         );
 
-        $ch = curl_init($endpoint);
+        $ch = curl_init($endPoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
