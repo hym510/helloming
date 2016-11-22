@@ -42,7 +42,7 @@
                             <td>{{ $equipment->power }}</td>
                             <td>{{ $equipment->job_id }}</td>
                             <td>{{ $equipment->position }}</td>
-                            <td>{{ $equipment->upgrade }}</td>
+                            <td>{{ json_encode($equipment->upgrade) }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $equipment->id }}">删除</a>
                                 <a href="{{ action('Admin\EquipmentsController@getEdit', $equipment->id) }}" class="btn btn-xs btn-default-bright">修改</a>
