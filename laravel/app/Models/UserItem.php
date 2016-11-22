@@ -13,8 +13,8 @@ class UserItem extends Model
             ->where('type', $type)
             ->orderBy('items.priority', 'desc')
             ->get([
-                'items.id as item_id', 'items.name', 'items.icon',
-                'items.info', 'user_items.quantity'
+                'items.id as item_id', 'items.name', 'items.quality',
+                'items.icon', 'items.info', 'user_items.quantity'
             ])
             ->toArray();
     }
