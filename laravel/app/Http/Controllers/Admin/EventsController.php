@@ -56,7 +56,8 @@ class EventsController extends Controller
 
     protected function typeName(array $event):array
     {
-        $data = [];
+        $data = array();
+
         switch ($event['type']) {
             case 'monster':
                 $data = Monster::find($event['monster_id'])->toArray();
