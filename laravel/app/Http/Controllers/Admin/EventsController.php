@@ -8,6 +8,34 @@ use App\Models\{Chest, Event, Mine, Monster};
 
 class EventsController extends Controller
 {
+    protected function typeName(array $event): array
+    {
+        $data = array();
+
+        switch ($event['type']) {
+            case 'monster':
+                $data = Monster::find($event['monster_id'])->toArray();
+                $event['id'] = $data['id'];
+                unset($event['mine_id']);
+                unset($event['chest_id']);
+                break;
+            case 'mine':
+                $data = Mine::find($event['mine_id'])->toArray();
+                $event['id'] = $data['id'];
+                unset($event['monster_id']);
+                unset($event['chest_id']);
+                break;
+            case 'chest':
+                $data = Chest::find($event['chest_id'])->toArray();
+                $event['id'] = $data['id'];
+                unset($event['mine_id']);
+                unset($event['monster_id']);
+                break;
+        }
+
+        return $event;
+    }
+
     public function getIndex()
     {
         $events = Event::get();
@@ -47,33 +75,5 @@ class EventsController extends Controller
         Event::where('id', $eventId)->delete();
 
         return redirect()->action('Admin\EventsController@getIndex');
-    }
-
-    protected function typeName(array $event):array
-    {
-        $data = array();
-
-        switch ($event['type']) {
-            case 'monster':
-                $data = Monster::find($event['monster_id'])->toArray();
-                $event['id'] = $data['id'];
-                unset($event['mine_id']);
-                unset($event['chest_id']);
-                break;
-            case 'mine':
-                $data = Mine::find($event['mine_id'])->toArray();
-                $event['id'] = $data['id'];
-                unset($event['monster_id']);
-                unset($event['chest_id']);
-                break;
-            case 'chest':
-                $data = Chest::find($event['chest_id'])->toArray();
-                $event['id'] = $data['id'];
-                unset($event['mine_id']);
-                unset($event['monster_id']);
-                break;
-        }
-
-        return $event;
     }
 }
