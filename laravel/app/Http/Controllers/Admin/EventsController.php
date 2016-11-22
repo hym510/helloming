@@ -30,19 +30,14 @@ class EventsController extends Controller
 
     public function postStore(EventsRequest $request)
     {
-        $data = $request->inputData();
-        $event = $this->typeName($data);
-        Event::create($event);
+        Event::create($this->typeName($request->inputData()));
 
         return redirect()->action('Admin\EventsController@getIndex');
     }
 
     public function postUpdate(EventsRequest $request, $eventId)
     {
-        $data = $request->inputData();
-        $event = $this->typeName($data);
-        $eve = Event::findOrFail($eventId);
-        $eve->update($event);
+        Event::where('id', $eventId)->update($this->typeName($request->inputData()));
 
         return redirect()->action('Admin\EventsController@getIndex');
     }
