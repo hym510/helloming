@@ -16,7 +16,7 @@
                         <tr>
                             <th>等级</th>
                             <th>经验</th>
-                            <th>力量</th>
+                            <th>体力</th>
                             <th>行动力</th>
                             <th>操作</th>
                         </tr>
@@ -41,11 +41,12 @@
     </div>
 </section>
 @stop
+
 @section('script')
 <script type="text/javascript">
     $('.del').click(function() {
-        var id = $(this).data('id');
-        var msg ='确认删除?';
+        var id = $(this).data('id'),
+            msg ='确认删除?';
         layer.msg(msg, {
             time: 0,
             btn: ['确定','取消'],

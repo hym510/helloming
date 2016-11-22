@@ -41,11 +41,12 @@
     </div>
 </section>
 @stop
+
 @section('script')
 <script type="text/javascript">
     $('.del').click(function() {
-        var id = $(this).data('id');
-        var msg ='确认删除?';
+        var id = $(this).data('id'),
+            msg ='确认删除?';
         layer.msg(msg, {
             time: 0,
             btn: ['确定','取消'],

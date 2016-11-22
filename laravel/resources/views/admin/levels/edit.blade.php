@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <input type="text" name="power" class="form-control" value="{{ $level->power or '' }}">
-                            <label>力量</label>
+                            <label>体力</label>
                         </div>
                         <div class="form-group">
                             <input type="text" name="action" class="form-control" value="{{ $level->action or '' }}">

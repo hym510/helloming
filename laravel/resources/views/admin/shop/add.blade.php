@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($items as $item)
+                    @foreach ($items as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->type_name }}</td>
@@ -42,8 +42,8 @@
 @section('script')
 <script type="text/javascript">
 $('.del').click(function() {
-        var id = $(this).data('id');
-        var msg = '确认添加?';
+        var id = $(this).data('id'),
+            msg = '确认添加?';
         layer.msg(msg, {
             time: 0,
             btn: ['确认', '取消'],

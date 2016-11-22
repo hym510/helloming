@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -60,9 +60,9 @@
 @section('script')
 <script type="text/javascript">
     $('.del').click(function() {
-        var id = $(this).data('id');
-        var type = $(this).data('type');
-        var msg = '确认删除?';
+        var id = $(this).data('id'),
+            type = $(this).data('type'),
+            msg = '确认删除?';
         layer.msg(msg, {
             time: 0,
             btn: ['确认', '删除'],
@@ -78,9 +78,9 @@
     });
 
     $('.forcedel').click(function() {
-        var id = $(this).data('id');
-        var type = $(this).data('type');
-        var msg = '确认屏蔽?';
+        var id = $(this).data('id'),
+            type = $(this).data('type'),
+            msg = '确认屏蔽?';
         layer.msg(msg, {
             time: 0,
             btn: ['确认', '删除'],

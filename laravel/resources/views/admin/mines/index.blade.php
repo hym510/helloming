@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($mines as $mine)
+                    @foreach ($mines as $mine)
                         <tr>
                             <td>{{ $mine->id }}</td>
                             <td>{{ $mine->name }}</td>

@@ -78,9 +78,9 @@
 @section('script')
 <script type="text/javascript">
     $(function() {
-        var dMonster = $('input[name="monster_id"]').parent();
-        var dMine = $('input[name="mine_id"]').parent();
-        var dChest = $('input[name="chest_id"]').parent();
+        var dMonster = $('input[name="monster_id"]').parent(),
+            dMine = $('input[name="mine_id"]').parent(),
+            dChest = $('input[name="chest_id"]').parent();
         $('select[name="type"]').on('change', function() {
             switch ($(this).val()) {
                 case 'monster':
