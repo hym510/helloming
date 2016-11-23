@@ -30,15 +30,15 @@
                             <label>封面图</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="level" class="form-control" value="{{ $equipment->level or ''}}">
+                            <input type="text" name="level" class="form-control" value="{{ $equipment->level or '' }}">
                             <label>装备等级</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="power" class="form-control" value="{{ $equipment->power or ''}}">
+                            <input type="text" name="power" class="form-control" value="{{ $equipment->power or '' }}">
                             <label>装备力量</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="job_id" class="form-control" value="{{ $equipment->job_id or ''}}">
+                            <input type="text" name="job_id" class="form-control" value="{{ $equipment->job_id or '' }}">
                             <label>职业id</label>
                         </div>
                         <div class="form-group">
@@ -50,7 +50,7 @@
                             <label>装备位置</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="upgrade" class="form-control" value="{{ $equipment->upgrade or ''}}">
+                            <input type="text" name="upgrade" class="form-control" value="{{ $equipment->upgrade or '' }}">
                             <label>装备升级</label>
                         </div>
                     </div>

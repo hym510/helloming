@@ -30,7 +30,7 @@
                             <label>矿物名称</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="time" class="form-control" value="{{ $mine->time or ''}}" placeholder="秒">
+                            <input type="text" name="time" class="form-control" value="{{ $mine->time or '' }}" placeholder="秒">
                             <label>开矿时间</label>
                         </div>
                         <div class="form-group">

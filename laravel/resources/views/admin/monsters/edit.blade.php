@@ -45,14 +45,14 @@
                             <label>怪物血量</label>
                         </div>
                         <div class="form-group">
-                            <select name="kill_limit" class="form-control" data-val="{{ $monster->kill_limit or ''}}">
+                            <select name="kill_limit" class="form-control" data-val="{{ $monster->kill_limit or '' }}">
                                 <option value="0">否</option>
                                 <option value="1">是</option>
                             </select>
                             <label>是否限时击杀</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="kill_limit_time" class="form-control" value="{{ $monster->kill_limit_time or ''}}" placeholder='秒'>
+                            <input type="text" name="kill_limit_time" class="form-control" value="{{ $monster->kill_limit_time or '' }}" placeholder='秒'>
                             <label>限时击杀时间</label>
                         </div>
                     </div>

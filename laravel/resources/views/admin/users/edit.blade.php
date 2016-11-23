@@ -23,11 +23,11 @@
                                 <label>图像</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="name" class="form-control" value="{{ $user->name or ''}}">
+                                <input type="text" name="name" class="form-control" value="{{ $user->name or '' }}">
                                 <label>姓名</label>
                             </div>
                             <div class="form-group">
-                                <select name="gender" class="form-control" data-val="{{ $user->gender or ''}}">
+                                <select name="gender" class="form-control" data-val="{{ $user->gender or '' }}">
                                     <option>填写性别</option>
                                     <option value="female">女</option>
                                     <option value="male">男</option>
@@ -35,33 +35,33 @@
                                 <label>性别</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="phone" class="form-control" value="{{ $user->phone or ''}}">
+                                <input type="text" name="phone" class="form-control" value="{{ $user->phone or '' }}">
                                 <label>手机</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="age" class="form-control" value="{{ $user->age or ''}}">
+                                <input type="text" name="age" class="form-control" value="{{ $user->age or '' }}">
                                 <label>年龄</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="height" class="form-control" value="{{ $user->height or ''}}">
+                                <input type="text" name="height" class="form-control" value="{{ $user->height or '' }}">
                                 <label>身高</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="weight" class="form-control" value="{{ $user->weight or ''}}">
+                                <input type="text" name="weight" class="form-control" value="{{ $user->weight or '' }}">
                                 <label>体重</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="job_id" class="form-control" value="{{ $user->job_id or ''}}">
+                                <input type="text" name="job_id" class="form-control" value="{{ $user->job_id or '' }}">
                                 <label>职业</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="online_time" class="form-control" value="{{ $user->online_time or ''}}">
+                                <input type="text" name="online_time" class="form-control" value="{{ $user->online_time or '' }}">
                                 <label>在线时间</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <select multiple name="zodiac" class="form-control" data-val="{{ $user->zodiac or ''}}">
+                                <select multiple name="zodiac" class="form-control" data-val="{{ $user->zodiac or '' }}">
                                     <option value="aries">白羊座</option>
                                     <option value="taurus">金牛座</option>
                                     <option value="gemini">双子座</option>

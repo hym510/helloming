@@ -38,7 +38,7 @@
                             <td>{{ json_encode($event->prize) }}</td>
                             <td>{{ $event->exp or ''}}</td>
                             <td>{{ $event->unlock_level or '' }}</td>
-                            <td>{{ mb_substr($event->info, 0, 8).'......'}}</td>
+                            <td>{{ mb_substr($event->info, 0, 8).'......' }}</td>
                             <td>{{ $event->weight }}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $event->id }}">删除</a>
