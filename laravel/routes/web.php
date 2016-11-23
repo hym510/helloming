@@ -48,12 +48,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('events/edit/{eventId}', ['uses' => 'EventsController@getEdit']);
     Route::get('events/delete/{eventId}', ['uses' => 'EventsController@getDelete']);
 
+    Route::get('helper/qiniu-token', ['uses' => 'HelperController@getQiniuToken']);
+
     Route::get('item', ['uses' => 'ItemsController@getIndex']);
     Route::get('item/add', ['uses' => 'ItemsController@getAdd']);
     Route::get('item/edit/{itemId}', ['uses' => 'ItemsController@getEdit']);
     Route::get('item/delete/{itemId}', ['uses' => 'ItemsController@getDelete']);
     Route::get('item/update/{itemId}', ['uses' => 'ItemsController@postUpdate']);
     Route::post('item/store', ['uses' => 'ItemsController@postStore']);
+
+    Route::get('level', ['uses' => 'LevelController@getIndex']);
+    Route::get('level/add', ['uses' => 'LevelController@getAdd']);
+    Route::get('level/edit/{levelId}', ['uses' => 'LevelController@getEdit']);
+    Route::post('level/store', ['uses' => 'LevelController@postStore']);
+    Route::post('level/update/{levelId}', ['uses' => 'LevelController@postUpdate']);
+    Route::get('level/delete/{levelId}', ['uses' => 'LevelController@getDelete']);
 
     Route::get('mines', ['uses' => 'MinesController@getIndex']);
     Route::get('mines/add', ['uses' => 'MinesController@getAdd']);
@@ -69,15 +78,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::post('monsters/update/{monsterId}', ['uses' => 'MonstersController@postUpdate']);
     Route::get('monsters/delete/{monsterId}', ['uses' => 'MonstersController@getDelete']);
 
-    Route::get('helper/qiniu-token', ['uses' => 'HelperController@getQiniuToken']);
-
-    Route::get('events', ['uses' => 'EventsController@getIndex']);
-    Route::get('events/add', ['uses' => 'EventsController@getAdd']);
-    Route::post('events/store', ['uses' => 'EventsController@postStore']);
-    Route::post('events/update/{eventId}', ['uses' => 'EventsController@postUpdate']);
-    Route::get('events/edit/{eventId}', ['uses' => 'EventsController@getEdit']);
-    Route::get('events/delete/{eventId}', ['uses' => 'EventsController@getDelete']);
-
     Route::get('msg', ['uses' => 'PushMsgController@getPushMsg']);
     Route::post('pushmsg', ['uses' => 'PushMsgController@postPushMsg']);
 
@@ -92,14 +92,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('users/show/{userId}', ['uses' => 'UsersController@getShow']);
     Route::get('users/add', ['uses' => 'UsersController@getAdd']);
     Route::post('users/store', ['uses' => 'UsersController@postStore']);
-
-    Route::get('level', ['uses' => 'LevelController@getIndex']);
-    Route::get('level/add', ['uses' => 'LevelController@getAdd']);
-    Route::get('level/edit/{levelId}', ['uses' => 'LevelController@getEdit']);
-    Route::post('level/store', ['uses' => 'LevelController@postStore']);
-    Route::post('level/update/{levelId}', ['uses' => 'LevelController@postUpdate']);
-    Route::get('level/delete/{levelId}', ['uses' => 'LevelController@getDelete']);
-
 });
 
 
