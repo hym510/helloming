@@ -10,8 +10,11 @@ use Qiniu\Storage\UploadManager;
 class Qiniu
 {
     private $accessKey;
+
     private $secretKey;
+
     private $bucket;
+
     private $domain;
 
     public function __construct()

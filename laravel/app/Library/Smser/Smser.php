@@ -42,7 +42,7 @@ class Smser implements SmserContract
         try {
             $result = curl_exec($ch);
             curl_close($ch);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -60,7 +60,7 @@ class Smser implements SmserContract
         try {
             $result = curl_exec($ch);
             curl_close($ch);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
