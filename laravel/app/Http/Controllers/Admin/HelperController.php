@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Json;
 use App\Http\Controllers\Controller;
 
 class HelperController extends Controller
 {
     public function getQiniuToken()
     {
-        return app('response')->success(app('qiniu')->getToken());
+        return Json::success(app('qiniu')->getToken());
     }
 }
