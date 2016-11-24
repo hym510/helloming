@@ -37,7 +37,7 @@
                                 <option value="4">橙色</option>
                                 <option value="5">红色</option>
                             </select>
-                            <label>道具类型</label>
+                            <label>道具品质</label>
                         </div>
                         <div class="form-group">
                             <input type="text" name="info" class="form-control" value="{{ $item->info or '' }}">

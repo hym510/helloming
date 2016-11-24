@@ -21,4 +21,9 @@ class LoginRequest extends Request
             'password' => '密码'
         ];
     }
+
+    public function getData()
+    {
+        return $this->only(array_keys($this->rules()));
+    }
 }
