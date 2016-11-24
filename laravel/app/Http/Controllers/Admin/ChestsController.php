@@ -10,9 +10,7 @@ class ChestsController extends Controller
 {
     public function getIndex()
     {
-        $chests = Chest::get();
-
-        return view('admin.chests.index', compact('chests'));
+        return view('admin.chests.index', ['chests' => Chest::get()]);
     }
 
     public function getAdd()
@@ -22,9 +20,9 @@ class ChestsController extends Controller
 
     public function getEdit($chestId)
     {
-        $chest = Chest::findOrFail($chestId);
-
-        return view('admin.chests.edit', compact('chest'));
+        return view('admin.chests.edit',
+            ['chest' => Chest::findOrFail($chestId)]
+        );
     }
 
     public function postStore(ChestsRequest $request)

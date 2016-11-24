@@ -18,9 +18,9 @@ class LevelController extends Controller
 
     public function getIndex()
     {
-        $levels = LevelAttr::orderBy('level', 'asc')->get();
-
-        return view('admin.levels.index', compact('levels'));
+        return view('admin.levels.index',
+            ['levels' => LevelAttr::orderBy('level', 'asc')->get()]
+        );
     }
 
     public function getAdd()
@@ -30,9 +30,9 @@ class LevelController extends Controller
 
     public function getEdit($levelId)
     {
-        $level = LevelAttr::findOrFail($levelId);
-
-        return view('admin.levels.edit', compact('level'));
+        return view('admin.levels.edit',
+            ['level' => LevelAttr::findOrFail($levelId)]
+        );
     }
 
     public function postUpdate(LevelRequest $request, $levelId)

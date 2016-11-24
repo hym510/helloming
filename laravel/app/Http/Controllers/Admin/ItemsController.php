@@ -26,9 +26,9 @@ class ItemsController extends Controller
 
     public function getEdit($itemId)
     {
-        $item = Item::findOrFail($itemId);
-
-        return view('admin.items.edit', compact('item'));
+        return view('admin.items.edit',
+            ['item' => Item::findOrFail($itemId)]
+        );
     }
 
     public function postStore(ItemRequest $request)

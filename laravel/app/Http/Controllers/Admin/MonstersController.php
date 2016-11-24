@@ -26,9 +26,9 @@ class MonstersController extends Controller
 
     public function getEdit($monsterId)
     {
-        $monster = Monster::findOrFail($monsterId);
-
-        return view('admin.monsters.edit', compact('monster'));
+        return view('admin.monsters.edit',
+            ['monster' => Monster::findOrFail($monsterId)]
+        );
     }
 
     public function postStore(MonstersRequest $request)

@@ -38,9 +38,7 @@ class EventsController extends Controller
 
     public function getIndex()
     {
-        $events = Event::get();
-
-        return view('admin.events.index', compact('events'));
+        return view('admin.events.index', ['events' => Event::get()]);
     }
 
     public function getAdd()
