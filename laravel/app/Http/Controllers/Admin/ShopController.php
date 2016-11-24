@@ -37,7 +37,7 @@ class ShopController extends Controller
         if (is_numeric($value)) {
             Shop::where('id', $id)->update(['price' => floor($value)]);
         } else {
-            return response()->json(['message' => 403]);
+            return Json::error('Fails to set price.', 403);
         }
     }
 
