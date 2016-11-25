@@ -28,7 +28,7 @@
                             <div class="col-xs-6 text-left">
                                 <div class="checkbox checkbox-inline checkbox-styled">
                                     <label>
-                                        <input type="checkbox" name="remember_token" value="1"> <span>记住我</span>
+                                        <input type="checkbox" name="remember"> <span>记住我</span>
                                     </label>
                                 </div>
                             </div>
