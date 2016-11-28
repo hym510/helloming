@@ -15,6 +15,7 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request)
     {
         $data = $request->inputData();
+
         if (isset($data['remember'])) {
             $remember = true;
             unset($data['remember']);
@@ -24,9 +25,9 @@ class AuthController extends Controller
 
         if (auth()->guard('admin')->attempt($data, $remember)) {
             return redirect()->action('Admin\HomeController@getIndex');
+        } else {
+            return back()->withErrors('账号或者密码错误');
         }
-
-        return back()->withErrors('账号或者密码错误');
     }
 
     public function getLogout()
