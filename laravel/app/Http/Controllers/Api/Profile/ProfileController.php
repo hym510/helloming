@@ -15,6 +15,7 @@ class ProfileController extends Controller
     {
         $profile = Redis::hgetall('user:'.Auth::user()->user);
         $profile['job'] = Job::where('id', $profile['job_id'])->first(['name'])->name;
+        $profile['next_level_exp'] = json_decode(Redis::get('level_attributes'))[$profile['level'] - 1]->exp;
 
         return Json::success($profile);
     }
