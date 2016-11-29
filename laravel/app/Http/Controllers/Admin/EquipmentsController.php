@@ -26,9 +26,9 @@ class EquipmentsController extends Controller
 
     public function getEdit($equipId)
     {
-        $equipment = Equipment::findOrFail($equipId);
-
-        return view('admin.equipments.edit', compact('equipment'));
+        return view('admin.equipments.edit', [
+            'equipment' => Equipment::findOrFail($equipId)
+        ]);
     }
 
     public function postStore(EquipmentsRequest $request)
