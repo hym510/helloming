@@ -10,24 +10,19 @@ class EventsController extends Controller
 {
     protected function typeName(array $event): array
     {
-        $data = array();
-
         switch ($event['type']) {
             case 'monster':
-                $data = Monster::find($event['monster_id'])->toArray();
-                $event['id'] = $data['id'];
+                $event['id'] = Monster::where('id', $event['monster_id'])->first(['id'])->id;
                 unset($event['mine_id']);
                 unset($event['chest_id']);
                 break;
             case 'mine':
-                $data = Mine::find($event['mine_id'])->toArray();
-                $event['id'] = $data['id'];
+                $event['id'] = Mine::where('id', $event['mine_id'])->first(['id'])->id;
                 unset($event['monster_id']);
                 unset($event['chest_id']);
                 break;
             case 'chest':
-                $data = Chest::find($event['chest_id'])->toArray();
-                $event['id'] = $data['id'];
+                $event['id'] = Chest::where('id', $event['chest_id'])->first(['id'])->id;
                 unset($event['mine_id']);
                 unset($event['monster_id']);
                 break;
