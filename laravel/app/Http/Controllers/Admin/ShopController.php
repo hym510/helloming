@@ -9,9 +9,7 @@ class ShopController extends Controller
 {
     public function getIndex()
     {
-        $shops = Shop::get();
-
-        return view('admin.shop.index', compact('shops'));
+        return view('admin.shop.index', ['shops' => Shop::get()]);
     }
 
     public function getAdd(Item $item)
