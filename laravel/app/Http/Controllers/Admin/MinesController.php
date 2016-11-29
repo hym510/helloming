@@ -26,9 +26,9 @@ class MinesController extends Controller
 
     public function getEdit($mineId)
     {
-        $mine = Mine::findOrFail($mineId);
-
-        return view('admin.mines.edit', compact('mine'));
+        return view('admin.mines.edit', [
+            'mine' => Mine::findOrFail($mineId)
+        ]);
     }
 
     public function postStore(MinesRequest $request)
