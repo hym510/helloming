@@ -48,10 +48,10 @@ class EventsController extends Controller
 
     public function getEdit($eventId)
     {
-        $event = Event::findOrFail($eventId);
-        $prize = json_encode($event->prize);
-
-        return view('admin.events.edit', compact('event', 'prize'));
+        return view('admin.events.edit', [
+            'event' => Event::findOrFail($eventId),
+            'prize' => json_encode($event->prize)
+        ]);
     }
 
     public function postStore(EventsRequest $request)
