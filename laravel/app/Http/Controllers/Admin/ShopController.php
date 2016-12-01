@@ -14,9 +14,7 @@ class ShopController extends Controller
 
     public function getAdd(Item $item)
     {
-        $items = $item->get();
-
-        return view('admin.shop.add', compact('items'));
+        return view('admin.shop.add', ['items' => $item->get()]);
     }
 
     public function postStore($id,  Shop $shop)
