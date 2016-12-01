@@ -12,9 +12,7 @@ class ResetPasswordController extends Controller
 {
     public function getReset()
     {
-        $user = Auth::user();
-
-        return view('admin.reset.index', compact('user'));
+        return view('admin.reset.index', ['user' => Auth::user()]);
     }
 
     public function putReset(ResetPasswordRequest $request)
