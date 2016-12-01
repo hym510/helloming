@@ -17,12 +17,12 @@ class ShopController extends Controller
         return view('admin.shop.add', ['items' => $item->get()]);
     }
 
-    public function postStore($id,  Shop $shop)
+    public function postStore($id, Shop $shop)
     {
-        $item = Item::findOrFail($id);
-        $shop['item_id'] = $item['id'];
-        $shop['type'] = $item['type'];
-        $shop['priority'] = $item['priority'];
+        $item = Item::where('id', $id)->first(['id', 'type', 'priority']);
+        $shop['item_id'] = $item->id;
+        $shop['type'] = $item->type;
+        $shop['priority'] = $item->priority;
         $shop->save();
 
         return redirect()->action('Admin\ShopController@getIndex');
