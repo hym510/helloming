@@ -20,9 +20,10 @@ class ChestsController extends Controller
 
     public function getEdit($chestId)
     {
-        return view('admin.chests.edit',
-            ['chest' => Chest::findOrFail($chestId)]
-        );
+        $chest = Chest::findOrFail($chestId);
+        $prize = json_encode($chest['prize']);
+
+        return view('admin.chests.edit', compact('chest', 'prize'));
     }
 
     public function postStore(ChestsRequest $request)

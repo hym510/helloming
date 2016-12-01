@@ -25,7 +25,7 @@
                     @foreach($chests as $chest)
                         <tr>
                             <td>{{ $chest->id }}</td>
-                            <td>{{ $chest->prize }}</td>
+                            <td>{{ json_encode($chest->prize) }}</td>
                             <td>{{ $chest->type_name }}</td>
                             <td>{{ $chest->cost }}</td>
                             <td>

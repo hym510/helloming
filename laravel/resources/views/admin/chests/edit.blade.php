@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="text" name="prize" class="form-control" value="{{ $chest->prize or '' }}">
+                            <input type="text" name="prize" class="form-control" value="{{ $prize or '' }}">
                             <label>奖励道具</label>
                         </div>
                         <div class="form-group">

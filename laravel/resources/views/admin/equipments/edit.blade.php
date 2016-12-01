@@ -50,7 +50,7 @@
                             <label>装备位置</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="upgrade" class="form-control" value="{{ $equipment->upgrade or '' }}">
+                            <input type="text" name="upgrade" class="form-control" value="{{ $upgrade or '' }}">
                             <label>装备升级</label>
                         </div>
                     </div>
