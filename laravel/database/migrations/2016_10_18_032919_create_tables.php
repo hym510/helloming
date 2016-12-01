@@ -64,6 +64,14 @@ class CreateTables extends Migration
             $table->rememberToken();
         });
 
+        Schema::create('state_attributes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedTinyInteger('level');
+            $table->unsignedSmallInteger('power');
+
+            $table->unique('level');
+        });
+
         Schema::create('level_attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedTinyInteger('level');
