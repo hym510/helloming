@@ -131,29 +131,39 @@ class User extends Model
     {
         $data = Redis::pipeline()
             ->get('level_attributes')
-            ->hmget('user:'.$id, 'level', 'exp')
+            ->get('state_attributes')
+            ->hmget('user:'.$id, 'level', 'exp', 'state')
             ->execute();
 
         $levelAttr = json_decode($data[0]);
-        $userAttr = $data[1];
+        $stateAttr = json_decode($data[1]);
+        $userAttr = $data[2];
         $userExp = $userAttr[1] + $exp;
 
         if ($userExp >= $levelAttr[$userAttr[0] - 1]->exp) {
+            $power = $levelAttr[$userAttr[0] - 1]->power;
+            $action = $levelAttr[$userAttr[0] - 1]->action;
+
             static::where('id', $id)->update([
                 'level' => $userAttr[0] + 1,
                 'exp' => $userExp,
-                'power' => $levelAttr[$userAttr[0] - 1]->power,
-                'action' => $levelAttr[$userAttr[0] - 1]->action
-
+                'power' => $power,
+                'action' => $action
             ]);
 
             Redis::pipeline()
                 ->hincrby('user:'.$id, 'level', 1)
                 ->hincrby('user:'.$id, 'exp', $exp)
-                ->hmset('user:'.$id, 'power', $levelAttr[$userAttr[0] - 1]->action,
-                    'action', $levelAttr[$userAttr[0] - 1]->action
-                )
+                ->hmset('user:'.$id, 'power', $power, 'action', $action)
                 ->execute();
+
+            if ($stateAttr[$userAttr[2] - 1]->power) {
+                static::where('id', $id)->update([
+                    'state' => $userAttr[2] + 1,
+                ]);
+
+                Redis::hincrby('user:'.$id, 'state', 1);
+            }
         } else {
             static::where('id', $id)->increment('exp', $exp);
             Redis::hincrby('user:'.$id, 'exp', $exp);
