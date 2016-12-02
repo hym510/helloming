@@ -80,7 +80,7 @@ class Equip
             [['level', $level],
              ['job_id', $jobId],
              ['position', $position]],
-            ['max_level', 'upgrade', 'icon']
+            ['name', 'max_level', 'power', 'upgrade', 'icon']
         );
 
         if ($equip['max_level'] == true) {
