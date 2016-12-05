@@ -71,6 +71,8 @@ class Equip
             ['power', 'icon']
         );
 
+        $upgEquip['next_level'] = static::material($user['job_id'], $user[$equipPos], $position);
+
         return ['success', $upgEquip];
     }
 
