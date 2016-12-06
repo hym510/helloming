@@ -206,7 +206,7 @@ class CreateTables extends Migration
                 ->references('id')->on('items')
                 ->onDelete('cascade');
             $table->enum('type', ['diamond', 'tool']);
-            $table->unsignedSmallInteger('price')->nullable();
+            $table->unsignedSmallInteger('price');
             $table->unsignedSmallInteger('quantity');
         });
 
