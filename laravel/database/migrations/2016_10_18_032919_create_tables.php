@@ -207,6 +207,7 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->enum('type', ['diamond', 'tool']);
             $table->unsignedSmallInteger('price')->nullable();
+            $table->unsignedSmallInteger('quantity');
         });
 
         Schema::create('notifications', function (Blueprint $table) {
