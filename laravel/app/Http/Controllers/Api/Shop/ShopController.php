@@ -8,5 +8,8 @@ use Illuminate\Routing\Controller;
 
 class ShopController extends Controller
 {
-
+    public function getGoods()
+    {
+        return Json::success(Shop::all()->toArray());
+    }
 }
