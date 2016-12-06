@@ -228,6 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'AuthToken' => App\Facades\AuthToken::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Json' => Soloslee\JsonResponse\Facades\JsonResponse::class,
