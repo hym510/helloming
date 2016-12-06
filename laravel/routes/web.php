@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('item/delete/{itemId}', ['uses' => 'ItemsController@getDelete']);
     Route::get('item/update/{itemId}', ['uses' => 'ItemsController@postUpdate']);
     Route::post('item/store', ['uses' => 'ItemsController@postStore']);
+    Route::post('item/excel', ['uses' => 'ItemsController@postImportExcel']);
 
     Route::get('level', ['uses' => 'LevelController@getIndex']);
     Route::get('level/add', ['uses' => 'LevelController@getAdd']);

@@ -18,6 +18,11 @@
                     </div>
                     <button type="submit" class="btn btn-default-bright">查找</button>
                 </form>
+                <form class="form-inline" enctype="multipart/form-data" method="post" action="{{ action('Admin\ItemsController@postImportExcel') }}">
+                {!! csrf_field() !!}
+                    <input type="file" name="excel">
+                    <button type="submit" class="btn btn-default-bright">提交</button>
+                </form>
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
