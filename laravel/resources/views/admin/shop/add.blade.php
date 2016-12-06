@@ -41,15 +41,15 @@
 
 @section('script')
 <script type="text/javascript">
-$('.del').click(function() {
+    $('.del').click(function() {
         var id = $(this).data('id'),
-            msg = '确认添加?';
+            msg ='确认添加?';
         layer.msg(msg, {
             time: 0,
-            btn: ['确认', '取消'],
+            btn: ['确定','取消'],
             yes: function(index) {
                 layer.close(index);
-                $.post("{{ action('Admin\ShopController@postStore', ['id' => ''] ) }}/" + id, function() {
+                $.post("{{ action('Admin\ShopController@postStore', ['id' => '']) }}/" + id, function() {
                     layer.alert('添加成功', function() {
                         location.reload();
                     })
@@ -57,5 +57,6 @@ $('.del').click(function() {
             }
         })
     });
+</script>
 </script>
 @stop

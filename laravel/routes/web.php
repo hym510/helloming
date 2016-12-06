@@ -48,13 +48,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('events/edit/{eventId}', ['uses' => 'EventsController@getEdit']);
     Route::get('events/delete/{eventId}', ['uses' => 'EventsController@getDelete']);
 
-    Route::get('helper/qiniu-token', ['uses' => 'HelperController@getQiniuToken']);
-
     Route::get('item', ['uses' => 'ItemsController@getIndex']);
     Route::get('item/add', ['uses' => 'ItemsController@getAdd']);
     Route::get('item/edit/{itemId}', ['uses' => 'ItemsController@getEdit']);
     Route::get('item/delete/{itemId}', ['uses' => 'ItemsController@getDelete']);
-    Route::get('item/update/{itemId}', ['uses' => 'ItemsController@postUpdate']);
+    Route::post('item/update/{itemId}', ['uses' => 'ItemsController@postUpdate']);
     Route::post('item/store', ['uses' => 'ItemsController@postStore']);
     Route::post('item/excel', ['uses' => 'ItemsController@postImportExcel']);
 
