@@ -22,7 +22,7 @@
                             <div class="form-control-static">
                                 <img src="{{ $mine->icon or config('main.placeholders.default_img') }}" class="upload-img" data-name="icon" height="120">
                             </div>
-                                <input type="hidden" name="icon" value="{{ $mine->icon or '' }}" required>
+                                <input type="file" name="icon" value="{{ $mine->icon or '' }}" required>
                                 <label>封面图</label>
                         </div>
                         <div class="form-group">

@@ -12,7 +12,7 @@ class ItemsController extends Controller
 {
     public function postImportExcel(Item $item, Request $request)
     {
-        $items = Item::get();
+        $item = Item::get();
         $path = $request->excel->path();
 
         $excels = ReadExcel::getExcel($path);

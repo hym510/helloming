@@ -19,7 +19,7 @@
                                 <div class="form-control-static">
                                     <img src="{{ $user->icon or config('main.placeholders.default_img') }}" class="upload-img" data-name="icon" height="120px">
                                 </div>
-                                <input type="hidden" name="icon" value="{{ $user->icon or '' }}">
+                                <input type="file" name="icon" value="{{ $user->icon or '' }}">
                                 <label>图像</label>
                             </div>
                             <div class="form-group">
