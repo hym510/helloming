@@ -201,7 +201,7 @@ class CreateTables extends Migration
 
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('item_id');
+            $table->unsignedInteger('item_id')->nullable();
             $table->foreign('item_id')
                 ->references('id')->on('items')
                 ->onDelete('cascade');
