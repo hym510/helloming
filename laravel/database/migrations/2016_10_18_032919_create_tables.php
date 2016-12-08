@@ -67,7 +67,6 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->unsignedTinyInteger('level');
             $table->unsignedSmallInteger('power');
-            $table->string('icon');
 
             $table->unique('level');
         });
