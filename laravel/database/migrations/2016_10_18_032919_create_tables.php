@@ -133,7 +133,6 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedSmallInteger('time');
-            $table->string('icon');
             $table->unsignedSmallInteger('consume_diamond');
         });
 
