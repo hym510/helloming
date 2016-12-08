@@ -14,6 +14,11 @@ class User extends Model
         return $this->belongsTo(Job::class, 'job_id');
     }
 
+    public function getAvatarAttribute($value)
+    {
+        return $value ? env('QINIU_DOMAIN').$value : null;
+    }
+
     public static function signup(array $data): array
     {
         if (! isset($data['avatar'])) {
