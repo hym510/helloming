@@ -41,14 +41,8 @@ class Chest
             return [];
         }
 
-        $prizeIds = UserItem::manyPrize($chest['prize'], $userId);
-        $items = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon']);
+        UserItem::manyPrize($chest['prize'], $userId);
 
-        foreach ($chest['prize'] as $p) {
-            $item = $items->where('id', $p[0])->first();
-            $item->quantity = $p[1];
-        }
-
-        return $items->toArray();
+        return $chest['prize'];
     }
 }
