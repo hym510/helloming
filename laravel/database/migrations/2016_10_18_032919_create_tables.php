@@ -127,7 +127,6 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('hp');
             $table->boolean('kill_limit');
             $table->unsignedSmallInteger('kill_limit_time')->nullable();
-            $table->string('icon');
         });
 
         Schema::create('mines', function (Blueprint $table) {
