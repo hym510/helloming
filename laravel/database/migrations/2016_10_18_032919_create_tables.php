@@ -50,7 +50,6 @@ class CreateTables extends Migration
             $table->string('wechat_id', 64)->nullable();
             $table->string('withdraw_password')->nullable();
             $table->timestamp('created_at');
-            $table->timestamp('consume_power')->nullable();
 
             $table->unique('phone');
             $table->unique('auth_token');
