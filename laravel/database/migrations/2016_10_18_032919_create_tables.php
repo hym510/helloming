@@ -95,7 +95,6 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('job_id');
             $table->enum('position', [1, 2, 3]);
             $table->json('upgrade');
-            $table->string('icon');
         });
 
         Schema::create('equipment_evaluate', function (Blueprint $table) {
