@@ -8,14 +8,9 @@ class UserItem extends Model
 
     public static function getAll($userId, $type): array
     {
-        return static::join('items', 'user_items.item_id', '=', 'items.id')
-            ->where('user_items.user_id', $userId)
+        return static::where('user_id', $userId)
             ->where('type', $type)
-            ->orderBy('items.priority', 'desc')
-            ->get([
-                'items.id as item_id', 'items.name', 'items.quality',
-                'items.icon', 'items.info', 'user_items.quantity'
-            ])
+            ->get(['item_id', 'quantity'])
             ->toArray();
     }
 
