@@ -11,3 +11,4 @@
 |'Diamonds are not enough.'|601|
 |'Fails to send message.'|602|
 |'Invalid SMS code.'|603|
+|'Invalid receipt.'|703|
