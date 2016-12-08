@@ -97,11 +97,6 @@ class CreateTables extends Migration
             $table->json('upgrade');
         });
 
-        Schema::create('equipment_evaluate', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedTinyInteger('level');
-        });
-
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
         });
