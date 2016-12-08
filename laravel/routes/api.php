@@ -32,6 +32,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
     });
 
+    Route::group(['namespace' => 'Purchase', 'middleware' => ['auth.api']], function () {
+        Route::post('purchase/verify', ['uses' => 'PurchaseController@postVerify']);
+    });
+
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
         Route::get('backpack/tool', ['uses' => 'BackpackController@getTool']);
         Route::get('equip/upgrade/{position}', ['uses' => 'EquipController@getUpgrade']);
