@@ -6,7 +6,7 @@ use App\Models\{Equipment, Item, User, UserItem};
 
 class Equip
 {
-    public static function upgrade($userId, $position): array
+    public static function upgrade($userId, $position): string
     {
         $equipPos = 'equipment'.$position.'_level';
 
@@ -19,11 +19,11 @@ class Equip
             [['level', $user[$equipPos]],
              ['job_id', $user['job_id']],
              ['position', $position]],
-            ['max_level', 'upgrade', 'icon']
+            ['max_level', 'upgrade']
         );
 
         if ($equip['max_level'] == true) {
-            return ['max'];
+            return 'max';
         }
 
         $enough = 0;
@@ -39,7 +39,7 @@ class Equip
             ->get(['item_id', 'quantity']);
 
         if ($items->count() < $count) {
-            return ['lack'];
+            return 'lack';
         }
 
         foreach ($equip['upgrade'] as $upgrade) {
@@ -53,7 +53,7 @@ class Equip
         }
 
         if ($enough != $count) {
-            return ['lack'];
+            return 'lack';
         }
 
         foreach ($equip['upgrade'] as $upgrade) {
@@ -64,16 +64,7 @@ class Equip
 
         User::equipUpgrade($userId, $equipPos);
 
-        $upgEquip = Equipment::getKeyValue(
-            [['level', $user[$equipPos] + 1],
-             ['job_id', $user['job_id']],
-             ['position', $position]],
-            ['power', 'icon']
-        );
-
-        $upgEquip['next_level'] = static::material($user['job_id'], $user[$equipPos], $position);
-
-        return ['success', $upgEquip];
+        return 'success';
     }
 
     public static function material($jobId, $level, $position): array
