@@ -11,15 +11,15 @@ class EquipController extends Controller
 {
     public function getUpgrade($position)
     {
-        $success = Equip::upgrade(Auth::user()->user, $position);
+        $result = Equip::upgrade(Auth::user()->user, $position);
 
-        switch ($success[0]) {
+        switch ($result) {
             case 'max':
                 return Json::error('Max level already reached.', 215);
             case 'lack':
                 return Json::error('Lack of material resources.', 501);
             case 'success':
-                return Json::success($success[1]);
+                return Json::success();
         }
     }
 }
