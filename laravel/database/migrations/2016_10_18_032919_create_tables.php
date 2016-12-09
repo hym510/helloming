@@ -143,9 +143,7 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->enum('type', ['mine', 'monster', 'chest']);
             $table->unsignedTinyInteger('level');
-            $table->unsignedInteger('mine_id')->nullable();
-            $table->unsignedInteger('monster_id')->nullable();
-            $table->unsignedInteger('chest_id')->nullable();
+            $table->unsignedInteger('type_id');
             $table->unsignedSmallInteger('exp');
             $table->unsignedTinyInteger('unlock_level');
             $table->unsignedTinyInteger('weight');
