@@ -48,10 +48,8 @@ class Event extends Model
         return static::where('unlock_level', '<=', $level)
             ->orderByRaw('RAND()')
             ->limit(6 - $count)
-            ->get([
-                'id', 'type', 'level', 'mine_id',
-                'monster_id', 'chest_id', 'info'
-            ])
+            ->get(['id'])
+            ->pluck('id')
             ->toArray();
     }
 }
