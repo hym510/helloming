@@ -10,7 +10,7 @@ class Monster
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'monster']],
-            ['monster_id', 'exp', 'prize']
+            ['type_id', 'exp', 'prize']
         );
 
         if (! $event) {
@@ -19,7 +19,7 @@ class Monster
 
         $atk *= 10;
 
-        if (! Monster::atk($event['monster_id'], $atk) || ! User::enough($userId, 'remain_power', $atk)) {
+        if (! Monster::atk($event['type_id'], $atk) || ! User::enough($userId, 'remain_power', $atk)) {
             return [];
         }
 
