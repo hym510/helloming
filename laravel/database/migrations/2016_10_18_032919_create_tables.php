@@ -108,9 +108,6 @@ class CreateTables extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->unsignedInteger('item_id');
-            $table->foreign('item_id')
-                ->references('id')->on('items')
-                ->onDelete('cascade');
             $table->unsignedSmallInteger('quantity')->default(1);
         });
 
