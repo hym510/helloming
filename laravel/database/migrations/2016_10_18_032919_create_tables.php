@@ -148,9 +148,6 @@ class CreateTables extends Migration
             $table->unsignedTinyInteger('level');
             $table->unsignedInteger('mine_id')->nullable();
             $table->unsignedInteger('monster_id')->nullable();
-            $table->foreign('monster_id')
-                ->references('id')->on('monsters')
-                ->onDelete('cascade');
             $table->unsignedInteger('chest_id')->nullable();
             $table->foreign('chest_id')
                 ->references('id')->on('chests')
