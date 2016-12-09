@@ -18,7 +18,7 @@ class Mining
 
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'mine']],
-            ['mine_id']
+            ['type_id']
         );
 
         if (! $event) {
@@ -26,13 +26,13 @@ class Mining
         }
 
         $mine = Mine::getKeyValue(
-            [['id', $event['mine_id']]],
+            [['id', $event['type_id']]],
             ['time']
         );
 
         User::mining($userId);
 
-        $hostEvent = HostEvent::start($userId, $eventId, $event['mine_id']);
+        $hostEvent = HostEvent::start($userId, $eventId, $event['type_id']);
 
         $job = (new HostMining($hostEvent['host_event_id']))
                     ->delay(Carbon::now()->addSeconds($mine['time']));
@@ -46,7 +46,7 @@ class Mining
     {
         $hostEvent = HostEvent::getKeyValue(
             [['id', $hostEventId], ['user_id', $userId]],
-            ['event_id', 'mine_id']
+            ['event_id', 'type_id']
         );
 
         if (! $hostEvent) {
@@ -54,7 +54,7 @@ class Mining
         }
 
         $mine = Mine::getKeyValue(
-            [['id', $hostEvent['mine_id']]],
+            [['id', $hostEvent['type_id']]],
             ['consume_diamond']
         );
 
