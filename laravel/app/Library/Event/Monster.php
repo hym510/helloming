@@ -2,7 +2,7 @@
 
 namespace App\Library\Event;
 
-use App\Models\{Event, Item, Monster, User, UserItem};
+use App\Models\{Event, Monster, User, UserItem};
 
 class Monster
 {
@@ -34,8 +34,7 @@ class Monster
         }
 
         UserItem::getPrize($prizeIds, $userId);
-        $items = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon'])->toArray();
 
-        return ['exp' => $event['exp'], 'prize' => $items];
+        return ['exp' => $event['exp'], 'prize' => $prizeIds];
     }
 }
