@@ -10,7 +10,7 @@ class MonsterRequest extends Request
     {
         return [
             'event_id' => 'required',
-            'atk' => 'required|digits:1',
+            'atk' => 'required',
         ];
     }
 }
