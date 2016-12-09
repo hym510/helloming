@@ -10,7 +10,7 @@ class Chest
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'chest']],
-            ['chest_id']
+            ['type_id']
         );
 
         if (! $event) {
@@ -18,7 +18,7 @@ class Chest
         }
 
         $chest = Chest::getKeyValue(
-            [['id', $event['chest_id']]],
+            [['id', $event['type_id']]],
             ['cost_type', 'item_id', 'cost', 'prize']
         );
 
