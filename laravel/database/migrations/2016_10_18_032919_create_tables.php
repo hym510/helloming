@@ -114,7 +114,6 @@ class CreateTables extends Migration
         Schema::create('monsters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->enum('type', ['normal', 'boss']);
             $table->unsignedSmallInteger('level');
             $table->unsignedSmallInteger('hp');
             $table->boolean('kill_limit');
