@@ -140,7 +140,7 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('exp');
             $table->unsignedTinyInteger('unlock_level');
             $table->unsignedTinyInteger('weight');
-            $table->json('prize')->nullable();
+            $table->json('prize');
             $table->string('info');
         });
 
