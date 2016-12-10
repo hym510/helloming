@@ -130,7 +130,6 @@ class CreateTables extends Migration
             $table->enum('cost_type', ['item', 'gold', 'diamond', 'none']);
             $table->unsignedInteger('item_id')->nullable();
             $table->unsignedTinyInteger('cost');
-            $table->json('prize');
         });
 
         Schema::create('events', function (Blueprint $table) {
