@@ -21,8 +21,8 @@ class HostEvent extends Model
         return static::join('mines', 'host_events.mine_id', '=', 'mines.id')
             ->where('host_events.user_id', $userId)
             ->get([
-                'host_events.id', 'host_events.event_id', 'mines.time',
-                'mines.icon', 'host_events.created_at'
+                'host_events.id', 'host_events.event_id',
+                'mines.time', 'host_events.created_at'
             ])
             ->toArray();
     }
