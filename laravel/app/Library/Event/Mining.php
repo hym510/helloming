@@ -96,6 +96,6 @@ class Mining
 
     public static function prize($userId): array
     {
-        return json_decode('['.Redis::getset('prize:'.$userId, '').']');
+        return ['mine_prize' => json_decode('['.Redis::getset('prize:'.$userId, '').']')];
     }
 }
