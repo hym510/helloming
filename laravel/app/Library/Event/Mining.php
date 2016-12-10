@@ -86,9 +86,7 @@ class Mining
 
         UserItem::getPrize($prizeIds, $userId);
 
-        $items = Item::whereIn('id', $prizeIds)->get(['id', 'name', 'icon'])->toArray();
-
-        return $items;
+        return ['prize' => prizeIds];
     }
 
     public static function host($userId): array
