@@ -116,7 +116,6 @@ class CreateTables extends Migration
             $table->string('name');
             $table->unsignedSmallInteger('level');
             $table->unsignedSmallInteger('hp');
-            $table->boolean('kill_limit');
             $table->unsignedSmallInteger('kill_limit_time')->nullable();
         });
 
