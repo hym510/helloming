@@ -116,7 +116,6 @@ class CreateTables extends Migration
             $table->string('name');
             $table->unsignedSmallInteger('level');
             $table->unsignedSmallInteger('hp');
-            $table->unsignedSmallInteger('kill_limit_time')->nullable();
         });
 
         Schema::create('mines', function (Blueprint $table) {
