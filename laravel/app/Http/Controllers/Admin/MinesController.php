@@ -22,8 +22,8 @@ class MinesController extends Controller
         Mine::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $mine){
+        $mines = ReadXml::readDatabase($path);
+        foreach ($mines as $mine){
             $data = [
                 'level' => $mine[''],
                 'exp' => $mine[''],

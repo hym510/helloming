@@ -19,8 +19,8 @@ class ChestsController extends Controller
         Chest::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $event){
+        $chests = ReadXml::readDatabase($path);
+        foreach ($chests as $chest){
             $data = [
 
             ];

@@ -15,7 +15,6 @@
                             <th>怪物名称</th>
                             <th>怪物等级</th>
                             <th>怪物血量</th>
-                            <th>击杀时间</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +24,6 @@
                             <td>{{ $monster->name }}</td>
                             <td>{{ $monster->level }}</td>
                             <td>{{ $monster->hp }}</td>
-                            <td>{{ $monster->kill_limit_time.'秒' }}</td>
                         </tr>
                     @endforeach
                     </tbody>

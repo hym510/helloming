@@ -21,8 +21,8 @@ class ItemsController extends Controller
         Item::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $item){
+        $items = ReadXml::readDatabase($path);
+        foreach ($items as $item){
             $data = [
                 'id' => $item['id_i'],
             ];

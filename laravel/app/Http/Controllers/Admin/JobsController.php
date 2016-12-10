@@ -21,8 +21,8 @@ class JobsController extends Controller
         Job::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $job){
+        $jobs = ReadXml::readDatabase($path);
+        foreach ($jobs as $job){
             $data = [
                 'id' => $job['id_i'],
                 'name' => $job['name_s'],

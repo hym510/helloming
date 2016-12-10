@@ -3,7 +3,7 @@ namespace App\Library\Xml;
 
 class ReadXml
 {
-    public static function readDatabase($filename)
+    public static function readDatabase($filename): array
     {
         $data = implode("",file($filename));
         $parser = xml_parser_create();
@@ -29,7 +29,7 @@ class ReadXml
         return $tdb;
     }
 
-    public static function parseMol($mvalues)
+    public static function parseMol($mvalues): array
     {
         for ($i = 0; $i < count($mvalues); $i++) {
             $mol[$mvalues[$i]["tag"]] = $mvalues[$i]["value"];

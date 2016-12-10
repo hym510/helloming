@@ -20,8 +20,8 @@ class ShopController extends Controller
         Shop::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $shop){
+        $shops = ReadXml::readDatabase($path);
+        foreach ($shops as $shop){
             $data = [
                 'item_id' => $shop['item_i'],
                 'type'  => $shop['type_i'],

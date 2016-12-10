@@ -22,13 +22,13 @@ class LevelController extends Controller
         levelAttr::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $k=>$v){
+        $levels = ReadXml::readDatabase($path);
+        foreach ($levels as $level){
             $data = [
-                'level' => $v['id_i'],
-                'exp' => $v['exp_i'],
-                'power' => $v['power_i'],
-                'action' => $v['action_i'],
+                'level' => $level['id_i'],
+                'exp' => $level['exp_i'],
+                'power' => $level['power_i'],
+                'action' => $level['action_i'],
             ];
             levelAttr::create($data);
         }

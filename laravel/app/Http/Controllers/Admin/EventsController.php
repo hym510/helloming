@@ -19,8 +19,8 @@ class EventsController extends Controller
         Event::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $event){
+        $events = ReadXml::readDatabase($path);
+        foreach ($events as $event){
             $data = [
                 'type' => $event['type_i'],
                 'level' => $event['level_i'],

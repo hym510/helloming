@@ -21,10 +21,13 @@ class MonstersController extends Controller
         Monster::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
-        $db = ReadXml::readDatabase($path);
-        foreach ($db as $monster){
+        $monsters = ReadXml::readDatabase($path);
+        foreach ($monsters as $monster){
             $data = [
-                            ];
+                'name' => $monster['name_s'],
+                'level' => $monster['level_i'],
+                'hp' => $monster['hp_i'],
+            ];
             Monster::create($data);
         }
 
