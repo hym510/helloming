@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\{Item, Shop};
+use App\Models\Shop;
+use App\Library\Xml\ReadXml;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ShopController extends Controller
@@ -12,35 +14,24 @@ class ShopController extends Controller
         return view('admin.shop.index', ['shops' => Shop::get()]);
     }
 
-    public function getAdd(Item $item)
+    public function postImportXml(Request $request)
     {
-        return view('admin.shop.add', ['items' => $item->get()]);
-    }
-
-    public function postStore($id, Shop $shop)
-    {
-        $item = Item::where('id', $id)->first(['id', 'type', 'priority']);
-        $shop['item_id'] = $item->id;
-        $shop['type'] = $item->type;
-        $shop['priority'] = $item->priority;
-        $shop->save();
-
-        return redirect()->action('Admin\ShopController@getIndex');
-    }
-
-    public function getSetPrice($id, $value)
-    {
-        if (is_numeric($value)) {
-            Shop::where('id', $id)->update(['price' => floor($value)]);
-        } else {
-            return Json::error('Fails to set price.', 403);
+        $shops = [];
+        Shop::truncate();
+        $xml = $request->xml->store('uploads');
+        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $db = ReadXml::readDatabase($path);
+        foreach ($db as $shop){
+            $data = [
+                'item_id' => $shop['item_i'],
+                'type'  => $shop['type_i'],
+                'price' => $shop['price_i'],
+                'quantity' => $shop['quantity_i'],
+            ];
+            Shop::create($data);
         }
-    }
-
-    public function getDelete($id)
-    {
-        Shop::where('id', $id)->delete();
 
         return redirect()->action('Admin\ShopController@getIndex');
     }
+
 }

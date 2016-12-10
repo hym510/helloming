@@ -151,9 +151,6 @@ class CreateTables extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->unsignedInteger('event_id');
-            $table->foreign('event_id')
-                ->references('id')->on('events')
-                ->onDelete('cascade');
             $table->unsignedInteger('mine_id');
             $table->foreign('mine_id')
                 ->references('id')->on('mines')
@@ -164,7 +161,7 @@ class CreateTables extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('item_id')->nullable();
-            $table->enum('type', ['diamond', 'tool']);
+            $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('price');
             $table->unsignedSmallInteger('quantity');
         });

@@ -17,9 +17,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="form-control-static">
-                                    <img src="{{ $user->icon or config('main.placeholders.default_img') }}" class="upload-img" data-name="icon" height="120px">
+                                    <label>
+                                        <img src="{{ $store->icon or config('main.placeholders.default_img') }}" data-name="icon" class="upload-img" height="120px">
+                                        <input type="file" name="icon" style="display:none" value="{{ $store->icon or '' }}">
+                                    <label>
                                 </div>
-                                <input type="file" name="icon" value="{{ $user->icon or '' }}">
+                                <input type="hidden" name="icon">
                                 <label>图像</label>
                             </div>
                             <div class="form-group">
@@ -89,4 +92,15 @@
         </div>
     </div>
 </section>
+@stop
+@section('script')
+<script type="text/javascript">
+    $(function() {
+        $('input[type="file"]').on('change', function() {
+            var file = this.files[0];
+            var url = window.URL.createObjectURL(file);
+            $(this).parent().find('.upload-img').attr('src', url);
+        })
+    });
+</script>
 @stop

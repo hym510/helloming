@@ -6,21 +6,6 @@ class Event extends Model
 {
     protected $table = 'events';
 
-    public function monster()
-    {
-        return $this->belongsTo(Monster::class);
-    }
-
-    public function mine()
-    {
-        return $this->belongsTo(Mine::class);
-    }
-
-    public function fortune()
-    {
-        return $this->belongsTo(Fortune::class);
-    }
-
     public function getPrizeAttribute($value)
     {
         return json_decode($value);

@@ -111,6 +111,12 @@
                             <span class="title">等级管理</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\JobsController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-flag"></i></div>
+                            <span class="title">职业管理</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

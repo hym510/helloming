@@ -33,7 +33,12 @@ class UsersController extends Controller
 
     public function postStore(UsersRequest $request)
     {
-        User::create($request->inputData());
+        $icon = $request->icon->store('uploads');
+        $path = rtrim(config('find.uploads.webpath', '/') . '/' . ltrim($icon, '/'));
+        $data = $request->inputData();
+        unset($data['icon']);
+        $data['icon'] = $path;
+        User::create($data);
 
         return redirect()->action('Admin\UsersController@getIndex');
     }

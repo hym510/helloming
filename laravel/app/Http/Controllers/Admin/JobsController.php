@@ -2,32 +2,34 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Chest;
+use App\Models\Job;
 use App\Library\Xml\ReadXml;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ChestsController extends Controller
+class JobsController extends Controller
 {
     public function getIndex()
     {
-        return view('admin.chests.index', ['chests' => Chest::get()]);
+        return view('admin.job.index',
+            ['jobs' => Job::paginate()->appends(request()->all())]
+        );
     }
 
     public function postImportXml(Request $request)
     {
-        Chest::truncate();
+        Job::truncate();
         $xml = $request->xml->store('uploads');
         $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
         $db = ReadXml::readDatabase($path);
-        foreach ($db as $event){
+        foreach ($db as $job){
             $data = [
-
+                'id' => $job['id_i'],
+                'name' => $job['name_s'],
             ];
-
-        Chest::create($data);
+            Job::create($data);
         }
 
-        return redirect()->action('Admin\ChestsController@getIndex');
+        return redirect()->action('Admin\JobsController@getIndex');
     }
 }

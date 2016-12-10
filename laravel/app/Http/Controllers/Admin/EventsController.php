@@ -2,71 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Event;
+use App\Library\Xml\ReadXml;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\EventsRequest;
-use App\Models\{Chest, Event, Mine, Monster};
 
 class EventsController extends Controller
 {
-    protected function typeName(array $event): array
-    {
-        switch ($event['type']) {
-            case 'monster':
-                $event['id'] = Monster::where('id', $event['monster_id'])->first(['id'])->id;
-                unset($event['mine_id']);
-                unset($event['chest_id']);
-                break;
-            case 'mine':
-                $event['id'] = Mine::where('id', $event['mine_id'])->first(['id'])->id;
-                unset($event['monster_id']);
-                unset($event['chest_id']);
-                break;
-            case 'chest':
-                $event['id'] = Chest::where('id', $event['chest_id'])->first(['id'])->id;
-                unset($event['mine_id']);
-                unset($event['monster_id']);
-                break;
-        }
-
-        return $event;
-    }
-
     public function getIndex()
     {
         return view('admin.events.index', ['events' => Event::get()]);
     }
 
-    public function getAdd()
+    public function postImportXml(Request $request)
     {
-        return view('admin.events.edit');
-    }
+        Event::truncate();
+        $xml = $request->xml->store('uploads');
+        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $db = ReadXml::readDatabase($path);
+        foreach ($db as $event){
+            $data = [
+                'type' => $event['type_i'],
+                'level' => $event['level_i'],
+                'type_id' => $event['obj_i'],
+                'exp' => $event['rewardExp_i'],
+                'unlock_level' => $event['startLevel_i'],
+                'weight' => $event['weight_i'],
+                'prize' => $event['rewardItem_a'],
+                'info' => $event['info_s'],
+            ];
 
-    public function getEdit($eventId)
-    {
-        return view('admin.events.edit', [
-            'event' => Event::findOrFail($eventId),
-            'prize' => json_encode($event->prize)
-        ]);
-    }
-
-    public function postStore(EventsRequest $request)
-    {
-        Event::create($this->typeName($request->inputData()));
-
-        return redirect()->action('Admin\EventsController@getIndex');
-    }
-
-    public function postUpdate(EventsRequest $request, $eventId)
-    {
-        Event::where('id', $eventId)
-            ->update($this->typeName($request->inputData()));
-
-        return redirect()->action('Admin\EventsController@getIndex');
-    }
-
-    public function getDelete($eventId)
-    {
-        Event::where('id', $eventId)->delete();
+            Event::create($data);
+        }
 
         return redirect()->action('Admin\EventsController@getIndex');
     }

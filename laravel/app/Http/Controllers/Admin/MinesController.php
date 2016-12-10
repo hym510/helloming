@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Mine;
+use App\Library\Xml\ReadXml;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MinesRequest;
 
@@ -10,44 +12,25 @@ class MinesController extends Controller
 {
     public function getIndex()
     {
-        $mines = Mine::when(request('keyword'), function ($q) {
-            return $q->where('name', request('keyword'));
-        })
-        ->paginate()
-        ->appends(request()->all());
+        $mines = Mine::paginate()->appends(request()->all());
 
         return view('admin.mines.index', compact('mines'));
     }
 
-    public function getAdd()
+    public function postImportXml(Request $request)
     {
-        return view('admin.mines.edit');
-    }
-
-    public function getEdit($mineId)
-    {
-        return view('admin.mines.edit', [
-            'mine' => Mine::findOrFail($mineId)
-        ]);
-    }
-
-    public function postStore(MinesRequest $request)
-    {
-        Mine::create($request->inputData());
-
-        return redirect()->action('Admin\MinesController@getIndex');
-    }
-
-    public function postUpdate(MinesRequest $request, $mineId)
-    {
-        Mine::where('id', $mineId)->update($request->inputData());
-
-        return redirect()->action('Admin\MinesController@getIndex');
-    }
-
-    public function getDelete($mineId)
-    {
-        Mine::where('id', $mineId)->delete();
+        Mine::truncate();
+        $xml = $request->xml->store('uploads');
+        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $db = ReadXml::readDatabase($path);
+        foreach ($db as $mine){
+            $data = [
+                'level' => $mine[''],
+                'exp' => $mine[''],
+                'power' => $mine[''],
+                'action' => $mine['']];
+            Mine::create($data);
+        }
 
         return redirect()->action('Admin\MinesController@getIndex');
     }

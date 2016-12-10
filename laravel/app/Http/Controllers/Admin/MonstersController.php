@@ -3,63 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Monster;
+use App\Library\Xml\ReadXml;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\MonstersRequest;
 
 class MonstersController extends Controller
 {
     public function getIndex()
     {
-        $monsters = Monster::when(request('keyword'), function ($q) {
-            return $q->where('name', request('keyword'));
-        })
-        ->paginate()
-        ->appends(request()->all());
+        $monsters = Monster::paginate();
 
         return view('admin.monsters.index', compact('monsters'));
     }
 
-    public function getAdd()
+    public function postImportXml(Request $request)
     {
-        return view('admin.monsters.edit');
-    }
-
-    public function getEdit($monsterId)
-    {
-        return view('admin.monsters.edit',
-            ['monster' => Monster::findOrFail($monsterId)]
-        );
-    }
-
-    public function postStore(MonstersRequest $request)
-    {
-        $data = $request->inputData();
-
-        if ($data['kill_limit'] == '0') {
-            unset($data['kill_limit_time']);
+        Monster::truncate();
+        $xml = $request->xml->store('uploads');
+        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $db = ReadXml::readDatabase($path);
+        foreach ($db as $monster){
+            $data = [
+                            ];
+            Monster::create($data);
         }
-
-        Monster::create($data);
-
-        return redirect()->action('Admin\MonstersController@getIndex');
-    }
-
-    public function postUpdate(MonstersRequest $request, $monsterId)
-    {
-        $data = $request->inputData();
-
-        if ($data['kill_limit'] == '0') {
-            unset($data['kill_limit_time']);
-        }
-
-        Monster::where('id', $monsterId)->update($data);
-
-        return redirect()->action('Admin\MonstersController@getIndex');
-    }
-
-    public function getDelete($monsterId)
-    {
-        Monster::where('id', $monsterId)->delete();
 
         return redirect()->action('Admin\MonstersController@getIndex');
     }
