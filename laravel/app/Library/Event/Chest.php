@@ -10,7 +10,7 @@ class Chest
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'chest']],
-            ['type_id']
+            ['type_id', 'prize']
         );
 
         if (! $event) {
@@ -19,7 +19,7 @@ class Chest
 
         $chest = Chest::getKeyValue(
             [['id', $event['type_id']]],
-            ['cost_type', 'item_id', 'cost', 'prize']
+            ['cost_type', 'item_id', 'cost']
         );
 
         if ($chest['cost_type'] == 'item') {
@@ -41,7 +41,7 @@ class Chest
             return [];
         }
 
-        UserItem::manyPrize($chest['prize'], $userId);
+        UserItem::manyPrize($event['prize'], $userId);
 
         return $chest['prize'];
     }
