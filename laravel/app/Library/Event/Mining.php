@@ -91,7 +91,7 @@ class Mining
 
     public static function host($userId): array
     {
-        return HostEvent::getMine($userId);
+        return ['host_events' => HostEvent::getMine($userId)];
     }
 
     public static function prize($userId): array
