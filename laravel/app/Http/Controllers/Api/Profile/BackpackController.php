@@ -11,6 +11,6 @@ class BackpackController extends Controller
 {
     public function getTool()
     {
-        return Json::success(UserItem::getAll(Auth::user()->user, 'tool'));
+        return Json::success(UserItem::getAll(Auth::user()->user));
     }
 }
