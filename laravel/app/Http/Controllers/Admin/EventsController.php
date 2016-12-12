@@ -17,8 +17,8 @@ class EventsController extends Controller
     public function postImportXml(Request $request)
     {
         Event::truncate();
-        $xml = $request->xml->store('uploads');
-        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $xml = $request->xml->storeAs('uploads', 'event.xml', 'xml');
+        $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $events = ReadXml::readDatabase($path);
         foreach ($events as $event){
             $data = [

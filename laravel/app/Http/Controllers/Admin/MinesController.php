@@ -20,8 +20,8 @@ class MinesController extends Controller
     public function postImportXml(Request $request)
     {
         Mine::truncate();
-        $xml = $request->xml->store('uploads');
-        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $xml = $request->xml->storeAs('uploads', 'mine.xml', 'xml');
+        $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $mines = ReadXml::readDatabase($path);
         foreach ($mines as $mine){
             $data = [

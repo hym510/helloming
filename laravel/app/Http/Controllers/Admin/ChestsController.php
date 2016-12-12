@@ -17,8 +17,8 @@ class ChestsController extends Controller
     public function postImportXml(Request $request)
     {
         Chest::truncate();
-        $xml = $request->xml->store('uploads');
-        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $xml = $request->xml->storeAs('uploads', 'chest.xml', 'xml');
+        $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $chests = ReadXml::readDatabase($path);
         foreach ($chests as $chest){
             $data = [

@@ -19,8 +19,8 @@ class JobsController extends Controller
     public function postImportXml(Request $request)
     {
         Job::truncate();
-        $xml = $request->xml->store('uploads');
-        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $xml = $request->xml->storeAs('uploads', 'jobs.xml', 'xml');
+        $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $jobs = ReadXml::readDatabase($path);
         foreach ($jobs as $job){
             $data = [

@@ -15,7 +15,6 @@ class ReadXml
         foreach ($tags as $key => $val) {
             if ($key == 'record') {
                 $molranges = $val;
-
                 for ($i = 0; $i < count($molranges); $i += 2) {
                     $offset = $molranges[$i] + 1;
                     $len = $molranges[$i + 1] - $offset;

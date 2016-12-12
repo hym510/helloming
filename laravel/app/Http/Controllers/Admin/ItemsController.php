@@ -19,14 +19,14 @@ class ItemsController extends Controller
     public function postImportXml(Request $request)
     {
         Item::truncate();
-        $xml = $request->xml->store('uploads');
-        $path = rtrim(public_path().config('find.uploads.webpath', '/') . '/' . ltrim($xml, '/'));
+        $xml = $request->xml->storeAs('uploads', 'item.xml', 'xml');
+        $path = rtrim(public_path() . '/' . ltrim($xml, '/'));
         $items = ReadXml::readDatabase($path);
         foreach ($items as $item){
             $data = [
                 'id' => $item['id_i'],
             ];
-            Item::create($data);
+        Item::create($data);
         }
 
         return redirect()->action('Admin\ItemsController@getIndex');

@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="card-actionbar">
-                        <div class="card-actionbar-row">
+                        <div class="text-center">
                             <button type="submit" class="btn ink-reaction btn-raised btn-primary">提交</button>
                         </div>
                     </div>
