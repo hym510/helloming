@@ -43,6 +43,6 @@ class Chest
 
         UserItem::manyPrize($event['prize'], $userId);
 
-        return $chest['prize'];
+        return ['prize' => $chest['prize']];
     }
 }
