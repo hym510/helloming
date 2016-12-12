@@ -62,7 +62,7 @@ class LeanCloud implements PusherContract
         return true;
     }
 
-    public function pushMany(array $userIds, array $data)
+    public function pushMany(array $userIds, array $data): bool
     {
         $userIds = '('.implode(', ', $userIds).')';
         $url = Config::get('leancloud.url').'/1.1/push';

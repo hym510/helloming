@@ -117,6 +117,12 @@
                             <span class="title">职业管理</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\StateController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-cloud"></i></div>
+                            <span class="title">境界管理</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -32,7 +32,9 @@ class StateController extends Controller
         $states = ReadXml::readDatabase($path);
         foreach ($states as $state){
             $data = [
-
+                'id' => $state['id'],
+                'level' => $state['level'],
+                'power' => $state['power'],
             ];
 
             StateAttr::create($data);

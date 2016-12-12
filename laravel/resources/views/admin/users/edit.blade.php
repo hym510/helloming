@@ -10,7 +10,7 @@
                     <li class="active"><a href="{{ url()->current() }}">添加</a></li>
                 </ul>
             </div>
-            <form class="card form" action="{{ action('Admin\UsersController@postStore')}}" accept-charset="utf-8" method="post">
+            <form class="card form" action="{{ action('Admin\UsersController@postStore')}}" accept-charset="utf-8" enctype="multipart/form-data" method="post">
                     {!! csrf_field() !!}
                 <div class="card-body form">
                     <div class="row">
@@ -18,11 +18,11 @@
                             <div class="form-group">
                                 <div class="form-control-static">
                                     <label>
-                                        <img src="{{ $store->icon or config('main.placeholders.default_img') }}" data-name="icon" class="upload-img" height="120px">
-                                        <input type="file" name="icon" style="display:none" value="{{ $store->icon or '' }}">
+                                        <img src="{{ $user->avatar or config('main.placeholders.default_img') }}" data-name="avatar" class="upload-img" height="120px">
+                                        <input type="file" name="avatar" style="display:none" value="{{ $user->avatar or '' }}">
                                     <label>
                                 </div>
-                                <input type="hidden" name="icon">
+                                <input type="hidden" name="avatar">
                                 <label>图像</label>
                             </div>
                             <div class="form-group">

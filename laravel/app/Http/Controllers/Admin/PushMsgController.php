@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Json;
 use Pusher;
 use App\Models\Notification;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,6 @@ class PushMsgController extends Controller
         $notification = Notification::create($data);
         $data['id'] = $notification->id;
 
-        return Pusher::pushOne($data['id'], ['message' => $data['message']]);
+        return Json::success(Pusher::pushOne($data['id'], ['message' => $data['message']]));
     }
 }

@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('admin/delete/{adminId}', ['uses' => 'AdminController@getDelete']);
 
     Route::get('chests', ['uses' => 'ChestsController@getIndex']);
-     Route::post('chests/xml', ['uses' => 'ChestsController@postImportXml']);
+    Route::post('chests/xml', ['uses' => 'ChestsController@postImportXml']);
 
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
     Route::post('equipments/xml', ['uses' => 'EquipmentsController@postImportXml']);
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::post('pushmsg', ['uses' => 'PushMsgController@postPushMsg']);
 
     Route::get('shop', ['uses' => 'ShopController@getIndex']);
-     Route::post('shop/xml', ['uses' => 'ShopController@postImportXml']);
+    Route::post('shop/xml', ['uses' => 'ShopController@postImportXml']);
 
     Route::get('users', ['uses' => 'UsersController@getIndex']);
     Route::get('users/delete/{userId}/{type}', ['uses' => 'UsersController@getDelete']);
@@ -62,6 +62,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('jobs', ['uses' => 'JobsController@getIndex']);
     Route::post('jobs/xml', ['uses' => 'JobsController@postImportXml']);
+
+    Route::get('state', ['uses' => 'StateController@getIndex']);
+    Route::post('state/xml', ['uses' => 'StateController@postImportXml']);
 });
 
 
