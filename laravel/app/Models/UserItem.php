@@ -6,10 +6,9 @@ class UserItem extends Model
 {
     protected $table = 'user_items';
 
-    public static function getAll($userId, $type): array
+    public static function getAll($userId): array
     {
         return static::where('user_id', $userId)
-            ->where('type', $type)
             ->get(['item_id', 'quantity'])
             ->toArray();
     }
