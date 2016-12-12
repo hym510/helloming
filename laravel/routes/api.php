@@ -48,4 +48,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Withdraw', 'middleware' => ['auth.api']], function () {
         Route::get('withdraw/{gold}', ['uses' => 'WithdrawController@getRedpack']);
     });
+
+    Route::group(['namespace' => 'Xml'], function () {
+        Route::get('xml/download/{file}', ['uses' => 'XmlController@getDownload']);
+    });
 });
