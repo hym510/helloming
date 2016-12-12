@@ -1,5 +1,6 @@
 |描述|错误码|
 |:---:|:---:|
+|'File doesn't exist.'|101|
 |'Invalid auth token.'|104|
 |'User account has been frozen.'|114|
 |'A user with the specified mobile phone number was not found.'|213|
