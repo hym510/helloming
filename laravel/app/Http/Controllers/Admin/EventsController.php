@@ -22,6 +22,7 @@ class EventsController extends Controller
         $events = ReadXml::readDatabase($path);
         foreach ($events as $event){
             $data = [
+                'id' => $event['id_i'],
                 'type' => $event['type_i'],
                 'level' => $event['level_i'],
                 'type_id' => $event['obj_i'],

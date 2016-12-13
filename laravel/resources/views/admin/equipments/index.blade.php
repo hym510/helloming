@@ -11,6 +11,7 @@
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
+                            <th>装备id</th>
                             <th>装备名称</th>
                             <th>装备等级</th>
                             <th>是否最高等级</th>
@@ -23,6 +24,7 @@
                     <tbody>
                     @foreach ($equipments as $equipment)
                         <tr>
+                            <td>{{ $equipment->id }}</td>
                             <td>{{ $equipment->name }}</td>
                             <td>{{ $equipment->level }}</td>
                             <td>{{ $equipment->max_level }}</td>

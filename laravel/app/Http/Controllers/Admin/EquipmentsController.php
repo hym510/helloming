@@ -24,6 +24,7 @@ class EquipmentsController extends Controller
         $equipments = ReadXml::readDatabase($path);
         foreach ($equipments as $equipment){
             $data = [
+                'id' => $equipment['id_i'],
                 'name' => $equipment['name_s'],
                 'level'  => $equipment['level_i'],
                 'max_level' => $equipment['maxLevel_i'],

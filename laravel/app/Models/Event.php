@@ -4,6 +4,12 @@ namespace App\Models;
 
 class Event extends Model
 {
+    protected $fillable = [
+        'id', 'type', 'level', 'type_id',
+        'exp', 'unlock_level', 'weight',
+        'prize', 'info'
+    ];
+
     protected $table = 'events';
 
     public function getPrizeAttribute($value)
