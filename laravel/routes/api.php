@@ -36,6 +36,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('purchase/verify', ['uses' => 'PurchaseController@postVerify']);
     });
 
+    Route::group(['namespace' => 'replenish', 'middleware' => ['auth.api']], function () {
+        Route::post('replenish/power/{diamonds}', ['uses' => 'ReplenishController@getPower']);
+    });
+
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
         Route::get('backpack/tool', ['uses' => 'BackpackController@getTool']);
         Route::get('equip/upgrade/{position}', ['uses' => 'EquipController@getUpgrade']);
