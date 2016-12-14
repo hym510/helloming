@@ -18,6 +18,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('auth/sign/sms', ['uses' => 'AuthController@postSignSms']);
     });
 
+    Route::group(['namespace' => 'Consume', 'middleware' => ['auth.api']], function () {
+        Route::get('consume/shoes/{shoes}', ['uses' => 'ConsumeController@getShoes']);
+    });
+
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {
         Route::get('chest/open/{eventId}', ['uses' => 'ChestController@getOpen']);
         Route::get('event/refresh/{count}/{out}', ['uses' => 'EventController@getRefresh']);

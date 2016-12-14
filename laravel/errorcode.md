@@ -12,4 +12,5 @@
 |'Diamonds are not enough.'|601|
 |'Fails to send message.'|602|
 |'Invalid SMS code.'|603|
+|'Shoes are not enough.'|701|
 |'Invalid receipt.'|703|
