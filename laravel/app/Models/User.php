@@ -199,6 +199,21 @@ class User extends Model
         return true;
     }
 
+    public static function ReplenishPower($id, $diamonds): bool
+    {
+        if (Redis::hget('user:'.$id, 'diamond') < $diamonds) {
+            return false;
+        }
+
+        static::where('id', $id)->decrement('diamond', $diamonds);
+        Redis::hincrby('user:'.$id, 'diamond', -$diamonds);
+
+        static::where('id', $id)->increment('power', $diamonds);
+        Redis::hincrby('user:'.$id, 'power', $diamonds);
+
+        return true;
+    }
+
     public static function bindOpenid($id, $openid, $withdrawPassword): bool
     {
         if (Redis::hget('user:'.$id, 'wechat_id')) {
