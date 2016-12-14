@@ -19,7 +19,7 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
     Route::group(['namespace' => 'Consume', 'middleware' => ['auth.api']], function () {
-        Route::get('consume/shoes/{shoes}', ['uses' => 'ConsumeController@getShoes']);
+        Route::get('consume/action/{action}', ['uses' => 'ConsumeController@getAction']);
     });
 
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {

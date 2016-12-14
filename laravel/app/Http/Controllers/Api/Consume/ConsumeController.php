@@ -9,9 +9,9 @@ use Illuminate\Routing\Controller;
 
 class ConsumeController extends Controller
 {
-    public function getShoes($shoes)
+    public function getAction($action)
     {
-        if (User::consumeShoes(Auth::user()->user, $shoes)) {
+        if (User::consumeAction(Auth::user()->user, $action)) {
             return Json::success();
         } else {
             return Json::error('Shoes are not enough.', 701);
