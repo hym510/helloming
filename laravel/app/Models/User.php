@@ -187,14 +187,14 @@ class User extends Model
         Redis::hincrby('user:'.$id, $position, 1);
     }
 
-    public static function consumeShoes($id, $shoes): bool
+    public static function consumeAction($id, $action): bool
     {
-        if (Redis::hget('user:'.$id, 'shoe') < $shoes) {
+        if (Redis::hget('user:'.$id, 'remain_action') < $action) {
             return false;
         }
 
-        static::where('id', $id)->decrement('shoe', $shoes);
-        Redis::hincrby('user:'.$id, 'shoe', -$shoes);
+        static::where('id', $id)->decrement('remain_action', $action);
+        Redis::hincrby('user:'.$id, 'remain_action', -$action);
 
         return true;
     }
