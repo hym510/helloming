@@ -40,7 +40,6 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('action')->default(0);
             $table->unsignedSmallInteger('remain_action')->default(0);
             $table->unsignedSmallInteger('gold')->default(0);
-            $table->unsignedSmallInteger('shoe')->default(0);
             $table->unsignedSmallInteger('diamond')->default(0);
             $table->unsignedSmallInteger('equipment1_level')->default(1);
             $table->unsignedSmallInteger('equipment2_level')->default(1);
