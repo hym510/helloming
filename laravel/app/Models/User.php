@@ -187,6 +187,18 @@ class User extends Model
         Redis::hincrby('user:'.$id, $position, 1);
     }
 
+    public static function consumeShoes($id, $shoes): bool
+    {
+        if (Redis::hget('user:'.$id, 'shoe') < $shoes) {
+            return false;
+        }
+
+        static::where('id', $id)->decrement('shoe', $shoes);
+        Redis::hincrby('user:'.$id, 'shoe', -$shoes);
+
+        return true;
+    }
+
     public static function bindOpenid($id, $openid, $withdrawPassword): bool
     {
         if (Redis::hget('user:'.$id, 'wechat_id')) {
