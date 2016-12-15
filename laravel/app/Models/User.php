@@ -214,6 +214,21 @@ class User extends Model
         return true;
     }
 
+    public static function ReplenishAction($id, $diamonds): bool
+    {
+        if (Redis::hget('user:'.$id, 'diamond') < $diamonds) {
+            return false;
+        }
+
+        static::where('id', $id)->decrement('diamond', $diamonds);
+        Redis::hincrby('user:'.$id, 'diamond', -$diamonds);
+
+        static::where('id', $id)->increment('action', $diamonds);
+        Redis::hincrby('user:'.$id, 'action', $diamonds);
+
+        return true;
+    }
+
     public static function bindOpenid($id, $openid, $withdrawPassword): bool
     {
         if (Redis::hget('user:'.$id, 'wechat_id')) {
