@@ -18,6 +18,8 @@
                             <th>事件奖励经验</th>
                             <th>事件开启等级</th>
                             <th>事件文字描述</th>
+                            <th>是否限时击杀</th>
+                            <th>击杀时间</th>
                             <th>权重</th>
                         </tr>
                     </thead>
@@ -31,6 +33,8 @@
                             <td>{{ $event->exp or ''}}</td>
                             <td>{{ $event->unlock_level or '' }}</td>
                             <td>{{ mb_substr($event->info, 0, 8).'......' }}</td>
+                            <td>{{ $event->kill_limit or '' }}</td>
+                            <td>{{ $event->kill_limit_time or '' }}</td>
                             <td>{{ $event->weight }}</td>
                         </tr>
                     @endforeach

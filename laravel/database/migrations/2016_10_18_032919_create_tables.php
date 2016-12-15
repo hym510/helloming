@@ -141,6 +141,8 @@ class CreateTables extends Migration
             $table->unsignedTinyInteger('weight');
             $table->json('prize');
             $table->string('info');
+            $table->boolean('kill_limit')->default(false);
+            $table->unsignedSmallInteger('kill_limit_time')->default(0);
         });
 
         Schema::create('host_events', function (Blueprint $table) {

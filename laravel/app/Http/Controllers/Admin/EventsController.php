@@ -31,9 +31,14 @@ class EventsController extends Controller
                 'weight' => $event['weight_i'],
                 'prize' => $event['rewardItem_a'],
                 'info' => $event['info_s'],
+                'kill_limit' => $event['timeLimit_i'],
             ];
-
-            Event::create($data);
+            if($event['timeLimit_i'] == 1 ){
+                $array = array_collapse([$data, ['kill_limit_time' => $event['time_i']]]);
+                Event::create($array);
+            } else {
+                Event::create($data);
+            }
         }
 
         return redirect()->action('Admin\EventsController@getIndex');

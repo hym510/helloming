@@ -7,7 +7,7 @@ class Event extends Model
     protected $fillable = [
         'id', 'type', 'level', 'type_id',
         'exp', 'unlock_level', 'weight',
-        'prize', 'info'
+        'prize', 'info', 'kill_limit', 'kill_limit_time',
     ];
 
     protected $table = 'events';
