@@ -37,7 +37,8 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
     Route::group(['namespace' => 'replenish', 'middleware' => ['auth.api']], function () {
-        Route::post('replenish/power/{diamonds}', ['uses' => 'ReplenishController@getPower']);
+        Route::get('replenish/action/{diamonds}', ['uses' => 'ReplenishController@getAction']);
+        Route::get('replenish/power/{diamonds}', ['uses' => 'ReplenishController@getPower']);
     });
 
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {

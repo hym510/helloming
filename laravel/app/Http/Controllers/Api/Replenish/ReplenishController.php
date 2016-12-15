@@ -9,6 +9,15 @@ use Illuminate\Routing\Controller;
 
 class ReplenishController extends Controller
 {
+    public function getAction($diamonds)
+    {
+        if (User::ReplenishAction(Auth::user()->user, $diamonds)) {
+            return Json::success();
+        } else {
+            return Json::error('Diamonds are not enough.', 601);
+        }
+    }
+
     public function getPower($diamonds)
     {
         if (User::ReplenishPower(Auth::user()->user, $diamonds)) {
