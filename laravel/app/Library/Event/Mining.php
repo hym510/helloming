@@ -18,24 +18,19 @@ class Mining
 
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'mine']],
-            ['type_id']
+            ['type_id', 'kill_limit_time']
         );
 
         if (! $event) {
             return [];
         }
 
-        $mine = Mine::getKeyValue(
-            [['id', $event['type_id']]],
-            ['time']
-        );
-
         User::mining($userId);
 
         $hostEvent = HostEvent::start($userId, $eventId, $event['type_id']);
 
         $job = (new HostMining($hostEvent['host_event_id']))
-                    ->delay(Carbon::now()->addSeconds($mine['time']));
+                    ->delay(Carbon::now()->addSeconds($event['kill_limit_time']));
 
         app(Dispatcher::class)->dispatch($job);
 
