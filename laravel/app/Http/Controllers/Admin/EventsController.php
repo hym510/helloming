@@ -21,9 +21,20 @@ class EventsController extends Controller
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $events = ReadXml::readDatabase($path);
         foreach ($events as $event){
+            switch ($event['type_i']) {
+                case 1:
+                    $type = 'monster';
+                    break;
+                case 2:
+                    $type = 'mine';
+                    break;
+                case 3:
+                    $type = 'chest';
+                    break;
+            }
             $data = [
                 'id' => $event['id_i'],
-                'type' => $event['type_i'],
+                'type' => $type,
                 'level' => $event['level_i'],
                 'type_id' => $event['obj_i'],
                 'exp' => $event['rewardExp_i'],

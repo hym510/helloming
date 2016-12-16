@@ -13,7 +13,6 @@
                         <tr>
                             <th>矿物id</th>
                             <th>矿物名称</th>
-                            <th>开矿时间</th>
                             <th>消耗钻石</th>
                         </tr>
                     </thead>
@@ -22,7 +21,6 @@
                         <tr>
                             <td>{{ $mine->id }}</td>
                             <td>{{ $mine->name }}</td>
-                            <td>{{ $mine->time}}</td>
                             <td>{{ $mine->consume_diamond }}</td>
                         </tr>
                     @endforeach
