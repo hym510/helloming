@@ -9,12 +9,12 @@ use Illuminate\Routing\Controller;
 
 class ReplenishController extends Controller
 {
-    public function getAction($diamonds)
+    public function getAction($gold)
     {
-        if (User::ReplenishAction(Auth::user()->user, $diamonds)) {
+        if (User::ReplenishAction(Auth::user()->user, $gold)) {
             return Json::success();
         } else {
-            return Json::error('Diamonds are not enough.', 601);
+            return Json::error('Gold are not enough.', 511);
         }
     }
 
