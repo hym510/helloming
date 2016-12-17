@@ -21,13 +21,14 @@ class ShopController extends Controller
         $xml = $request->xml->storeAs('uploads', 'shop.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $shops = ReadXml::readDatabase($path);
-        foreach ($shops as $shop){
+        foreach ($shops as $shop) {
             $data = [
                 'item_id' => $shop['item_i'],
                 'type'  => $shop['type_i'],
                 'price' => $shop['price_i'],
                 'quantity' => $shop['quantity_i'],
             ];
+
             Shop::create($data);
         }
 

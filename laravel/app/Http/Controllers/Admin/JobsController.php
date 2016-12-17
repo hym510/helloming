@@ -22,11 +22,13 @@ class JobsController extends Controller
         $xml = $request->xml->storeAs('uploads', 'jobs.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $jobs = ReadXml::readDatabase($path);
-        foreach ($jobs as $job){
+
+        foreach ($jobs as $job) {
             $data = [
                 'id' => $job['id_i'],
                 'name' => $job['name_s'],
             ];
+
             Job::create($data);
         }
 

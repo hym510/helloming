@@ -30,7 +30,8 @@ class StateController extends Controller
         $xml = $request->xml->storeAs('uploads', 'state.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $states = ReadXml::readDatabase($path);
-        foreach ($states as $state){
+
+        foreach ($states as $state) {
             $data = [
                 'id' => $state['id'],
                 'level' => $state['level'],

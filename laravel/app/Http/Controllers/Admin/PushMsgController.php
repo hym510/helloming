@@ -20,7 +20,8 @@ class PushMsgController extends Controller
         $data = $request->inputData();
         $notification = Notification::create($data);
         $data['id'] = $notification->id;
-        Json::success(Pusher::pushOne($data['id'], ['message' => $data['message']]));
+
+        return Json::success(Pusher::pushOne($data['id'], ['message' => $data['message']]));
 
         return redirect()->action('Admin\PushMsgController@getPushMsg');
     }

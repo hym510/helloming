@@ -22,7 +22,8 @@ class EquipmentsController extends Controller
         $xml = $request->xml->storeAs('uploads', 'equipment.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $equipments = ReadXml::readDatabase($path);
-        foreach ($equipments as $equipment){
+
+        foreach ($equipments as $equipment) {
             $data = [
                 'id' => $equipment['id_i'],
                 'name' => $equipment['name_s'],
@@ -33,6 +34,7 @@ class EquipmentsController extends Controller
                 'position' => $equipment['position_i'],
                 'upgrade' => $equipment['upgrade_a'],
             ];
+
             Equipment::create($data);
         }
 

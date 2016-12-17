@@ -20,7 +20,8 @@ class EventsController extends Controller
         $xml = $request->xml->storeAs('uploads', 'event.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $events = ReadXml::readDatabase($path);
-        foreach ($events as $event){
+
+        foreach ($events as $event) {
             switch ($event['type_i']) {
                 case 1:
                     $type = 'monster';
@@ -32,6 +33,7 @@ class EventsController extends Controller
                     $type = 'chest';
                     break;
             }
+
             $data = [
                 'id' => $event['id_i'],
                 'type' => $type,
@@ -44,7 +46,8 @@ class EventsController extends Controller
                 'info' => $event['info_s'],
                 'kill_limit' => $event['timeLimit_i'],
             ];
-            if($event['timeLimit_i'] == 1 ){
+
+            if ($event['timeLimit_i'] == 1) {
                 $array = array_collapse([$data, ['kill_limit_time' => $event['time_i']]]);
                 Event::create($array);
             } else {

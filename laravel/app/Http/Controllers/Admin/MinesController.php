@@ -23,12 +23,15 @@ class MinesController extends Controller
         $xml = $request->xml->storeAs('uploads', 'mine.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $mines = ReadXml::readDatabase($path);
-        foreach ($mines as $mine){
+
+        foreach ($mines as $mine) {
             $data = [
                 'level' => $mine[''],
                 'exp' => $mine[''],
                 'power' => $mine[''],
-                'action' => $mine['']];
+                'action' => $mine['']
+            ];
+
             Mine::create($data);
         }
 

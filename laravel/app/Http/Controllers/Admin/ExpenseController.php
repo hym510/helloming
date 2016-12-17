@@ -19,12 +19,14 @@ class ExpenseController extends Controller
         $xml = $request->xml->storeAs('uploads', 'expense.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $events = ReadXml::readDatabase($path);
-        foreach ($events as $event){
+
+        foreach ($events as $event) {
             $data = [
                 'type' => 'type_i',
                 'price' => 'price_i',
                 'currency' => 'currency_i',
             ];
+
             Redis::set('expense', json_encode($data));
         }
 

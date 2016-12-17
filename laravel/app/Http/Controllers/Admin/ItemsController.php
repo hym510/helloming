@@ -22,11 +22,13 @@ class ItemsController extends Controller
         $xml = $request->xml->storeAs('uploads', 'item.xml', 'xml');
         $path = rtrim(public_path() . '/' . ltrim($xml, '/'));
         $items = ReadXml::readDatabase($path);
-        foreach ($items as $item){
+
+        foreach ($items as $item) {
             $data = [
                 'id' => $item['id_i'],
             ];
-        Item::create($data);
+
+            Item::create($data);
         }
 
         return redirect()->action('Admin\ItemsController@getIndex');

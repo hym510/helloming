@@ -22,12 +22,14 @@ class MonstersController extends Controller
         $xml = $request->xml->storeAs('uploads', 'minster.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $monsters = ReadXml::readDatabase($path);
-        foreach ($monsters as $monster){
+
+        foreach ($monsters as $monster) {
             $data = [
                 'name' => $monster['name_s'],
                 'level' => $monster['level_i'],
                 'hp' => $monster['hp_i'],
             ];
+
             Monster::create($data);
         }
 

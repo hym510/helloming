@@ -23,13 +23,15 @@ class LevelController extends Controller
         $xml = $request->xml->storeAs('uploads', 'level.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $levels = ReadXml::readDatabase($path);
-        foreach ($levels as $level){
+
+        foreach ($levels as $level) {
             $data = [
                 'level' => $level['id_i'],
                 'exp' => $level['exp_i'],
                 'power' => $level['power_i'],
                 'action' => $level['action_i'],
             ];
+
             levelAttr::create($data);
         }
 

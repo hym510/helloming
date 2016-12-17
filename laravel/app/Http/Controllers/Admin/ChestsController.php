@@ -20,12 +20,13 @@ class ChestsController extends Controller
         $xml = $request->xml->storeAs('uploads', 'chest.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $chests = ReadXml::readDatabase($path);
-        foreach ($chests as $chest){
+
+        foreach ($chests as $chest) {
             $data = [
 
             ];
 
-        Chest::create($data);
+            Chest::create($data);
         }
 
         return redirect()->action('Admin\ChestsController@getIndex');
