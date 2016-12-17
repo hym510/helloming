@@ -18,12 +18,12 @@ class ReplenishController extends Controller
         }
     }
 
-    public function getPower($diamonds)
+    public function getPower($gold)
     {
-        if (User::ReplenishPower(Auth::user()->user, $diamonds)) {
+        if (User::ReplenishPower(Auth::user()->user, $gold)) {
             return Json::success();
         } else {
-            return Json::error('Diamonds are not enough.', 601);
+            return Json::error('Gold are not enough.', 601);
         }
     }
 }
