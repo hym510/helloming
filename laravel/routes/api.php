@@ -36,9 +36,9 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('purchase/verify', ['uses' => 'PurchaseController@postVerify']);
     });
 
-    Route::group(['namespace' => 'replenish', 'middleware' => ['auth.api']], function () {
-        Route::get('replenish/action/{diamonds}', ['uses' => 'ReplenishController@getAction']);
-        Route::get('replenish/power/{diamonds}', ['uses' => 'ReplenishController@getPower']);
+    Route::group(['namespace' => 'Replenish', 'middleware' => ['auth.api']], function () {
+        Route::get('replenish/action/{gold}', ['uses' => 'ReplenishController@getAction']);
+        Route::get('replenish/power/{gold}', ['uses' => 'ReplenishController@getPower']);
     });
 
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
