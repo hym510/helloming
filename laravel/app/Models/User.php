@@ -199,17 +199,17 @@ class User extends Model
         return true;
     }
 
-    public static function ReplenishPower($id, $diamonds): bool
+    public static function ReplenishPower($id, $gold): bool
     {
-        if (Redis::hget('user:'.$id, 'diamond') < $diamonds) {
+        if (Redis::hget('user:'.$id, 'gold') < $gold) {
             return false;
         }
 
-        static::where('id', $id)->decrement('diamond', $diamonds);
-        Redis::hincrby('user:'.$id, 'diamond', -$diamonds);
+        static::where('id', $id)->decrement('gold', $gold);
+        Redis::hincrby('user:'.$id, 'gold', -$gold);
 
-        static::where('id', $id)->increment('power', $diamonds);
-        Redis::hincrby('user:'.$id, 'power', $diamonds);
+        static::where('id', $id)->increment('power', $gold);
+        Redis::hincrby('user:'.$id, 'power', $gold);
 
         return true;
     }
