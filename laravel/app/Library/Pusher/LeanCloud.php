@@ -42,7 +42,7 @@ class LeanCloud implements PusherContract
         $pushData = json_encode([
             'where' => ['user_id' => (int)$userId],
             'prod' => Config::get('leancloud.prod'),
-            'data' => $this->setting,
+            'data' => array_merge($this->setting, $data),
             'expiration_interval' => '86400',
         ]);
 
