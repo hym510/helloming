@@ -25,7 +25,7 @@ class EventsController extends Controller
             $prize = '['. $event['rewardItem_a'] .']';
             $data = [
                 'id' => $event['id_i'],
-                'type' => $type,
+                'type' => $event['type_i'],
                 'level' => $event['level_i'],
                 'type_id' => $event['obj_i'],
                 'exp' => $event['rewardExp_i'],
