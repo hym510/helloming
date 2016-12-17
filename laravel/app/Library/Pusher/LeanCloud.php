@@ -16,7 +16,7 @@ class LeanCloud implements PusherContract
 
     public function __construct($master = false)
     {
-        $this->url = Config::get('leancloud.url');
+        $this->url = Config::get('leancloud.url').'/1.1/push';
 
         if ($master) {
             $appKey = Config::get('leancloud.master_key').',master';
@@ -51,6 +51,7 @@ class LeanCloud implements PusherContract
         curl_setopt($ch, CURLOPT_POSTFIELDS, $pushData);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
         try {
             $result = curl_exec($ch);
             curl_close($ch);
@@ -64,7 +65,7 @@ class LeanCloud implements PusherContract
     public function pushMany(array $userIds, array $data): bool
     {
         $userIds = '('.implode(', ', $userIds).')';
-        $url = Config::get('leancloud.url').'/1.1/push';
+        $url = Config::get('leancloud.url');
         $pushData = json_encode([
             'cql' => 'select * from _Installation where user_id in '.$userIds,
             'prod' => Config::get('leancloud.prod'),
