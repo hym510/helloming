@@ -33,7 +33,7 @@ class EventsController extends Controller
                     $type = 'chest';
                     break;
             }
-
+            $prize = '['. $event['rewardItem_a'] .']';
             $data = [
                 'id' => $event['id_i'],
                 'type' => $type,
@@ -42,7 +42,7 @@ class EventsController extends Controller
                 'exp' => $event['rewardExp_i'],
                 'unlock_level' => $event['startLevel_i'],
                 'weight' => $event['weight_i'],
-                'prize' => $event['rewardItem_a'],
+                'prize' => $prize,
                 'info' => $event['info_s'],
                 'kill_limit' => $event['timeLimit_i'],
             ];

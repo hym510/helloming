@@ -125,7 +125,7 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\ExpenseController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-cloud"></i></div>
+                            <div class="gui-icon"><i class="fa fa-coffee"></i></div>
                             <span class="title">补充消耗管理</span>
                         </a>
                     </li>
