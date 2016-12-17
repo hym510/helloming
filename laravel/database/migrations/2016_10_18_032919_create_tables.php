@@ -140,7 +140,7 @@ class CreateTables extends Migration
             $table->unsignedTinyInteger('weight');
             $table->json('prize');
             $table->string('info');
-            $table->boolean('kill_limit')->default(false);
+            $table->boolean('time_limit')->default(false);
             $table->unsignedSmallInteger('kill_limit_time')->default(0);
         });
 
