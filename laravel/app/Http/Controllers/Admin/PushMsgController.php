@@ -23,6 +23,6 @@ class PushMsgController extends Controller
         $id[] = User::pluck('id');
         Json::success(Pusher::pushMany($id, ['message' => $data['message']]));
 
-        return redirect()->action('Admin\PushMsgController@getPushMsg');
+        return $this->backSuccessMsg('推送成功');
     }
 }
