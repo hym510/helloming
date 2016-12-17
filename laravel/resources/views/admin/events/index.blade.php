@@ -33,8 +33,8 @@
                             <td>{{ $event->exp or ''}}</td>
                             <td>{{ $event->unlock_level or '' }}</td>
                             <td>{{ mb_substr($event->info, 0, 8).'......' }}</td>
-                            <td>{{ $event->kill_limit or '' }}</td>
-                            <td>{{ $event->kill_limit_time or '' }}</td>
+                            <td>{{ $event->time_limit or '' }}</td>
+                            <td>{{ $event->time or '' }}</td>
                             <td>{{ $event->weight }}</td>
                         </tr>
                     @endforeach
