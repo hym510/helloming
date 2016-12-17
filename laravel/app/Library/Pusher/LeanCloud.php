@@ -33,7 +33,6 @@ class LeanCloud implements PusherContract
         $this->setting = [
             'action' => 'cn.find.action',
             'badge' => 'Increment',
-            'sound' => Config::get('leancloud.sound')
         ];
     }
 

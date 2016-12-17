@@ -20,6 +20,8 @@
                             <th>事件文字描述</th>
                             <th>是否限时击杀</th>
                             <th>击杀时间</th>
+                            <th>立即完成所需道具</th>
+                            <th>立即完成所需道具数量</th>
                             <th>权重</th>
                         </tr>
                     </thead>
@@ -35,6 +37,8 @@
                             <td>{{ mb_substr($event->info, 0, 8).'......' }}</td>
                             <td>{{ $event->time_limit or '' }}</td>
                             <td>{{ $event->time or '' }}</td>
+                            <td>{{ $event->finishItem or '' }}</td>
+                            <td>{{ $event->finishItemQuantity or '' }}</td>
                             <td>{{ $event->weight }}</td>
                         </tr>
                     @endforeach
