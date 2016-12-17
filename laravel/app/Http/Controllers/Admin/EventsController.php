@@ -22,17 +22,6 @@ class EventsController extends Controller
         $events = ReadXml::readDatabase($path);
 
         foreach ($events as $event) {
-            switch ($event['type_i']) {
-                case 1:
-                    $type = 'monster';
-                    break;
-                case 2:
-                    $type = 'mine';
-                    break;
-                case 3:
-                    $type = 'chest';
-                    break;
-            }
             $prize = '['. $event['rewardItem_a'] .']';
             $data = [
                 'id' => $event['id_i'],
@@ -44,11 +33,11 @@ class EventsController extends Controller
                 'weight' => $event['weight_i'],
                 'prize' => $prize,
                 'info' => $event['info_s'],
-                'kill_limit' => $event['timeLimit_i'],
+                'time_limit' => $event['timeLimit_i'],
             ];
 
             if ($event['timeLimit_i'] == 1) {
-                $array = array_collapse([$data, ['kill_limit_time' => $event['time_i']]]);
+                $array = array_collapse([$data, ['time' => $event['time_i']]]);
                 Event::create($array);
             } else {
                 Event::create($data);
