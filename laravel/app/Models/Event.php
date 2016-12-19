@@ -8,7 +8,7 @@ class Event extends Model
         'id', 'type', 'level', 'type_id',
         'exp', 'unlock_level', 'weight',
         'prize', 'info', 'time_limit', 'time',
-        'finishItemQuantity', 'finishItem',
+        'finish_item_id', 'item_quantity',
     ];
 
     protected $table = 'events';
