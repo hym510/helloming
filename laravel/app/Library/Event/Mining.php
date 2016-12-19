@@ -6,7 +6,7 @@ use Redis;
 use Carbon\Carbon;
 use App\Jobs\HostMining;
 use Illuminate\Contracts\Bus\Dispatcher;
-use App\Models\{Event, HostEvent, Item, Mine, User, UserItem};
+use App\Models\{Event, HostEvent, User, UserItem};
 
 class Mining
 {
@@ -41,7 +41,7 @@ class Mining
     {
         $hostEvent = HostEvent::getKeyValue(
             [['id', $hostEventId], ['user_id', $userId]],
-            ['event_id']
+            ['event_id', 'created_at']
         );
 
         if (! $hostEvent) {
@@ -50,39 +50,38 @@ class Mining
 
         $mine = Event::getKeyValue(
             [['id', $hostEvent['event_id']]], ['type', 'mine']],
-            ['exp', 'finish_item_id', 'item_quantity']
+            ['exp', 'prize', 'time', 'finish_item_id', 'item_quantity']
         );
 
         if (! $mine) {
             return [];
         }
 
-        if ($mine['finish_item_id'] == 10000 && ！User::enough($userId, 'gold', $mine['item_quantity'])) {
-            return [];
-        } elseif ($mine['finish_item_id'] == 10001 && ！User::enough($userId, 'diamond', $mine['item_quantity'])) {
-            return [];
-        } else {
-            $userItem = UserItem::getKeyValue(
-                [['user_id', $userId], ['item_id', $mine['finish_item_id']]],
-                ['quantity']
-            );
+        $created = strtotime($hostEvent->created_at);
+        $finish = created + $mine['time'];
+        $remain = $finish - time();
 
-            if ($userItem['quantity'] >= $mine['item_quantity']) {
-                UserItem::where('user_id', $userId)
-                    ->where('item_id', $mine['finish_item_id'])
-                    ->decrement('quantity', $mine['item_quantity']);
-            } else {
+        if ($remain < 0) {
+            $diamond = 0;
+        } elseif (0 < $remain && $remain < 60) {
+            $diamond = 1;
+        } else {
+            $diamond = $remain % 60;
+        }
+
+        if ($diamond) {
+            if (！User::enough($userId, 'diamond', $diamond)) {
                 return [];
             }
         }
 
         HostEvent::where('id', $hostEventId)->delete();
         User::freeSpace($userId);
-        User::addExp($userId, $event['exp']);
+        User::addExp($userId, $mine['exp']);
 
         $prizeIds = array();
 
-        foreach ($event['prize'] as $p) {
+        foreach ($mine['prize'] as $p) {
             if (is_lucky($p[1])) {
                 $prizeIds[] = $p[0];
             }
