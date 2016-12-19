@@ -27,7 +27,7 @@ class StateController extends Controller
     public function postImportXml(Request $request)
     {
         StateAttr::truncate();
-        $xml = $request->xml->storeAs('uploads', 'state.xml', 'xml');
+        $xml = $request->xml->storeAs('uploads', 'userState.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $states = ReadXml::readDatabase($path);
 

@@ -23,7 +23,8 @@ class ChestsController extends Controller
 
         foreach ($chests as $chest) {
             $data = [
-
+                'item_id' => chest['finishItem_i'],
+                'cost' => chest['finishItemQuantity_i'],
             ];
 
             Chest::create($data);

@@ -19,7 +19,7 @@ class EquipmentsController extends Controller
     public function postImportXml(Request $request)
     {
         Equipment::truncate();
-        $xml = $request->xml->storeAs('uploads', 'equipment.xml', 'xml');
+        $xml = $request->xml->storeAs('uploads', 'equip.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $equipments = ReadXml::readDatabase($path);
 

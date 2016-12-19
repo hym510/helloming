@@ -11,21 +11,17 @@
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
-                            <th>宝箱id</th>
-                            <th>奖励道具</th>
-                            <th>消耗类型</th>
-                            <th>消耗数量</th>
+                            <th>id</th>
                             <th>道具id</th>
+                            <th>消耗数量</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($chests as $chest)
                         <tr>
                             <td>{{ $chest->id }}</td>
-                            <td>{{ json_encode($chest->prize) }}</td>
-                            <td>{{ $chest->type_name }}</td>
+                            <td>{{ $chest->item_id }}</td>
                             <td>{{ $chest->cost }}</td>
-                            <td>{{ $chest->id }}</td>
                         </tr>
                     @endforeach
                     </tbody>
