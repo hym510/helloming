@@ -37,8 +37,8 @@
                             <td>{{ mb_substr($event->info, 0, 8).'......' }}</td>
                             <td>{{ $event->time_limit or '' }}</td>
                             <td>{{ $event->time or '' }}</td>
-                            <td>{{ $event->finishItem or '' }}</td>
-                            <td>{{ $event->finishItemQuantity or '' }}</td>
+                            <td>{{ $event->finish_item_id or '' }}</td>
+                            <td>{{ $event->item_quantity or '' }}</td>
                             <td>{{ $event->weight }}</td>
                         </tr>
                     @endforeach
