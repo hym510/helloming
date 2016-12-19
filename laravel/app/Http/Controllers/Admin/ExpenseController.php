@@ -22,7 +22,8 @@ class ExpenseController extends Controller
 
         foreach ($expenses as $expense){
             $data = [
-                'type' => $expense['id_i'],
+                'id' => $expense['id_i'],
+                'type' => $expense['type_i'],
                 'price' => $expense['price_i'],
                 'currency' => $expense['currency_i'],
             ];

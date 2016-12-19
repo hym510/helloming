@@ -27,9 +27,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('admin/edit/{adminId}', ['uses' => 'AdminController@getEdit']);
     Route::get('admin/delete/{adminId}', ['uses' => 'AdminController@getDelete']);
 
-    Route::get('chests', ['uses' => 'ChestsController@getIndex']);
-    Route::post('chests/xml', ['uses' => 'ChestsController@postImportXml']);
-
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
     Route::post('equipments/xml', ['uses' => 'EquipmentsController@postImportXml']);
 
@@ -41,9 +38,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('level', ['uses' => 'LevelController@getIndex']);
     Route::post('level/xml', ['uses' => 'LevelController@postImportXml']);
-
-    Route::get('mines', ['uses' => 'MinesController@getIndex']);
-    Route::post('mines/xml', ['uses' => 'MinesController@postImportXml']);
 
     Route::get('monsters', ['uses' => 'MonstersController@getIndex']);
     Route::post('monsters/xml', ['uses' => 'MonstersController@postImportXml']);

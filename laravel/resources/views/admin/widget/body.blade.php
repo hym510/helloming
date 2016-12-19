@@ -76,18 +76,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ action('Admin\MinesController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-star"></i></div>
-                            <span class="title">挖矿事件</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ action('Admin\ChestsController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-diamond"></i></div>
-                            <span class="title">宝箱事件</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ action('Admin\EventsController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-gears"></i></div>
                             <span class="title">事件管理</span>
