@@ -23,7 +23,6 @@ class EquipLevelController extends Controller
         foreach ($equiplevels as $equiplevel){
             $data = [
                 'level' => $equiplevel['level_i'],
-                'icon' => $equiplevel['icon_i'],
             ];
             $all[] = $data;
         }
