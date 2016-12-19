@@ -73,7 +73,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->job }}
+                                {{ $user->job_id }}
                             </div>
                             <label>玩家职业</label>
                         </div>

@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-file-upload">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-inline" enctype="multipart/form-data" method="post" action="{{ action('Admin\ChestsController@postImportXml') }}">
+            <form class="form-inline" enctype="multipart/form-data" method="post" action="{{ action('Admin\EquipLevelController@postImportXml') }}">
                 {!! csrf_field() !!}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="xml">

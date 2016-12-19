@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UsersRequest;
 
 class UsersController extends Controller
 {
     public function getIndex()
     {
-        $users = User::with('job')->when(request('keyword'), function ($q) {
+        $users = User::when(request('keyword'), function ($q) {
             return $q->where('phone', request('keyword'))
                 ->orWhere('name', request('keyword'));
         })
@@ -23,11 +22,6 @@ class UsersController extends Controller
     public function getShow($userId)
     {
         return view('admin.users.show', ['user' => User::findOrfail($userId)]);
-    }
-
-    public function getAdd()
-    {
-        return view('admin.users.edit');
     }
 
     public function getDelete($userId, $type)

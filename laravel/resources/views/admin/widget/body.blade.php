@@ -112,6 +112,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ action('Admin\EquipLevelController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-level-up"></i></div>
+                            <span class="title">装备等级管理</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ action('Admin\ExpenseController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-coffee"></i></div>
                             <span class="title">补充消耗管理</span>

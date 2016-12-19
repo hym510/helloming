@@ -62,6 +62,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('expense', ['uses' => 'ExpenseController@getIndex']);
     Route::post('expense/xml', ['uses' => 'ExpenseController@postImportXml']);
+
+    Route::get('equiplevel', ['uses' => 'EquipLevelController@getIndex']);
+    Route::post('equiplevel/xml', ['uses' => 'EquipLevelController@postImportXml']);
 });
 
 
