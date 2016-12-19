@@ -6,7 +6,7 @@ use Redis;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\{Event, HostEvent, Item, User, UserItem};
+use App\Models\{Event, HostEvent, User, UserItem};
 
 class HostMining implements ShouldQueue
 {
