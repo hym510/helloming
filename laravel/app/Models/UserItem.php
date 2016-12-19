@@ -25,20 +25,4 @@ class UserItem extends Model
             }
         }
     }
-
-    public static function manyPrize($prize, $userId)
-    {
-        $prizeIds = array();
-
-        foreach ($prize as $p) {
-            $prizeIds[] = $p[0];
-            $count = static::where('user_id', $userId)->where('item_id', $p[0])->count();
-
-            if ($count > 0) {
-                static::where('user_id', $userId)->where('item_id', $p[0])->increment('quantity', $p[1]);
-            } else {
-                static::create(['user_id' => $userId, 'item_id' => $p[0], 'quantity' => $p[1]]);
-            }
-        }
-    }
 }
