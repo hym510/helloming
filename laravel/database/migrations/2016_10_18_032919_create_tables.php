@@ -117,11 +117,6 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('hp');
         });
 
-        Schema::create('mines', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-        });
-
         Schema::create('chests', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('item_id')->nullable();
