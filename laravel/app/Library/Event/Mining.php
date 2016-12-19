@@ -97,8 +97,12 @@ class Mining
         return ['host_events' => HostEvent::getMine($userId)];
     }
 
-    public static function prize($userId): array
+    public static function prize($userId, $hostEventId): array
     {
-        return ['mine_prize' => json_decode('['.Redis::getset('prize:'.$userId, '').']')];
+        $result = Redis::pipeline()->get('prize:' . $userId . ':' . $hostEventId)
+            ->del('prize:' . $userId . ':' . $hostEventId)
+            ->execute();
+
+        return ['mine_prize' => json_decode($result[0])];
     }
 }
