@@ -21,7 +21,7 @@ class PushMsgController extends Controller
         $data = $request->inputData();
         $notification = Notification::create($data);
         $id[] = User::pluck('id');
-        Json::success(Pusher::pushMany($id, ['message' => $data['message']]));
+        Pusher::pushMany($id, ['message' => $data['message']]);
 
         return $this->backSuccessMsg('推送成功');
     }
