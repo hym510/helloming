@@ -3,7 +3,7 @@
 namespace App\Library\Event;
 
 use Redis;
-use App\Models\{Chest, Event, Mine, Monster};
+use App\Models\Event;
 
 class Event
 {
