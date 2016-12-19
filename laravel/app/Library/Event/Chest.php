@@ -2,7 +2,7 @@
 
 namespace App\Library\Event;
 
-use App\Models\{Event, Item, User, UserItem};
+use App\Models\{Event, User, UserItem};
 
 class Chest
 {
@@ -10,7 +10,7 @@ class Chest
     {
         $chest = Event::getKeyValue(
             [['id', $eventId], ['type', 'chest']],
-            ['finish_item_id', 'item_quantity']
+            ['exp', 'prize', 'finish_item_id', 'item_quantity']
         );
 
         if (! $chest) {
@@ -36,9 +36,10 @@ class Chest
             }
         }
 
+        User::addExp($userId, $chest['exp']);
         $prizeIds = array();
 
-        foreach ($event['prize'] as $p) {
+        foreach ($chest['prize'] as $p) {
             if (is_lucky($p[1])) {
                 $prizeIds[] = $p[0];
             }
