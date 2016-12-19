@@ -50,12 +50,7 @@ class HostMining implements ShouldQueue
         }
 
         $prize = array('event_id' => $hostEvent['event_id'], 'prize' => $prizeIds);
-
-        if (Redis::exists('prize:'.$hostEvent['user_id'])) {
-            Redis::append('prize:'.$hostEvent['user_id'], ','.json_encode($prize));
-        } else {
-            Redis::append('prize:'.$hostEvent['user_id'], json_encode($prize));
-        }
+        Redis::set('prize:' . $hostEvent['user_id'] . ':' . $this->hostEventId, json_encode($prize));
 
         UserItem::getPrize($prizeIds, $hostEvent['user_id']);
     }
