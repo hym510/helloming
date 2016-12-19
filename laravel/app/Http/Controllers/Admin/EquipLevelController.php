@@ -27,7 +27,7 @@ class EquipLevelController extends Controller
             $all[] = $data;
         }
 
-        Redis::set('expense', json_encode($all));
+        Redis::set('equipRating', json_encode($all));
 
         return $this->backSuccessMsg('成功添加xml文件');
     }
