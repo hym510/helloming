@@ -142,8 +142,8 @@ class CreateTables extends Migration
             $table->string('info');
             $table->boolean('time_limit')->default(false);
             $table->unsignedSmallInteger('time')->default(0);
-            $table->unsignedInteger('finishItem');
-            $table->unsignedSmallInteger('finishItemQuantity');
+            $table->unsignedInteger('finish_item_id');
+            $table->unsignedSmallInteger('item_quantity');
         });
 
         Schema::create('host_events', function (Blueprint $table) {
