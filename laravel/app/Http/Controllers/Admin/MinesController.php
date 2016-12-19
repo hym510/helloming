@@ -26,10 +26,7 @@ class MinesController extends Controller
 
         foreach ($mines as $mine) {
             $data = [
-                'level' => $mine[''],
-                'exp' => $mine[''],
-                'power' => $mine[''],
-                'action' => $mine['']
+
             ];
 
             Mine::create($data);

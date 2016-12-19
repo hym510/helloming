@@ -33,9 +33,8 @@ class StateController extends Controller
 
         foreach ($states as $state) {
             $data = [
-                'id' => $state['id'],
-                'level' => $state['level'],
-                'power' => $state['power'],
+                'level' => $state['id_i'],
+                'power' => $state['powerLimit_i'],
             ];
 
             StateAttr::create($data);
