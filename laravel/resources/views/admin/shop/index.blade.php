@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-file-upload">
-                            <i class="fa fa-upload"></i>上传
+                    <i class="fa fa-upload"></i>上传
                 </button>
                 <table class="table table-hover table-striped table-condensed">
                     <thead>

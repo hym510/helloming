@@ -6,7 +6,6 @@ use App\Models\Mine;
 use App\Library\Xml\ReadXml;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\MinesRequest;
 
 class MinesController extends Controller
 {
