@@ -4,12 +4,6 @@
 <section>
     <div class="section-body">
         <div class="card">
-            <div class="card-head">
-                <ul class="nav nav-tabs nav-justified">
-                    <li class="active"><a href="{{ url()->current() }}">列表</a></li>
-                    <li><a href="{{ action('Admin\UsersController@getAdd') }}">添加</a></li>
-                </ul>
-            </div>
             <div class="card-body">
                 <form action="" class="form-inline" method="get">
                     <div class="form-group">
@@ -41,8 +35,12 @@
                             <td>{{ $user->vip_experience }}</td>
                             <td>
                                 <a href="{{ action('Admin\UsersController@getShow', $user->id) }}" class="btn btn-xs btn-default-bright">详情</a>
-                                <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $user->id }}" data-type="forcedelete">删除</a>
-                                <a href="javascript:;" class="btn btn-xs btn-default-bright forcedel" data-id="{{ $user->id }}" data-type="delete">冻结</a>
+                                <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $user->id }}" data-type="delete">删除</a>
+                                @if ($user->activate == 1)
+                                <a href="{{ action('Admin\UsersController@getDelete', ['id' => $user->id, 'type' => 'freeze']) }}" class="btn btn-xs btn-default-bright">冻结</a>
+                                @else
+                                <a href="{{ action('Admin\UsersController@getDelete', ['id' => $user->id, 'type' => 'unfreeze']) }}" class="btn btn-xs btn-default-bright">取消冻结</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -70,24 +68,6 @@
                 layer.close(index);
                 $.get("{{ action('Admin\UsersController@getDelete', ['id' => '', 'type' => '']) }}/" + id + "/" +type, function() {
                     layer.alert('删除成功', function() {
-                        location.reload();
-                    })
-                });
-            }
-        })
-    });
-
-    $('.forcedel').click(function() {
-        var id = $(this).data('id'),
-            type = $(this).data('type'),
-            msg = '确认屏蔽?';
-        layer.msg(msg, {
-            time: 0,
-            btn: ['确认', '删除'],
-            yes: function(index) {
-                layer.close(index);
-                $.get("{{ action('Admin\UsersController@getDelete', ['id' => '', 'type' => '']) }}/" + id + "/" +type, function() {
-                    layer.alert('屏蔽成功', function() {
                         location.reload();
                     })
                 });
