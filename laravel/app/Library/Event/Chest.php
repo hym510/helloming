@@ -36,8 +36,16 @@ class Chest
             }
         }
 
-        UserItem::manyPrize($event['prize'], $userId);
+        $prizeIds = array();
 
-        return ['prize' => $chest['prize']];
+        foreach ($event['prize'] as $p) {
+            if (is_lucky($p[1])) {
+                $prizeIds[] = $p[0];
+            }
+        }
+
+        UserItem::getPrize($prizeIds, $userId);
+
+        return ['prize' => $prizeIds];
     }
 }
