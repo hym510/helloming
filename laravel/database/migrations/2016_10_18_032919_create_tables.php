@@ -62,6 +62,14 @@ class CreateTables extends Migration
             $table->rememberToken();
         });
 
+        Schema::create('wechat', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('union_id', 64);
+            $table->string('open_id', 64);
+
+            $table->unique('union_id');
+        });
+
         Schema::create('state_attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedTinyInteger('level');
