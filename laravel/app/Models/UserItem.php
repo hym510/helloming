@@ -16,12 +16,18 @@ class UserItem extends Model
     public static function getPrize($itemIds, $userId)
     {
         foreach ($itemIds as $itemId) {
-            $count = static::where('user_id', $userId)->where('item_id', $itemId)->count();
-
-            if ($count > 0) {
-                static::where('user_id', $userId)->where('item_id', $itemId)->increment('quantity', 1);
+            if ($itemId == 10000) {
+                User::ReplenishGold($userId, 1);
+            } elseif ($itemId == 10001) {
+                User::ReplenishDiamond($userId, 1);
             } else {
-                static::create(['user_id' => $userId, 'item_id' => $itemId]);
+                $count = static::where('user_id', $userId)->where('item_id', $itemId)->count();
+
+                if ($count > 0) {
+                    static::where('user_id', $userId)->where('item_id', $itemId)->increment('quantity', 1);
+                } else {
+                    static::create(['user_id' => $userId, 'item_id' => $itemId]);
+                }
             }
         }
     }
