@@ -229,6 +229,12 @@ class User extends Model
         return true;
     }
 
+    public static function ReplenishDiamond($id, $diamond)
+    {
+        static::where('id', $id)->increment('diamond', $diamond);
+        Redis::hincrby('user:' . $id, 'diamond', $diamond);
+    }
+
     public static function bindOpenid($id, $openid, $withdrawPassword): bool
     {
         if (Redis::hget('user:'.$id, 'wechat_id')) {
