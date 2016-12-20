@@ -17,17 +17,21 @@ class Chest
             return [];
         }
 
-        if ($chest['finish_item_id'] == 10000 && ！User::enough($userId, 'gold', $chest['item_quantity'])) {
-            return [];
-        } elseif ($chest['finish_item_id'] == 10001 && ！User::enough($userId, 'diamond', $chest['item_quantity'])) {
-            return [];
+        if ($chest['finish_item_id'] == 10000) {
+            if (! User::enough($userId, 'gold', $chest['item_quantity'])) {
+                return [];
+            }
+        } elseif ($chest['finish_item_id'] == 10001) {
+            if (! User::enough($userId, 'diamond', $chest['item_quantity'])) {
+                return [];
+            }
         } else {
             $userItem = UserItem::getKeyValue(
                 [['user_id', $userId], ['item_id', $chest['finish_item_id']]],
                 ['quantity']
             );
 
-            if ($userItem['quantity'] >= $chest['item_quantity']) {
+            if ($userItem && $userItem['quantity'] >= $chest['item_quantity']) {
                 UserItem::where('user_id', $userId)
                     ->where('item_id', $chest['finish_item_id'])
                     ->decrement('quantity', $chest['item_quantity']);
