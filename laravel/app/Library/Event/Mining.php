@@ -34,7 +34,7 @@ class Mining
 
         app(Dispatcher::class)->dispatch($job);
 
-        return $hostEvent['host_event_id']);
+        return $hostEvent['host_event_id'];
     }
 
     public static function complete($hostEventId, $userId): array
