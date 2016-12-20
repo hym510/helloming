@@ -46,13 +46,13 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('equipment3_level')->default(1);
             $table->boolean('activate')->default(true);
             $table->string('auth_token', 64)->nullable();
-            $table->string('wechat_id', 64)->nullable();
+            $table->string('union_id', 64)->nullable();
             $table->string('withdraw_password')->nullable();
             $table->timestamp('created_at');
 
             $table->unique('phone');
             $table->unique('auth_token');
-            $table->unique('wechat_id');
+            $table->unique('union_id');
         });
 
         Schema::create('admins', function (Blueprint $table) {
