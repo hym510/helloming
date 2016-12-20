@@ -199,32 +199,32 @@ class User extends Model
         return true;
     }
 
-    public static function ReplenishPower($id, $gold): bool
+    public static function ReplenishPower($id, $quantity): bool
     {
-        if (Redis::hget('user:'.$id, 'gold') < $gold) {
+        if (Redis::hget('user:'.$id, 'diamond') < $quantity) {
             return false;
         }
 
-        static::where('id', $id)->decrement('gold', $gold);
-        Redis::hincrby('user:'.$id, 'gold', -$gold);
+        static::where('id', $id)->decrement('diamond', $quantity);
+        Redis::hincrby('user:'.$id, 'diamond', -$quantity);
 
-        static::where('id', $id)->increment('power', $gold);
-        Redis::hincrby('user:'.$id, 'power', $gold);
+        static::where('id', $id)->increment('power', $quantity);
+        Redis::hincrby('user:'.$id, 'power', $quantity);
 
         return true;
     }
 
-    public static function ReplenishAction($id, $gold): bool
+    public static function ReplenishAction($id, $quantity): bool
     {
-        if (Redis::hget('user:'.$id, 'gold') < $gold) {
+        if (Redis::hget('user:'.$id, 'diamond') < $quantity) {
             return false;
         }
 
-        static::where('id', $id)->decrement('gold', $gold);
-        Redis::hincrby('user:'.$id, 'gold', -$gold);
+        static::where('id', $id)->decrement('diamond', $quantity);
+        Redis::hincrby('user:'.$id, 'diamond', -$quantity);
 
-        static::where('id', $id)->increment('action', $gold);
-        Redis::hincrby('user:'.$id, 'action', $gold);
+        static::where('id', $id)->increment('action', $quantity);
+        Redis::hincrby('user:'.$id, 'action', $quantity);
 
         return true;
     }
