@@ -10,10 +10,10 @@ use App\Models\{Event, HostEvent, User, UserItem};
 
 class Mining
 {
-    public static function start($eventId, $userId): array
+    public static function start($eventId, $userId): bool
     {
         if (! User::free($userId)) {
-            return [];
+            return false;
         }
 
         $event = Event::getKeyValue(
@@ -22,7 +22,7 @@ class Mining
         );
 
         if (! $event) {
-            return [];
+            return false;
         }
 
         User::mining($userId);
@@ -34,7 +34,7 @@ class Mining
 
         app(Dispatcher::class)->dispatch($job);
 
-        return $event;
+        return true;
     }
 
     public static function complete($hostEventId, $userId): array
@@ -49,7 +49,7 @@ class Mining
         }
 
         $mine = Event::getKeyValue(
-            [['id', $hostEvent['event_id']]], ['type', 'mine']],
+            [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize', 'time', 'finish_item_id', 'item_quantity']
         );
 
