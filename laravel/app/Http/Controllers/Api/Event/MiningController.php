@@ -22,12 +22,17 @@ class MiningController extends Controller
 
     public function getComplete($hostEventId)
     {
-        $success = Mining::complete($hostEventId, Auth::user()->user);
+        $result = Mining::complete($hostEventId, Auth::user()->user);
 
-        if (! $success) {
-            return Json::error('Diamonds are not enough.', 601);
+        switch ($result[0]) {
+            case 'finish':
+                return Json::success();
+            case 'lack':
+                return Json::error('Diamonds are not enough.', 601);
+            case 'nonexist':
+                return Json::success();
         }
 
-        return Json::success($success);
+        return Json::success($result[0]);
     }
 }
