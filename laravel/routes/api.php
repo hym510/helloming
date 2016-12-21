@@ -54,6 +54,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('shop/goods', ['uses' => 'ShopController@getGoods']);
     });
 
+    Route::group(['namespace' => 'Wechat'], function () {
+        Route::post('wechat/subscribe', ['uses' => 'WechatController@postSubscribe']);
+    });
+
     Route::group(['namespace' => 'Withdraw', 'middleware' => ['auth.api']], function () {
         Route::get('withdraw/{gold}', ['uses' => 'WithdrawController@getRedpack']);
     });
