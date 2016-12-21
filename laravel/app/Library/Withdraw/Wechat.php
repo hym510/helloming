@@ -4,7 +4,7 @@ namespace App\Library\Withdraw;
 
 use Redis;
 use Config;
-use App\Models\User;
+use App\Models\{User, Wechat};
 use EasyWeChat\Foundation\Application;
 
 class Wechat
@@ -40,5 +40,34 @@ class Wechat
         }
 
         return true;
+    }
+
+    public static function subscribe()
+    {
+        $wechat = Config::get('wechat');
+        $options = [
+            'debug'  => true,
+            'app_id' => $wechat['app_id'],
+            'secret' => $wechat['app_secret'],
+            'token' => $wechat['token'],
+            'aes_key' => '',
+            'log' => [
+                'level' => 'debug',
+                'file' => $wechat['log'],
+            ]
+        ];
+
+        $app = new Application($options);
+        $server = $app->server;
+        $userService = $app->user;
+
+        $server->setMessageHandler(function($message) use ($userService) {
+            $unionId = $userService->get($message->FromUserName)->openid;
+            Wechat::addOne($message->FromUserName, $unionId);
+        });
+
+        $response = $server->serve();
+
+        return $response;
     }
 }
