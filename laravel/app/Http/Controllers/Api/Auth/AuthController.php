@@ -22,9 +22,9 @@ class AuthController extends Controller
 
     public function postSignin(Smser $smser, SigninRequest $request)
     {
-        if (! $smser->verifySmsCode($request->phone, $request->code)) {
-            return Json::error('Invalid SMS code.', 603);
-        }
+        // if (! $smser->verifySmsCode($request->phone, $request->code)) {
+        //     return Json::error('Invalid SMS code.', 603);
+        // }
 
         if (! PhoneNumber::isExist($request->phone)) {
             return Json::error(
