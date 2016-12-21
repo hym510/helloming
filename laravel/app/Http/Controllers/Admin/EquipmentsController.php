@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Json;
 use App\Models\Equipment;
 use App\Library\Xml\ReadXml;
 use Illuminate\Http\Request;
@@ -34,10 +35,18 @@ class EquipmentsController extends Controller
                 'position' => $equipment['position_i'],
                 'upgrade' => $equipment['upgrade_a'],
             ];
+            Json::success(app('qiniu')->uploadUrl($equipment['icon_i']));
 
             Equipment::create($data);
         }
 
         return redirect()->action('Admin\EquipmentsController@getIndex');
+    }
+
+    public function postImportImg(Request $request)
+    {
+        Json::success(app('qiniu')->uploadUrl());
+
+        return $this->backSuccessMsg('上传成功');
     }
 }

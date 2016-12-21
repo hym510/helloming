@@ -29,12 +29,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
     Route::post('equipments/xml', ['uses' => 'EquipmentsController@postImportXml']);
+    Route::post('equipments/img', ['uses' => 'EquipmentsController@postImportImg']);
 
     Route::get('events', ['uses' => 'EventsController@getIndex']);
     Route::post('events/xml', ['uses' => 'EventsController@postImportXml']);
 
     Route::get('item', ['uses' => 'ItemsController@getIndex']);
     Route::post('item/xml', ['uses' => 'ItemsController@postImportXml']);
+    Route::post('item/img', ['uses' => 'ItemsController@postImportImg']);
 
     Route::get('level', ['uses' => 'LevelController@getIndex']);
     Route::post('level/xml', ['uses' => 'LevelController@postImportXml']);
@@ -65,6 +67,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('equiplevel', ['uses' => 'EquipLevelController@getIndex']);
     Route::post('equiplevel/xml', ['uses' => 'EquipLevelController@postImportXml']);
+
 });
 
 
