@@ -45,7 +45,7 @@ class Mining
         );
 
         if (! $hostEvent) {
-            return [];
+            return ['finish'];
         }
 
         $mine = Event::getKeyValue(
@@ -54,11 +54,11 @@ class Mining
         );
 
         if (! $mine) {
-            return [];
+            return ['nonexist'];
         }
 
-        $created = strtotime($hostEvent->created_at);
-        $finish = created + $mine['time'];
+        $created = strtotime($hostEvent['created_at']);
+        $finish = $created + $mine['time'];
         $remain = $finish - time();
 
         if ($remain < 0) {
@@ -70,8 +70,8 @@ class Mining
         }
 
         if ($diamond) {
-            if (！User::enough($userId, 'diamond', $diamond)) {
-                return [];
+            if (! User::enough($userId, 'diamond', $diamond)) {
+                return ['lack'];
             }
         }
 
@@ -89,7 +89,7 @@ class Mining
 
         UserItem::getPrize($prizeIds, $userId);
 
-        return ['prize' => prizeIds];
+        return ['prize' => $prizeIds];
     }
 
     public static function host($userId): array
