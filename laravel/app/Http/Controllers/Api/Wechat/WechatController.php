@@ -9,6 +9,8 @@ class WechatController extends Controller
 {
     public function postSubscribe()
     {
-        return Wechat::subscribe();
+        $server = Wechat::subscribe();
+
+        return $server->serve();
     }
 }
