@@ -9,7 +9,7 @@ use EasyWeChat\Foundation\Application;
 
 class Wechat
 {
-    public static function sendRedpack($userId, $openId, $gold): bool
+    public static function sendRedpack($userId, $gold): bool
     {
         $wechat = Config::get('wechat');
         $options = [
@@ -18,13 +18,24 @@ class Wechat
                 'key' => $wechat['mch_key'],
                 'cert_path' => $wechat['cert_path'],
                 'key_path' => $wechat['key_path'],
+                'log' => [
+                    'level' => 'debug',
+                    'file' => $wechat['log'],
+                ]
             ],
         ];
 
-        $luckyMoney = (new Application($options))->lucky_money;
+        $unionId = User::getKeyValue(
+            [['id', $userId]], ['union_id']
+        );
 
+        $openId = Wechat::getKeyValue(
+            [['union_id', $unionId]], ['open_id']
+        );
+
+        $luckyMoney = (new Application($options))->lucky_money;
         $luckyMoneyData = [
-            'mch_billno' => $mchId.date('YmdHis').rand(1000, 9999),
+            'mch_billno' => $wechat['mch_id'] . date('YmdHis') . rand(1000, 9999),
             'send_name' => 'find',
             're_openid' => $openId,
             'total_num' => 1,
