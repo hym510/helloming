@@ -31,8 +31,8 @@
                             <td>{{ $user->name }}</td>
                             <td><img src="{{ $user->avatar }}"></td>
                             <td>{{ $user->phone }}</td>
-                            <td>{{ $user->experience }}</td>
-                            <td>{{ $user->vip_experience }}</td>
+                            <td>{{ $user->exp }}</td>
+                            <td>{{ $user->vip_exp }}</td>
                             <td>
                                 <a href="{{ action('Admin\UsersController@getShow', $user->id) }}" class="btn btn-xs btn-default-bright">详情</a>
                                 <a href="javascript:;" class="btn btn-xs btn-default-bright del" data-id="{{ $user->id }}" data-type="delete">删除</a>

@@ -41,13 +41,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->experience or '' }}
+                                {{ $user->exp or '' }}
                             </div>
                             <label>经验</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->vip_experience or '' }}
+                                {{ $user->vip_exp or '' }}
                             </div>
                             <label>会员经验</label>
                         </div>

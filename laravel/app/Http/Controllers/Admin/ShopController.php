@@ -16,7 +16,6 @@ class ShopController extends Controller
 
     public function postImportXml(Request $request)
     {
-        $shops = [];
         Shop::truncate();
         $xml = $request->xml->storeAs('uploads', 'shop.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
