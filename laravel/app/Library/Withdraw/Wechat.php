@@ -11,12 +11,13 @@ class Wechat
 {
     public static function sendRedpack($userId, $openId, $gold): bool
     {
-        $mchId = Config::get('wechat.mch_id');
-
+        $wechat = Config::get('wechat');
         $options = [
             'payment' => [
-                'merchant_id' => $mchId,
-                'key' => Config::get('wechat.mch_key'),
+                'merchant_id' => $wechat['mch_id'],
+                'key' => $wechat['mch_key'],
+                'cert_path' => $wechat['cert_path'],
+                'key_path' => $wechat['key_path'],
             ],
         ];
 
@@ -60,14 +61,13 @@ class Wechat
         $app = new Application($options);
         $server = $app->server;
         $userService = $app->user;
+        $unionId = $userService->get($message->FromUserName)->openid;
 
         $server->setMessageHandler(function($message) use ($userService) {
             $unionId = $userService->get($message->FromUserName)->openid;
             Wechat::addOne($message->FromUserName, $unionId);
         });
 
-        $response = $server->serve();
-
-        return $response;
+        return $server;
     }
 }
