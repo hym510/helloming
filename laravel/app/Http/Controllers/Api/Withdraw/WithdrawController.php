@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Profile;
+namespace App\Http\Controllers\Api\Withdraw;
 
 use Auth;
 use Json;
@@ -16,8 +16,7 @@ class WithdrawController extends Controller
             return Json::error('Gold are not enough.', 511);
         }
 
-        $userId = Auth::user()->user;
-        Wechat::sendRedpack($userId, Redis::hget('user:'.$userId, 'wechat_id'), $gold);
+        Wechat::sendRedpack(Auth::user()->user, $gold);
 
         return Json::success();
     }
