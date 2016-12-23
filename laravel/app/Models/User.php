@@ -201,15 +201,21 @@ class User extends Model
 
     public static function ReplenishPower($id, $quantity): bool
     {
-        if (Redis::hget('user:'.$id, 'diamond') < $quantity) {
+        $user = Redis::hmget('user:'.$id, 'diamond', 'remain_power', 'power');
+
+        if ($user[0] < $quantity) {
             return false;
+        }
+
+        if ($user[1] + $quantity >= $user[2]) {
+            $quantity = $user[2] - $user[1];
         }
 
         static::where('id', $id)->decrement('diamond', $quantity);
         Redis::hincrby('user:'.$id, 'diamond', -$quantity);
 
-        static::where('id', $id)->increment('power', $quantity);
-        Redis::hincrby('user:'.$id, 'power', $quantity);
+        static::where('id', $id)->increment('remain_power', $quantity);
+        Redis::hincrby('user:'.$id, 'remain_power', $quantity);
 
         return true;
     }
