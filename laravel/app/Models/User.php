@@ -222,15 +222,21 @@ class User extends Model
 
     public static function ReplenishAction($id, $quantity): bool
     {
-        if (Redis::hget('user:'.$id, 'diamond') < $quantity) {
+        $user = Redis::hget('user:'.$id, 'diamond', 'remain_action', 'action');
+
+        if ($user[0] < $quantity) {
             return false;
+        }
+
+        if ($user[1] + $quantity >= $user[2]) {
+            $quantity = $user[2] - $user[1];
         }
 
         static::where('id', $id)->decrement('diamond', $quantity);
         Redis::hincrby('user:'.$id, 'diamond', -$quantity);
 
-        static::where('id', $id)->increment('action', $quantity);
-        Redis::hincrby('user:'.$id, 'action', $quantity);
+        static::where('id', $id)->increment('remain_action', $quantity);
+        Redis::hincrby('user:'.$id, 'remain_action', $quantity);
 
         return true;
     }
