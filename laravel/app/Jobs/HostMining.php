@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Log;
 use Redis;
 use Pusher;
 use Illuminate\Bus\Queueable;
@@ -55,6 +56,6 @@ class HostMining implements ShouldQueue
 
         UserItem::getPrize($prizeIds, $hostEvent['user_id']);
 
-        Pusher::pushOne($hostEvent['user_id'], ['alert' => '你在FIND里面进行的事件已经完成, 前往查看!']);
+        Pusher::pushOne((string)$hostEvent['user_id'], ['alert' => '你在FIND里面进行的事件已经完成, 前往查看!']);
     }
 }
