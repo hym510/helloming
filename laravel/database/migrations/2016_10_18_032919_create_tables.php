@@ -149,9 +149,6 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->unsignedInteger('event_id');
             $table->unsignedInteger('mine_id');
-            $table->foreign('mine_id')
-                ->references('id')->on('mines')
-                ->onDelete('cascade');
             $table->timestamp('created_at');
         });
 
