@@ -123,6 +123,12 @@
                             <span class="title">补充消耗管理</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ action('Admin\ExchangeGoldController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-filter"></i></div>
+                            <span class="title">金币兑换人民币</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

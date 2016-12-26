@@ -165,5 +165,11 @@ class CreateTables extends Migration
             $table->string('message');
             $table->timestamp('created_at');
         });
+
+        Schema::create('exchange_golds', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('gold');
+            $table->unsignedInteger('money');
+        });
     }
 }

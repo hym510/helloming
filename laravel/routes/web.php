@@ -68,6 +68,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('equiplevel', ['uses' => 'EquipLevelController@getIndex']);
     Route::post('equiplevel/xml', ['uses' => 'EquipLevelController@postImportXml']);
 
+    Route::get('exchange', ['uses' => 'ExchangeGoldController@getIndex']);
+    Route::post('exchange/store', ['uses' => 'ExchangeGoldController@postStore']);
+
 });
 
 
