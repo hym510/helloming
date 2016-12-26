@@ -22,6 +22,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('consume/action/{action}', ['uses' => 'ConsumeController@getAction']);
     });
 
+    Route::group(['namespace' => 'Data'], function () {
+        Route::get('data/qiniu/token', ['uses' => 'QiniuController@getToken']);
+    });
+
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {
         Route::get('chest/open/{eventId}', ['uses' => 'ChestController@getOpen']);
         Route::get('event/refresh/{count}/{out}', ['uses' => 'EventController@getRefresh']);

@@ -32,16 +32,19 @@ class Qiniu
         $auth = new Auth($this->accessKey, $this->secretKey);
         $token = $auth->uploadToken($this->bucket, null, 60 * 60);
         $domain = $this->domain;
+
         return compact('token', 'domain');
     }
 
     public function uploadUrl()
     {
         $file = request()->file('img');
+
         if ($file->isValid()) {
             $token = $this->getToken()['token'];
             $uploader = new UploadManager();
             $result = $uploader->putFile($token, $file->getClientOriginalName(), $file);
+
             if ($result[1]) {
                 throw $result[1];
             }
