@@ -9,10 +9,11 @@ use EasyWeChat\Foundation\Application;
 
 class Wechat
 {
-    public static function sendRedpack($userId, $gold): bool
+    public static function sendRedpack($userId, $amount): bool
     {
         $wechat = Config::get('wechat');
         $options = [
+            'app_id' => $wechat['app_id'],
             'payment' => [
                 'merchant_id' => $wechat['mch_id'],
                 'key' => $wechat['mch_key'],
@@ -39,7 +40,7 @@ class Wechat
             'send_name' => 'find',
             're_openid' => $openId,
             'total_num' => 1,
-            'total_amount' => $gold * 100,
+            'total_amount' => $amount * 100,
             'wishing' => '恭喜发财',
             'client_ip' => $_SERVER['REMOTE_ADDR'],
             'act_name' => '无',
@@ -47,8 +48,8 @@ class Wechat
         ];
 
         if ($luckyMoney->sendNormal($luckyMoneyData)) {
-            User::where('id', $userId)->decrement('gold', $gold);
-            Redis::hincrby('user:'.$userId, 'gold', -$gold);
+            User::where('id', $userId)->decrement('gold', $amount * 10);
+            Redis::hincrby('user:'.$userId, 'gold', -$amount);
         }
 
         return true;
