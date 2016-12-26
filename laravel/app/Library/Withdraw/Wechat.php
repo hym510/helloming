@@ -62,7 +62,7 @@ class Wechat
             'app_id' => $wechat['app_id'],
             'secret' => $wechat['app_secret'],
             'token' => $wechat['token'],
-            'aes_key' => '',
+            'aes_key' => $wechat['aes_key'],
             'log' => [
                 'level' => 'debug',
                 'file' => $wechat['log'],
