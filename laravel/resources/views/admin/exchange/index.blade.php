@@ -9,7 +9,7 @@
                         <form action="{{ action('Admin\ExchangeGoldController@postStore') }}" method="post">
                             {!! csrf_field() !!}
                             <div class="card-body form">
-                                <h3 class="text-center">金币兑换人民币比例</h3>
+                                <h3 class="text-center">金币兑换人民币比例设置</h3>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="gold">
                                     <label>金币数</label>
