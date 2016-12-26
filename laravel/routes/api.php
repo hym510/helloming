@@ -55,6 +55,7 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
     Route::group(['namespace' => 'Wechat'], function () {
+        Route::get('wechat/subscribe', ['uses' => 'WechatController@getSubscribe']);
         Route::post('wechat/subscribe', ['uses' => 'WechatController@postSubscribe']);
     });
 
