@@ -2,6 +2,7 @@
 
 return [
 
+    'aes_key' => env('WECHAT_AES_KEY'),
     'app_id' => env('WECHAT_APP_ID'),
     'app_secret' => env('WECHAT_APP_SECRET'),
     'cert_path' => env('WECHAT_CERT_PATH'),
