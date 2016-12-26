@@ -71,11 +71,9 @@ class Wechat
 
         $app = new Application($options);
         $server = $app->server;
-        $userService = $app->user;
-        $unionId = $userService->get($message->FromUserName)->openid;
+        $unionId = $app->user->get($message->FromUserName)->openid;
 
-        $server->setMessageHandler(function($message) use ($userService) {
-            $unionId = $userService->get($message->FromUserName)->openid;
+        $server->setMessageHandler(function($message) use ($unionId) {
             Wechat::addOne($message->FromUserName, $unionId);
         });
 
