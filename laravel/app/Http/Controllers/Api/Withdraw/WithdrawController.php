@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Withdraw;
 use Auth;
 use Json;
 use Redis;
-use App\Library\Withdraw\Wechat;
+use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
 
 class WithdrawController extends Controller
@@ -16,7 +16,7 @@ class WithdrawController extends Controller
             return Json::error('Gold are not enough.', 511);
         }
 
-        Wechat::sendRedpack(Auth::user()->user, $gold);
+        Withdraw::sendRedpack(Auth::user()->user, $gold);
 
         return Json::success();
     }
