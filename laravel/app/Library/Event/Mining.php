@@ -89,7 +89,7 @@ class Mining
 
         UserItem::getPrize($prizeIds, $userId);
 
-        return ['prize' => $prizeIds];
+        return [$prizeIds];
     }
 
     public static function host($userId): array
