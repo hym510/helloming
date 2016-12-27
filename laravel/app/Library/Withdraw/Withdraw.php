@@ -7,7 +7,7 @@ use Config;
 use App\Models\{User, Wechat};
 use EasyWeChat\Foundation\Application;
 
-class Wechat
+class Withdraw
 {
     public static function sendRedpack($userId, $amount): bool
     {
