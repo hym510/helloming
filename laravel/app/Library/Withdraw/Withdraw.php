@@ -72,10 +72,13 @@ class Withdraw
 
         $app = new Application($options);
         $server = $app->server;
-        $unionId = $app->user->get($message->FromUserName)->openid;
+        $userService = $app->user;
 
-        $server->setMessageHandler(function($message) use ($unionId) {
-            Wechat::addOne($message->FromUserName, $unionId);
+        $server->setMessageHandler(function($message) use ($userService) {
+            Wechat::addOne(
+                $message->FromUserName,
+                $userService->get($message->FromUserName)->openid
+            );
         });
 
         return $server;
