@@ -253,7 +253,7 @@ class User extends Model
         Redis::hincrby('user:' . $id, 'gold', $gold);
     }
 
-    public static function bindUnionid($id, $unionid, $withdrawPassword): bool
+    public static function bindUnionid($id, $unionid): bool
     {
         if (Redis::hget('user:'.$id, 'union_id')) {
             return false;
