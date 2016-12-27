@@ -13,7 +13,7 @@ class WechatController extends Controller
     public function postBind(WechatRequest $request)
     {
         $bound = User::bindUnionid(
-            Auth::user()->user, $request->unionid, $request->withdraw_password
+            Auth::user()->user, $request->unionid
         );
 
         if ($bound) {
