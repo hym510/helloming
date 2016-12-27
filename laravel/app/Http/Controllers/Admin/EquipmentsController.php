@@ -35,7 +35,6 @@ class EquipmentsController extends Controller
                 'position' => $equipment['position_i'],
                 'upgrade' => $equipment['upgrade_a'],
             ];
-            Json::success(app('qiniu')->uploadUrl($equipment['icon_i']));
 
             Equipment::create($data);
         }
