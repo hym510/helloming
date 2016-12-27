@@ -47,7 +47,6 @@ class CreateTables extends Migration
             $table->boolean('activate')->default(true);
             $table->string('auth_token', 64)->nullable();
             $table->string('union_id', 64)->nullable();
-            $table->string('withdraw_password')->nullable();
             $table->timestamp('created_at');
 
             $table->unique('phone');
