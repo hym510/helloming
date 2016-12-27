@@ -258,10 +258,7 @@ class User extends Model
         if (Redis::hget('user:'.$id, 'union_id')) {
             return false;
         } else {
-            static::where('id', $id)->update([
-                'union_id' => $unionid,
-                'wechat_password' => Hash::make($withdrawPassword)
-            ]);
+            static::where('id', $id)->update(['union_id' => $unionid]);
 
             Redis::hset('user:'.$id, 'wechat_id', $openid);
 
