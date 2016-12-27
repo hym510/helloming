@@ -26,9 +26,7 @@ class Withdraw
             ],
         ];
 
-        $unionId = User::getKeyValue(
-            [['id', $userId]], ['union_id']
-        );
+        $unionId = Redis::hget('user:'.$userId, 'wechat_id');
 
         $openId = Wechat::getKeyValue(
             [['union_id', $unionId]], ['open_id']
