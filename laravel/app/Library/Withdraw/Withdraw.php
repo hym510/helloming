@@ -32,6 +32,8 @@ class Withdraw
             [['union_id', $unionId]], ['open_id']
         );
 
+        $goldExchange = json_decode(Redis::get('gold_exchange'));
+        $amount = $amount * $goldExchange['money'] / $goldExchange['money'];
         $luckyMoney = (new Application($options))->lucky_money;
         $luckyMoneyData = [
             'mch_billno' => $wechat['mch_id'] . date('YmdHis') . rand(1000, 9999),
