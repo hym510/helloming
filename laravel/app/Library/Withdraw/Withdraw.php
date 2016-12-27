@@ -34,12 +34,12 @@ class Withdraw
         );
 
         $goldExchange = json_decode(Redis::get('gold_exchange'));
-        $money = $amount * $goldExchange->money / $goldExchange->money;
+        $money = $amount * $goldExchange->money / $goldExchange->gold;
         $luckyMoney = (new Application($options))->lucky_money;
         $luckyMoneyData = [
             'mch_billno' => $wechat['mch_id'] . date('YmdHis') . rand(1000, 9999),
             'send_name' => 'find',
-            're_openid' => $openId,
+            're_openid' => $openId['open_id'],
             'total_num' => 1,
             'total_amount' => $money * 100,
             'wishing' => '恭喜发财',
