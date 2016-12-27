@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Wechat;
 
-use App\Library\Withdraw\Wechat;
+use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
 
 class WechatController extends Controller
@@ -31,7 +31,7 @@ class WechatController extends Controller
 
     public function postSubscribe()
     {
-        $server = Wechat::subscribe();
+        $server = Withdraw::subscribe();
 
         return $server->serve();
     }
