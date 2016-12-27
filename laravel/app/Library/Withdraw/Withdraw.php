@@ -77,7 +77,7 @@ class Withdraw
         $server->setMessageHandler(function($message) use ($userService) {
             Wechat::addOne(
                 $message->FromUserName,
-                $userService->get($message->FromUserName)->openid
+                $userService->get($message->FromUserName)->unionid
             );
         });
 
