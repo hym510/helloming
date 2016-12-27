@@ -16,7 +16,7 @@ class ExchangeGoldController extends Controller
     public function postStore(ExchangeGoldRequest $request)
     {
         $data = $request->inputData();
-        Redis::set('ExchangeGold', json_encode(['gold' => $data['gold'], 'money' => $data['money']]));
+        Redis::set('gold_exchange', json_encode(['gold' => $data['gold'], 'money' => $data['money']]));
 
         return $this->backSuccessMsg('设置成功');
     }
