@@ -269,7 +269,7 @@ class User extends Model
         }
     }
 
-    public static function unbindOpenid($id)
+    public static function unbindUnionid($id)
     {
         static::where('id', $id)->update([
             'wechat_id' => null,
