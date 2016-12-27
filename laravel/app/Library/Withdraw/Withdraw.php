@@ -13,6 +13,7 @@ class Withdraw
     {
         $wechat = Config::get('wechat');
         $options = [
+            'debug'  => true,
             'app_id' => $wechat['app_id'],
             'payment' => [
                 'merchant_id' => $wechat['mch_id'],
@@ -33,7 +34,7 @@ class Withdraw
         );
 
         $goldExchange = json_decode(Redis::get('gold_exchange'));
-        $amount = $amount * $goldExchange['money'] / $goldExchange['money'];
+        $amount = $amount * $goldExchange->money / $goldExchange->money;
         $luckyMoney = (new Application($options))->lucky_money;
         $luckyMoneyData = [
             'mch_billno' => $wechat['mch_id'] . date('YmdHis') . rand(1000, 9999),
