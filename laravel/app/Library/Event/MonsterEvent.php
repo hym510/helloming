@@ -4,7 +4,7 @@ namespace App\Library\Event;
 
 use App\Models\{Event, Monster, User, UserItem};
 
-class Monster
+class MonsterEvent
 {
     public static function atk($eventId, $atk, $userId): array
     {

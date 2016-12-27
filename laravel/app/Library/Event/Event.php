@@ -3,7 +3,7 @@
 namespace App\Library\Event;
 
 use Redis;
-use App\Models\Event;
+use App\Models\Event as EventModel;
 
 class Event
 {
@@ -13,6 +13,6 @@ class Event
             return [];
         }
 
-        return ['events' => Event::random(Redis::hget('user:'.$userId, 'level'), $count)];
+        return ['events' => EventModel::random(Redis::hget('user:'.$userId, 'level'), $count)];
     }
 }
