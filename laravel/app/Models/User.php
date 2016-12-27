@@ -101,8 +101,6 @@ class User extends Model
             'id', 'auth_token as old_auth_token'
         ]);
 
-        $user->auth_token = $authToken;
-
         static::where('phone', $phone)->update(['auth_token' => $authToken]);
 
         Redis::pipeline()->hdel('auth_tokens', $user->old_auth_token)
