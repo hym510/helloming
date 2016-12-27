@@ -9,8 +9,7 @@ class WechatRequest extends Request
     public function rules()
     {
         return [
-            'openid' => 'required',
-            'withdraw_password' => 'required|size:6',
+            'unionid' => 'required',
         ];
     }
 }
