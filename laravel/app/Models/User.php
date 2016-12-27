@@ -268,10 +268,7 @@ class User extends Model
 
     public static function unbindUnionid($id)
     {
-        static::where('id', $id)->update([
-            'union_id' => null,
-            'withdraw_password' => null
-        ]);
+        static::where('id', $id)->update(['union_id' => null]);
 
         Redis::hset('user:'.$id, 'union_id', null);
     }
