@@ -12,19 +12,19 @@ class WechatController extends Controller
 {
     public function postBind(WechatRequest $request)
     {
-        $bound = User::bindOpenid(
-            Auth::user()->user, $request->openid, $request->withdraw_password
+        $bound = User::bindUnionid(
+            Auth::user()->user, $request->unionid, $request->withdraw_password
         );
 
         if ($bound) {
             return Json::success();
         } else {
-            return Json::error('An openid has bound to this account.', 216);
+            return Json::error('An unionid has bound to this account.', 216);
         }
     }
 
     public function getUnbind()
     {
-        return Json::success(User::unbindOpenid(Auth::user()->user));
+        return Json::success(User::unbindUnionid(Auth::user()->user));
     }
 }
