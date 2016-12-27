@@ -255,11 +255,11 @@ class User extends Model
 
     public static function bindUnionid($id, $unionid, $withdrawPassword): bool
     {
-        if (Redis::hget('user:'.$id, 'wechat_id')) {
+        if (Redis::hget('user:'.$id, 'union_id')) {
             return false;
         } else {
             static::where('id', $id)->update([
-                'wechat_id' => $unionid,
+                'union_id' => $unionid,
                 'wechat_password' => Hash::make($withdrawPassword)
             ]);
 
@@ -272,10 +272,10 @@ class User extends Model
     public static function unbindUnionid($id)
     {
         static::where('id', $id)->update([
-            'wechat_id' => null,
+            'union_id' => null,
             'withdraw_password' => null
         ]);
 
-        Redis::hset('user:'.$id, 'wechat_id', null);
+        Redis::hset('user:'.$id, 'union_id', null);
     }
 }

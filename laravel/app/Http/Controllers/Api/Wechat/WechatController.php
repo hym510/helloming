@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Wechat;
 
+use Config;
 use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
 
