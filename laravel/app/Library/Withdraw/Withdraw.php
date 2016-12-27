@@ -34,14 +34,14 @@ class Withdraw
         );
 
         $goldExchange = json_decode(Redis::get('gold_exchange'));
-        $amount = $amount * $goldExchange->money / $goldExchange->money;
+        $money = $amount * $goldExchange->money / $goldExchange->money;
         $luckyMoney = (new Application($options))->lucky_money;
         $luckyMoneyData = [
             'mch_billno' => $wechat['mch_id'] . date('YmdHis') . rand(1000, 9999),
             'send_name' => 'find',
             're_openid' => $openId,
             'total_num' => 1,
-            'total_amount' => $amount * 100,
+            'total_amount' => $money * 100,
             'wishing' => '恭喜发财',
             'client_ip' => $_SERVER['REMOTE_ADDR'],
             'act_name' => '无',
@@ -49,7 +49,7 @@ class Withdraw
         ];
 
         if ($luckyMoney->sendNormal($luckyMoneyData)) {
-            User::where('id', $userId)->decrement('gold', $amount * 10);
+            User::where('id', $userId)->decrement('gold', $amount);
             Redis::hincrby('user:'.$userId, 'gold', -$amount);
         }
 
