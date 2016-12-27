@@ -30,7 +30,7 @@ class Mining
         $hostEvent = HostEvent::start($userId, $eventId, $event['type_id']);
 
         $job = (new HostMining($hostEvent['host_event_id']))
-                    ->delay(Carbon::now()->addSeconds($event['time']));
+            ->delay(Carbon::now()->addSeconds($event['time']));
 
         app(Dispatcher::class)->dispatch($job);
 

@@ -258,7 +258,7 @@ class User extends Model
         } else {
             static::where('id', $id)->update(['union_id' => $unionid]);
 
-            Redis::hset('user:'.$id, 'wechat_id', $openid);
+            Redis::hset('user:'.$id, 'union_id', $unionid);
 
             return true;
         }
