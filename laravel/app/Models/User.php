@@ -253,13 +253,13 @@ class User extends Model
         Redis::hincrby('user:' . $id, 'gold', $gold);
     }
 
-    public static function bindOpenid($id, $openid, $withdrawPassword): bool
+    public static function bindUnionid($id, $unionid, $withdrawPassword): bool
     {
         if (Redis::hget('user:'.$id, 'wechat_id')) {
             return false;
         } else {
             static::where('id', $id)->update([
-                'wechat_id' => $openid,
+                'wechat_id' => $unionid,
                 'wechat_password' => Hash::make($withdrawPassword)
             ]);
 
