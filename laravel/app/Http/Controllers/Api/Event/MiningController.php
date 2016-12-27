@@ -32,7 +32,7 @@ class MiningController extends Controller
             case 'nonexist':
                 return Json::success();
             case 'prize':
-                return Json::success($result[1]);
+                return Json::success(['prize' => $result[1]]);
         }
     }
 }
