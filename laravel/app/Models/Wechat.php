@@ -6,11 +6,11 @@ class Wechat extends Model
 {
     protected $table = 'wechat';
 
-    public static function addOne(string $unionId, string $openId)
+    public static function addOne(string $openId, string $unionId)
     {
         $model = new static;
-        $model->union_id = $unionId;
         $model->open_id = $openId;
+        $model->union_id = $unionId;
 
         $model->save();
     }
