@@ -8,7 +8,7 @@ use Redis;
 use App\Models\User;
 use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
-use App\Http\Requests\Api\WithdrawRequest;
+use App\Http\Requests\Api\{RedpackRequest, WithdrawRequest};
 
 class WithdrawController extends Controller
 {
@@ -19,13 +19,19 @@ class WithdrawController extends Controller
         return Json::success();
     }
 
-    public function getRedpack($gold)
+    public function postRedpack(RedpackRequest $request)
     {
-        if (Redis::hget('user:'.Auth::user()->user, 'gold') < $gold) {
+        $user = Redis::hget('user:'.Auth::user()->user, 'gold', 'withdraw_password');
+
+        if (! password_verify($request->password, $user[1])) {
+            return Json::error('Password mismatch.', 210);
+        }
+
+        if ($user[0] < $request->gold) {
             return Json::error('Gold are not enough.', 511);
         }
 
-        Withdraw::sendRedpack(Auth::user()->user, $gold);
+        Withdraw::sendRedpack(Auth::user()->user, $request->gold, $request->password);
 
         return Json::success();
     }

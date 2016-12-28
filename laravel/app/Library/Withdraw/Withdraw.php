@@ -9,7 +9,7 @@ use EasyWeChat\Foundation\Application;
 
 class Withdraw
 {
-    public static function sendRedpack($userId, $amount): bool
+    public static function sendRedpack($userId, $amount, $password): bool
     {
         $wechat = Config::get('wechat');
         $options = [
