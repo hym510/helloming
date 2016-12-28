@@ -70,6 +70,16 @@ class CreateTables extends Migration
             $table->unique('union_id');
         });
 
+        Schema::create('log', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+            $table->enum('type', ['online', 'offline']);
+            $table->timestamp('time');
+        });
+
         Schema::create('state_attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedTinyInteger('level');
