@@ -6,7 +6,7 @@ class Logger extends Model
 {
     protected $table = 'log';
 
-    public static function addOne(string $userId, $string $type)
+    public static function addOne(string $userId, string $type)
     {
         $model = new static;
         $model->user_id = $userId;
