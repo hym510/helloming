@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.api');
+    }
+
     public function getOnLine()
     {
         return Json::success(Logger::addOne(Auth::user()->user, 'online'));
