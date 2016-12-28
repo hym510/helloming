@@ -13,4 +13,9 @@ class LogController extends Controller
     {
         return Json::success(Logger::addOne(Auth::user()->user, 'online'));
     }
+
+    public function getOffLine()
+    {
+        return Json::success(Logger::addOne(Auth::user()->user, 'offline'));
+    }
 }
