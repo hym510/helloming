@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Redis;
 use App\Library\Token\AuthToken;
 
@@ -269,5 +270,14 @@ class User extends Model
         static::where('id', $id)->update(['union_id' => null]);
 
         Redis::hset('user:'.$id, 'union_id', null);
+    }
+
+    public static function withdraw($id, $password)
+    {
+        $password = Hash::make($password);
+
+        static::where('id', $id)->update(['withdraw_password' => $password]);
+
+        Redis::hset('user:'.$id, 'withdraw_password', $password);
     }
 }
