@@ -9,6 +9,8 @@ class QiniuController extends Controller
 {
     public function getToken()
     {
-        return Json::success(['token' => app('qiniu')->getToken()['token']]);
+        $data = app('qiniu')->getToken();
+
+        return Json::success(['token' => $data['token'], 'domain' => $data['domain']]);
     }
 }
