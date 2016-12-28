@@ -33,7 +33,7 @@ class Qiniu
         $token = $auth->uploadToken($this->bucket, null, 60 * 60);
         $domain = $this->domain;
 
-        return compact('token', 'domain');
+        return compact('auth', 'token', 'domain');
     }
 
     public function uploadUrl()
