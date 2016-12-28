@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['namespace' => 'Data'], function () {
         Route::get('data/exchange/gold', ['uses' => 'ExchangeController@getGold']);
+        Route::get('data/log/online', ['uses' => 'LogController@getOnLine']);
         Route::get('data/qiniu/token', ['uses' => 'QiniuController@getToken']);
     });
 
