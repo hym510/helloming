@@ -65,7 +65,8 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
     Route::group(['namespace' => 'Withdraw', 'middleware' => ['auth.api']], function () {
-        Route::post('withdraw', ['uses' => 'WithdrawController@postRedpack']);
+        Route::post('withdraw/password', ['uses' => 'WithdrawController@postPassword']);
+        Route::post('withdraw/redpack', ['uses' => 'WithdrawController@postRedpack']);
     });
 
     Route::group(['namespace' => 'Xml'], function () {
