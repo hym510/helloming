@@ -10,7 +10,7 @@ class RedpackRequest extends Request
     {
         return [
             'gold' => 'required',
-            'withdraw_password' => 'required',
+            'password' => 'required',
         ];
     }
 }
