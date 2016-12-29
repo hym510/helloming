@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Purchase;
 
+use Auth;
 use Json;
 use Exception;
 use App\Library\IAP\IAP;
@@ -14,10 +15,12 @@ class PurchaseController extends Controller
     {
         try {
             $data = IAP::getReceiptData($request->receipt, true);
-
-            return Json::success();
         } catch (Exception $e) {
             return Json::error('Invalid receipt.', 703);
         }
+
+        IAP::success(Auth::user()->user, $data->productId);
+
+        return Json::success();
     }
 }
