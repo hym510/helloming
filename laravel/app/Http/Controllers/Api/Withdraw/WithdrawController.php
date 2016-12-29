@@ -21,7 +21,7 @@ class WithdrawController extends Controller
 
     public function postRedpack(RedpackRequest $request)
     {
-        $user = Redis::hget('user:'.Auth::user()->user, 'gold', 'withdraw_password');
+        $user = Redis::hmget('user:'.Auth::user()->user, 'gold', 'withdraw_password');
 
         if (! password_verify($request->password, $user[1])) {
             return Json::error('Password mismatch.', 210);
