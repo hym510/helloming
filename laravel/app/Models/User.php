@@ -221,7 +221,7 @@ class User extends Model
 
     public static function ReplenishAction($id, $quantity): bool
     {
-        $user = Redis::hget('user:'.$id, 'diamond', 'remain_action', 'action');
+        $user = Redis::hmget('user:'.$id, 'diamond', 'remain_action', 'action');
 
         if ($user[0] < $quantity) {
             return false;
