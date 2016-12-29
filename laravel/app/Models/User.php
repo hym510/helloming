@@ -30,7 +30,12 @@ class User extends Model
             ->where('job_id', $data['job_id'])
             ->limit(3)
             ->get(['power']);
-        $data['power'] = 0;
+
+        $levelAttr = LevelAttr::where('level', 1)
+            ->first(['power', 'action']);
+
+        $data['power'] = $levelAttr->power;
+        $data['action'] = $levelAttr->action;
 
         foreach ($equipment as $e) {
             $data['power'] += $e['power'];
