@@ -1,9 +1,8 @@
-.env
+/node_modules
+/public/storage
+/vendor
+/.idea
 composer.lock
 Homestead.json
 Homestead.yaml
-/.idea
-/node_modules
-/public/storage
-/resources/wechat
-/vendor
+.env

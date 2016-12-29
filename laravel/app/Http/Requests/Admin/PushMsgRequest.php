@@ -9,7 +9,7 @@ class PushMsgRequest extends Request
     public function rules()
     {
         return [
-            'message' => 'required',
+
         ];
     }
 }

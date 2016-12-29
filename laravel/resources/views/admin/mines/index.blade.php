@@ -11,25 +11,29 @@
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>职业名称</th>
+                            <th>矿物id</th>
+                            <th>矿物名称</th>
+                            <th>消耗钻石</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($jobs as $job)
+                    @foreach ($mines as $mine)
                         <tr>
-                            <td>{{ $job->id }}</td>
-                            <td>{{ $job->name }}</td>
+                            <td>{{ $mine->id }}</td>
+                            <td>{{ $mine->name }}</td>
+                            <td>{{ $mine->consume_diamond }}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center" data-total="{{ $jobs->total() }}">
-                    {!! $jobs->links() !!}
+                <div class="text-center" data-total="{{ $mines->total() }}">
+                    {!! $mines->links() !!}
                 </div>
             </div>
         </div>
     </div>
 </section>
-@include('admin.upload.file-job')
+@include('admin.upload.file-mines')
 @stop
+
+

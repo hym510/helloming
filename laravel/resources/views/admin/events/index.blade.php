@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-file-upload">
-                    <i class="fa fa-upload"></i>上传
+                            <i class="fa fa-upload"></i>上传
                 </button>
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
@@ -37,8 +37,8 @@
                             <td>{{ mb_substr($event->info, 0, 8).'......' }}</td>
                             <td>{{ $event->time_limit or '' }}</td>
                             <td>{{ $event->time or '' }}</td>
-                            <td>{{ $event->finish_item_id or '' }}</td>
-                            <td>{{ $event->item_quantity or '' }}</td>
+                            <td>{{ $event->finishItem or '' }}</td>
+                            <td>{{ $event->finishItemQuantity or '' }}</td>
                             <td>{{ $event->weight }}</td>
                         </tr>
                     @endforeach

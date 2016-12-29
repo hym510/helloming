@@ -22,18 +22,11 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('consume/action/{action}', ['uses' => 'ConsumeController@getAction']);
     });
 
-    Route::group(['namespace' => 'Data'], function () {
-        Route::get('data/exchange/gold', ['uses' => 'ExchangeController@getGold']);
-        Route::get('data/log/online', ['uses' => 'LogController@getOnLine']);
-        Route::get('data/log/offline', ['uses' => 'LogController@getOffLine']);
-        Route::get('data/qiniu/token', ['uses' => 'QiniuController@getToken']);
-    });
-
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {
         Route::get('chest/open/{eventId}', ['uses' => 'ChestController@getOpen']);
         Route::get('event/refresh/{count}/{out}', ['uses' => 'EventController@getRefresh']);
         Route::get('host/mine', ['uses' => 'HostController@getMine']);
-        Route::get('host/prize/{hostEventId}', ['uses' => 'HostController@getPrize']);
+        Route::get('host/prize', ['uses' => 'HostController@getPrize']);
         Route::get('mining/start/{eventId}', ['uses' => 'MiningController@getStart']);
         Route::get('mining/complete/{hostEventId}', ['uses' => 'MiningController@getComplete']);
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
@@ -61,14 +54,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('shop/goods', ['uses' => 'ShopController@getGoods']);
     });
 
-    Route::group(['namespace' => 'Wechat'], function () {
-        Route::get('wechat/subscribe', ['uses' => 'WechatController@getSubscribe']);
-        Route::post('wechat/subscribe', ['uses' => 'WechatController@postSubscribe']);
-    });
-
     Route::group(['namespace' => 'Withdraw', 'middleware' => ['auth.api']], function () {
-        Route::post('withdraw/password', ['uses' => 'WithdrawController@postPassword']);
-        Route::post('withdraw/redpack', ['uses' => 'WithdrawController@postRedpack']);
+        Route::get('withdraw/{gold}', ['uses' => 'WithdrawController@getRedpack']);
     });
 
     Route::group(['namespace' => 'Xml'], function () {

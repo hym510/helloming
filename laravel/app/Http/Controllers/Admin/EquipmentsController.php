@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Json;
 use App\Models\Equipment;
 use App\Library\Xml\ReadXml;
 use Illuminate\Http\Request;
@@ -20,7 +19,7 @@ class EquipmentsController extends Controller
     public function postImportXml(Request $request)
     {
         Equipment::truncate();
-        $xml = $request->xml->storeAs('uploads', 'equip.xml', 'xml');
+        $xml = $request->xml->storeAs('uploads', 'equipment.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $equipments = ReadXml::readDatabase($path);
 
@@ -40,12 +39,5 @@ class EquipmentsController extends Controller
         }
 
         return redirect()->action('Admin\EquipmentsController@getIndex');
-    }
-
-    public function postImportImg(Request $request)
-    {
-        Json::success(app('qiniu')->uploadUrl());
-
-        return $this->backSuccessMsg('上传成功');
     }
 }

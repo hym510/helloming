@@ -66,4 +66,40 @@ class Equip
 
         return 'success';
     }
+
+    public static function material($jobId, $level, $position): array
+    {
+        $equip = Equipment::getKeyValue(
+            [['level', $level],
+             ['job_id', $jobId],
+             ['position', $position]],
+            ['name', 'max_level', 'power', 'upgrade', 'icon']
+        );
+
+        if ($equip['max_level'] == true) {
+            return $equip;
+        }
+
+        $material = array();
+
+        foreach ($equip['upgrade'] as $upgrade) {
+            $material[] = $upgrade[0];
+        }
+
+        $upgrade = Item::whereIn('id', $material)
+            ->get(['id', 'name', 'quality', 'icon'])
+            ->toArray();
+
+        foreach ($upgrade as &$value) {
+            foreach ($equip['upgrade'] as $v) {
+                if ($v[0] == $value['id']) {
+                    $value['quantity'] = $v[1];
+                }
+            }
+        }
+
+        $equip['upgrade'] = $upgrade;
+
+        return $equip;
+    }
 }

@@ -41,13 +41,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->exp or '' }}
+                                {{ $user->experience or '' }}
                             </div>
                             <label>经验</label>
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->vip_exp or '' }}
+                                {{ $user->vip_experience or '' }}
                             </div>
                             <label>会员经验</label>
                         </div>
@@ -73,7 +73,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->job_id }}
+                                {{ $user->job }}
                             </div>
                             <label>玩家职业</label>
                         </div>

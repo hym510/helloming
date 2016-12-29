@@ -34,8 +34,8 @@ class EventsController extends Controller
                 'prize' => $prize,
                 'info' => $event['info_s'],
                 'time_limit' => $event['timeLimit_i'],
-                'finish_item_id' => $event['finishItem_i'],
-                'item_quantity' => $event['finishItemQuantity_i'],
+                'finishItem' => $event['finishItem_i'],
+                'finishItemQuantity' => $event['finishItemQuantity_i'],
             ];
 
             if ($event['timeLimit_i'] == 1) {

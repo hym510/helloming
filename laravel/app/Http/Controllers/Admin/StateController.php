@@ -27,14 +27,15 @@ class StateController extends Controller
     public function postImportXml(Request $request)
     {
         StateAttr::truncate();
-        $xml = $request->xml->storeAs('uploads', 'userState.xml', 'xml');
+        $xml = $request->xml->storeAs('uploads', 'state.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $states = ReadXml::readDatabase($path);
 
         foreach ($states as $state) {
             $data = [
-                'level' => $state['id_i'],
-                'power' => $state['powerLimit_i'],
+                'id' => $state['id'],
+                'level' => $state['level'],
+                'power' => $state['power'],
             ];
 
             StateAttr::create($data);

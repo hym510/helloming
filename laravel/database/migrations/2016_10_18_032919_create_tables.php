@@ -46,13 +46,13 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('equipment3_level')->default(1);
             $table->boolean('activate')->default(true);
             $table->string('auth_token', 64)->nullable();
-            $table->string('union_id', 64)->nullable();
+            $table->string('wechat_id', 64)->nullable();
             $table->string('withdraw_password')->nullable();
             $table->timestamp('created_at');
 
             $table->unique('phone');
             $table->unique('auth_token');
-            $table->unique('union_id');
+            $table->unique('wechat_id');
         });
 
         Schema::create('admins', function (Blueprint $table) {
@@ -60,24 +60,6 @@ class CreateTables extends Migration
             $table->string('email');
             $table->string('password');
             $table->rememberToken();
-        });
-
-        Schema::create('wechat', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('union_id', 64);
-            $table->string('open_id', 64);
-
-            $table->unique('union_id');
-        });
-
-        Schema::create('log', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
-            $table->enum('type', ['online', 'offline']);
-            $table->timestamp('time');
         });
 
         Schema::create('state_attributes', function (Blueprint $table) {
@@ -135,6 +117,19 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('hp');
         });
 
+        Schema::create('mines', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->unsignedSmallInteger('consume_diamond');
+        });
+
+        Schema::create('chests', function (Blueprint $table) {
+            $table->increments('id');
+            $table->enum('cost_type', ['item', 'gold', 'diamond', 'none']);
+            $table->unsignedInteger('item_id')->nullable();
+            $table->unsignedTinyInteger('cost');
+        });
+
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type', ['monster', 'mine', 'chest']);
@@ -147,8 +142,8 @@ class CreateTables extends Migration
             $table->string('info');
             $table->boolean('time_limit')->default(false);
             $table->unsignedSmallInteger('time')->default(0);
-            $table->unsignedInteger('finish_item_id');
-            $table->unsignedSmallInteger('item_quantity');
+            $table->unsignedInteger('finishItem');
+            $table->unsignedSmallInteger('finishItemQuantity');
         });
 
         Schema::create('host_events', function (Blueprint $table) {
@@ -159,6 +154,9 @@ class CreateTables extends Migration
                 ->onDelete('cascade');
             $table->unsignedInteger('event_id');
             $table->unsignedInteger('mine_id');
+            $table->foreign('mine_id')
+                ->references('id')->on('mines')
+                ->onDelete('cascade');
             $table->timestamp('created_at');
         });
 
@@ -168,6 +166,12 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('price');
             $table->unsignedSmallInteger('quantity');
+        });
+
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('message');
+            $table->timestamp('created_at');
         });
     }
 }

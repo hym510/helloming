@@ -2,13 +2,11 @@
 
 namespace App\Jobs;
 
-use Log;
 use Redis;
-use Pusher;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\{Event, HostEvent, User, UserItem};
+use App\Models\{Event, HostEvent, Item, User, UserItem};
 
 class HostMining implements ShouldQueue
 {
@@ -52,10 +50,13 @@ class HostMining implements ShouldQueue
         }
 
         $prize = array('event_id' => $hostEvent['event_id'], 'prize' => $prizeIds);
-        Redis::set('prize:' . $hostEvent['user_id'] . ':' . $this->hostEventId, json_encode($prize));
+
+        if (Redis::exists('prize:'.$hostEvent['user_id'])) {
+            Redis::append('prize:'.$hostEvent['user_id'], ','.json_encode($prize));
+        } else {
+            Redis::append('prize:'.$hostEvent['user_id'], json_encode($prize));
+        }
 
         UserItem::getPrize($prizeIds, $hostEvent['user_id']);
-
-        Pusher::pushOne((string)$hostEvent['user_id'], ['host_event_id' => $hostEvent['user_id'], 'event_id' => $event['id'], 'alert' => '你在FIND里面进行的事件已经完成, 前往查看!']);
     }
 }

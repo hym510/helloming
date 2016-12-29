@@ -6,14 +6,14 @@ use Redis;
 use Carbon\Carbon;
 use App\Jobs\HostMining;
 use Illuminate\Contracts\Bus\Dispatcher;
-use App\Models\{Event, HostEvent, User, UserItem};
+use App\Models\{Event, HostEvent, Item, Mine, User, UserItem};
 
 class Mining
 {
-    public static function start($eventId, $userId): int
+    public static function start($eventId, $userId): array
     {
         if (! User::free($userId)) {
-            return 0;
+            return [];
         }
 
         $event = Event::getKeyValue(
@@ -22,7 +22,7 @@ class Mining
         );
 
         if (! $event) {
-            return 0;
+            return [];
         }
 
         User::mining($userId);
@@ -30,58 +30,50 @@ class Mining
         $hostEvent = HostEvent::start($userId, $eventId, $event['type_id']);
 
         $job = (new HostMining($hostEvent['host_event_id']))
-            ->delay(Carbon::now()->addSeconds($event['time']));
+                    ->delay(Carbon::now()->addSeconds($event['time']));
 
         app(Dispatcher::class)->dispatch($job);
 
-        return $hostEvent['host_event_id'];
+        return $event;
     }
 
     public static function complete($hostEventId, $userId): array
     {
         $hostEvent = HostEvent::getKeyValue(
             [['id', $hostEventId], ['user_id', $userId]],
-            ['event_id', 'created_at']
+            ['event_id', 'type_id']
         );
 
         if (! $hostEvent) {
-            return ['finish'];
+            return [];
         }
 
-        $mine = Event::getKeyValue(
-            [['id', $hostEvent['event_id']], ['type', 'mine']],
-            ['exp', 'prize', 'time', 'finish_item_id', 'item_quantity']
+        $mine = Mine::getKeyValue(
+            [['id', $hostEvent['type_id']]],
+            ['consume_diamond']
         );
 
         if (! $mine) {
-            return ['nonexist'];
+            return [];
         }
 
-        $created = strtotime($hostEvent['created_at']);
-        $finish = $created + $mine['time'];
-        $remain = $finish - time();
-
-        if ($remain < 0) {
-            $diamond = 0;
-        } elseif (0 < $remain && $remain < 60) {
-            $diamond = 1;
-        } else {
-            $diamond = $remain % 60;
-        }
-
-        if ($diamond) {
-            if (! User::enough($userId, 'diamond', $diamond)) {
-                return ['lack'];
-            }
+        if (! User::enough($userId, 'diamond', $mine['consume_diamond'])) {
+            return [];
         }
 
         HostEvent::where('id', $hostEventId)->delete();
+
         User::freeSpace($userId);
-        User::addExp($userId, $mine['exp']);
+
+        $event = Event::getKeyValue(
+            [['id', $hostEvent['event_id']], ['type', 'mine']],
+            ['exp', 'prize']
+        );
+        User::addExp($userId, $event['exp']);
 
         $prizeIds = array();
 
-        foreach ($mine['prize'] as $p) {
+        foreach ($event['prize'] as $p) {
             if (is_lucky($p[1])) {
                 $prizeIds[] = $p[0];
             }
@@ -89,7 +81,7 @@ class Mining
 
         UserItem::getPrize($prizeIds, $userId);
 
-        return ['prize', $prizeIds];
+        return ['prize' => prizeIds];
     }
 
     public static function host($userId): array
@@ -97,12 +89,8 @@ class Mining
         return ['host_events' => HostEvent::getMine($userId)];
     }
 
-    public static function prize($userId, $hostEventId): array
+    public static function prize($userId): array
     {
-        $result = Redis::pipeline()->get('prize:' . $userId . ':' . $hostEventId)
-            ->del('prize:' . $userId . ':' . $hostEventId)
-            ->execute();
-
-        return ['mine_prize' => json_decode($result[0])];
+        return ['mine_prize' => json_decode('['.Redis::getset('prize:'.$userId, '').']')];
     }
 }
