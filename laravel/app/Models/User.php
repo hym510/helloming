@@ -67,8 +67,8 @@ class User extends Model
 
     public static function mining($id)
     {
-        static::where('id', $id)->increment('take_up', 1);
         Redis::hincrby('user:'.$id, 'take_up', 1);
+        static::where('id', $id)->increment('take_up', 1);
     }
 
     public static function getProfile($id): array
@@ -79,8 +79,8 @@ class User extends Model
     public static function enough($id, $type, $cost): bool
     {
         if (Redis::hget('user:'.$id, $type) >= $cost) {
-            static::where('id', $id)->decrement($type, $cost);
             Redis::hincrby('user:'.$id, $type, -$cost);
+            static::where('id', $id)->decrement($type, $cost);
 
             return true;
         } else {
@@ -167,28 +167,31 @@ class User extends Model
                 ->execute();
 
             if ($stateAttr[$userAttr[2] - 1]->power) {
+                Redis::hincrby('user:'.$id, 'state', 1);
+
                 static::where('id', $id)->update([
                     'state' => $userAttr[2] + 1,
                 ]);
-
-                Redis::hincrby('user:'.$id, 'state', 1);
             }
         } else {
-            static::where('id', $id)->increment('exp', $exp);
             Redis::hincrby('user:'.$id, 'exp', $exp);
+
+            static::where('id', $id)->increment('exp', $exp);
         }
     }
 
     public static function freeSpace($id)
     {
-        static::where('id', $id)->decrement('take_up', 1);
         Redis::hincrby('user:'.$id, 'take_up', -1);
+
+        static::where('id', $id)->decrement('take_up', 1);
     }
 
     public static function equipUpgrade($id, $position)
     {
-        static::where('id', $id)->increment($position, 1);
         Redis::hincrby('user:'.$id, $position, 1);
+
+        static::where('id', $id)->increment($position, 1);
     }
 
     public static function consumeAction($id, $action): bool
@@ -197,8 +200,8 @@ class User extends Model
             return false;
         }
 
-        static::where('id', $id)->decrement('remain_action', $action);
         Redis::hincrby('user:'.$id, 'remain_action', -$action);
+        static::where('id', $id)->decrement('remain_action', $action);
 
         return true;
     }
@@ -215,11 +218,11 @@ class User extends Model
             $quantity = $user[2] - $user[1];
         }
 
-        static::where('id', $id)->decrement('diamond', $quantity);
         Redis::hincrby('user:'.$id, 'diamond', -$quantity);
+        static::where('id', $id)->decrement('diamond', $quantity);
 
-        static::where('id', $id)->increment('remain_power', $quantity);
         Redis::hincrby('user:'.$id, 'remain_power', $quantity);
+        static::where('id', $id)->increment('remain_power', $quantity);
 
         return true;
     }
@@ -236,25 +239,27 @@ class User extends Model
             $quantity = $user[2] - $user[1];
         }
 
-        static::where('id', $id)->decrement('diamond', $quantity);
         Redis::hincrby('user:'.$id, 'diamond', -$quantity);
+        static::where('id', $id)->decrement('diamond', $quantity);
 
-        static::where('id', $id)->increment('remain_action', $quantity);
         Redis::hincrby('user:'.$id, 'remain_action', $quantity);
+        static::where('id', $id)->increment('remain_action', $quantity);
 
         return true;
     }
 
     public static function ReplenishDiamond($id, $diamond)
     {
-        static::where('id', $id)->increment('diamond', $diamond);
         Redis::hincrby('user:' . $id, 'diamond', $diamond);
+
+        static::where('id', $id)->increment('diamond', $diamond);
     }
 
     public static function ReplenishGold($id, $gold)
     {
-        static::where('id', $id)->increment('gold', $gold);
         Redis::hincrby('user:' . $id, 'gold', $gold);
+
+        static::where('id', $id)->increment('gold', $gold);
     }
 
     public static function bindUnionid($id, $unionid): bool
@@ -262,27 +267,31 @@ class User extends Model
         if (Redis::hget('user:'.$id, 'union_id')) {
             return false;
         } else {
-            static::where('id', $id)->update(['union_id' => $unionid]);
-
             Redis::hset('user:'.$id, 'union_id', $unionid);
+
+            static::where('id', $id)->update(['union_id' => $unionid]);
 
             return true;
         }
     }
 
-    public static function unbindUnionid($id)
+    public static function unbindUnionid($id, $password)
     {
-        static::where('id', $id)->update(['union_id' => null]);
+        $withdrawPwd = Redis::hget('user:'.$id, 'withdraw_password');
 
-        Redis::hset('user:'.$id, 'union_id', null);
+        if (password_verify($password, $withdrawPwd)) {
+            Redis::hset('user:'.$id, 'union_id', null);
+
+            static::where('id', $id)->update(['union_id' => null]);
+        }
     }
 
     public static function withdraw($id, $password)
     {
         $password = Hash::make($password);
 
-        static::where('id', $id)->update(['withdraw_password' => $password]);
-
         Redis::hset('user:'.$id, 'withdraw_password', $password);
+
+        static::where('id', $id)->update(['withdraw_password' => $password]);
     }
 }
