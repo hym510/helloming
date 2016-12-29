@@ -35,6 +35,7 @@ class IAP
         }
 
         $data = json_decode($response);
+        $receipt = $data->receipt->in_app[0];
 
         if (! is_object($data)) {
             throw new Exception('Invalid response data');
@@ -45,12 +46,10 @@ class IAP
         }
 
         return array(
-            'quantity' => $data->receipt->quantity,
-            'productId' => $data->receipt->product_id,
-            'transactionId' => $data->receipt->transaction_id,
-            'purchaseDate' => $data->receipt->purchase_date,
-            'bid' => $data->receipt->bid,
-            'bvrs' => $data->receipt->bvrs
+            'quantity' => $receipt->quantity,
+            'productId' => $receipt->product_id,
+            'transactionId' => $receipt->transaction_id,
+            'purchaseDate' => $receipt->purchase_date
         );
     }
 }
