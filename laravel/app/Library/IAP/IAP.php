@@ -6,7 +6,7 @@ use Exception;
 
 class IAP
 {
-    public static function getReceiptData($receipt, $isSandbox = false)
+    public static function getReceiptData($receipt, $isSandbox = false): array
     {
         if ($isSandbox) {
             $endPoint = 'https://sandbox.itunes.apple.com/verifyReceipt';
@@ -46,10 +46,9 @@ class IAP
 
         return array(
             'quantity' => $data->receipt->quantity,
-            'product_id' => $data->receipt->product_id,
-            'transaction_id' => $data->receipt->transaction_id,
-            'purchase_date' => $data->receipt->purchase_date,
-            'app_item_id' => $data->receipt->app_item_id,
+            'productId' => $data->receipt->product_id,
+            'transactionId' => $data->receipt->transaction_id,
+            'purchaseDate' => $data->receipt->purchase_date,
             'bid' => $data->receipt->bid,
             'bvrs' => $data->receipt->bvrs
         );
