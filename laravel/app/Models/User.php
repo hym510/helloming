@@ -275,15 +275,19 @@ class User extends Model
         }
     }
 
-    public static function unbindUnionid($id, $password)
+    public static function unbindUnionid($id, $password): bool
     {
         $withdrawPwd = Redis::hget('user:'.$id, 'withdraw_password');
 
-        if (password_verify($password, $withdrawPwd)) {
-            Redis::hset('user:'.$id, 'union_id', null);
-
-            static::where('id', $id)->update(['union_id' => null]);
+        if (! password_verify($password, $withdrawPwd)) {
+            return false;
         }
+
+        Redis::hset('user:'.$id, 'union_id', null);
+
+        static::where('id', $id)->update(['union_id' => null]);
+
+        return true;
     }
 
     public static function withdraw($id, $password)
