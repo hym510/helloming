@@ -52,4 +52,25 @@ class IAP
             'purchaseDate' => $receipt->purchase_date
         );
     }
+
+    public static function success($userId, $productId)
+    {
+        switch ($productId) {
+            case 'com.find.iphone.1':
+                User::ReplenishDiamond($userId, 10);
+                break;
+            case 'com.find.iphone.2':
+                User::ReplenishDiamond($userId, 22);
+                break;
+            case 'com.find.iphone.3':
+                User::ReplenishDiamond($userId, 36);
+                break;
+            case 'com.find.iphone.4':
+                User::ReplenishDiamond($userId, 50);
+                break;
+            case 'com.find.iphone.5':
+                User::ReplenishDiamond($userId, 120);
+                break;
+        }
+    }
 }
