@@ -23,7 +23,7 @@ class WechatController extends Controller
         }
     }
 
-    public function getUnbind(UnbindRequest $request)
+    public function postUnbind(UnbindRequest $request)
     {
         $success = User::unbindUnionid(Auth::user()->user, $request->password);
 

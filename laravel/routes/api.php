@@ -54,7 +54,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('profile/detail', ['uses' => 'ProfileController@getDetail']);
         Route::post('profile/update', ['uses' => 'ProfileController@postUpdate']);
         Route::post('wechat/bind', ['uses' => 'WechatController@postBind']);
-        Route::get('wechat/unbind', ['uses' => 'WechatController@getUnbind']);
+        Route::post('wechat/unbind', ['uses' => 'WechatController@postUnbind']);
     });
 
     Route::group(['namespace' => 'Shop', 'middleware' => ['auth.api']], function () {
