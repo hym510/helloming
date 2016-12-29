@@ -5,9 +5,16 @@
     <div class="section-body">
         <div class="card">
             <div class="card-body">
-                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-file-upload">
-                        <i class="fa fa-upload"></i>上传
-                </button>
+                <div style="display:inline-block">
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-file-upload">
+                        <i class="fa fa-upload"></i>xml上传
+                    </button>
+                </div>
+                <div style="display:inline-block">
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-equipment-file-upload">
+                        <i class="fa fa-upload"></i>图像上传
+                    </button>
+                </div>
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
@@ -44,6 +51,7 @@
     </div>
 </section>
 @include('admin.upload.file-equipments')
+@include('admin.upload.file-equipments-img')
 @stop
 
 

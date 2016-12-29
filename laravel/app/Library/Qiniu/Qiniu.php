@@ -2,6 +2,7 @@
 
 namespace App\Library\Qiniu;
 
+use Json;
 use Config;
 use Qiniu\Auth;
 use GuzzleHttp\Client;
@@ -32,21 +33,23 @@ class Qiniu
         $token = $auth->uploadToken($this->bucket, null, 60 * 60);
         $domain = $this->domain;
 
-        return compact('token', 'domain');
+        return compact('auth', 'token', 'domain');
     }
 
-    public function uploadUrl($url)
+    public function uploadUrl()
     {
-        $client = new Client(['timeout' => 120]);
-        $response = $client->get($url);
-        $token = $this->getToken()['token'];
-        $uploader = new UploadManager();
-        $result = $uploader->put($token, null, $response->getBody());
+        $file = request()->file('img');
 
-        if ($result[1]) {
-            throw $result[1];
+        if ($file->isValid()) {
+            $token = $this->getToken()['token'];
+            $uploader = new UploadManager();
+            $result = $uploader->putFile($token, $file->getClientOriginalName(), $file);
+
+            if ($result[1]) {
+                throw $result[1];
+            }
+
+            return $result[0]['key'];
         }
-
-        return $result[0]['key'];
     }
 }

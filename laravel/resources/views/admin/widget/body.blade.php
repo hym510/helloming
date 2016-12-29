@@ -76,18 +76,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ action('Admin\MinesController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-star"></i></div>
-                            <span class="title">挖矿事件</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ action('Admin\ChestsController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-diamond"></i></div>
-                            <span class="title">宝箱事件</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ action('Admin\EventsController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-gears"></i></div>
                             <span class="title">事件管理</span>
@@ -124,9 +112,21 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ action('Admin\EquipLevelController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-level-up"></i></div>
+                            <span class="title">装备等级管理</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ action('Admin\ExpenseController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-coffee"></i></div>
                             <span class="title">补充消耗管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ action('Admin\ExchangeGoldController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-filter"></i></div>
+                            <span class="title">金币兑换人民币</span>
                         </a>
                     </li>
                 </ul>

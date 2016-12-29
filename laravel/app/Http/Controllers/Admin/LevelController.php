@@ -20,7 +20,7 @@ class LevelController extends Controller
     public function postImportXml(Request $request)
     {
         levelAttr::truncate();
-        $xml = $request->xml->storeAs('uploads', 'level.xml', 'xml');
+        $xml = $request->xml->storeAs('uploads', 'userPropery.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $levels = ReadXml::readDatabase($path);
 

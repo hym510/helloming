@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UsersRequest;
 
 class UsersController extends Controller
 {
     public function getIndex()
     {
-        $users = User::with('job')->when(request('keyword'), function ($q) {
+        $users = User::when(request('keyword'), function ($q) {
             return $q->where('phone', request('keyword'))
                 ->orWhere('name', request('keyword'));
         })
-        ->where('activate', 1)
         ->paginate()
         ->appends(request()->all());
 
@@ -26,30 +24,17 @@ class UsersController extends Controller
         return view('admin.users.show', ['user' => User::findOrfail($userId)]);
     }
 
-    public function getAdd()
-    {
-        return view('admin.users.edit');
-    }
-
-    public function postStore(UsersRequest $request)
-    {
-        $data = $request->avatar->store('uploads', 'xml');
-        $path = rtrim($data);
-        $data = $request->inputData();
-        $data['avatar'] = $path;
-        User::create($data);
-
-        return redirect()->action('Admin\UsersController@getIndex');
-    }
-
     public function getDelete($userId, $type)
     {
         switch ($type) {
-            case 'delete':
+            case 'freeze':
                 User::where('id', $userId)->update(['activate' => 0]);
                 break;
-            case 'forcedelete':
-                User::where('id', $userId)->forceDelete();
+            case 'unfreeze':
+                User::where('id', $userId)->update(['activate' => 1]);
+                break;
+            case 'delete':
+                User::where('id', $userId)->delete();
                 break;
         }
 

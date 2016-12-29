@@ -1,10 +1,10 @@
-<div class="modal fade" id="modal-file-upload">
+<div class="modal fade" id="modal-item-file-upload">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-inline" enctype="multipart/form-data" method="post" action="{{ action('Admin\ChestsController@postImportXml') }}">
+            <form class="form-inline" enctype="multipart/form-data" method="post" action="{{ action('Admin\ItemsController@postImportImg') }}">
                 {!! csrf_field() !!}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="xml">
+                <input type="hidden" name="img">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         ×
@@ -17,7 +17,7 @@
                             文件
                         </label>
                         <div class="col-sm-8">
-                            <input type="file" id="file" name="xml">
+                            <input type="file" name="img">
                         </div>
                     </div>
                 </div>

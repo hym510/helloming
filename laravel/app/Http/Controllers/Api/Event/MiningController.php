@@ -17,17 +17,22 @@ class MiningController extends Controller
             return Json::error('Not enough space available.', 401);
         }
 
-        return Json::success($success);
+        return Json::success(['host_event_id' => $success]);
     }
 
     public function getComplete($hostEventId)
     {
-        $success = Mining::complete($hostEventId, Auth::user()->user);
+        $result = Mining::complete($hostEventId, Auth::user()->user);
 
-        if (! $success) {
-            return Json::error('Diamonds are not enough.', 601);
+        switch ($result[0]) {
+            case 'finish':
+                return Json::success();
+            case 'lack':
+                return Json::error('Diamonds are not enough.', 601);
+            case 'nonexist':
+                return Json::success();
+            case 'prize':
+                return Json::success(['prize' => $result[1]]);
         }
-
-        return Json::success($success);
     }
 }

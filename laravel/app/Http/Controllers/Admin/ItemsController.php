@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Json;
 use App\Models\Item;
 use App\Library\Xml\ReadXml;
 use Illuminate\Http\Request;
@@ -32,5 +33,12 @@ class ItemsController extends Controller
         }
 
         return redirect()->action('Admin\ItemsController@getIndex');
+    }
+
+    public function postImportImg(Request $request)
+    {
+        Json::success(app('qiniu')->uploadUrl());
+
+        return $this->backSuccessMsg('上传成功');
     }
 }

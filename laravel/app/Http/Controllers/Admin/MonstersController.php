@@ -19,7 +19,7 @@ class MonstersController extends Controller
     public function postImportXml(Request $request)
     {
         Monster::truncate();
-        $xml = $request->xml->storeAs('uploads', 'minster.xml', 'xml');
+        $xml = $request->xml->storeAs('uploads', 'monster.xml', 'xml');
         $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
         $monsters = ReadXml::readDatabase($path);
 

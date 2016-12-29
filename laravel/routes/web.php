@@ -27,23 +27,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('admin/edit/{adminId}', ['uses' => 'AdminController@getEdit']);
     Route::get('admin/delete/{adminId}', ['uses' => 'AdminController@getDelete']);
 
-    Route::get('chests', ['uses' => 'ChestsController@getIndex']);
-    Route::post('chests/xml', ['uses' => 'ChestsController@postImportXml']);
-
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
     Route::post('equipments/xml', ['uses' => 'EquipmentsController@postImportXml']);
+    Route::post('equipments/img', ['uses' => 'EquipmentsController@postImportImg']);
 
     Route::get('events', ['uses' => 'EventsController@getIndex']);
     Route::post('events/xml', ['uses' => 'EventsController@postImportXml']);
 
     Route::get('item', ['uses' => 'ItemsController@getIndex']);
     Route::post('item/xml', ['uses' => 'ItemsController@postImportXml']);
+    Route::post('item/img', ['uses' => 'ItemsController@postImportImg']);
 
     Route::get('level', ['uses' => 'LevelController@getIndex']);
     Route::post('level/xml', ['uses' => 'LevelController@postImportXml']);
-
-    Route::get('mines', ['uses' => 'MinesController@getIndex']);
-    Route::post('mines/xml', ['uses' => 'MinesController@postImportXml']);
 
     Route::get('monsters', ['uses' => 'MonstersController@getIndex']);
     Route::post('monsters/xml', ['uses' => 'MonstersController@postImportXml']);
@@ -68,6 +64,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('expense', ['uses' => 'ExpenseController@getIndex']);
     Route::post('expense/xml', ['uses' => 'ExpenseController@postImportXml']);
+
+    Route::get('equiplevel', ['uses' => 'EquipLevelController@getIndex']);
+    Route::post('equiplevel/xml', ['uses' => 'EquipLevelController@postImportXml']);
+
+    Route::get('exchange', ['uses' => 'ExchangeGoldController@getIndex']);
+    Route::post('exchange/store', ['uses' => 'ExchangeGoldController@postStore']);
+
 });
 
 

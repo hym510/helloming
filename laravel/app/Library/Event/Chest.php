@@ -2,47 +2,55 @@
 
 namespace App\Library\Event;
 
-use App\Models\{Chest, Event, Item, User, UserItem};
+use App\Models\{Event, User, UserItem};
 
 class Chest
 {
     public static function open($eventId, $userId): array
     {
-        $event = Event::getKeyValue(
+        $chest = Event::getKeyValue(
             [['id', $eventId], ['type', 'chest']],
-            ['type_id', 'prize']
+            ['exp', 'prize', 'finish_item_id', 'item_quantity']
         );
 
-        if (! $event) {
+        if (! $chest) {
             return [];
         }
 
-        $chest = Chest::getKeyValue(
-            [['id', $event['type_id']]],
-            ['cost_type', 'item_id', 'cost']
-        );
-
-        if ($chest['cost_type'] == 'item') {
+        if ($chest['finish_item_id'] == 10000) {
+            if (! User::enough($userId, 'gold', $chest['item_quantity'])) {
+                return [];
+            }
+        } elseif ($chest['finish_item_id'] == 10001) {
+            if (! User::enough($userId, 'diamond', $chest['item_quantity'])) {
+                return [];
+            }
+        } else {
             $userItem = UserItem::getKeyValue(
-                [['user_id', $userId], ['item_id', $chest['item_id']]],
+                [['user_id', $userId], ['item_id', $chest['finish_item_id']]],
                 ['quantity']
             );
 
-            if ($userItem['quantity'] >= $chest['cost']) {
+            if ($userItem && $userItem['quantity'] >= $chest['item_quantity']) {
                 UserItem::where('user_id', $userId)
-                    ->where('item_id', $chest['item_id'])
-                    ->decrement('quantity', $chest['cost']);
+                    ->where('item_id', $chest['finish_item_id'])
+                    ->decrement('quantity', $chest['item_quantity']);
             } else {
                 return [];
             }
-        } elseif ($chest['cost_type'] == 'gold' && ! User::enough($userId, 'gold', $chest['cost'])) {
-            return [];
-        } elseif ($chest['cost_type'] == 'diamond' && ! User::enough($userId, 'diamond', $chest['cost'])) {
-            return [];
         }
 
-        UserItem::manyPrize($event['prize'], $userId);
+        User::addExp($userId, $chest['exp']);
+        $prizeIds = array();
 
-        return ['prize' => $chest['prize']];
+        foreach ($chest['prize'] as $p) {
+            if (is_lucky($p[1])) {
+                $prizeIds[] = $p[0];
+            }
+        }
+
+        UserItem::getPrize($prizeIds, $userId);
+
+        return ['prize' => $prizeIds];
     }
 }

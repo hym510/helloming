@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Redis;
 use App\Library\Token\AuthToken;
 
@@ -101,8 +102,6 @@ class User extends Model
             'id', 'auth_token as old_auth_token'
         ]);
 
-        $user->auth_token = $authToken;
-
         static::where('phone', $phone)->update(['auth_token' => $authToken]);
 
         Redis::pipeline()->hdel('auth_tokens', $user->old_auth_token)
@@ -199,59 +198,86 @@ class User extends Model
         return true;
     }
 
-    public static function ReplenishPower($id, $gold): bool
+    public static function ReplenishPower($id, $quantity): bool
     {
-        if (Redis::hget('user:'.$id, 'gold') < $gold) {
+        $user = Redis::hmget('user:'.$id, 'diamond', 'remain_power', 'power');
+
+        if ($user[0] < $quantity) {
             return false;
         }
 
-        static::where('id', $id)->decrement('gold', $gold);
-        Redis::hincrby('user:'.$id, 'gold', -$gold);
+        if ($user[1] + $quantity >= $user[2]) {
+            $quantity = $user[2] - $user[1];
+        }
 
-        static::where('id', $id)->increment('power', $gold);
-        Redis::hincrby('user:'.$id, 'power', $gold);
+        static::where('id', $id)->decrement('diamond', $quantity);
+        Redis::hincrby('user:'.$id, 'diamond', -$quantity);
+
+        static::where('id', $id)->increment('remain_power', $quantity);
+        Redis::hincrby('user:'.$id, 'remain_power', $quantity);
 
         return true;
     }
 
-    public static function ReplenishAction($id, $gold): bool
+    public static function ReplenishAction($id, $quantity): bool
     {
-        if (Redis::hget('user:'.$id, 'gold') < $gold) {
+        $user = Redis::hget('user:'.$id, 'diamond', 'remain_action', 'action');
+
+        if ($user[0] < $quantity) {
             return false;
         }
 
-        static::where('id', $id)->decrement('gold', $gold);
-        Redis::hincrby('user:'.$id, 'gold', -$gold);
+        if ($user[1] + $quantity >= $user[2]) {
+            $quantity = $user[2] - $user[1];
+        }
 
-        static::where('id', $id)->increment('action', $gold);
-        Redis::hincrby('user:'.$id, 'action', $gold);
+        static::where('id', $id)->decrement('diamond', $quantity);
+        Redis::hincrby('user:'.$id, 'diamond', -$quantity);
+
+        static::where('id', $id)->increment('remain_action', $quantity);
+        Redis::hincrby('user:'.$id, 'remain_action', $quantity);
 
         return true;
     }
 
-    public static function bindOpenid($id, $openid, $withdrawPassword): bool
+    public static function ReplenishDiamond($id, $diamond)
     {
-        if (Redis::hget('user:'.$id, 'wechat_id')) {
+        static::where('id', $id)->increment('diamond', $diamond);
+        Redis::hincrby('user:' . $id, 'diamond', $diamond);
+    }
+
+    public static function ReplenishGold($id, $gold)
+    {
+        static::where('id', $id)->increment('gold', $gold);
+        Redis::hincrby('user:' . $id, 'gold', $gold);
+    }
+
+    public static function bindUnionid($id, $unionid): bool
+    {
+        if (Redis::hget('user:'.$id, 'union_id')) {
             return false;
         } else {
-            static::where('id', $id)->update([
-                'wechat_id' => $openid,
-                'wechat_password' => Hash::make($withdrawPassword)
-            ]);
+            static::where('id', $id)->update(['union_id' => $unionid]);
 
-            Redis::hset('user:'.$id, 'wechat_id', $openid);
+            Redis::hset('user:'.$id, 'union_id', $unionid);
 
             return true;
         }
     }
 
-    public static function unbindOpenid($id)
+    public static function unbindUnionid($id)
     {
-        static::where('id', $id)->update([
-            'wechat_id' => null,
-            'withdraw_password' => null
-        ]);
+        static::where('id', $id)->update(['union_id' => null]);
 
-        Redis::hset('user:'.$id, 'wechat_id', null);
+        Redis::hset('user:'.$id, 'union_id', null);
+    }
+
+    public static function withdraw($id, $password)
+    {
+        $password = Hash::make($password);
+
+        static::where('id', $id)->update(['withdraw_password' => $password]);
+
+        Redis::hset('user:'.$id, 'withdraw_password', $password);
     }
 }

@@ -6,6 +6,10 @@ use Redis;
 
 class Job extends Model
 {
+    protected $fillable = [
+        'id', 'name',
+    ];
+
     protected $table = 'jobs';
 
     public static function getAll(): array
