@@ -25,8 +25,12 @@ class WechatController extends Controller
 
     public function getUnbind(UnbindRequest $request)
     {
-        return Json::success(
-            User::unbindUnionid(Auth::user()->user, $request->password)
-        );
+        $success = User::unbindUnionid(Auth::user()->user, $request->password);
+
+        if ($success) {
+            return Json::success();
+        } else {
+            return Json::error('Password mismatch.', 210);
+        }
     }
 }
