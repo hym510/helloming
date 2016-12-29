@@ -6,7 +6,7 @@ use Auth;
 use Json;
 use App\Models\User;
 use Illuminate\Routing\Controller;
-use App\Http\Requests\Api\WechatRequest;
+use App\Http\Requests\Api\{UnbindRequest, WechatRequest};
 
 class WechatController extends Controller
 {
@@ -23,8 +23,10 @@ class WechatController extends Controller
         }
     }
 
-    public function getUnbind()
+    public function getUnbind(UnbindRequest $request)
     {
-        return Json::success(User::unbindUnionid(Auth::user()->user));
+        return Json::success(
+            User::unbindUnionid(Auth::user()->user, $request->password)
+        );
     }
 }
