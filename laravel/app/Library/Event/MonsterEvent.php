@@ -60,6 +60,6 @@ class MonsterEvent
             return [];
         }
 
-        return array_shift($prizeIds);
+        return ['exp' => $prizeIds[0], 'prize' => array_shift($prizeIds)];
     }
 }
