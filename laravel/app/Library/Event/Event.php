@@ -35,19 +35,22 @@ class Event
             ->get('user_event:' . $userId)
             ->get('life_cycle')
             ->execute();
-        $events = json_decode($date[0]);
+        $events = json_decode($data[0]);
         $length = count($events);
         $newEvents = array();
-        $now = date('Y-m-d H:i:s');
+        $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]['created'] + $date[1]) > $now) {
+            if (($events[$i]->created + $data[1]) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
 
         if (count($newEvents) < 30) {
-            $newEvents[] = array($userId, $eventId, $longitude, $latitude, $now);
+            $newEvents[] = [
+                'event_id' => $eventId, 'longitude' => $longitude,
+                'latitude' => $latitude, 'created' => $now
+            ];
         }
 
         Redis::set('user_event:' . $userId, json_encode($newEvents));
