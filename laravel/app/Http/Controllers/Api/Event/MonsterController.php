@@ -20,4 +20,9 @@ class MonsterController extends Controller
 
         return Json::success($success);
     }
+
+    public function getPrize($eventId)
+    {
+        return Json::success(MonsterEvent::prize($eventId, Auth::user()->user));
+    }
 }

@@ -39,6 +39,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('mining/start/{eventId}', ['uses' => 'MiningController@getStart']);
         Route::get('mining/complete/{hostEventId}', ['uses' => 'MiningController@getComplete']);
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
+        Route::get('monster/prize/{eventId}', ['uses' => 'MonsterController@getPrize']);
     });
 
     Route::group(['namespace' => 'Purchase', 'middleware' => ['auth.api']], function () {
