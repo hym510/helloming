@@ -72,6 +72,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Withdraw', 'middleware' => ['auth.api']], function () {
         Route::post('withdraw/sms', ['uses' => 'WithdrawController@postSms']);
         Route::post('withdraw/password', ['uses' => 'WithdrawController@postPassword']);
+        Route::post('withdraw/update/password', ['uses' => 'WithdrawController@postUpdatePwd']);
         Route::post('withdraw/redpack', ['uses' => 'WithdrawController@postRedpack']);
     });
 

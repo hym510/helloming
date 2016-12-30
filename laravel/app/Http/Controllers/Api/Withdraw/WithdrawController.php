@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Library\Smser\Smser;
 use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
-use App\Http\Requests\Api\{RedpackRequest, WithdrawRequest};
+use App\Http\Requests\Api\{RedpackRequest, WithdrawRequest, WithdrawPwdRequest};
 
 class WithdrawController extends Controller
 {
@@ -25,6 +25,17 @@ class WithdrawController extends Controller
 
     public function postPassword(WithdrawRequest $request)
     {
+        User::withdraw(Auth::user()->user, $request->password);
+
+        return Json::success();
+    }
+
+    public function postUpdatePwd(WithdrawPwdRequest $request)
+    {
+        if (! getenv('APP_DEBUG') && ! $smser->verifySmsCode($request->phone, $request->code)) {
+            return Json::error('Invalid SMS code.', 603);
+        }
+
         User::withdraw(Auth::user()->user, $request->password);
 
         return Json::success();
