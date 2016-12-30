@@ -6,9 +6,10 @@ class Monster extends Model
 {
     protected $table = 'monsters';
 
-    public static function atk($id, $atk): bool
+    public static function atk($id, $userId, $atk): bool
     {
         $hp = static::getValue($id, 'hp');
+        User::consumePower($userId, $atk);
 
         if ($atk >= $hp) {
             return true;
