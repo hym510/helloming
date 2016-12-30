@@ -12,7 +12,7 @@ class EventController extends Controller
 {
     public function getAll()
     {
-        return Json::success(Event::all(Auth::user()->user));
+        return Json::success(['events' => Event::all(Auth::user()->user)]);
     }
 
     public function postAdd(Request $request)
