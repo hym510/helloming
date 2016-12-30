@@ -6,7 +6,7 @@ use App\Models\{Event, Monster, User, UserItem};
 
 class MonsterEvent
 {
-    public static function atk($eventId, $atk, $userId): array
+    public static function atk($eventId, $atk, $userId): bool
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'monster']],
@@ -14,28 +14,22 @@ class MonsterEvent
         );
 
         if (! $event) {
-            return [];
+            return false;
         }
 
         $atk *= 10;
 
         if (! Monster::atk($event['type_id'], $userId, $atk)) {
-            return [];
+            return false;
         }
 
-        User::addExp($userId, $event['exp']);
+        $prizeIds = json_decode(Redis::set('user:monster:' . $userId));
 
-        $prizeIds = array();
+        User::addExp($userId, $prizeIds[0]);
 
-        foreach ($event['prize'] as $p) {
-            if (is_lucky($p[1])) {
-                $prizeIds[] = $p[0];
-            }
-        }
+        UserItem::getPrize(array_shift($prizeIds), $userId);
 
-        UserItem::getPrize($prizeIds, $userId);
-
-        return ['exp' => $event['exp'], 'prize' => $prizeIds];
+        return true;
     }
 
     public static function prize($eventId, $userId): array
