@@ -148,9 +148,6 @@ class CreateTables extends Migration
         Schema::create('host_events', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
             $table->unsignedInteger('event_id');
             $table->unsignedInteger('mine_id');
             $table->timestamp('created_at');
