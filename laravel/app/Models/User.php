@@ -50,7 +50,7 @@ class User extends Model
         $userArray = static::where('id', $user->id)->first([
             'id', 'avatar', 'level', 'exp', 'vip_exp', 'state',
             'name', 'height', 'weight', 'gender', 'age', 'online_time',
-            'job_id', 'zodiac', 'space', 'take_up',  'power',  'remain_power',
+            'job_id', 'zodiac', 'space', 'take_up', 'power', 'remain_power',
             'action', 'remain_action', 'gold', 'diamond', 'equipment1_level',
             'equipment2_level', 'equipment3_level', 'activate'
         ])->toArray();
