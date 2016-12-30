@@ -6,7 +6,11 @@ class Monster extends Model
 {
     protected $table = 'monsters';
 
-    public static function atk($id, $userId, $atk): bool
+    protected $fillable = [
+        'id', 'name', 'level', 'hp',
+    ];
+
+    public static function atk($id, $atk): bool
     {
         $hp = static::getValue($id, 'hp');
         User::consumePower($userId, $atk);

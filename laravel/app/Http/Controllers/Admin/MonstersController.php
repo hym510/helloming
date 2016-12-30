@@ -25,6 +25,7 @@ class MonstersController extends Controller
 
         foreach ($monsters as $monster) {
             $data = [
+                'id' => $monster['id_i'],
                 'name' => $monster['name_s'],
                 'level' => $monster['level_i'],
                 'hp' => $monster['hp_i'],
