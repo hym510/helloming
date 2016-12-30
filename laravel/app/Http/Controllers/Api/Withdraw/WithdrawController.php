@@ -6,12 +6,23 @@ use Auth;
 use Json;
 use Redis;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Library\Smser\Smser;
 use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\Api\{RedpackRequest, WithdrawRequest};
 
 class WithdrawController extends Controller
 {
+    public function postSms(Smser $smser, Request $request)
+    {
+        if ($smser->requestSmsCode($request->phone)) {
+            return Json::success();
+        } else {
+            return Json::error('Fails to send message.', 602);
+        }
+    }
+
     public function postPassword(WithdrawRequest $request)
     {
         User::withdraw(Auth::user()->user, $request->password);
