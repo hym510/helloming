@@ -121,9 +121,6 @@ class CreateTables extends Migration
         Schema::create('user_items', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
             $table->unsignedInteger('item_id');
             $table->unsignedSmallInteger('quantity')->default(1);
         });
