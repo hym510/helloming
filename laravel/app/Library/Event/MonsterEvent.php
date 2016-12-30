@@ -19,7 +19,7 @@ class MonsterEvent
 
         $atk *= 10;
 
-        if (! Monster::atk($event['type_id'], $atk) || ! User::enough($userId, 'remain_power', $atk)) {
+        if (! Monster::atk($event['type_id'], $userId, $atk)) {
             return [];
         }
 
