@@ -26,9 +26,9 @@ class MonsterEvent
 
         $prizeIds = json_decode(Redis::set('user:monster:' . $userId));
 
-        User::addExp($userId, $prizeIds[0]);
+        User::addExp($userId, array_shift($prizeIds));
 
-        UserItem::getPrize(array_shift($prizeIds), $userId);
+        UserItem::getPrize($prizeIds, $userId);
 
         return true;
     }
