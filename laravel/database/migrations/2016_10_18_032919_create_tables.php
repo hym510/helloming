@@ -73,9 +73,6 @@ class CreateTables extends Migration
         Schema::create('log', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
             $table->enum('type', ['online', 'offline']);
             $table->timestamp('time');
         });
