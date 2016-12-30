@@ -2,6 +2,7 @@
 
 namespace App\Library\Event;
 
+use Redis;
 use App\Models\{Event, Monster, User, UserItem};
 
 class MonsterEvent
