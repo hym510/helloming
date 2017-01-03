@@ -5,8 +5,8 @@ namespace App\Http\Middleware;
 use Auth;
 use Json;
 use Closure;
-use App\Models\AuthenUser;
 use App\Library\Redis\Redis;
+use App\Models\{AuthenUser, User};
 
 class ApiAuthenticate
 {
