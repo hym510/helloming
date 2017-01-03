@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Auth;
 use Json;
-use Redis;
 use Closure;
 use App\Models\AuthenUser;
+use App\Library\Redis\Redis;
 
 class ApiAuthenticate
 {
@@ -25,7 +25,7 @@ class ApiAuthenticate
             $userId = $user->id;
         }
 
-        if (! Redis::hget('user:'.$userId, 'activate')) {
+        if (Redis::hget('user:'.$userId, 'activate') == 0) {
             return Json::error('User account has been frozen.', 114);
         }
 
