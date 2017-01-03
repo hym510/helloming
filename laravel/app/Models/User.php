@@ -265,9 +265,9 @@ class User extends Model
 
     public static function ReplenishAction($id, $quantity): bool
     {
-        $user = Redis::hmget('user:'.$id, 'diamond', 'remain_action', 'action');
+        $expense = json_encode(Redis::get('expense'));
 
-         foreach ($expense as $exp) {
+        foreach ($expense as $exp) {
             if ($exp[0] == 1) {
                 $data = $exp;
             }
@@ -284,6 +284,7 @@ class User extends Model
             case '10001':
                 $type = 'diamond';
         }
+        $user = Redis::hmget('user:'.$id, $type, 'remain_action', 'action');
 
         $consume = $quantity * $data[1];
 
