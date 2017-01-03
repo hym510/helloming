@@ -29,7 +29,7 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
-                            <td><img src="{{ $user->avatar }}"></td>
+                            <td><img src="{{ $user->avatar }}" height="50px"></td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->exp }}</td>
                             <td>{{ $user->vip_exp }}</td>

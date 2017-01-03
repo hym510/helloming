@@ -58,15 +58,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ action('Admin\ItemsController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
-                            <span class="title">道具管理</span>
+                        <a href="{{ action('Admin\XmlManagementController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-navicon"></i></div>
+                            <span class="title">版本管理</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\PushMsgController@getPushMsg') }}">
                             <div class="gui-icon"><i class="fa fa-comment"></i></div>
                             <span class="title">全局推送</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ action('Admin\ItemsController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-paw"></i></div>
+                            <span class="title">道具管理</span>
                         </a>
                     </li>
                     <li>
@@ -109,18 +115,6 @@
                         <a href="{{ action('Admin\StateController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-cloud"></i></div>
                             <span class="title">境界管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ action('Admin\EquipLevelController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-level-up"></i></div>
-                            <span class="title">装备等级管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ action('Admin\ExpenseController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-coffee"></i></div>
-                            <span class="title">补充消耗管理</span>
                         </a>
                     </li>
                     <li>

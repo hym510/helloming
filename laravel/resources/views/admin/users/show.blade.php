@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->gender or '' }}
+                                {{ $user->gender_type or '' }}
                             </div>
                             <label>玩家性别</label>
                         </div>
@@ -33,12 +33,10 @@
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                <img src="{{ $user->avatar or '' }}">
+                                <img src="{{ $user->avatar or '' }}" height="120px">
                             </div>
                             <label>玩家图像</label>
                         </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
                                 {{ $user->exp or '' }}
@@ -51,6 +49,8 @@
                             </div>
                             <label>会员经验</label>
                         </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
                                 {{ $user->height or '' }}
@@ -69,8 +69,6 @@
                             </div>
                             <label>在线时间</label>
                         </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-control-static">
                                 {{ $user->job_id }}
@@ -79,7 +77,7 @@
                         </div>
                         <div class="form-group">
                             <div class="form-control-static">
-                                {{ $user->zodiac or '' }}
+                                {{ $user->zodiac_type or '' }}
                             </div>
                             <label>玩家星座</label>
                         </div>
@@ -87,7 +85,57 @@
                             <div class="form-control-static">
                                 {{ $user->power or '' }}
                             </div>
-                            <label>玩家人气</label>
+                            <label>力量</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->remain_power or ''}}
+                            </div>
+                            <label>剩余力量</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->action or ''}}
+                            </div>
+                            <label>行动力</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->remain_action or ''}}
+                            </div>
+                            <label>剩余行动力</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->gold or ''}}
+                            </div>
+                            <label>金币</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->diamond or ''}}
+                            </div>
+                            <label>钻石</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->equipment1_level or ''}}
+                            </div>
+                            <label>装备等级</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->equipment2_level or ''}}
+                            </div>
+                            <label>装备等级</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                {{ $user->equipment3_level or ''}}
+                            </div>
+                            <label>装备等级</label>
                         </div>
                     </div>
                 </div>

@@ -5,9 +5,6 @@
     <div class="section-body">
         <div class="card">
             <div class="card-body">
-                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-file-upload">
-                    <i class="fa fa-upload"></i>上传
-                </button>
                 <table class="table table-hover table-condensed table-striped no-margin">
                     <thead>
                         <tr>
@@ -17,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($states as $state)
+                    @foreach ($stateattrs as $state)
                         <tr>
                             <td>{{ $state->id }}</td>
                             <td>{{ $state->level }}</td>
@@ -26,12 +23,11 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center" data-total="{{ $states->total() }}">
-                    {!! $states->links() !!}
+                <div class="text-center" data-total="{{ $stateattrs->total() }}">
+                    {!! $stateattrs->links() !!}
                 </div>
             </div>
         </div>
     </div>
 </section>
-@include('admin.upload.file-state')
 @stop

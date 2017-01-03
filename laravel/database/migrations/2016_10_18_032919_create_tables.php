@@ -160,5 +160,21 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('price');
             $table->unsignedSmallInteger('quantity');
         });
+
+        Schema::create('xml_managements', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('xmlname');
+            $table->string('version');
+            $table->boolean('mark')->default(true);
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+        });
+
+        Schema::create('xml_urls', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('urlname');
+            $table->string('flag')->default(true);
+            $table->timestamp('created_at');
+        });
     }
 }

@@ -406,4 +406,59 @@ class User extends Model
 
         static::where('id', $id)->update(['withdraw_password' => $password]);
     }
+
+    public function getGenderTypeAttribute(): string
+    {
+        if ($this->gender == 'male'){
+            $gender = '男';
+        } else {
+            $gender = '女';
+        }
+
+        return $gender;
+    }
+
+    public function getZodiacTypeAttribute(): string
+    {
+        switch ($this->zodiac) {
+            case 'aquarius':
+                $zodiac = '水瓶座';
+                break;
+            case 'pisces':
+                $zodiac = '双鱼座';
+                break;
+            case 'aries':
+                $zodiac = '牡羊座';
+                break;
+            case 'taurus':
+                $zodiac = '金牛座';
+                break;
+            case 'gemini':
+                $zodiac = '双子座';
+                break;
+            case 'cancer':
+                $zodiac = '巨蟹座';
+                break;
+            case 'leo':
+                $zodiac = '狮子座';
+                break;
+            case 'virgo':
+                $zodiac = '处女座';
+                break;
+            case 'libra':
+                $zodiac = '天枰座';
+                break;
+            case 'scorpio':
+                $zodiac = '天蝎座';
+                break;
+            case 'sagittarius':
+                $zodiac = '射手座';
+                break;
+            case 'capricorn':
+                $zodiac = '摩羯座';
+                break;
+        }
+
+        return $zodiac;
+    }
 }

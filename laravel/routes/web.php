@@ -28,48 +28,36 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('admin/delete/{adminId}', ['uses' => 'AdminController@getDelete']);
 
     Route::get('equipments', ['uses' => 'EquipmentsController@getIndex']);
-    Route::post('equipments/xml', ['uses' => 'EquipmentsController@postImportXml']);
-    Route::post('equipments/img', ['uses' => 'EquipmentsController@postImportImg']);
 
     Route::get('events', ['uses' => 'EventsController@getIndex']);
-    Route::post('events/xml', ['uses' => 'EventsController@postImportXml']);
 
     Route::get('item', ['uses' => 'ItemsController@getIndex']);
-    Route::post('item/xml', ['uses' => 'ItemsController@postImportXml']);
-    Route::post('item/img', ['uses' => 'ItemsController@postImportImg']);
 
     Route::get('level', ['uses' => 'LevelController@getIndex']);
-    Route::post('level/xml', ['uses' => 'LevelController@postImportXml']);
 
     Route::get('monsters', ['uses' => 'MonstersController@getIndex']);
-    Route::post('monsters/xml', ['uses' => 'MonstersController@postImportXml']);
 
     Route::get('msg', ['uses' => 'PushMsgController@getPushMsg']);
     Route::post('pushmsg', ['uses' => 'PushMsgController@postPushMsg']);
 
     Route::get('shop', ['uses' => 'ShopController@getIndex']);
-    Route::post('shop/xml', ['uses' => 'ShopController@postImportXml']);
 
     Route::get('users', ['uses' => 'UsersController@getIndex']);
     Route::get('users/delete/{userId}/{type}', ['uses' => 'UsersController@getDelete']);
     Route::get('users/show/{userId}', ['uses' => 'UsersController@getShow']);
-    Route::get('users/add', ['uses' => 'UsersController@getAdd']);
-    Route::post('users/store', ['uses' => 'UsersController@postStore']);
 
     Route::get('jobs', ['uses' => 'JobsController@getIndex']);
-    Route::post('jobs/xml', ['uses' => 'JobsController@postImportXml']);
 
     Route::get('state', ['uses' => 'StateController@getIndex']);
-    Route::post('state/xml', ['uses' => 'StateController@postImportXml']);
-
-    Route::get('expense', ['uses' => 'ExpenseController@getIndex']);
-    Route::post('expense/xml', ['uses' => 'ExpenseController@postImportXml']);
-
-    Route::get('equiplevel', ['uses' => 'EquipLevelController@getIndex']);
-    Route::post('equiplevel/xml', ['uses' => 'EquipLevelController@postImportXml']);
 
     Route::get('exchange', ['uses' => 'ExchangeGoldController@getIndex']);
     Route::post('exchange/store', ['uses' => 'ExchangeGoldController@postStore']);
+
+    Route::get('xml_management', ['uses' => 'XmlManagementController@getIndex']);
+    Route::get('xml_management/adit/{xmlId}', ['uses' => 'XmlManagementController@getEdit']);
+    Route::get('xml_management/show/{xmlId}', ['uses' => 'XmlManagementController@getShow']);
+    Route::post('xml_management/postStoreVersion/{xmlId}', ['uses' => 'XmlManagementController@postStoreVersion']);
+    Route::post('xml_management/postModifyUrl/{xmlId}/{data}', ['uses' => 'XmlManagementController@postModifyUrl']);
 
 });
 

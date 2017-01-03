@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Redis;
 use App\Models\StateAttr;
-use App\Library\Xml\ReadXml;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class StateController extends Controller
@@ -19,28 +17,9 @@ class StateController extends Controller
 
     public function getIndex()
     {
-        $states = StateAttr::paginate()->appends(request()->all());
+        $stateattrs = StateAttr::paginate()->appends(request()->all());
 
-        return view('admin.state.index', compact('states'));
-    }
-
-    public function postImportXml(Request $request)
-    {
-        StateAttr::truncate();
-        $xml = $request->xml->storeAs('uploads', 'userState.xml', 'xml');
-        $path = rtrim(public_path(). '/' . ltrim($xml, '/'));
-        $states = ReadXml::readDatabase($path);
-
-        foreach ($states as $state) {
-            $data = [
-                'level' => $state['id_i'],
-                'power' => $state['powerLimit_i'],
-            ];
-
-            StateAttr::create($data);
-        }
-
-        return redirect()->action('Admin\StateController@getIndex');
+        return view('admin.state.index', compact('stateattrs'));
     }
 
 }
