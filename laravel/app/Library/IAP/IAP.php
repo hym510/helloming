@@ -3,6 +3,7 @@
 namespace App\Library\IAP;
 
 use Exception;
+use App\Models\User;
 
 class IAP
 {
