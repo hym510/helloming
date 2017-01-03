@@ -221,9 +221,29 @@ class User extends Model
 
     public static function ReplenishPower($id, $quantity): bool
     {
-        $user = Redis::hmget('user:'.$id, 'diamond', 'remain_power', 'power');
+        $expense = json_encode(Redis::get('expense'));
 
-        if ($user[0] < $quantity) {
+        foreach ($expense as $exp) {
+            if ($exp[0] == 2) {
+                $data = $exp;
+            }
+        }
+
+        if (! isset($data)) {
+            return false;
+        }
+
+        switch ($data[2]) {
+            case '10000':
+                $type = 'gold';
+                break;
+            case '10001':
+                $type = 'diamond';
+        }
+
+        $user = Redis::hmget('user:'.$id, $type, 'remain_power', 'power');
+
+        if ($user[0] < $quantity * $data[1]) {
             return false;
         }
 
@@ -231,8 +251,8 @@ class User extends Model
             $quantity = $user[2] - $user[1];
         }
 
-        Redis::hincrby('user:'.$id, 'diamond', -$quantity);
-        static::where('id', $id)->decrement('diamond', $quantity);
+        Redis::hincrby('user:'.$id, $type, -($quantity * $data[1]));
+        static::where('id', $id)->decrement($type, $quantity * $data[1]);
 
         Redis::hincrby('user:'.$id, 'remain_power', $quantity);
         static::where('id', $id)->increment('remain_power', $quantity);
