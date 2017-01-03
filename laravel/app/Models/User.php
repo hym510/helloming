@@ -224,7 +224,7 @@ class User extends Model
         $expense = json_decode(Redis::get('expense'));
 
         foreach ($expense as $exp) {
-            if ($exp[0] == 2) {
+            if ($exp->id == 2) {
                 $data = $exp;
             }
         }
@@ -233,7 +233,7 @@ class User extends Model
             return false;
         }
 
-        switch ($data[2]) {
+        switch ($data->currency) {
             case '10000':
                 $type = 'gold';
                 break;
@@ -243,7 +243,7 @@ class User extends Model
 
         $user = Redis::hmget('user:'.$id, $type, 'remain_power', 'power');
 
-        $consume = $quantity * $data[1];
+        $consume = $quantity * $data->price;
 
         if ($user[0] < $consume) {
             return false;
@@ -251,7 +251,7 @@ class User extends Model
 
         if ($user[1] + $quantity >= $user[2]) {
             $quantity = $user[2] - $user[1];
-            $consume = $quantity * $data[1];
+            $consume = $quantity * $data->price;
         }
 
         Redis::hincrby('user:'.$id, $type, -$consume);
