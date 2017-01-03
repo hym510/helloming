@@ -264,6 +264,26 @@ class User extends Model
     {
         $user = Redis::hmget('user:'.$id, 'diamond', 'remain_action', 'action');
 
+         foreach ($expense as $exp) {
+            if ($exp[0] == 1) {
+                $data = $exp;
+            }
+        }
+
+        if (! isset($data)) {
+            return false;
+        }
+
+        switch ($data[2]) {
+            case '10000':
+                $type = 'gold';
+                break;
+            case '10001':
+                $type = 'diamond';
+        }
+
+        $quantity = $quantity * $data[1];
+
         if ($user[0] < $quantity) {
             return false;
         }
@@ -272,8 +292,8 @@ class User extends Model
             $quantity = $user[2] - $user[1];
         }
 
-        Redis::hincrby('user:'.$id, 'diamond', -$quantity);
-        static::where('id', $id)->decrement('diamond', $quantity);
+        Redis::hincrby('user:'.$id, $type, -$quantity);
+        static::where('id', $id)->decrement($type, $quantity);
 
         Redis::hincrby('user:'.$id, 'remain_action', $quantity);
         static::where('id', $id)->increment('remain_action', $quantity);
