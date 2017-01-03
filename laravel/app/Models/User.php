@@ -219,7 +219,7 @@ class User extends Model
         return true;
     }
 
-    public static function ReplenishPower($id, $quantity): bool
+    public static function replenishPower($id, $quantity): bool
     {
         $expense = json_encode(Redis::get('expense'));
 
@@ -263,7 +263,7 @@ class User extends Model
         return true;
     }
 
-    public static function ReplenishAction($id, $quantity): bool
+    public static function replenishAction($id, $quantity): bool
     {
         $expense = json_encode(Redis::get('expense'));
 
@@ -306,14 +306,14 @@ class User extends Model
         return true;
     }
 
-    public static function ReplenishDiamond($id, $diamond)
+    public static function replenishDiamond($id, $diamond)
     {
         Redis::hincrby('user:' . $id, 'diamond', $diamond);
 
         static::where('id', $id)->increment('diamond', $diamond);
     }
 
-    public static function ReplenishGold($id, $gold)
+    public static function replenishGold($id, $gold)
     {
         Redis::hincrby('user:' . $id, 'gold', $gold);
 

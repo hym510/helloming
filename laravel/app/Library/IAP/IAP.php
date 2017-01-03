@@ -57,19 +57,19 @@ class IAP
     {
         switch ($productId) {
             case 'com.find.iphone.1':
-                User::ReplenishDiamond($userId, 10);
+                User::replenishDiamond($userId, 10);
                 break;
             case 'com.find.iphone.2':
-                User::ReplenishDiamond($userId, 22);
+                User::replenishDiamond($userId, 22);
                 break;
             case 'com.find.iphone.3':
-                User::ReplenishDiamond($userId, 36);
+                User::replenishDiamond($userId, 36);
                 break;
             case 'com.find.iphone.4':
-                User::ReplenishDiamond($userId, 50);
+                User::replenishDiamond($userId, 50);
                 break;
             case 'com.find.iphone.5':
-                User::ReplenishDiamond($userId, 120);
+                User::replenishDiamond($userId, 120);
                 break;
         }
     }

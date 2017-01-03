@@ -17,9 +17,9 @@ class UserItem extends Model
     {
         foreach ($itemIds as $itemId) {
             if ($itemId == 10000) {
-                User::ReplenishGold($userId, 1);
+                User::replenishGold($userId, 1);
             } elseif ($itemId == 10001) {
-                User::ReplenishDiamond($userId, 1);
+                User::replenishDiamond($userId, 1);
             } else {
                 $count = static::where('user_id', $userId)->where('item_id', $itemId)->count();
 

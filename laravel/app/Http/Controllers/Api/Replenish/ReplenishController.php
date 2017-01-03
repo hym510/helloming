@@ -11,7 +11,7 @@ class ReplenishController extends Controller
 {
     public function getAction($quantity)
     {
-        if (User::ReplenishAction(Auth::user()->user, $quantity)) {
+        if (User::replenishAction(Auth::user()->user, $quantity)) {
             return Json::success();
         } else {
             return Json::error('Currency are not enough.', 512);
@@ -20,7 +20,7 @@ class ReplenishController extends Controller
 
     public function getPower($quantity)
     {
-        if (User::ReplenishPower(Auth::user()->user, $quantity)) {
+        if (User::replenishPower(Auth::user()->user, $quantity)) {
             return Json::success();
         } else {
             return Json::error('Currency are not enough.', 512);
