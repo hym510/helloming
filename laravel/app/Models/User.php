@@ -221,7 +221,7 @@ class User extends Model
 
     public static function replenishPower($id, $quantity): bool
     {
-        $expense = json_encode(Redis::get('expense'));
+        $expense = json_decode(Redis::get('expense'));
 
         foreach ($expense as $exp) {
             if ($exp[0] == 2) {
@@ -265,7 +265,7 @@ class User extends Model
 
     public static function replenishAction($id, $quantity): bool
     {
-        $expense = json_encode(Redis::get('expense'));
+        $expense = json_decode(Redis::get('expense'));
 
         foreach ($expense as $exp) {
             if ($exp[0] == 1) {
@@ -308,7 +308,7 @@ class User extends Model
 
     public static function addSpace($id, $quantity): bool
     {
-        $expense = json_encode(Redis::get('expense'));
+        $expense = json_decode(Redis::get('expense'));
 
         foreach ($expense as $exp) {
             if ($exp[0] == 3) {
