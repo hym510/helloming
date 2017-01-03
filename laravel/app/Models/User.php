@@ -166,7 +166,7 @@ class User extends Model
 
         if (! $data[1]) {
             $stateAttr = StateAttr::orderBy('level', 'asc')->get()->toArray();
-            Redis::set('level_attributes', json_encode($stateAttr));
+            Redis::set('state_attributes', json_encode($stateAttr));
         } else {
             $stateAttr = json_decode($data[1]);
         }
