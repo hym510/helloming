@@ -18,8 +18,24 @@ class Redis extends BaseRedis
         $userId = explode(':', $key)[1];
         $user = User::find($userId)->toArray();
 
-        Redis::hmset($key, $user);
+        parent::hmset($key, $user);
 
         return $user;
+    }
+
+    public static function hget(...$args)
+    {
+        $data = call_user_func_array('parent::hget', $args);
+
+        if ($data) {
+            return $data;
+        }
+
+        $userId = explode(':', $args[0])[1];
+        $user = User::find($userId)->toArray();
+
+        parent::hmset($args[0], $user);
+
+        return call_user_func_array('parent::hget', $args);
     }
 }
