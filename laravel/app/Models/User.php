@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Hash;
-use Redis;
+use App\Library\Redis\Redis;
 use App\Library\Token\AuthToken;
 
 class User extends Model
