@@ -1,4 +1,4 @@
-<?php
+quantity<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +47,9 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
     Route::group(['namespace' => 'Replenish', 'middleware' => ['auth.api']], function () {
-        Route::get('replenish/action/{gold}', ['uses' => 'ReplenishController@getAction']);
-        Route::get('replenish/power/{gold}', ['uses' => 'ReplenishController@getPower']);
+        Route::get('replenish/power/{quantity}', ['uses' => 'ReplenishController@getPower']);
+        Route::get('replenish/space/{quantity}', ['uses' => 'ReplenishController@getSpace']);
+        Route::get('replenish/action/{quantity}', ['uses' => 'ReplenishController@getAction']);
     });
 
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
