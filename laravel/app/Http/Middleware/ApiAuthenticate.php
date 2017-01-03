@@ -12,7 +12,7 @@ class ApiAuthenticate
 {
     public function handle($request, Closure $next)
     {
-        $userId = Redis::hget('auth_tokens', $request->header('AUTHTOKEN'));
+        $userId = Redis::authtoken('auth_tokens', $request->header('AUTHTOKEN'));
 
         if (! $userId) {
             $user = User::where('auth_token', $request->header('AUTHTOKEN'))
