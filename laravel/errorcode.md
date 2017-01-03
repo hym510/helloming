@@ -10,6 +10,7 @@
 |'An openid has bound to this account.'|216|
 |'Lack of physical strength.'|501|
 |'Gold are not enough.'|511|
+|'Currency are not enough.'|512|
 |'Diamonds are not enough.'|601|
 |'Fails to send message.'|602|
 |'Invalid SMS code.'|603|
