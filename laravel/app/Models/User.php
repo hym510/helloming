@@ -157,8 +157,20 @@ class User extends Model
             ->hmget('user:'.$id, 'level', 'exp', 'state')
             ->execute();
 
-        $levelAttr = json_decode($data[0]);
-        $stateAttr = json_decode($data[1]);
+        if (! $data[0]) {
+            $levelAttr = LevelAttr::orderBy('level', 'asc')->get()->toArray();
+            Redis::set('level_attributes', json_encode($levelAttr));
+        } else {
+            $levelAttr = json_decode($data[0]);
+        }
+
+        if (! $data[1]) {
+            $stateAttr = StateAttr::orderBy('level', 'asc')->get()->toArray();
+            Redis::set('level_attributes', json_encode($stateAttr));
+        } else {
+            $stateAttr = json_decode($data[1]);
+        }
+
         $userAttr = $data[2];
         $userExp = $userAttr[1] + $exp;
 
