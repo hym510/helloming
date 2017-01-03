@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Profile;
 
 use Auth;
 use Json;
-use Redis;
+use App\Library\Redis\Redis;
 use App\Library\Profile\Equip;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\Api\ProfileRequest;
