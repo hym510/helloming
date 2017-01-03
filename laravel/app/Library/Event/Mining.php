@@ -2,9 +2,9 @@
 
 namespace App\Library\Event;
 
-use Redis;
 use Carbon\Carbon;
 use App\Jobs\HostMining;
+use App\Library\Redis\Redis;
 use Illuminate\Contracts\Bus\Dispatcher;
 use App\Models\{Event, HostEvent, User, UserItem};
 

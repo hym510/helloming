@@ -2,8 +2,8 @@
 
 namespace App\Library\Profile;
 
-use Redis;
 use App\Models\User;
+use App\Library\Redis\Redis;
 
 class Wechat
 {

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Redis;
+use App\Library\Redis\Redis;
 
 class Job extends Model
 {

@@ -2,7 +2,7 @@
 
 namespace App\Library\Event;
 
-use Redis;
+use App\Library\Redis\Redis;
 use App\Models\Event as EventModel;
 
 class Event

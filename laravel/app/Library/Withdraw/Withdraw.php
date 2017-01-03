@@ -2,8 +2,8 @@
 
 namespace App\Library\Withdraw;
 
-use Redis;
 use Config;
+use App\Library\Redis\Redis;
 use App\Models\{User, Wechat};
 use EasyWeChat\Foundation\Application;
 

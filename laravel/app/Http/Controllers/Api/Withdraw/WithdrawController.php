@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\Withdraw;
 
 use Auth;
 use Json;
-use Redis;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Library\Redis\Redis;
 use App\Library\Smser\Smser;
+use Illuminate\Http\Request;
 use App\Library\Withdraw\Withdraw;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\Api\{RedpackRequest, WithdrawRequest, WithdrawPwdRequest};
