@@ -243,16 +243,19 @@ class User extends Model
 
         $user = Redis::hmget('user:'.$id, $type, 'remain_power', 'power');
 
-        if ($user[0] < $quantity * $data[1]) {
+        $consume = $quantity * $data[1];
+
+        if ($user[0] < $consume) {
             return false;
         }
 
         if ($user[1] + $quantity >= $user[2]) {
             $quantity = $user[2] - $user[1];
+            $consume = $quantity * $data[1];
         }
 
-        Redis::hincrby('user:'.$id, $type, -($quantity * $data[1]));
-        static::where('id', $id)->decrement($type, $quantity * $data[1]);
+        Redis::hincrby('user:'.$id, $type, -$consume);
+        static::where('id', $id)->decrement($type, $consume);
 
         Redis::hincrby('user:'.$id, 'remain_power', $quantity);
         static::where('id', $id)->increment('remain_power', $quantity);
@@ -282,7 +285,7 @@ class User extends Model
                 $type = 'diamond';
         }
 
-        $quantity = $quantity * $data[1];
+        $consume = $quantity * $data[1];
 
         if ($user[0] < $quantity) {
             return false;
@@ -290,10 +293,11 @@ class User extends Model
 
         if ($user[1] + $quantity >= $user[2]) {
             $quantity = $user[2] - $user[1];
+            $consume = $quantity * $data[1];
         }
 
-        Redis::hincrby('user:'.$id, $type, -$quantity);
-        static::where('id', $id)->decrement($type, $quantity);
+        Redis::hincrby('user:'.$id, $type, -$consume);
+        static::where('id', $id)->decrement($type, $consume);
 
         Redis::hincrby('user:'.$id, 'remain_action', $quantity);
         static::where('id', $id)->increment('remain_action', $quantity);
