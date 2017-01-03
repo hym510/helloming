@@ -38,4 +38,9 @@ class Redis extends BaseRedis
 
         return call_user_func_array('parent::hget', $args);
     }
+
+    public static function authtoken($token)
+    {
+        return parent::hget('auth_tokens', $token);
+    }
 }
