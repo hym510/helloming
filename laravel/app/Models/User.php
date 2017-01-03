@@ -306,6 +306,49 @@ class User extends Model
         return true;
     }
 
+    public static function addSpace($id, $quantity): bool
+    {
+        $expense = json_encode(Redis::get('expense'));
+
+        foreach ($expense as $exp) {
+            if ($exp[0] == 3) {
+                $data = $exp;
+            }
+        }
+
+        if (! isset($data)) {
+            return false;
+        }
+
+        switch ($data[2]) {
+            case '10000':
+                $type = 'gold';
+                break;
+            case '10001':
+                $type = 'diamond';
+        }
+        $user = Redis::hmget('user:'.$id, $type);
+
+        $consume = $quantity * $data[1];
+
+        if ($user[0] < $quantity) {
+            return false;
+        }
+
+        if ($user[1] + $quantity >= $user[2]) {
+            $quantity = $user[2] - $user[1];
+            $consume = $quantity * $data[1];
+        }
+
+        Redis::hincrby('user:'.$id, $type, -$consume);
+        static::where('id', $id)->decrement($type, $consume);
+
+        Redis::hincrby('user:'.$id, 'space', $quantity);
+        static::where('id', $id)->increment('space', $quantity);
+
+        return true;
+    }
+
     public static function replenishDiamond($id, $diamond)
     {
         Redis::hincrby('user:' . $id, 'diamond', $diamond);
