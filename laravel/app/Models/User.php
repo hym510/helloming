@@ -251,6 +251,9 @@ class User extends Model
                 break;
             case '10001':
                 $type = 'diamond';
+            case '10002':
+                $type = 'power';
+                break;
         }
 
         $user = Redis::hmget('user:'.$id, $type, 'remain_power', 'power');
