@@ -7,8 +7,8 @@
                 <div class="card-body">
                     <div class="input-group">
                         <div class="form-group">
-                            <label class="sr-only">url</label>
-                            <p class="form-control-static">{{ $xmlurl->urlname or '' }}</p>
+                            <label class="control-label">服务器地址:</label>
+                            <p style="display:inline; text-decoration:underline;" class="form-control-static">{{ $xmlurl->urlname or '' }}</p>
                         </div>
                         <span class="input-group-btn" style="width:0;">
                             <a href="javascript:;" class="btn btn-primary btn-md del" data-id="{{ $xmlurl->id or '' }}" type="button">修改</a>

@@ -11,9 +11,10 @@ class XmlController extends Controller
 {
     public function getDownload($file)
     {
-        $filedata = XmlManagement::where('xmlname', $file . '.xml')->where('mark', 1)->first();
-        $filename = explode('.', $filedata['xmlname']);
-        $file = app()->make('path.public') . '/uploads/' . $filename[0] . '_' . $filedata['version'] . '.xml';
+        // $filedata = XmlManagement::where('xmlname', $file . '.xml')->where('mark', 1)->first();
+        // $filename = explode('.', $filedata['xmlname']);
+        // $file = app()->make('path.public') . '/uploads/' . $filename[0] . '_' . $filedata['version'] . '.xml';
+        $file = app()->make('path.public') . '/uploads/' . $file . '.xml';
 
         if (file_exists($file)) {
             return app(ResponseFactory::class)->download($file);
