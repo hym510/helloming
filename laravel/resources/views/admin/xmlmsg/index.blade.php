@@ -11,7 +11,7 @@
                             <p class="form-control-static">{{ $xmlurl->urlname or '' }}</p>
                         </div>
                         <span class="input-group-btn" style="width:0;">
-                            <a href="javascript:;" class="btn btn-primary btn-md del" data-id="{{ $xmlurl->id }}" type="button">修改</a>
+                            <a href="javascript:;" class="btn btn-primary btn-md del" data-id="{{ $xmlurl->id or '' }}" type="button">修改</a>
                         </span>
                     </div>
                 <table class="table table-striped table-hover table-condensed no-margin">
