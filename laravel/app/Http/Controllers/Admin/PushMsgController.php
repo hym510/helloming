@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Pusher;
 use App\Models\User;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\PushMsgRequest;
 
 class PushMsgController extends Controller

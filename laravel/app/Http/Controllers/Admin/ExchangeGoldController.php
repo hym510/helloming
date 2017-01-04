@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Redis;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\ExchangeGoldRequest;
 
 class ExchangeGoldController extends Controller

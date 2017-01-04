@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\XmlUrl;
-use App\Models\XmlManagement;
-use App\Http\Controllers\Controller;
 use App\Library\Readfile\ReadFileUrl;
+use App\Models\{XmlManagement, XmlUrl};
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\XmlManagementRequest;
 
 class XmlManagementController extends Controller

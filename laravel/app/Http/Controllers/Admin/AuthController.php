@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginRequest;
+use App\Http\Controllers\Admin\Controller;
 
 class AuthController extends Controller
 {

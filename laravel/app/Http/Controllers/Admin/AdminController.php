@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Hash;
 use App\Models\Admin;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Controllers\Admin\Controller;
 
 class AdminController extends Controller
 {

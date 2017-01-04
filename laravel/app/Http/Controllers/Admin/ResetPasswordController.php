@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Auth;
 use Hash;
 use Json;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\ResetPasswordRequest;
 
 class ResetPasswordController extends Controller

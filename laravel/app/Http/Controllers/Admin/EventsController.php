@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Event;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 
 class EventsController extends Controller
 {

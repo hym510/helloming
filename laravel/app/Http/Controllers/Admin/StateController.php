@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Redis;
 use App\Models\StateAttr;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 
 class StateController extends Controller
 {
