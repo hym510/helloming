@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('data/log/online', ['uses' => 'LogController@getOnLine']);
         Route::get('data/log/offline', ['uses' => 'LogController@getOffLine']);
         Route::get('data/qiniu/token', ['uses' => 'QiniuController@getToken']);
+        Route::get('data/qiniu/domain', ['uses' => 'QiniuController@getDomain']);
     });
 
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {

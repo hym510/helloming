@@ -53,11 +53,14 @@
                 title: '修改url',
             }, function(val, index) {
                 layer.close(index);
-                $.post("{{ action('Admin\XmlManagementController@postModifyUrl', ['id' => '', 'data' => '']) }}/" + id + '/' + val, function() {
-                    layer.msg('修改成功', function() {
-                        location.reload();
-                    })
-                })
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ action('Admin\XmlManagementController@postModifyUrl', ['id' => '']) }}/" + id,
+                    data: {
+                        'val': val,
+                    },
+                });
+                location.reload();
             })
         })
     </script>

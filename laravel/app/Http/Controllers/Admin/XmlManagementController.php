@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Library\Readfile\ReadFileUrl;
+use Illuminate\Http\Request;
 use App\Models\{XmlManagement, XmlUrl};
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\XmlManagementRequest;
@@ -62,12 +63,12 @@ class XmlManagementController extends Controller
         return view('admin.xmlmsg.show', compact('xmldatas', 'xmlmsg'));
     }
 
-    public function postModifyUrl($xmlId, $data)
+    public function postModifyUrl($xmlId, Request $request)
     {
         XmlUrl::where('id', $xmlId)->update(['flag' => 0]);
-        XmlUrl::create(['urlname' => $data]);
+        XmlUrl::create(['urlname' => $request->val]);
 
-        return redirect()->action('Admin\XmlManagementController@getIndex');
+        return $this->backSuccessMsg('修改成功');
     }
 
     protected function SelectFile($filename)

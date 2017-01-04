@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('xml_management/adit/{xmlId}', ['uses' => 'XmlManagementController@getEdit']);
     Route::get('xml_management/show/{xmlId}', ['uses' => 'XmlManagementController@getShow']);
     Route::post('xml_management/postStoreVersion/{xmlId}', ['uses' => 'XmlManagementController@postStoreVersion']);
-    Route::post('xml_management/postModifyUrl/{xmlId}/{data}', ['uses' => 'XmlManagementController@postModifyUrl']);
+    Route::post('xml_management/postModifyUrl/{xmlId}', ['uses' => 'XmlManagementController@postModifyUrl']);
 
 });
 
