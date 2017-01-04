@@ -18,8 +18,6 @@ class MonsterEvent
             return false;
         }
 
-        $atk *= 10;
-
         if (! Monster::atk($event['type_id'], $userId, $atk)) {
             return false;
         }
