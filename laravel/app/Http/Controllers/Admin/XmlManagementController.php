@@ -13,10 +13,10 @@ class XmlManagementController extends Controller
 
     public function getIndex()
     {
-        $xmlurls = XmlUrl::where('flag', 1)->get();
+        $xmlurl = XmlUrl::where('flag', 1)->first();
         $xmlmsgs = XmlManagement::where('mark', 1)->paginate()->appends(request()->all());
 
-        return view('admin.xmlmsg.index', compact('xmlmsgs', 'xmlurls'));
+        return view('admin.xmlmsg.index', compact('xmlmsgs', 'xmlurl'));
     }
 
     public function getEdit($xmlId)

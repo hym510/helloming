@@ -6,7 +6,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="input-group">
-                    @foreach($xmlurls as $xmlurl)
                         <div class="form-group">
                             <label class="sr-only">url</label>
                             <p class="form-control-static">{{ $xmlurl->urlname or '' }}</p>
@@ -14,7 +13,6 @@
                         <span class="input-group-btn" style="width:0;">
                             <a href="javascript:;" class="btn btn-primary btn-md del" data-id="{{ $xmlurl->id }}" type="button">修改</a>
                         </span>
-                    @endforeach
                     </div>
                 <table class="table table-striped table-hover table-condensed no-margin">
                     <thead>
