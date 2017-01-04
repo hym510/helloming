@@ -253,7 +253,7 @@ class User extends Model
                 $type = 'diamond';
                 break;
             case '10002':
-                $type = 'power';
+                $type = 'remain_power';
                 break;
         }
 
@@ -301,7 +301,7 @@ class User extends Model
                 $type = 'diamond';
                 break;
             case '10002':
-                $type = 'power';
+                $type = 'remain_power';
                 break;
         }
         $user = Redis::hmget('user:'.$id, $type, 'remain_action', 'action');
@@ -346,6 +346,9 @@ class User extends Model
                 break;
             case '10001':
                 $type = 'diamond';
+            case '10002':
+                $type = 'remain_power';
+                break;
         }
         $user = Redis::hmget('user:'.$id, $type);
 
