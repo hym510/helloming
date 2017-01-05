@@ -97,7 +97,7 @@ class User extends Model
             static::where('id', $id)->decrement('remain_power', $power);
         } else {
             Redis::hset('user:'.$id, 'remain_power', 0);
-            static::where('id', $id)->update('remain_power', 0);
+            static::where('id', $id)->update(['remain_power' => 0]);
         }
     }
 
