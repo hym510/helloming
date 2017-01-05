@@ -180,8 +180,8 @@ class CreateTables extends Migration
 
         Schema::create('configure', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->json('data');
+            $table->string('key', 64);
+            $table->json('value');
         });
     }
 }
