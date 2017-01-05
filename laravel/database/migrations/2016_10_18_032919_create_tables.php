@@ -177,5 +177,11 @@ class CreateTables extends Migration
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
+
+        Schema::create('configure', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->json('data');
+        });
     }
 }
