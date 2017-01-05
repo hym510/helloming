@@ -49,7 +49,9 @@ class Withdraw
             'remark' => '无',
         ];
 
-        if ($luckyMoney->sendNormal($luckyMoneyData)) {
+        $resultCode = $luckyMoney->sendNormal($luckyMoneyData)->all()['result_code'];
+
+        if ($resultCode == 'SUCCESS') {
             User::where('id', $userId)->decrement('gold', $amount);
             Redis::hincrby('user:'.$userId, 'gold', -$amount);
         }
