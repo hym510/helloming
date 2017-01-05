@@ -3,23 +3,21 @@
 namespace App\Library\Event;
 
 use App\Library\Redis\Redis;
+use App\Library\Redis\ConfigRedis;
 use App\Models\Event as EventModel;
 
 class Event
 {
     public static function all($userId): array
     {
-        $data = Redis::pipeline()
-            ->get('user_event:' . $userId)
-            ->get('life_cycle')
-            ->execute();
-        $events = json_decode($data[0]);
+        $events = json_decode(Redis::get('user_event:' . $userId));
+        $lifeCycle = ConfigRedis::get('life_cycle');
         $length = count($events);
         $newEvents = array();
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created + $data[1]) > $now) {
+            if (($events[$i]->created + $lifeCycle) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
