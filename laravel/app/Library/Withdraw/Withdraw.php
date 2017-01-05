@@ -5,6 +5,7 @@ namespace App\Library\Withdraw;
 use Config;
 use App\Library\Redis\Redis;
 use App\Models\{User, Wechat};
+use App\Library\Redis\ConfigRedis;
 use EasyWeChat\Foundation\Application;
 
 class Withdraw
@@ -33,7 +34,7 @@ class Withdraw
             [['union_id', $unionId]], ['open_id']
         );
 
-        $goldExchange = json_decode(Redis::get('gold_exchange'));
+        $goldExchange = json_decode(ConfigRedis::get('gold_exchange'));
         $money = $amount * $goldExchange->money / $goldExchange->gold;
         $luckyMoney = (new Application($options))->lucky_money;
         $luckyMoneyData = [
