@@ -9,12 +9,15 @@ class ConfigRedis extends BaseRedis
 {
     public static function get($key)
     {
-        $data = call_user_func_array('parent::get', $key);
+        $data = call_user_func('parent::get', $key);
 
         if ($data) {
             return $data;
         }
 
-        return Configure::where('key', $key)->first(['value']);
+        $value = Configure::where('key', $key)->first(['value'])->value;
+        call_user_func_array('parent::set', array($key, $value));
+
+        return $value;
     }
 }
