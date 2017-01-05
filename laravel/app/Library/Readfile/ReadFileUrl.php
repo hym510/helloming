@@ -113,7 +113,6 @@ class ReadFileUrl
         foreach ($expenses as $expense){
             $data = [
                 'id' => $expense['id_i'],
-                'type' => $expense['type_i'],
                 'price' => $expense['price_i'],
                 'currency' => $expense['currency_i'],
             ];
