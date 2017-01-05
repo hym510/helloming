@@ -18,7 +18,7 @@ class MonsterController extends Controller
             return Json::error('Lack of physical strength.', 501);
         }
 
-        return Json::success($success);
+        return Json::success();
     }
 
     public function getPrize($eventId)
