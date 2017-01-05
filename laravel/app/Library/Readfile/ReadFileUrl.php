@@ -2,10 +2,8 @@
 namespace App\Library\Readfile;
 
 use Redis;
-use App\Models\XmlUrl;
 use App\Library\Xml\ReadXml;
-use App\Models\XmlManagement;
-use App\Models\{Equipment, Event, Item, Job, LevelAttr, Monster, Shop, StateAttr};
+use App\Models\{Equipment, Event, Item, Job, LevelAttr, Monster, Shop, StateAttr, XmlUrl, Configure, XmlManagement};
 
 class ReadFileUrl
 {
@@ -52,8 +50,9 @@ class ReadFileUrl
             ];
             $all[] = $data;
         }
-
-        Redis::set('equip_rate', json_encode($all));
+        $jsonData = json_encode($all);
+        Redis::set('equip_rate', $jsonData);
+        Configure::create(['key' => 'equip_rate', 'value' => $jsonData]);
     }
 
     public static function WriteEquipment($filename)
@@ -118,8 +117,9 @@ class ReadFileUrl
             ];
             $all[] = $data;
         }
-
-        Redis::set('expense', json_encode($all));
+        $jsonData = json_encode($all);
+        Redis::set('expense', $jsonData);
+        Configure::create(['key' => 'expense', 'value' => $jsonData]);
     }
 
     public static function WriteJob($filename)
@@ -196,5 +196,30 @@ class ReadFileUrl
 
             StateAttr::create($data);
         }
+    }
+
+    public static function FileGroupLoad()
+    {
+        static::Fileload('event.xml');
+        static::Fileload('item.xml');
+        static::Fileload('equipRating.xml');
+        static::Fileload('expense.xml');
+        static::Fileload('equip.xml');
+        static::Fileload('job.xml');
+        static::Fileload('userPropery.xml');
+        static::Fileload('monster.xml');
+        static::Fileload('shop.xml');
+        static::Fileload('userState.xml');
+
+        static::WriteEvent('event.xml');
+        static::WriteItem('item.xml');
+        static::WriteEquipLevel('equipRating.xml');
+        static::WriteExpense('expense.xml');
+        static::WriteEquipment('equip.xml');
+        static::WriteJob('job.xml');
+        static::WriteLevel('userPropery.xml');
+        static::WriteMonster('monster.xml');
+        static::WriteShop('shop.xml');
+        static::WriteState('userState.xml');
     }
 }

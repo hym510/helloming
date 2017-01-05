@@ -51,26 +51,7 @@ class XmlTableSeeder extends Seeder
             'xmlname' => 'userState.xml',
             'version' => '1.0.0',
         ]);
-        ReadFileUrl::Fileload('event.xml');
-        ReadFileUrl::Fileload('item.xml');
-        ReadFileUrl::Fileload('equipRating.xml');
-        ReadFileUrl::Fileload('expense.xml');
-        ReadFileUrl::Fileload('equip.xml');
-        ReadFileUrl::Fileload('job.xml');
-        ReadFileUrl::Fileload('userPropery.xml');
-        ReadFileUrl::Fileload('monster.xml');
-        ReadFileUrl::Fileload('shop.xml');
-        ReadFileUrl::Fileload('userState.xml');
 
-        ReadFileUrl::WriteEvent('event.xml');
-        ReadFileUrl::WriteItem('item.xml');
-        ReadFileUrl::WriteEquipLevel('equipRating.xml');
-        ReadFileUrl::WriteExpense('expense.xml');
-        ReadFileUrl::WriteEquipment('equip.xml');
-        ReadFileUrl::WriteJob('job.xml');
-        ReadFileUrl::WriteLevel('userPropery.xml');
-        ReadFileUrl::WriteMonster('monster.xml');
-        ReadFileUrl::WriteShop('shop.xml');
-        ReadFileUrl::WriteState('userState.xml');
+        ReadFileUrl::FileGroupLoad();
     }
 }
