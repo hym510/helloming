@@ -3,7 +3,7 @@
 namespace App\Library\IAP;
 
 use Exception;
-use App\Models\User;
+use App\Models\{Order, User};
 
 class IAP
 {
@@ -50,13 +50,21 @@ class IAP
             'quantity' => $receipt->quantity,
             'productId' => $receipt->product_id,
             'transactionId' => $receipt->transaction_id,
-            'purchaseDate' => $receipt->purchase_date
+            'purchaseDate' => date('Y/m/d H:i:s', ($receipt->purchase_date_ms / 1000))
         );
     }
 
-    public static function success($userId, $productId)
+    public static function success($userId, array $data)
     {
-        switch ($productId) {
+        Order::create([
+            'user_id' => $userId,
+            'quantity' => $data['quantity'],
+            'product_id' => $data['productId'],
+            'transaction_id' => $data['transactionId'],
+            'purchase_date' => $data['purchaseDate']
+        ]);
+
+        switch ($data['productId']) {
             case 'com.find.iphone.1':
                 User::replenishDiamond($userId, 10);
                 break;
