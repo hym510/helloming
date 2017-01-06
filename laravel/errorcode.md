@@ -15,4 +15,5 @@
 |'Fails to send message.'|602|
 |'Invalid SMS code.'|603|
 |'Shoes are not enough.'|701|
+|'Payment has been verified.'|702|
 |'Invalid receipt.'|703|
