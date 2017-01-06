@@ -70,6 +70,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ action('Admin\DiamondController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-comment"></i></div>
+                            <span class="title">钻石管理</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ action('Admin\ItemsController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-paw"></i></div>
                             <span class="title">道具管理</span>

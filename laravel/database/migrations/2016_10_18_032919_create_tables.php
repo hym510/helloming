@@ -172,6 +172,14 @@ class CreateTables extends Migration
             $table->unique('transaction_id');
         });
 
+        Schema::create('diamonds', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('icon');
+            $table->string('diamond');
+            $table->unsignedSmallInteger('price');
+            $table->unsignedSmallInteger('count');
+        });
+
         Schema::create('xml_managements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('xmlname');

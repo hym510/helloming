@@ -53,11 +53,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('exchange', ['uses' => 'ExchangeGoldController@getIndex']);
     Route::post('exchange/store', ['uses' => 'ExchangeGoldController@postStore']);
 
+    Route::get('helper/qiniu-token', ['uses' => 'HelperController@getQiniuToken']);
+
+    Route::get('diamond', ['uses' => 'DiamondController@getIndex']);
+    Route::get('diamond/add', ['uses' => 'DiamondController@getAdd']);
+    Route::get('diamond/edit/{diamondId}', ['uses' => 'DiamondController@getEdit']);
+    Route::post('diamond/update/{diamondId}', ['uses' => 'DiamondController@postUpdate']);
+    Route::post('diamond/store', ['uses' => 'DiamondController@postStore']);
+
     Route::get('xml_management', ['uses' => 'XmlManagementController@getIndex']);
     Route::get('xml_management/adit/{xmlId}', ['uses' => 'XmlManagementController@getEdit']);
     Route::get('xml_management/show/{xmlId}', ['uses' => 'XmlManagementController@getShow']);
     Route::post('xml_management/postStoreVersion/{xmlId}', ['uses' => 'XmlManagementController@postStoreVersion']);
     Route::post('xml_management/postModifyUrl/{xmlId}', ['uses' => 'XmlManagementController@postModifyUrl']);
+    Route::get('xml_management/add', ['uses' => 'XmlManagementController@getAdd']);
+    Route::post('xml_management/postStoreFilename', ['uses' => 'XmlManagementController@postStoreFilename']);
 
 });
 

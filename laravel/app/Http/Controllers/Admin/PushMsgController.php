@@ -17,7 +17,7 @@ class PushMsgController extends Controller
     public function postPushMsg(PushMsgRequest $request)
     {
         $data = $request->inputData();
-        Pusher::pushMany(['alert' => $data['message']]);
+        Pusher::pushMany(['alert' => $data['message'], 'push_time' => $data['time']]);
 
         return $this->backSuccessMsg('推送成功');
     }

@@ -19,6 +19,24 @@ class XmlManagementController extends Controller
         return view('admin.xmlmsg.index', compact('xmlmsgs', 'xmlurl'));
     }
 
+    public function getAdd()
+    {
+        return view('admin.xmlmsg.add');
+    }
+
+    public function postStoreFilename(XmlManagementRequest $request)
+    {
+        $data = $request->inputData();
+        XmlManagement::create($data);
+        $url = XmlUrl::where('flag', 1)->first();
+        $file = explode('.', $data['xmlname']);
+        $path = rtrim($url->urlname . $file[0] . '_' . $data['version'] . '.xml');
+        $xml = file_get_contents($path);
+        file_put_contents('uploads/' . $file[0] . '_' . $data['version'] . '.xml', $xml);
+
+        return redirect()->action('Admin\XmlManagementController@getIndex');
+    }
+
     public function getEdit($xmlId)
     {
         $xmlmsg = Xmlmanagement::findOrFail($xmlId);
