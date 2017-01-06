@@ -9,5 +9,7 @@ class Admin extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
+    protected $connection = 'admin';
+
     protected $table = 'admins';
 }
