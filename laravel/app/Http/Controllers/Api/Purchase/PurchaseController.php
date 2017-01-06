@@ -19,7 +19,11 @@ class PurchaseController extends Controller
             return Json::error('Invalid receipt.', 703);
         }
 
-        IAP::success(Auth::user()->user, $data['productId']);
+        try {
+            IAP::success(Auth::user()->user, $data);
+        } catch (Exception $e) {
+            return Json::error('Payment has been verified.', 703);
+        }
 
         return Json::success();
     }
