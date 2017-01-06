@@ -4,6 +4,8 @@ namespace App\Models;
 
 class Logger extends Model
 {
+    protected $connection = 'log';
+
     protected $table = 'log';
 
     public static function addOne(string $userId, string $type)
