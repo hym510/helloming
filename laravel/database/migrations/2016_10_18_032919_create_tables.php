@@ -164,7 +164,7 @@ class CreateTables extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedSmallInteger('quantity');
+            $table->unsignedTinyInteger('quantity');
             $table->string('product_id', 64);
             $table->string('transaction_id');
             $table->timestamp('purchase_date');
