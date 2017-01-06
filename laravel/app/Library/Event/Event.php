@@ -29,14 +29,13 @@ class Event
     public static function addEvent($userId, array $data)
     {
         $events = json_decode(Redis::get('user_event:' . $userId));
-        $lifeCycle = ConfigRedis::get('life_cycle');
         $length = count($events);
         $dataLength = count($data);
         $newEvents = array();
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created + $lifeCycle) > $now) {
+            if (($events[$i]->created + 86400) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
