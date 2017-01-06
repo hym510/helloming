@@ -17,7 +17,7 @@ class EventController extends Controller
 
     public function postAdd(Request $request)
     {
-        Event::addEvent(Auth::user()->user, $request->event_id, $request->longitude, $request->latitude);
+        Event::addEvent(Auth::user()->user, $request->data);
 
         return Json::success();
     }
