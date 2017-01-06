@@ -45,7 +45,8 @@ class Event
             $data[$i]['created'] = $now;
         }
 
-        Redis::set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)));
+        Redis::pipeline()->set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)))
+            ->expire('user_event:' . $userId, 172800);
     }
 
     public static function random($userId, $count): array
