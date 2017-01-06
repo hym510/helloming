@@ -27,11 +27,12 @@ class Event
         return $newEvents;
     }
 
-    public static function addEvent($userId, $eventId, $longitude, $latitude)
+    public static function addEvent($userId, array $data)
     {
         $events = json_decode(Redis::get('user_event:' . $userId));
         $lifeCycle = ConfigRedis::get('life_cycle');
         $length = count($events);
+        $dataLength = count($data);
         $newEvents = array();
         $now = time();
 
@@ -41,14 +42,11 @@ class Event
             }
         }
 
-        if (count($newEvents) < 30) {
-            $newEvents[] = [
-                'event_id' => $eventId, 'longitude' => $longitude,
-                'latitude' => $latitude, 'created' => $now
-            ];
+        for ($i = 0; $i < $dataLength; $i++) {
+            $data[$i]['created'] = $now;
         }
 
-        Redis::set('user_event:' . $userId, json_encode($newEvents));
+        Redis::set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)));
     }
 
     public static function random($userId, $count): array
