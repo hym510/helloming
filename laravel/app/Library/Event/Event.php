@@ -21,7 +21,8 @@ class Event
             }
         }
 
-        Redis::set('user_event:' . $userId, json_encode($newEvents));
+        Redis::pipeline()->set('user_event:' . $userId, json_encode($newEvents))
+            ->expire('user_event:' . $userId, 172800);
 
         return $newEvents;
     }
