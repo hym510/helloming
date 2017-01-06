@@ -55,7 +55,7 @@ class CreateTables extends Migration
             $table->unique('union_id');
         });
 
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::connection('admin')->create('admins', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
             $table->string('password');
