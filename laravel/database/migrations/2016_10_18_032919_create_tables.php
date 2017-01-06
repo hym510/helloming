@@ -73,7 +73,7 @@ class CreateTables extends Migration
         Schema::create('log', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->enum('type', ['online', 'offline']);
+            $table->string('type', 16);
             $table->timestamp('time');
         });
 
@@ -166,16 +166,20 @@ class CreateTables extends Migration
             $table->string('xmlname');
             $table->string('version');
             $table->boolean('mark')->default(true);
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')
+                ->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')
+                ->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
         Schema::create('xml_urls', function(Blueprint $table) {
             $table->increments('id');
             $table->string('urlname');
             $table->string('flag')->default(true);
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')
+                ->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')
+                ->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
         Schema::create('configure', function(Blueprint $table) {
