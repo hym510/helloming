@@ -44,6 +44,7 @@ class Event
 
         for ($i = 0; $i < $dataLength; $i++) {
             $data[$i]['created'] = $now;
+            $data[$i]['is_open'] = 0;
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)))
