@@ -29,6 +29,11 @@ class EventController extends Controller
         return Json::success();
     }
 
+    public function getLifeCycle()
+    {
+        return Json::success(['chest' => 172800, 'mime' => 172800, 'monster' => 172800]);
+    }
+
     public function getRefresh($count, $out)
     {
         return Json::success(Event::random(Auth::user()->user, $count));
