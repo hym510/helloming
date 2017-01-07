@@ -25,7 +25,7 @@ class CreateTables extends Migration
             $table->unsignedTinyInteger('height')->default(0);
             $table->unsignedTinyInteger('weight')->default(0);
             $table->unsignedTinyInteger('age')->default(0);
-            $table->enum('gender', ['male', 'female'])->default('male');
+            $table->string('gender', 16)->default('male');
             $table->unsignedMediumInteger('online_time')->default(0);
             $table->unsignedSmallInteger('job_id');
             $table->enum('zodiac', [
