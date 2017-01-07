@@ -24,7 +24,7 @@ class EventController extends Controller
 
     public function postOpen(Request $request)
     {
-        Event::addEvent(Auth::user()->user, $request->all());
+        Event::open(Auth::user()->user, $request->all());
 
         return Json::success();
     }
