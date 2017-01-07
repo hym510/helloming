@@ -36,7 +36,7 @@ class Event
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created + 86400) > $now) {
+            if (($events[$i]->created + 172800) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
@@ -46,7 +46,8 @@ class Event
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)))
-            ->expire('user_event:' . $userId, 172800);
+            ->expire('user_event:' . $userId, 172800)
+            ->execute();
     }
 
     public static function random($userId, $count): array
