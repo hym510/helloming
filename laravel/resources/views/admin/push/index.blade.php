@@ -1,5 +1,9 @@
 @extends('admin.widget.body')
 
+@section('style_link')
+    <link href="assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+@stop
+
 @section('content')
     <section>
         <div class="section-body">
@@ -10,9 +14,11 @@
                             {!! csrf_field() !!}
                             <div class="card-body form">
                                 <h3 class="text-center">发布全局推送</h3>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="time" placeholder="格式为 YYYY-MM-DDTHH:MM:SS.MMMZ 的 UTC 时间">
-                                    <label>推送时间</label>
+                                <div class='input-group date' id='datetimepicker'>
+                                    <input type='text' class="form-control" name="time"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                 </div>
                                 <div class="form-group">
                                     <textarea name="message" rows="5" class="form-control"></textarea>
@@ -30,5 +36,18 @@
             </div>
         </div>
     </section>
+@stop
+
+@section('script_link')
+    <script src="assets/lib/single_file/moment.min.js"></script>
+    <script src="assets/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+@stop
+@section('script')
+    <script type="text/javascript">
+        $('#datetimepicker').datetimepicker({
+            'format': 'YYYY-MM-DD HH:mm',
+            'locale': 'zh-CN',
+        });
+    </script>
 @stop
 

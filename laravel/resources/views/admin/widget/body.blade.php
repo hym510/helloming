@@ -71,7 +71,7 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\DiamondController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-comment"></i></div>
+                            <div class="gui-icon"><i class="fa fa-diamond"></i></div>
                             <span class="title">钻石管理</span>
                         </a>
                     </li>
