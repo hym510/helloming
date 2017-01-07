@@ -131,7 +131,7 @@ class CreateTables extends Migration
 
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['monster', 'mine', 'chest']);
+            $table->string('type', 32);
             $table->unsignedTinyInteger('level');
             $table->unsignedInteger('type_id');
             $table->unsignedSmallInteger('exp');
