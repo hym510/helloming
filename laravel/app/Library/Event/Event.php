@@ -16,13 +16,14 @@ class Event
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created + 86400) > $now) {
+            if (($events[$i]->created + 172800) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode($newEvents))
-            ->expire('user_event:' . $userId, 172800);
+            ->expire('user_event:' . $userId, 172800)
+            ->execute();
 
         return $newEvents;
     }
