@@ -107,7 +107,7 @@ class CreateTables extends Migration
             $table->boolean('max_level')->default(false);
             $table->unsignedSmallInteger('power');
             $table->unsignedSmallInteger('job_id');
-            $table->enum('position', [1, 2, 3]);
+            $table->unsignedTinyInteger('position');
             $table->json('upgrade');
         });
 
