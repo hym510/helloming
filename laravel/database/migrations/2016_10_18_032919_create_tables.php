@@ -28,11 +28,7 @@ class CreateTables extends Migration
             $table->string('gender', 16)->default('male');
             $table->unsignedMediumInteger('online_time')->default(0);
             $table->unsignedSmallInteger('job_id');
-            $table->enum('zodiac', [
-                    'aquarius', 'pisces', 'aries',
-                    'taurus', 'gemini', 'cancer', 'leo', 'virgo',
-                    'libra', 'scorpio', 'sagittarius', 'capricorn'
-                ])->nullable();
+            $table->string('zodiac', 16)->nullable();
             $table->unsignedTinyInteger('space')->default(3);
             $table->unsignedTinyInteger('take_up')->default(0);
             $table->unsignedSmallInteger('power')->default(0);
