@@ -22,6 +22,13 @@ class EventController extends Controller
         return Json::success();
     }
 
+    public function postOpen(Request $request)
+    {
+        Event::addEvent(Auth::user()->user, $request->all());
+
+        return Json::success();
+    }
+
     public function getRefresh($count, $out)
     {
         return Json::success(Event::random(Auth::user()->user, $count));
