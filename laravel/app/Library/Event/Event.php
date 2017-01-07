@@ -51,6 +51,24 @@ class Event
             ->execute();
     }
 
+    public static function open($userId, array $data)
+    {
+        $events = json_decode(Redis::get('user_event:' . $userId));
+        $length = count($events);
+
+        for ($i = 0; $i < $length; $i++) {
+            if ($events[$i]->event_id == $data['event_id']
+                && $events[$i]->longitude == $data['longitude']
+                && $events[$i]->latitude == $data['latitude']) {
+                $events[$i]['is_open'] = 1;
+            }
+        }
+
+        Redis::pipeline()->set('user_event:' . $userId, json_encode($events))
+            ->expire('user_event:' . $userId, 172800)
+            ->execute();
+    }
+
     public static function random($userId, $count): array
     {
         if ($count >= 6) {
