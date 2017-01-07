@@ -61,7 +61,7 @@ class Event
             if ($events[$i]->event_id == $data['event_id']
                 && $events[$i]->longitude == $data['longitude']
                 && $events[$i]->latitude == $data['latitude']) {
-                $events[$i]['is_open'] = 1;
+                $events[$i]->is_open = 1;
             }
         }
 
