@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Hash;
 use App\Library\Redis\Redis;
 use App\Library\Token\AuthToken;
 
@@ -411,7 +410,7 @@ class User extends Model
 
     public static function withdraw($id, $password)
     {
-        $password = Hash::make($password);
+        $password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 10]);
 
         Redis::hset('user:'.$id, 'withdraw_password', $password);
 
