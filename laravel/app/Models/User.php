@@ -70,7 +70,7 @@ class User extends Model
                 $zodiac = '摩羯座';
                 break;
             default:
-                $zodiac = NULL;
+                $zodiac = '';
         }
 
         return $zodiac;
