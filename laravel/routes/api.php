@@ -67,6 +67,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Shop', 'middleware' => ['auth.api']], function () {
         Route::get('shop/goods', ['uses' => 'ShopController@getGoods']);
         Route::get('shop/diamond', ['uses' => 'DiamondController@getDiamond']);
+        Route::post('shop/order', ['uses' => 'ShopController@postOrder']);
     });
 
     Route::group(['namespace' => 'Wechat'], function () {

@@ -21,7 +21,7 @@ class Order extends Model
         return static::create([
             'user_id' => $data['user_id'],
             'quantity' => $data['quantity'],
-            'product_id' => $data['product'],
+            'product_id' => $data['product_id'],
             'transaction_id' => $data['transaction_id'],
             ]);
     }
