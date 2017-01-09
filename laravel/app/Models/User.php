@@ -69,6 +69,8 @@ class User extends Model
             case 'capricorn':
                 $zodiac = '摩羯座';
                 break;
+            default:
+                $zodiac = NULL;
         }
 
         return $zodiac;
