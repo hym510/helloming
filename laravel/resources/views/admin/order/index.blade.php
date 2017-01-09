@@ -30,11 +30,12 @@
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->user->name }}</td>
-                            <td>{{ $order->protuct->diamond }}</td>
-                            <td><img src="{{ $order->protuct->icon }}" height="50px"></td>
-                            <td>{{ $order->protuct->price }}</td>
-                            <td>{{ $order->protuct->count }}</td>
+                            <td>{{ $order->product->diamond }}</td>
+                            <td><img src="{{ $order->product->icon }}" height="50px"></td>
+                            <td>{{ $order->product->price }}</td>
+                            <td>{{ $order->product->count }}</td>
                             <td>{{ $order->transaction_id }}</td>
+                            <td>{{ $order->purchase_date }}</td>
                         </tr>
                     @endforeach
                     </tbody>

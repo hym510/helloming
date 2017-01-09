@@ -77,7 +77,7 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\OrdersController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-cloud"></i></div>
+                            <div class="gui-icon"><i class="fa fa-book"></i></div>
                             <span class="title">钻石购买记录</span>
                         </a>
                     </li>
