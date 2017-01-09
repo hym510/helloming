@@ -58,7 +58,7 @@ class HostMining implements ShouldQueue
 
         Pusher::pushOne(
             (string)$hostEvent['user_id'],
-            ['host_event_id' => $this->hostEventId],
+            ['host_event_id' => $this->hostEventId,
             'event_id' => $hostEvent['event_id'],
             'alert' => '你在FIND里面进行的事件已经完成, 前往查看!']
         );
