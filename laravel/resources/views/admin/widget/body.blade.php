@@ -76,6 +76,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ action('Admin\OrdersController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-cloud"></i></div>
+                            <span class="title">钻石购买记录</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ action('Admin\ItemsController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-paw"></i></div>
                             <span class="title">道具管理</span>

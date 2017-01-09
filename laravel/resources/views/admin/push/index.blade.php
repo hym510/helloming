@@ -14,11 +14,14 @@
                             {!! csrf_field() !!}
                             <div class="card-body form">
                                 <h3 class="text-center">发布全局推送</h3>
-                                <div class='input-group date' id='datetimepicker'>
-                                    <input type='text' class="form-control" name="time"/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                <div class="form-group">
+                                    <div class="input-group date" id="datetimepicker">
+                                        <div class="input-group-content">
+                                            <input type="text" class="form-control" name="time">
+                                            <label>推送时间</label>
+                                        </div>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <textarea name="message" rows="5" class="form-control"></textarea>
@@ -45,7 +48,7 @@
 @section('script')
     <script type="text/javascript">
         $('#datetimepicker').datetimepicker({
-            'format': 'YYYY-MM-DD HH:mm',
+            'format': 'YYYY-MM-DD HH:mm:ss',
             'locale': 'zh-CN',
         });
     </script>
