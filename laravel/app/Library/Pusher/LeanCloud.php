@@ -60,13 +60,17 @@ class LeanCloud implements PusherContract
         return true;
     }
 
-    public function pushMany(array $data): bool
+    public function pushMany(array $data, $pushTime = null): bool
     {
-        $pushData = json_encode([
+        $pushData = [
             'prod' => Config::get('leancloud.prod'),
             'data' => array_merge($this->setting, $data),
             'expiration_interval' => '86400',
-        ]);
+        ];
+        if ($pushTime) {
+            $pushData['push_time'] = $pushTime;
+        }
+        $pushData = json_encode($pushData);
         $headers = $this->headers;
 
         $ch = curl_init($this->url);
