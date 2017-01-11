@@ -18,11 +18,8 @@ class HostEvent extends Model
 
     public static function getMine($userId): array
     {
-        return static::where('host_events.user_id', $userId)
-            ->get([
-                'host_events.id', 'host_events.event_id',
-                'host_events.created_at'
-            ])
+        return static::where('user_id', $userId)
+            ->get(['id', 'event_id', 'created_at'])
             ->toArray();
     }
 }
