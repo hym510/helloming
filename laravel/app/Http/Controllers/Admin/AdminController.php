@@ -40,11 +40,18 @@ class AdminController extends Controller
 
     public function postUpdate(AdminRequest $request, $adminId)
     {
-        Admin::where('id', $adminId)
+        if ($request->password) {
+            Admin::where('id', $adminId)
             ->update([
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
+        } else {
+            Admin::where('id', $adminId)
+            ->update([
+                'email' => $request->email,
+            ]);
+        }
 
         return redirect()->action('Admin\AdminController@getIndex');
     }
