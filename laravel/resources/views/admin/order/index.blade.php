@@ -28,14 +28,14 @@
                     <tbody>
                     @foreach ($orders as $order)
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->user->name }}</td>
-                            <td>{{ $order->product->diamond }}</td>
-                            <td><img src="{{ $order->product->icon }}" height="50px"></td>
-                            <td>{{ $order->product->price }}</td>
-                            <td>{{ $order->product->count }}</td>
-                            <td>{{ $order->transaction_id }}</td>
-                            <td>{{ $order->purchase_date }}</td>
+                            <td>{{ $order->id or '' }}</td>
+                            <td>{{ $order->user->name or '' }}</td>
+                            <td>{{ $order->product->diamond or '' }}</td>
+                            <td><img src="{{ $order->product->icon or '' }}" height="50px"></td>
+                            <td>{{ $order->product->price or '' }}</td>
+                            <td>{{ $order->product->count or '' }}</td>
+                            <td>{{ $order->transaction_id or '' }}</td>
+                            <td>{{ $order->purchase_date or '' }}</td>
                         </tr>
                     @endforeach
                     </tbody>
