@@ -27,9 +27,9 @@
                         <tr>
                             <td>{{ $diamond->id }}</td>
                             <td><img src="{{ $diamond->icon }}" height="50px"></td>
-                            <td>{{ $diamond->diamond }}</td>
+                            <td>{{ $diamond->product_id }}</td>
                             <td>{{ $diamond->price }}</td>
-                            <td>{{ $diamond->count }}</td>
+                            <td>{{ $diamond->quantity }}</td>
                             <td>
                                 <a href="{{ action('Admin\DiamondController@getEdit', $diamond->id) }}" class="btn btn-xs btn-default-bright">修改</a>
                             </td>
