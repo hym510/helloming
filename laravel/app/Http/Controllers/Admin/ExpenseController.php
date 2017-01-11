@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Redis;
 use App\Library\Xml\ReadXml;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\Controller;
 
 class ExpenseController extends Controller
 {
