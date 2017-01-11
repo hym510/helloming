@@ -173,7 +173,7 @@ class CreateTables extends Migration
             $table->string('icon');
             $table->string('product_id');
             $table->unsignedSmallInteger('price');
-            $table->unsignedSmallInteger('count');
+            $table->unsignedSmallInteger('quantity');
         });
 
         Schema::create('xml_managements', function (Blueprint $table) {
