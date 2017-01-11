@@ -27,14 +27,14 @@ class Mining
 
         User::mining($userId);
 
-        $hostEvent = HostEvent::start($userId, $eventId, $event['type_id']);
+        $hostEventId = HostEvent::start($userId, $eventId, $event['type_id']);
 
-        $job = (new HostMining($hostEvent['host_event_id']))
+        $job = (new HostMining($hostEventId))
             ->delay(Carbon::now()->addSeconds($event['time']));
 
         app(Dispatcher::class)->dispatch($job);
 
-        return $hostEvent['host_event_id'];
+        return $hostEventId;
     }
 
     public static function complete($hostEventId, $userId): array
