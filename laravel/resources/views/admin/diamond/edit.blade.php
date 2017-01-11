@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="diamond" value="{{ $diamond->diamond or '' }}">
+                                <input type="text" class="form-control" name="product_id" value="{{ $diamond->product_id or '' }}">
                                 <label>钻石</label>
                             </div>
                             <div class="form-group">
@@ -27,7 +27,7 @@
                                 <label>价格</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="count" value="{{ $diamond->count or '' }}">
+                                <input type="text" class="form-control" name="quantity" value="{{ $diamond->quantity or '' }}">
                                 <label>数量</label>
                             </div>
                             <div class="form-group">
