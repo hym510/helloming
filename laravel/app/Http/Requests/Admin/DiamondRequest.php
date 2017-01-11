@@ -10,9 +10,9 @@ class DiamondRequest extends Request
     {
         return [
             'icon' => 'required',
-            'diamond' => 'required',
+            'product_id' => 'required',
             'price' => 'required|numeric',
-            'count' => 'required|numeric',
+            'quantity' => 'required|numeric',
         ];
     }
 }
