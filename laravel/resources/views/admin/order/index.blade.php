@@ -30,10 +30,10 @@
                         <tr>
                             <td>{{ $order->id or '' }}</td>
                             <td>{{ $order->user->name or '' }}</td>
-                            <td>{{ $order->product->diamond or '' }}</td>
+                            <td>{{ $order->product->product_id or '' }}</td>
                             <td><img src="{{ $order->product->icon or '' }}" height="50px"></td>
                             <td>{{ $order->product->price or '' }}</td>
-                            <td>{{ $order->product->count or '' }}</td>
+                            <td>{{ $order->product->quantity or '' }}</td>
                             <td>{{ $order->transaction_id or '' }}</td>
                             <td>{{ $order->purchase_date or '' }}</td>
                         </tr>

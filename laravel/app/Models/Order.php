@@ -13,6 +13,6 @@ class Order extends Model
 
     public function product()
     {
-        return $this->belongsTo(Diamond::class, 'product_id', 'diamond');
+        return $this->belongsTo(Diamond::class, 'product_id', 'product_id');
     }
 }
