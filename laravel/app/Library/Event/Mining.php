@@ -4,9 +4,10 @@ namespace App\Library\Event;
 
 use Carbon\Carbon;
 use App\Jobs\HostMining;
+use App\Library\Event\Prize;
 use App\Library\Redis\Redis;
 use Illuminate\Contracts\Bus\Dispatcher;
-use App\Models\{Event, HostEvent, User, UserItem};
+use App\Models\{Event, HostEvent, User};
 
 class Mining
 {
@@ -69,11 +70,7 @@ class Mining
             }
         }
 
-        HostEvent::where('id', $hostEventId)->delete();
-        User::freeSpace($userId);
-        User::addExp($userId, $mine['exp']);
-
-        UserItem::getPrize($mine['prize'], $userId);
+        Prize::get($hostEventId, $userId, $mine['exp'], $mine['prize']);
 
         return 'success';
     }
