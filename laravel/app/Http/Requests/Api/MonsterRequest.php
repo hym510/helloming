@@ -9,7 +9,7 @@ class MonsterRequest extends Request
     public function rules()
     {
         return [
-            'event_id' => 'required',
+            'host_event_id' => 'required',
             'atk' => 'required',
         ];
     }
