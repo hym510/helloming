@@ -145,7 +145,6 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('event_id');
-            $table->unsignedInteger('mine_id');
             $table->timestamp('created_at');
         });
 
