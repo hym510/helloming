@@ -3,7 +3,7 @@
 namespace App\Library\IAP;
 
 use Exception;
-use App\Models\{Order, User};
+use App\Models\{Diamond, Order, User};
 
 class IAP
 {
@@ -56,30 +56,22 @@ class IAP
 
     public static function success($userId, array $data)
     {
-        Order::create([
-            'user_id' => $userId,
-            'quantity' => $data['quantity'],
-            'product_id' => $data['productId'],
-            'transaction_id' => $data['transactionId'],
-            'purchase_date' => $data['purchaseDate']
-        ]);
+        $diamond = Diamond::get(['product_id', 'quantity'])->toArray();
 
-        switch ($data['productId']) {
-            case 'com.find.iphone.1':
-                User::replenishDiamond($userId, 10);
-                break;
-            case 'com.find.iphone.2':
-                User::replenishDiamond($userId, 22);
-                break;
-            case 'com.find.iphone.3':
-                User::replenishDiamond($userId, 36);
-                break;
-            case 'com.find.iphone.4':
-                User::replenishDiamond($userId, 50);
-                break;
-            case 'com.find.iphone.5':
-                User::replenishDiamond($userId, 120);
-                break;
+        $length = count($diamond);
+
+        for ($i = 0; $i < $length; $i++) {
+            if ($diamond[$i]['product_id'] == $data['productId']) {
+                Order::create([
+                    'user_id' => $userId,
+                    'quantity' => $data['quantity'],
+                    'product_id' => $data['productId'],
+                    'transaction_id' => $data['transactionId'],
+                    'purchase_date' => $data['purchaseDate']
+                ]);
+
+                User::replenishDiamond($userId, $diamond[$i]['quantity']);
+            }
         }
     }
 }
