@@ -22,9 +22,7 @@ class MiningController extends Controller
 
     public function getComplete($hostEventId)
     {
-        $result = Mining::complete($hostEventId, Auth::user()->user);
-
-        switch ($result[0]) {
+        switch (Mining::complete($hostEventId, Auth::user()->user)) {
             case 'finish':
                 return Json::success();
             case 'lack':
@@ -32,7 +30,7 @@ class MiningController extends Controller
             case 'nonexist':
                 return Json::success();
             case 'prize':
-                return Json::success(['prize' => $result[1]]);
+                return Json::success();
         }
     }
 }
