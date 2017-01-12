@@ -31,7 +31,7 @@ class Mining
         return true;
     }
 
-    public static function complete($hostEventId, $userId): array
+    public static function complete($hostEventId, $userId): string
     {
         $hostEvent = HostEvent::getKeyValue(
             [['id', $hostEventId], ['user_id', $userId]],
@@ -39,7 +39,7 @@ class Mining
         );
 
         if (! $hostEvent) {
-            return ['finish'];
+            return 'finish';
         }
 
         $mine = Event::getKeyValue(
@@ -48,7 +48,7 @@ class Mining
         );
 
         if (! $mine) {
-            return ['nonexist'];
+            return 'nonexist';
         }
 
         $created = strtotime($hostEvent['created_at']);
@@ -65,7 +65,7 @@ class Mining
 
         if ($diamond) {
             if (! User::enough($userId, 'diamond', $diamond)) {
-                return ['lack'];
+                return 'lack';
             }
         }
 
@@ -73,17 +73,9 @@ class Mining
         User::freeSpace($userId);
         User::addExp($userId, $mine['exp']);
 
-        $prizeIds = array();
+        UserItem::getPrize($mine['prize'], $userId);
 
-        foreach ($mine['prize'] as $p) {
-            if (is_lucky($p[1])) {
-                $prizeIds[] = $p[0];
-            }
-        }
-
-        UserItem::getPrize($prizeIds, $userId);
-
-        return ['prize', $prizeIds];
+        return 'success';
     }
 
     public static function prize($userId, $hostEventId): array
