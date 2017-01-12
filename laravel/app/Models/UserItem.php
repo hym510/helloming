@@ -13,20 +13,20 @@ class UserItem extends Model
             ->toArray();
     }
 
-    public static function getPrize($itemIds, $userId)
+    public static function getPrize($item, $userId)
     {
-        foreach ($itemIds as $itemId) {
-            if ($itemId == 10000) {
-                User::replenishGold($userId, 1);
-            } elseif ($itemId == 10001) {
-                User::replenishDiamond($userId, 1);
+        foreach ($item as $i) {
+            if ($i[0] == 10000) {
+                User::replenishGold($userId, $i[1]);
+            } elseif ($i[0] == 10001) {
+                User::replenishDiamond($userId, $i[1]);
             } else {
-                $count = static::where('user_id', $userId)->where('item_id', $itemId)->count();
+                $count = static::where('user_id', $userId)->where('item_id', $i[0])->count();
 
                 if ($count > 0) {
-                    static::where('user_id', $userId)->where('item_id', $itemId)->increment('quantity', 1);
+                    static::where('user_id', $userId)->where('item_id', $i[0])->increment('quantity', $i[1]);
                 } else {
-                    static::create(['user_id' => $userId, 'item_id' => $itemId]);
+                    static::create(['user_id' => $userId, 'item_id' => $i[0], 'quantity' => $i[1]]);
                 }
             }
         }
