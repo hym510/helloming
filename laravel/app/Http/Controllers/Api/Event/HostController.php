@@ -16,9 +16,4 @@ class HostController extends Controller
             'host_events' => HostEvent::getHost(Auth::user()->user)
         ]);
     }
-
-    public function getPrize($hostEventId)
-    {
-        return Json::success(Mining::prize(Auth::user()->user, $hostEventId));
-    }
 }
