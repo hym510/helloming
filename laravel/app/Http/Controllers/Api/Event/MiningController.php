@@ -13,10 +13,6 @@ class MiningController extends Controller
     {
         $success = Mining::start($hostEventId, Auth::user()->user);
 
-        if (! $success) {
-            return Json::error('Not enough space available.', 401);
-        }
-
         return Json::success();
     }
 
