@@ -35,30 +35,13 @@ class MonsterEvent
     {
         $event = Event::getKeyValue(
             [['id', $eventId], ['type', 'monster']],
-            ['type_id', 'exp', 'prize']
+            ['exp', 'prize']
         );
 
         if (! $event) {
             return [];
         }
 
-        $hp = Monster::getValue($event['type_id'], 'hp');
-        $power = User::getValue($userId, 'remain_power');
-
-        if ($power >= $hp) {
-            $prizeIds = array($event['exp']);
-
-            foreach ($event['prize'] as $p) {
-                if (is_lucky($p[1])) {
-                    $prizeIds[] = $p[0];
-                }
-            }
-
-            Redis::set('user:monster:' . $userId, json_encode($prizeIds));
-        } else {
-            return [];
-        }
-
-        return ['exp' => array_shift($prizeIds), 'prize' => $prizeIds];
+        return ['exp' => $event['exp'], 'prize' => $event['prize'];
     }
 }
