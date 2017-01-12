@@ -72,7 +72,7 @@ var Helper = {
             $.fn.plupload = function (options) {
                 var settings = {
                     runtimes: 'html5,html4',
-                    url: 'http://up.qiniu.com/',
+                    url: 'https://up.qbox.me',
                     file_data_name: 'file',
                     multi_selection: false, //是否多选
                     multipart_params: {
