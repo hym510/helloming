@@ -6,24 +6,29 @@ use App\Models\{Event, User, UserItem};
 
 class Chest
 {
-    public static function open($eventId, $userId): array
+    public static function open($hostEventId, $userId): int
     {
+        $event = HostEvent::getKeyValue(
+            [['id', $hostEventId], ['user_id', $userId]],
+            ['event_id']
+        );
+
         $chest = Event::getKeyValue(
-            [['id', $eventId], ['type', 'chest']],
+            [['id', $event['event_id'], ['type', 'chest']],
             ['exp', 'prize', 'finish_item_id', 'item_quantity']
         );
 
         if (! $chest) {
-            return [];
+            return 0;
         }
 
         if ($chest['finish_item_id'] == 10000) {
             if (! User::enough($userId, 'gold', $chest['item_quantity'])) {
-                return [];
+                return 0;
             }
         } elseif ($chest['finish_item_id'] == 10001) {
             if (! User::enough($userId, 'diamond', $chest['item_quantity'])) {
-                return [];
+                return 0;
             }
         } else {
             $userItem = UserItem::getKeyValue(
@@ -36,7 +41,7 @@ class Chest
                     ->where('item_id', $chest['finish_item_id'])
                     ->decrement('quantity', $chest['item_quantity']);
             } else {
-                return [];
+                return 0;
             }
         }
 
@@ -51,6 +56,6 @@ class Chest
 
         UserItem::getPrize($prizeIds, $userId);
 
-        return ['prize' => $prizeIds];
+        return 1;
     }
 }
