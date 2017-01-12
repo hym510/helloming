@@ -10,31 +10,25 @@ use App\Models\{Event, HostEvent, User, UserItem};
 
 class Mining
 {
-    public static function start($eventId, $userId): int
+    public static function start($hostEventId, $userId): int
     {
-        if (! User::free($userId)) {
-            return 0;
-        }
-
-        $event = Event::getKeyValue(
-            [['id', $eventId], ['type', 'mine']],
-            ['type_id', 'time']
+        $event = HostEvent::getKeyValue(
+            [['id', $hostEventId], ['user_id', $userId]],
+            ['event_id']
         );
 
         if (! $event) {
             return 0;
         }
 
-        User::mining($userId);
-
-        $hostEventId = HostEvent::start($userId, $eventId, $event['type_id']);
+        $time = Event::getValue($event['event_id'], 'time');
 
         $job = (new HostMining($hostEventId))
-            ->delay(Carbon::now()->addSeconds($event['time']));
+            ->delay(Carbon::now()->addSeconds($time));
 
         app(Dispatcher::class)->dispatch($job);
 
-        return $hostEventId;
+        return 1;
     }
 
     public static function complete($hostEventId, $userId): array
