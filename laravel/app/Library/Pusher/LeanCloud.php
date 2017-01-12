@@ -36,10 +36,10 @@ class LeanCloud implements PusherContract
         ];
     }
 
-    public function pushOne($userId, array $data): bool
+    public function pushOne($channel, array $data): bool
     {
         $pushData = json_encode([
-            'where' => ['user_id' => $userId, 'deviceType' => 'ios'],
+            'where' => ['channels' => $channel, 'deviceType' => 'ios'],
             'prod' => Config::get('leancloud.prod'),
             'data' => array_merge($this->setting, $data),
             'expiration_interval' => '86400',
