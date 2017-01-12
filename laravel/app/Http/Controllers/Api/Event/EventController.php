@@ -24,9 +24,9 @@ class EventController extends Controller
 
     public function postOpen(Request $request)
     {
-        Event::open(Auth::user()->user, $request->all());
-
-        return Json::success();
+        return Json::success([
+            'host_event_id' => Event::open(Auth::user()->user, $request->all())
+        ]);
     }
 
     public function getLifeCycle()
