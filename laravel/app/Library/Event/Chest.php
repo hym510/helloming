@@ -6,7 +6,7 @@ use App\Models\{Event, User, UserItem};
 
 class Chest
 {
-    public static function open($hostEventId, $userId): int
+    public static function open($hostEventId, $userId): bool
     {
         $event = HostEvent::getKeyValue(
             [['id', $hostEventId], ['user_id', $userId]],
@@ -19,16 +19,16 @@ class Chest
         );
 
         if (! $chest) {
-            return 0;
+            return false;
         }
 
         if ($chest['finish_item_id'] == 10000) {
             if (! User::enough($userId, 'gold', $chest['item_quantity'])) {
-                return 0;
+                return false;
             }
         } elseif ($chest['finish_item_id'] == 10001) {
             if (! User::enough($userId, 'diamond', $chest['item_quantity'])) {
-                return 0;
+                return false;
             }
         } else {
             $userItem = UserItem::getKeyValue(
@@ -41,21 +41,14 @@ class Chest
                     ->where('item_id', $chest['finish_item_id'])
                     ->decrement('quantity', $chest['item_quantity']);
             } else {
-                return 0;
+                return false;
             }
         }
 
         User::addExp($userId, $chest['exp']);
-        $prizeIds = array();
 
-        foreach ($chest['prize'] as $p) {
-            if (is_lucky($p[1])) {
-                $prizeIds[] = $p[0];
-            }
-        }
+        UserItem::getPrize($chest['prize'], $userId);
 
-        UserItem::getPrize($prizeIds, $userId);
-
-        return 1;
+        return true;
     }
 }
