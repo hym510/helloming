@@ -43,7 +43,7 @@ class ReadFileUrl
     public static function WriteEquipLevel($filename)
     {
         $equiplevels = static::FilePath($filename);
-
+        Configure::where('key', 'equip_rate')->delete();
         foreach ($equiplevels as $equiplevel) {
             $data = [
                 'level' => $equiplevel['level_i'],
@@ -93,7 +93,7 @@ class ReadFileUrl
                 'info' => $event['info_s'],
                 'time_limit' => $event['timeLimit_i'],
                 'finish_item_id' => $event['finishItem_i'],
-                'item_quantity' => $event['finishItemQuantity_i'],
+                'item_quantity' => $event['finishItem_iQuantity_i'],
             ];
 
             if ($event['timeLimit_i'] == 1) {
@@ -108,7 +108,7 @@ class ReadFileUrl
     public static function WriteExpense($filename)
     {
         $expenses = static::FilePath($filename);
-
+        Configure::where('key', 'expense')->delete();
         foreach ($expenses as $expense){
             $data = [
                 'id' => $expense['id_i'],
@@ -198,6 +198,38 @@ class ReadFileUrl
         }
     }
 
+    public static function WriteFreeShoe($filename)
+    {
+        $freeshoes = static::FilePath($filename);
+        Configure::where('key', 'freeshoe')->delete();
+        foreach ($freeshoes as $freeshoe) {
+            $data = [
+                'time' => $freeshoe['time_a'],
+                'quantity' => $freeshoe['quantity_i'],
+            ];
+            $all[] = $data;
+        }
+        $jsonData = json_encode($all);
+        Redis::set('freeshoe', $jsonData);
+        Configure::create(['key' => 'freeshoe', 'value' => $jsonData]);
+    }
+
+    public static function WriteEventTime($filename)
+    {
+        $eventtimes = static::FilePath($filename);
+        Configure::where('key', 'eventtime')->delete();
+        foreach ($eventtimes as $eventtime) {
+            $data = [
+                'id' => 'id_i',
+                'value' => 'value_i',
+            ];
+            $all[] = $data;
+        }
+        $jsonData = json_encode($all);
+        Redis::set('eventtime', $jsonData);
+        Configure::create(['key' => 'eventtime', 'value' => $jsonData]);
+    }
+
     public static function FileGroupLoad()
     {
         static::Fileload('event.xml');
@@ -210,6 +242,8 @@ class ReadFileUrl
         static::Fileload('monster.xml');
         static::Fileload('shop.xml');
         static::Fileload('userState.xml');
+        static::Fileload('freeShoe.xml');
+        static::Fileload('general.xml');
 
         static::WriteEvent('event.xml');
         static::WriteItem('item.xml');
@@ -221,5 +255,7 @@ class ReadFileUrl
         static::WriteMonster('monster.xml');
         static::WriteShop('shop.xml');
         static::WriteState('userState.xml');
+        static::WriteFreeShoe('freeShoe.xml');
+        static::WriteEventTime('general.xml');
     }
 }

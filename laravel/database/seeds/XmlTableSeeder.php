@@ -51,6 +51,14 @@ class XmlTableSeeder extends Seeder
             'xmlname' => 'userState.xml',
             'version' => '1.0.0',
         ]);
+        XmlManagement::insert([
+            'xmlname' => 'freeShoe.xml',
+            'version' => '1.0.0',
+        ]);
+        XmlManagement::insert([
+            'xmlname' => 'general.xml',
+            'version' => '1.0.0',
+        ]);
 
         ReadFileUrl::FileGroupLoad();
     }

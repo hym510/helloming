@@ -122,6 +122,12 @@ class XmlManagementController extends Controller
             case 'userState.xml':
                 ReadFileUrl::WriteState('userState.xml');
                 break;
+            case 'freeShoe.xml':
+                ReadFileUrl::WriteFreeShoe('freeShoe.xml');
+                break;
+            case 'general.xml':
+                ReadFileUrl::WriteEventTime('general.xml');
+                break;
         }
     }
 }

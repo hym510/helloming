@@ -21,13 +21,13 @@ class Event extends Model
     public function getTypeNameAttribute(): string
     {
         switch ($this->type) {
-            case 'monster':
+            case '1':
                 $type = '打怪事件';
                 break;
-            case 'mine':
+            case '2':
                 $type = '挖矿事件';
                 break;
-            case 'chest':
+            case '3':
                 $type = '宝箱事件';
                 break;
         }
