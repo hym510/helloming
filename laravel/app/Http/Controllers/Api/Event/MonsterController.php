@@ -12,7 +12,7 @@ class MonsterController extends Controller
 {
     public function postAtk(MonsterRequest $request)
     {
-        $success = MonsterEvent::atk($request->event_id, $request->atk, Auth::user()->user);
+        $success = MonsterEvent::atk($request->host_event_id, $request->atk, Auth::user()->user);
 
         if (! $success) {
             return Json::error('Lack of physical strength.', 501);
