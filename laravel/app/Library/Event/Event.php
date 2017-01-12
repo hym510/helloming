@@ -2,7 +2,7 @@
 
 namespace App\Library\Event;
 
-use App\Models\HostEvent;
+use App\Models\{HostEvent, User};
 use App\Models\Event as EventModel;
 use App\Library\Redis\{ConfigRedis, Redis};
 
@@ -73,7 +73,7 @@ class Event
             ->expire('user_event:' . $userId, 172800)
             ->execute();
 
-        $hostEventId = HostEvent::host($data['event_id'], $userId);
+        $hostEventId = HostEvent::host($userId, $data['event_id']);
 
         return $hostEventId;
     }
