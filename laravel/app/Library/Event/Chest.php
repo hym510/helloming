@@ -2,7 +2,8 @@
 
 namespace App\Library\Event;
 
-use App\Models\{Event, User, UserItem};
+use App\Library\Event\Prize;
+use App\Models\{Event, HostEvent, User, UserItem};
 
 class Chest
 {
@@ -14,7 +15,7 @@ class Chest
         );
 
         $chest = Event::getKeyValue(
-            [['id', $event['event_id'], ['type', 'chest']],
+            [['id', $event['event_id']], ['type', 'chest']],
             ['exp', 'prize', 'finish_item_id', 'item_quantity']
         );
 
@@ -45,9 +46,7 @@ class Chest
             }
         }
 
-        User::addExp($userId, $chest['exp']);
-
-        UserItem::getPrize($chest['prize'], $userId);
+        Prize::get($hostEventId, $userId, $chest['exp'], $chest['prize']);
 
         return true;
     }
