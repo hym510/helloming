@@ -32,18 +32,4 @@ class MonsterEvent
 
         return true;
     }
-
-    public static function prize($eventId, $userId): array
-    {
-        $event = Event::getKeyValue(
-            [['id', $eventId], ['type', 'monster']],
-            ['exp', 'prize']
-        );
-
-        if (! $event) {
-            return [];
-        }
-
-        return ['exp' => $event['exp'], 'prize' => $event['prize'];
-    }
 }
