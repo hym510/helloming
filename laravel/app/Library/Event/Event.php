@@ -2,9 +2,9 @@
 
 namespace App\Library\Event;
 
-use App\Library\Redis\Redis;
-use App\Library\Redis\ConfigRedis;
+use App\Models\HostEvent;
 use App\Models\Event as EventModel;
+use App\Library\Redis\{ConfigRedis, Redis};
 
 class Event
 {
@@ -54,6 +54,10 @@ class Event
 
     public static function open($userId, array $data)
     {
+        if (! User::free($userId)) {
+            return 0;
+        }
+
         $events = json_decode(Redis::get('user_event:' . $userId));
         $length = count($events);
 
@@ -68,6 +72,10 @@ class Event
         Redis::pipeline()->set('user_event:' . $userId, json_encode($events))
             ->expire('user_event:' . $userId, 172800)
             ->execute();
+
+        $hostEventId = HostEvent::host($data['event_id'], $userId);
+
+        return $hostEventId;
     }
 
     public static function random($userId, $count): array
