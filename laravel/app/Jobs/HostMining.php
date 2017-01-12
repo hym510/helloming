@@ -43,18 +43,7 @@ class HostMining implements ShouldQueue
 
         User::addExp($hostEvent['user_id'], $event['exp']);
 
-        $prizeIds = array();
-
-        foreach ($event['prize'] as $p) {
-            if (is_lucky($p[1])) {
-                $prizeIds[] = $p[0];
-            }
-        }
-
-        $prize = array('event_id' => $hostEvent['event_id'], 'prize' => $prizeIds);
-        Redis::set('prize:' . $hostEvent['user_id'] . ':' . $this->hostEventId, json_encode($prize));
-
-        UserItem::getPrize($prizeIds, $hostEvent['user_id']);
+        UserItem::getPrize($event['$prize'], $hostEvent['user_id']);
 
         Pusher::pushOne(
             (string)$hostEvent['user_id'],
