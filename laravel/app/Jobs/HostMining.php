@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use Log;
 use Redis;
 use Pusher;
+use App\Library\Event\Prize;
 use Illuminate\Bus\Queueable;
+use App\Models\{Event, HostEvent};
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\{Event, HostEvent, User, UserItem};
 
 class HostMining implements ShouldQueue
 {
@@ -32,18 +32,12 @@ class HostMining implements ShouldQueue
             return;
         }
 
-        HostEvent::where('id', $this->hostEventId)->delete();
-
-        User::freeSpace($hostEvent['user_id']);
-
         $event = Event::getKeyValue(
             [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize']
         );
 
-        User::addExp($hostEvent['user_id'], $event['exp']);
-
-        UserItem::getPrize($event['$prize'], $hostEvent['user_id']);
+        Prize::get($this->hostEventId, $hostEvent['user_id'], $event['exp'], $event['prize']);
 
         Pusher::pushOne(
             (string)$hostEvent['user_id'],
