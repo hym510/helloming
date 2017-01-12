@@ -9,15 +9,15 @@ use Illuminate\Routing\Controller;
 
 class MiningController extends Controller
 {
-    public function getStart($eventId)
+    public function getStart($hostEventId)
     {
-        $success = Mining::start($eventId, Auth::user()->user);
+        $success = Mining::start($hostEventId, Auth::user()->user);
 
         if (! $success) {
             return Json::error('Not enough space available.', 401);
         }
 
-        return Json::success(['host_event_id' => $success]);
+        return Json::success();
     }
 
     public function getComplete($hostEventId)
