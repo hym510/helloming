@@ -31,14 +31,14 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
     Route::group(['namespace' => 'Event', 'middleware' => ['auth.api']], function () {
-        Route::get('chest/open/{eventId}', ['uses' => 'ChestController@getOpen']);
+        Route::get('chest/open/{hostEventId}', ['uses' => 'ChestController@getOpen']);
         Route::get('event/all', ['uses' => 'EventController@getAll']);
         Route::post('event/add', ['uses' => 'EventController@postAdd']);
         Route::post('event/open', ['uses' => 'EventController@postOpen']);
         Route::get('event/life', ['uses' => 'EventController@getLifeCycle']);
         Route::get('event/refresh/{count}/{out}', ['uses' => 'EventController@getRefresh']);
         Route::get('host/mine', ['uses' => 'HostController@getMine']);
-        Route::get('mining/start/{eventId}', ['uses' => 'MiningController@getStart']);
+        Route::get('mining/start/{hostEventId}', ['uses' => 'MiningController@getStart']);
         Route::get('mining/complete/{hostEventId}', ['uses' => 'MiningController@getComplete']);
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
     });
