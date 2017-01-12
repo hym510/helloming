@@ -38,11 +38,9 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('event/life', ['uses' => 'EventController@getLifeCycle']);
         Route::get('event/refresh/{count}/{out}', ['uses' => 'EventController@getRefresh']);
         Route::get('host/mine', ['uses' => 'HostController@getMine']);
-        Route::get('host/prize/{hostEventId}', ['uses' => 'HostController@getPrize']);
         Route::get('mining/start/{eventId}', ['uses' => 'MiningController@getStart']);
         Route::get('mining/complete/{hostEventId}', ['uses' => 'MiningController@getComplete']);
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
-        Route::get('monster/prize/{eventId}', ['uses' => 'MonsterController@getPrize']);
     });
 
     Route::group(['namespace' => 'Purchase', 'middleware' => ['auth.api']], function () {
