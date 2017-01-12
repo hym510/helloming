@@ -121,7 +121,7 @@ class User extends Model
         return $userArray;
     }
 
-    public static function mining($id)
+    public static function hostEvent($id)
     {
         Redis::hincrby('user:'.$id, 'take_up', 1);
         static::where('id', $id)->increment('take_up', 1);
