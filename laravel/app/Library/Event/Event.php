@@ -63,14 +63,22 @@ class Event
 
         $events = json_decode(Redis::get('user_event:' . $userId));
         $length = count($events);
+        $found = false;
 
         for ($i = 0; $i < $length; $i++) {
             if ($events[$i]->event_id == $data['event_id']
                 && $events[$i]->longitude == $data['longitude']
                 && $events[$i]->latitude == $data['latitude']) {
+                $found = true;
                 $events[$i]->is_open = 1;
                 $events[$i]->host_event_id = $hostEventId;
             }
+        }
+
+        if (! $found) {
+            $data['is_open'] = 1;
+            $data['host_event_id'] = $hostEventId;
+            $events[] = $data;
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode($events))
