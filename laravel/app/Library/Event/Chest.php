@@ -32,6 +32,11 @@ class Chest
             if (! User::enough($userId, 'diamond', $chest['item_quantity'])) {
                 return false;
             }
+            Consume::create([
+                'quantity' => $chest['item_quantity'],
+                'user_id' => $userId,
+                'content' => '挖矿事件',
+            ]);
         } else {
             $userItem = UserItem::getKeyValue(
                 [['user_id', $userId], ['item_id', $chest['finish_item_id']]],

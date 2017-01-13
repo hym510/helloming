@@ -332,6 +332,14 @@ class User extends Model
         Redis::hincrby('user:'.$id, 'remain_power', $quantity);
         static::where('id', $id)->increment('remain_power', $quantity);
 
+        if ($type == 'diamond') {
+            Consume::create([
+                'quantity' => $quantity,
+                'user_id' => $id,
+                'content' => '补充体力',
+            ]);
+        }
+
         return true;
     }
 
@@ -379,6 +387,14 @@ class User extends Model
         Redis::hincrby('user:'.$id, 'remain_action', $quantity);
         static::where('id', $id)->increment('remain_action', $quantity);
 
+        if ($type == 'diamond') {
+            Consume::create([
+                'quantity' => $quantity,
+                'user_id' => $id,
+                'content' => '补充行动力',
+            ]);
+        }
+
         return true;
     }
 
@@ -419,6 +435,13 @@ class User extends Model
 
         Redis::hincrby('user:'.$id, 'space', $quantity);
         static::where('id', $id)->increment('space', $quantity);
+        if ($type == 'diamond') {
+            Consume::create([
+            'quantity' => $quantity,
+            'user_id' => $id,
+            'content' => '增加托管事件',
+            ]);
+        }
 
         return true;
     }

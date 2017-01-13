@@ -57,6 +57,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('order', ['uses' => 'OrdersController@getIndex']);
 
+    Route::get('consume', ['uses' => 'ConsumeController@getIndex']);
+
     Route::get('diamond', ['uses' => 'DiamondController@getIndex']);
     Route::get('diamond/add', ['uses' => 'DiamondController@getAdd']);
     Route::get('diamond/edit/{diamondId}', ['uses' => 'DiamondController@getEdit']);

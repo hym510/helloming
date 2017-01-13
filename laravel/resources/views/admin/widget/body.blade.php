@@ -69,17 +69,16 @@
                             <span class="title">全局推送</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ action('Admin\DiamondController@getIndex') }}">
+                    <li class="gui-folder">
+                        <a>
                             <div class="gui-icon"><i class="fa fa-diamond"></i></div>
                             <span class="title">钻石管理</span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="{{ action('Admin\OrdersController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-book"></i></div>
-                            <span class="title">钻石购买记录</span>
-                        </a>
+                        <ul>
+                            <li><a href="{{ action('Admin\DiamondController@getIndex') }}"><span class="title">钻石设置</span></a></li>
+                            <li><a href="{{ action('Admin\OrdersController@getIndex') }}"><span class="title">钻石购买记录</span></a></li>
+                            <li><a href="{{ action('Admin\ConsumeController@getIndex') }}"><span class="title">钻石消耗记录</span></a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ action('Admin\ItemsController@getIndex') }}">

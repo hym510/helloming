@@ -186,7 +186,7 @@ class CreateTables extends Migration
                 ->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
-        Schema::create('xml_urls', function(Blueprint $table) {
+        Schema::create('xml_urls', function (Blueprint $table) {
             $table->increments('id');
             $table->string('urlname');
             $table->string('flag')->default(true);
@@ -196,10 +196,18 @@ class CreateTables extends Migration
                 ->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
-        Schema::create('configure', function(Blueprint $table) {
+        Schema::create('configure', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key', 64);
             $table->json('value');
+        });
+
+        Schema::create('consumes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('content');
+            $table->unsignedSmallInteger('quantity');
+            $table->timestamp('consume_date');
         });
     }
 }
