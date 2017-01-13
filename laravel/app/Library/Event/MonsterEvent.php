@@ -2,9 +2,10 @@
 
 namespace App\Library\Event;
 
+use App\Models\EventModel;
 use App\Library\Event\Prize;
 use App\Library\Redis\Redis;
-use App\Models\{Event, HostEvent, Monster};
+use App\Models\{HostEvent, Monster};
 
 class MonsterEvent
 {
@@ -15,7 +16,7 @@ class MonsterEvent
             ['event_id']
         );
 
-        $monster = Event::getKeyValue(
+        $monster = EventModel::getKeyValue(
             [['id', $event['event_id']], ['type', 'monster']],
             ['type_id', 'exp', 'prize']
         );
@@ -29,6 +30,8 @@ class MonsterEvent
         }
 
         Prize::get($hostEventId, $userId, $monster['exp'], $monster['prize']);
+
+        Event::delete($userId, $hostEventId);
 
         return true;
     }
