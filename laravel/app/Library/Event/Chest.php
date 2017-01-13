@@ -4,7 +4,7 @@ namespace App\Library\Event;
 
 use App\Library\Event\Prize;
 use App\Models\Event as EventModel;
-use App\Models\{HostEvent, User, UserItem};
+use App\Models\{HostEvent, User, UserItem, Consume};
 
 class Chest
 {
@@ -35,7 +35,7 @@ class Chest
             Consume::create([
                 'quantity' => $chest['item_quantity'],
                 'user_id' => $userId,
-                'content' => '挖矿事件',
+                'content' => '开启宝箱',
             ]);
         } else {
             $userItem = UserItem::getKeyValue(

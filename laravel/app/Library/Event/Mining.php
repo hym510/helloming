@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use App\Jobs\HostMining;
 use App\Library\Event\Prize;
 use App\Library\Redis\Redis;
-use App\Models\{HostEvent, User};
+use App\Models\{HostEvent, User, Consume};
 use App\Models\Event as EventModel;
 use Illuminate\Contracts\Bus\Dispatcher;
 
@@ -72,6 +72,12 @@ class Mining
                 return 'lack';
             }
         }
+
+        Consume::create([
+            'quantity' => $mine['item_quantity'],
+            'user_id' => $userId,
+            'content' => '挖矿事件',
+        ]);
 
         Prize::get($hostEventId, $userId, $mine['exp'], $mine['prize']);
 
