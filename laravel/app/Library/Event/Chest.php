@@ -2,8 +2,9 @@
 
 namespace App\Library\Event;
 
+use App\Models\EventModel;
 use App\Library\Event\Prize;
-use App\Models\{Event, HostEvent, User, UserItem};
+use App\Models\{HostEvent, User, UserItem};
 
 class Chest
 {
@@ -14,7 +15,7 @@ class Chest
             ['event_id']
         );
 
-        $chest = Event::getKeyValue(
+        $chest = EventModel::getKeyValue(
             [['id', $event['event_id']], ['type', 'chest']],
             ['exp', 'prize', 'finish_item_id', 'item_quantity']
         );
@@ -47,6 +48,8 @@ class Chest
         }
 
         Prize::get($hostEventId, $userId, $chest['exp'], $chest['prize']);
+
+        Event::delete($userId, $hostEventId);
 
         return true;
     }
