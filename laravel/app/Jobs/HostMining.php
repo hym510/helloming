@@ -34,7 +34,7 @@ class HostMining implements ShouldQueue
         }
 
         $event = EventModel::getKeyValue(
-            [['id', $hostEvent['event_id']], ['type', 'mine']],
+            [['id', $hostEvent['event_id']], ['type', 2]],
             ['exp', 'prize']
         );
 
