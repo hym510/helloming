@@ -91,6 +91,8 @@ class Event
 
     public static function delete($userId, $hostEventId)
     {
+        HostEvent::where('id', $hostEventId)->delete();
+
         $events = json_decode(Redis::get('user_event:' . $userId));
         $length = count($events);
         $newEvents = array();
