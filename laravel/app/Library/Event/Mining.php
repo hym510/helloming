@@ -47,7 +47,7 @@ class Mining
         }
 
         $mine = EventModel::getKeyValue(
-            [['id', $hostEvent['event_id']], ['type', 'mine']],
+            [['id', $hostEvent['event_id']], ['type', 2]],
             ['exp', 'prize', 'time', 'finish_item_id', 'item_quantity']
         );
 
