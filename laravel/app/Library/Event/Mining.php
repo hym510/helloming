@@ -4,10 +4,11 @@ namespace App\Library\Event;
 
 use Carbon\Carbon;
 use App\Jobs\HostMining;
+use App\Models\EventModel;
 use App\Library\Event\Prize;
 use App\Library\Redis\Redis;
+use App\Models\{HostEvent, User};
 use Illuminate\Contracts\Bus\Dispatcher;
-use App\Models\{Event, HostEvent, User};
 
 class Mining
 {
@@ -22,7 +23,9 @@ class Mining
             return false;
         }
 
-        $time = Event::getValue($event['event_id'], 'time');
+        HostEvent::updateValue($hostEventId, ['created' => Carbon::now()]);
+
+        $time = EventModel::getValue($event['event_id'], 'time');
 
         $job = (new HostMining($hostEventId))
             ->delay(Carbon::now()->addSeconds($time));
