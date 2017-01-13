@@ -46,7 +46,7 @@ class Mining
             return 'finish';
         }
 
-        $mine = Event::getKeyValue(
+        $mine = EventModel::getKeyValue(
             [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize', 'time', 'finish_item_id', 'item_quantity']
         );
@@ -74,6 +74,8 @@ class Mining
         }
 
         Prize::get($hostEventId, $userId, $mine['exp'], $mine['prize']);
+
+        Event::delete($userId, $hostEventId);
 
         return 'success';
     }
