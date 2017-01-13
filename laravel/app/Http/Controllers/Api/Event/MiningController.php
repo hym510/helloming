@@ -25,7 +25,7 @@ class MiningController extends Controller
                 return Json::error('Diamonds are not enough.', 601);
             case 'nonexist':
                 return Json::success();
-            case 'prize':
+            case 'success':
                 return Json::success();
         }
     }
