@@ -24,9 +24,13 @@ class EventController extends Controller
 
     public function postOpen(Request $request)
     {
-        return Json::success([
-            'host_event_id' => Event::open(Auth::user()->user, $request->all())
-        ]);
+        $success = Event::open(Auth::user()->user, $request->all());
+
+        if ($success) {
+            return Json::success(['host_event_id' => $success]);
+        } else {
+            return Json::error('Not enough space available.', 401);
+        }
     }
 
     public function getLifeCycle()
