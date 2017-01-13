@@ -59,6 +59,8 @@ class Event
             return 0;
         }
 
+        $hostEventId = HostEvent::host($userId, $data['event_id']);
+
         $events = json_decode(Redis::get('user_event:' . $userId));
         $length = count($events);
 
@@ -67,14 +69,13 @@ class Event
                 && $events[$i]->longitude == $data['longitude']
                 && $events[$i]->latitude == $data['latitude']) {
                 $events[$i]->is_open = 1;
+                $events[$i]->host_event_id = $hostEventId;
             }
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode($events))
             ->expire('user_event:' . $userId, 172800)
             ->execute();
-
-        $hostEventId = HostEvent::host($userId, $data['event_id']);
 
         return $hostEventId;
     }
