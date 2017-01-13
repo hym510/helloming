@@ -4,9 +4,10 @@ namespace App\Jobs;
 
 use Redis;
 use Pusher;
-use App\Library\Event\Prize;
+use App\Models\HostEvent;
 use Illuminate\Bus\Queueable;
-use App\Models\{Event, HostEvent};
+use App\Models\Event as EventModel;
+use App\Library\Event\{Event, Prize};
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -32,12 +33,14 @@ class HostMining implements ShouldQueue
             return;
         }
 
-        $event = Event::getKeyValue(
+        $event = EventModel::getKeyValue(
             [['id', $hostEvent['event_id']], ['type', 'mine']],
             ['exp', 'prize']
         );
 
         Prize::get($this->hostEventId, $hostEvent['user_id'], $event['exp'], $event['prize']);
+
+        Event::delete($hostEvent['user_id'], $this->hostEventId);
 
         Pusher::pushOne(
             (string)$hostEvent['user_id'],

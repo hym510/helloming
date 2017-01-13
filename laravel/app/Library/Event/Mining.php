@@ -4,10 +4,10 @@ namespace App\Library\Event;
 
 use Carbon\Carbon;
 use App\Jobs\HostMining;
-use App\Models\EventModel;
 use App\Library\Event\Prize;
 use App\Library\Redis\Redis;
 use App\Models\{HostEvent, User};
+use App\Models\Event as EventModel;
 use Illuminate\Contracts\Bus\Dispatcher;
 
 class Mining

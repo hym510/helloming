@@ -2,8 +2,8 @@
 
 namespace App\Library\Event;
 
-use App\Models\EventModel;
 use App\Library\Event\Prize;
+use App\Models\Event as EventModel;
 use App\Models\{HostEvent, User, UserItem};
 
 class Chest
