@@ -16,7 +16,7 @@ class Chest
         );
 
         $chest = EventModel::getKeyValue(
-            [['id', $event['event_id']], ['type', 'chest']],
+            [['id', $event['event_id']], ['type', 3]],
             ['exp', 'prize', 'finish_item_id', 'item_quantity']
         );
 
