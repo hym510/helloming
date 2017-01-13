@@ -88,4 +88,21 @@ class Event
 
         return ['events' => EventModel::random(Redis::hget('user:'.$userId, 'level'), $count)];
     }
+
+    public static function delete($userId, $hostEventId)
+    {
+        $events = json_decode(Redis::get('user_event:' . $userId));
+        $length = count($events);
+        $newEvents = array();
+
+        for ($i = 0; $i < $length; $i++) {
+            if (($events[$i]->host_event_id) != $hostEventId) {
+                $newEvents[] = $events[$i];
+            }
+        }
+
+        Redis::pipeline()->set('user_event:' . $userId, json_encode($newEvents))
+            ->expire('user_event:' . $userId, 172800)
+            ->execute();
+    }
 }
