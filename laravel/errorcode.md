@@ -8,6 +8,7 @@
 |'Mobile phone number has already been taken.'|214|
 |'Max level already reached.'|215|
 |'An openid has bound to this account.'|216|
+|'Not enough space available.'|401|
 |'Lack of physical strength.'|501|
 |'Gold are not enough.'|511|
 |'Currency are not enough.'|512|
