@@ -53,7 +53,7 @@ class Event
             ->execute();
     }
 
-    public static function open($userId, array $data)
+    public static function open($userId, array $data): int
     {
         if (! User::free($userId)) {
             return 0;
