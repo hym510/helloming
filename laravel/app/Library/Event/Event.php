@@ -37,7 +37,7 @@ class Event
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created + 172800) > $now) {
+            if (($events[$i]->created_at + 172800) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
@@ -46,6 +46,7 @@ class Event
             $data[$i]['created'] = $now;
             $data[$i]['is_open'] = 0;
             $data[$i]['host_event_id'] = 0;
+            $data[$i]['created_at'] = $now;
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)))
