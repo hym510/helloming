@@ -115,6 +115,7 @@ class User extends Model
         Redis::pipeline()->hset('auth_tokens', $authToken, $user->id)
             ->sadd('phone_numbers', $data['phone'])
             ->hmset('user:'.$user->id, $userArray)
+            ->set('replenish_time:' . $user->id, time())
             ->execute();
 
         $userArray['auth_token'] = $authToken;
