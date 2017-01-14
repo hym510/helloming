@@ -32,13 +32,14 @@ class Event
     public static function addEvent($userId, array $data)
     {
         $events = json_decode(Redis::get('user_event:' . $userId));
+        $lifeCycle = ConfigRedis::get('life_cycle');
         $length = count($events);
         $dataLength = count($data);
         $newEvents = array();
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created_at + 172800) > $now) {
+            if (($events[$i]->created_at + $lifeCycle) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
@@ -50,7 +51,7 @@ class Event
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode(array_merge($newEvents, $data)))
-            ->expire('user_event:' . $userId, 172800)
+            ->expire('user_event:' . $userId, $lifeCycle)
             ->execute();
     }
 
