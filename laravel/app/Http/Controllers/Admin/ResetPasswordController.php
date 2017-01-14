@@ -16,8 +16,10 @@ class ResetPasswordController extends Controller
 
     public function putReset(ResetPasswordRequest $request)
     {
-        Auth::user()->update(['password' => Hash::make($request->password)]);
+        if ($request->password) {
+            Auth::user()->update(['password' => Hash::make($request->password)]);
+        }
 
-        return Json::success();
+        return redirect()->action('Admin\AuthController@getLogin');
     }
 }
