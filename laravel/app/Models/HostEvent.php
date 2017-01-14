@@ -21,7 +21,7 @@ class HostEvent extends Model
     public static function getHost($userId): array
     {
         return static::where('user_id', $userId)
-            ->get(['id', 'event_id', 'created_at'])
+            ->get(['id', 'event_id', 'longitude', 'latitude', 'created_at'])
             ->toArray();
     }
 }
