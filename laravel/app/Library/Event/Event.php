@@ -84,7 +84,7 @@ class Event
         }
 
         if (! $found) {
-            $hostEventId = HostEvent::host($userId, $data['event_id']);
+            $hostEventId = HostEvent::host($userId, $data['event_id'], $data['longitude'], $data['latitude']);
             $data['is_open'] = 1;
             $data['host_event_id'] = $hostEventId;
             $data['created_at'] = time();
