@@ -16,7 +16,7 @@ class Event
         $now = time();
 
         for ($i = 0; $i < $length; $i++) {
-            if (($events[$i]->created + 172800) > $now) {
+            if (($events[$i]->created_at + 172800) > $now) {
                 $newEvents[] = $events[$i];
             }
         }
