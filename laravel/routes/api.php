@@ -35,7 +35,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('event/all', ['uses' => 'EventController@getAll']);
         Route::post('event/add', ['uses' => 'EventController@postAdd']);
         Route::post('event/open', ['uses' => 'EventController@postOpen']);
-        Route::get('event/life', ['uses' => 'EventController@getLifeCycle']);
         Route::get('event/refresh/{count}/{out}', ['uses' => 'EventController@getRefresh']);
         Route::get('host/events', ['uses' => 'HostController@getEvents']);
         Route::get('mining/start/{hostEventId}', ['uses' => 'MiningController@getStart']);
