@@ -6,10 +6,11 @@ class HostEvent extends Model
 {
     protected $table = 'host_events';
 
-    public static function host($userId, $eventId): int
+    public static function host($userId, $eventId, $longitude, $latitude): int
     {
         $model = static::create([
             'user_id' => $userId, 'event_id' => $eventId,
+            'longitude' => $longitude, 'latitude' => $latitude,
             'created_at' => date('Y-m-d H:i:s')
         ]);
 
