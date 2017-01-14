@@ -30,4 +30,33 @@ class Prize
         Redis::hincrby('user:' . $userId, 'remain_power', $quantity);
         User::where('id', $id)->increment('remain_power', $quantity);
     }
+
+    public static function action($userId)
+    {
+        $data = Redis::pipeline()->get('free_shoe')
+            ->hmget('user:' . $id, $type, 'remain_action', 'action')
+            ->execute();
+
+        $freeShoe = json_decode($data[0]);
+        $now = time();
+        $length = count($freeShoe);
+
+        for ($i = 0; $i < $length; $i++) {
+            $startTime = strtotime($freeShoe[$i]->time[0] . ':' . $freeShoe[$i]->time[1]);
+            $endTime = $startTime + 1800;
+
+            if ($now >= $startTime && $now <= $endTime) {
+                $quantity = $freeShoe[$i]->quantity;
+                $user = $data[1];
+
+                if ($quantity + $user[0] >= $user[1]) {
+                    $quantity = $user[1] - $user[0];
+                }
+
+                Redis::hincrby('user:' . $userId, 'remain_action', $quantity);
+                User::where('id', $id)->increment('remain_action', $quantity);
+                break;
+            }
+        }
+    }
 }
