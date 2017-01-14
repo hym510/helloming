@@ -201,7 +201,7 @@ class ReadFileUrl
     public static function WriteFreeShoe($filename)
     {
         $freeshoes = static::FilePath($filename);
-        Configure::where('key', 'freeshoe')->delete();
+        Configure::where('key', 'free_shoe')->delete();
         foreach ($freeshoes as $freeshoe) {
             $data = [
                 'time' => $freeshoe['time_a'],
@@ -217,7 +217,7 @@ class ReadFileUrl
     public static function WriteEventTime($filename)
     {
         $eventtimes = static::FilePath($filename);
-        Configure::where('key', 'eventtime')->delete();
+        Configure::where('key', 'event_time')->delete();
         foreach ($eventtimes as $eventtime) {
             $data = [
                 'id' => 'id_i',
@@ -226,8 +226,8 @@ class ReadFileUrl
             $all[] = $data;
         }
         $jsonData = json_encode($all);
-        Redis::set('event_time', $jsonData);
-        Configure::create(['key' => 'event_time', 'value' => $jsonData]);
+        Redis::set('life_cycle', $jsonData);
+        Configure::create(['key' => 'life_cycle', 'value' => $jsonData]);
     }
 
     public static function FileGroupLoad()
