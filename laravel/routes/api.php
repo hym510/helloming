@@ -42,14 +42,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('monster/atk', ['uses' => 'MonsterController@postAtk']);
     });
 
-    Route::group(['namespace' => 'Purchase', 'middleware' => ['auth.api']], function () {
-        Route::post('purchase/verify', ['uses' => 'PurchaseController@postVerify']);
-    });
-
-    Route::group(['namespace' => 'Replenish', 'middleware' => ['auth.api']], function () {
-        Route::get('replenish/power/{quantity}', ['uses' => 'ReplenishController@getPower']);
-        Route::get('replenish/space/{quantity}', ['uses' => 'ReplenishController@getSpace']);
-        Route::get('replenish/action/{quantity}', ['uses' => 'ReplenishController@getAction']);
+    Route::group(['namespace' => 'Prize', 'middleware' => ['auth.api']], function () {
+        Route::get('prize/power', ['uses' => 'PrizeController@getPower']);
     });
 
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
@@ -59,6 +53,16 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('profile/update', ['uses' => 'ProfileController@postUpdate']);
         Route::post('wechat/bind', ['uses' => 'WechatController@postBind']);
         Route::post('wechat/unbind', ['uses' => 'WechatController@postUnbind']);
+    });
+
+    Route::group(['namespace' => 'Purchase', 'middleware' => ['auth.api']], function () {
+        Route::post('purchase/verify', ['uses' => 'PurchaseController@postVerify']);
+    });
+
+    Route::group(['namespace' => 'Replenish', 'middleware' => ['auth.api']], function () {
+        Route::get('replenish/power/{quantity}', ['uses' => 'ReplenishController@getPower']);
+        Route::get('replenish/space/{quantity}', ['uses' => 'ReplenishController@getSpace']);
+        Route::get('replenish/action/{quantity}', ['uses' => 'ReplenishController@getAction']);
     });
 
     Route::group(['namespace' => 'Shop', 'middleware' => ['auth.api']], function () {
