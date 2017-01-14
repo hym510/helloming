@@ -226,7 +226,7 @@ class ReadFileUrl
             $all[] = $data;
         }
         $jsonData = json_encode($all);
-        Redis::set('eventtime', $jsonData);
+        Redis::set('event_time', $jsonData);
         Configure::create(['key' => 'eventtime', 'value' => $jsonData]);
     }
 
