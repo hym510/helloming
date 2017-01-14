@@ -26,10 +26,12 @@ class EventController extends Controller
     {
         $success = Event::open(Auth::user()->user, $request->all());
 
-        if ($success) {
-            return Json::success(['host_event_id' => $success]);
-        } else {
+        if ($success < 0) {
+            return Json::error('Event has already been open.', 502);
+        } elseif ($success == 0) {
             return Json::error('Not enough space available.', 401);
+        } else {
+            return Json::success(['host_event_id' => $success]);
         }
     }
 
