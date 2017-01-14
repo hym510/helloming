@@ -217,17 +217,24 @@ class ReadFileUrl
     public static function WriteEventTime($filename)
     {
         $eventtimes = static::FilePath($filename);
-        Configure::where('key', 'event_time')->delete();
+        Configure::whereIn('key', ['event_time', 'power_time'])->delete();
         foreach ($eventtimes as $eventtime) {
             $data = [
-                'id' => 'id_i',
-                'value' => 'value_i',
+                'id' => $eventtime['id_i'],
+                'value' => $eventtime['value_i'],
             ];
-            $all[] = $data;
+            if ($data['id'] == 1) {
+                $datavalue = array_values(($data));
+                $jsonData = json_encode($datavalue);
+                Redis::set('event_time', $jsonData);
+                Configure::create(['key' => 'event_time', 'value' => $jsonData]);
+            } elseif ($data['id'] > 3) {
+                $datavalue = array_values(($data));
+                $jsonData = json_encode($datavalue);
+                Redis::set('power_time', $jsonData);
+                Configure::create(['key' => 'power_time', 'value' => $jsonData]);
+            }
         }
-        $jsonData = json_encode($all);
-        Redis::set('life_cycle', $jsonData);
-        Configure::create(['key' => 'life_cycle', 'value' => $jsonData]);
     }
 
     public static function FileGroupLoad()
