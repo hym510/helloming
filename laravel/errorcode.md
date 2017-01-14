@@ -10,6 +10,7 @@
 |'An openid has bound to this account.'|216|
 |'Not enough space available.'|401|
 |'Lack of physical strength.'|501|
+|'Event has already been open.'|502|
 |'Gold are not enough.'|511|
 |'Currency are not enough.'|512|
 |'Diamonds are not enough.'|601|
