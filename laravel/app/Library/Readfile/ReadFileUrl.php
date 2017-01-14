@@ -211,7 +211,7 @@ class ReadFileUrl
         }
         $jsonData = json_encode($all);
         Redis::set('free_shoe', $jsonData);
-        Configure::create(['key' => 'freeshoe', 'value' => $jsonData]);
+        Configure::create(['key' => 'free_shoe', 'value' => $jsonData]);
     }
 
     public static function WriteEventTime($filename)
@@ -227,7 +227,7 @@ class ReadFileUrl
         }
         $jsonData = json_encode($all);
         Redis::set('event_time', $jsonData);
-        Configure::create(['key' => 'eventtime', 'value' => $jsonData]);
+        Configure::create(['key' => 'event_time', 'value' => $jsonData]);
     }
 
     public static function FileGroupLoad()
