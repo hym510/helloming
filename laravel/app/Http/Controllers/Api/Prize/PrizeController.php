@@ -15,4 +15,11 @@ class PrizeController extends Controller
 
         return Json::success();
     }
+
+    public function getAction()
+    {
+        Prize::action(Auth::user()->user);
+
+        return Json::success();
+    }
 }

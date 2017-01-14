@@ -44,6 +44,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['namespace' => 'Prize', 'middleware' => ['auth.api']], function () {
         Route::get('prize/power', ['uses' => 'PrizeController@getPower']);
+        Route::get('prize/action', ['uses' => 'PrizeController@getaction']);
     });
 
     Route::group(['namespace' => 'Profile', 'middleware' => ['auth.api']], function () {
