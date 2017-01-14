@@ -63,6 +63,7 @@ class Event
 
         $hostEventId = -1;
         $events = json_decode(Redis::get('user_event:' . $userId));
+        $lifeCycle = ConfigRedis::get('life_cycle');
         $length = count($events);
         $found = false;
 
@@ -91,7 +92,7 @@ class Event
         }
 
         Redis::pipeline()->set('user_event:' . $userId, json_encode($events))
-            ->expire('user_event:' . $userId, 172800)
+            ->expire('user_event:' . $userId, $lifeCycle)
             ->execute();
 
         return $hostEventId;
