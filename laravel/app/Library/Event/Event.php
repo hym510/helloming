@@ -74,7 +74,7 @@ class Event
                 $found = true;
 
                 if (! $events[$i]->is_open) {
-                    $hostEventId = HostEvent::host($userId, $data['event_id']);
+                    $hostEventId = HostEvent::host($userId, $data['event_id'], $data['longitude'], $data['latitude']);
                     $events[$i]->is_open = 1;
                     $events[$i]->host_event_id = $hostEventId;
                 }
