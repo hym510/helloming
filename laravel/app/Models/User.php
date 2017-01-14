@@ -420,6 +420,7 @@ class User extends Model
                 break;
             case '10001':
                 $type = 'diamond';
+                break;
             case '10002':
                 $type = 'remain_power';
                 break;
@@ -437,11 +438,12 @@ class User extends Model
 
         Redis::hincrby('user:'.$id, 'space', $quantity);
         static::where('id', $id)->increment('space', $quantity);
+
         if ($type == 'diamond') {
             Consume::create([
-            'quantity' => $quantity,
-            'user_id' => $id,
-            'content' => '增加托管事件',
+                'quantity' => $quantity,
+                'user_id' => $id,
+                'content' => '增加托管事件',
             ]);
         }
 
