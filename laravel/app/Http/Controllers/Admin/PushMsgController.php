@@ -22,7 +22,7 @@ class PushMsgController extends Controller
 
         Pusher::pushMany([
             'alert' => $data['message'],
-        ], $time->format("Y-m-d\TH:i:s").'.000Z');
+        ], $time->format('Y-m-d\TH:i:s').'.000Z');
 
         return $this->backSuccessMsg('推送成功');
     }

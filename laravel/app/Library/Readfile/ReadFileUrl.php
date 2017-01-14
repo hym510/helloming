@@ -210,7 +210,7 @@ class ReadFileUrl
             $all[] = $data;
         }
         $jsonData = json_encode($all);
-        Redis::set('freeshoe', $jsonData);
+        Redis::set('free_shoe', $jsonData);
         Configure::create(['key' => 'freeshoe', 'value' => $jsonData]);
     }
 

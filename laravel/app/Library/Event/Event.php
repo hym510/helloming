@@ -43,7 +43,6 @@ class Event
         }
 
         for ($i = 0; $i < $dataLength; $i++) {
-            $data[$i]['created'] = $now;
             $data[$i]['is_open'] = 0;
             $data[$i]['host_event_id'] = 0;
             $data[$i]['created_at'] = $now;
@@ -60,8 +59,7 @@ class Event
             return 0;
         }
 
-        $hostEventId = HostEvent::host($userId, $data['event_id']);
-
+        $hostEventId = -1;
         $events = json_decode(Redis::get('user_event:' . $userId));
         $length = count($events);
         $found = false;
@@ -71,14 +69,22 @@ class Event
                 && $events[$i]->longitude == $data['longitude']
                 && $events[$i]->latitude == $data['latitude']) {
                 $found = true;
-                $events[$i]->is_open = 1;
-                $events[$i]->host_event_id = $hostEventId;
+
+                if (! $events[$i]->is_open) {
+                    $hostEventId = HostEvent::host($userId, $data['event_id']);
+                    $events[$i]->is_open = 1;
+                    $events[$i]->host_event_id = $hostEventId;
+                }
+
+                break;
             }
         }
 
         if (! $found) {
+            $hostEventId = HostEvent::host($userId, $data['event_id']);
             $data['is_open'] = 1;
             $data['host_event_id'] = $hostEventId;
+            $data['created_at'] = time();
             $events[] = $data;
         }
 
