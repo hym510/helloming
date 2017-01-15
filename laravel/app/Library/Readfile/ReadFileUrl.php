@@ -246,9 +246,14 @@ class ReadFileUrl
                 Configure::create(['key' => 'life_cycle', 'value' => $jsonData]);
             } elseif ($data['id'] > 3) {
                 $datavalue = array_values(($data));
-                $jsonData = json_encode($datavalue);
-                Redis::set('power_time', $jsonData);
-                Configure::create(['key' => 'power_time', 'value' => $jsonData]);
+                $all[] = $datavalue;
+                if ($data['id'] == 5) {
+                    $all = array_values($all);
+                    $powerdata = array_collapse([[$all[0][1]], [$all[1][1]]]);
+                    $jsonData = json_encode($powerdata);
+                    Redis::set('power_time', $jsonData);
+                    Configure::create(['key' => 'power_time', 'value' => $jsonData]);
+                }
             }
         }
     }
