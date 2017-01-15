@@ -20,7 +20,7 @@ class CreateTables extends Migration
             $table->unsignedTinyInteger('level')->default(1);
             $table->unsignedMediumInteger('exp')->default(0);
             $table->unsignedMediumInteger('vip_exp')->default(0);
-            $table->unsignedTinyInteger('state')->default(0);
+            $table->unsignedTinyInteger('state')->default(1);
             $table->string('name', 32);
             $table->unsignedTinyInteger('height')->default(0);
             $table->unsignedTinyInteger('weight')->default(0);
