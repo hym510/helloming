@@ -11,7 +11,7 @@ class Event
     public static function all($userId): array
     {
         $events = json_decode(Redis::get('user_event:' . $userId));
-        $lifeCycle = ConfigRedis::get('life_cycle');
+        $lifeCycle = (int)ConfigRedis::get('life_cycle');
         $length = count($events);
         $newEvents = array();
         $now = time();
@@ -32,7 +32,7 @@ class Event
     public static function addEvent($userId, array $data)
     {
         $events = json_decode(Redis::get('user_event:' . $userId));
-        $lifeCycle = ConfigRedis::get('life_cycle');
+        $lifeCycle = (int)ConfigRedis::get('life_cycle');
         $length = count($events);
         $dataLength = count($data);
         $newEvents = array();
@@ -63,7 +63,7 @@ class Event
 
         $hostEventId = -1;
         $events = json_decode(Redis::get('user_event:' . $userId));
-        $lifeCycle = ConfigRedis::get('life_cycle');
+        $lifeCycle = (int)ConfigRedis::get('life_cycle');
         $length = count($events);
         $found = false;
 
@@ -112,7 +112,7 @@ class Event
         HostEvent::where('id', $hostEventId)->delete();
 
         $events = json_decode(Redis::get('user_event:' . $userId));
-        $lifeCycle = ConfigRedis::get('life_cycle');
+        $lifeCycle = (int)ConfigRedis::get('life_cycle');
         $length = count($events);
         $newEvents = array();
 
