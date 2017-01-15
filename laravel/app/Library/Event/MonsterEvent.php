@@ -29,13 +29,13 @@ class MonsterEvent
             return false;
         }
 
+        Event::delete($userId, $hostEventId);
+
         if (! Monster::atk($monster['type_id'], $userId, $atk)) {
             return false;
         }
 
         Prize::get($hostEventId, $userId, $monster['exp'], $monster['prize']);
-
-        Event::delete($userId, $hostEventId);
 
         return true;
     }
