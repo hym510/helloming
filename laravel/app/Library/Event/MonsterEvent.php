@@ -16,6 +16,10 @@ class MonsterEvent
             ['event_id']
         );
 
+        if (! $event) {
+            return false;
+        }
+
         $monster = EventModel::getKeyValue(
             [['id', $event['event_id']], ['type', 1]],
             ['type_id', 'exp', 'prize']
