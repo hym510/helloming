@@ -249,7 +249,7 @@ class User extends Model
                 ->hmset('user:'.$id, 'power', $power, 'action', $action)
                 ->execute();
 
-            if ($stateAttr[$userAttr[2] - 1]->power) {
+            if ($power >= $stateAttr[$userAttr[2] - 1]->power) {
                 Redis::hincrby('user:'.$id, 'state', 1);
 
                 static::where('id', $id)->update([
