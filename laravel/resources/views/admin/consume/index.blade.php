@@ -17,9 +17,9 @@
                         <tr>
                             <th>编号</th>
                             <th>姓名</th>
-                            <th>消耗事件</th>
+                            <th>消耗钻石事件</th>
                             <th>消耗钻石数量</th>
-                            <th>消耗时间</th>
+                            <th>消耗钻石时间</th>
                         </tr>
                     </thead>
                     <tbody>
