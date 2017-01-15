@@ -31,6 +31,7 @@ class ReadFileUrl
     {
         $items = static::FilePath($filename);
         Item::truncate();
+
         foreach ($items as $item) {
             $data = [
                 'id' => $item['id_i'],
@@ -44,12 +45,14 @@ class ReadFileUrl
     {
         $equiplevels = static::FilePath($filename);
         Configure::where('key', 'equip_rate')->delete();
+
         foreach ($equiplevels as $equiplevel) {
             $data = [
                 'level' => $equiplevel['level_i'],
             ];
             $all[] = $data;
         }
+
         $jsonData = json_encode($all);
         Redis::set('equip_rate', $jsonData);
         Configure::create(['key' => 'equip_rate', 'value' => $jsonData]);
@@ -59,6 +62,7 @@ class ReadFileUrl
     {
         $equipments = static::FilePath($filename);
         Equipment::truncate();
+
         foreach ($equipments as $equipment) {
             $data = [
                 'id' => $equipment['id_i'],
@@ -79,6 +83,7 @@ class ReadFileUrl
     {
         $events = static::FilePath($filename);
         Event::truncate();
+
         foreach ($events as $event) {
             $prize = '[' . $event['rewardItem_a'] . ']';
             $data = [
@@ -109,6 +114,7 @@ class ReadFileUrl
     {
         $expenses = static::FilePath($filename);
         Configure::where('key', 'expense')->delete();
+
         foreach ($expenses as $expense){
             $data = [
                 'id' => $expense['id_i'],
@@ -117,6 +123,7 @@ class ReadFileUrl
             ];
             $all[] = $data;
         }
+
         $jsonData = json_encode($all);
         Redis::set('expense', $jsonData);
         Configure::create(['key' => 'expense', 'value' => $jsonData]);
@@ -126,6 +133,7 @@ class ReadFileUrl
     {
         $jobs = static::FilePath($filename);
         Job::truncate();
+
         foreach ($jobs as $job) {
             $data = [
                 'id' => $job['id_i'],
@@ -140,6 +148,7 @@ class ReadFileUrl
     {
         $levels = static::FilePath($filename);
         levelAttr::truncate();
+
         foreach ($levels as $level) {
             $data = [
                 'level' => $level['level_i'],
@@ -156,6 +165,7 @@ class ReadFileUrl
     {
         $monsters = static::FilePath($filename);
         Monster::truncate();
+
         foreach ($monsters as $monster) {
             $data = [
                 'id' => $monster['id_i'],
@@ -172,6 +182,7 @@ class ReadFileUrl
     {
         $shops = static::FilePath($filename);
         Shop::truncate();
+
         foreach ($shops as $shop) {
             $data = [
                 'item_id' => $shop['item_i'],
@@ -188,6 +199,7 @@ class ReadFileUrl
     {
         $states = static::FilePath($filename);
         StateAttr::truncate();
+
         foreach ($states as $state) {
             $data = [
                 'level' => $state['id_i'],
@@ -202,6 +214,7 @@ class ReadFileUrl
     {
         $freeshoes = static::FilePath($filename);
         Configure::where('key', 'free_shoe')->delete();
+
         foreach ($freeshoes as $freeshoe) {
             $data = [
                 'time' => $freeshoe['time_a'],
@@ -209,25 +222,28 @@ class ReadFileUrl
             ];
             $all[] = $data;
         }
+
         $jsonData = json_encode($all);
         Redis::set('free_shoe', $jsonData);
         Configure::create(['key' => 'free_shoe', 'value' => $jsonData]);
     }
 
-    public static function WriteEventTime($filename)
+    public static function WriteLifeCycle($filename)
     {
         $eventtimes = static::FilePath($filename);
-        Configure::whereIn('key', ['event_time', 'power_time'])->delete();
+        Configure::whereIn('key', ['life_cycle', 'power_time'])->delete();
+
         foreach ($eventtimes as $eventtime) {
             $data = [
                 'id' => $eventtime['id_i'],
                 'value' => $eventtime['value_i'],
             ];
+
             if ($data['id'] == 1) {
                 $datavalue = array_values(($data));
                 $jsonData = json_encode($datavalue);
-                Redis::set('event_time', $jsonData);
-                Configure::create(['key' => 'event_time', 'value' => $jsonData]);
+                Redis::set('life_cycle', $jsonData);
+                Configure::create(['key' => 'life_cycle', 'value' => $jsonData]);
             } elseif ($data['id'] > 3) {
                 $datavalue = array_values(($data));
                 $jsonData = json_encode($datavalue);
@@ -263,6 +279,6 @@ class ReadFileUrl
         static::WriteShop('shop.xml');
         static::WriteState('userState.xml');
         static::WriteFreeShoe('freeShoe.xml');
-        static::WriteEventTime('general.xml');
+        static::WriteLifeCycle('general.xml');
     }
 }
