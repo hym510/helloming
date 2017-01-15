@@ -11,7 +11,7 @@ class Prize
     {
         $data = Redis::pipeline()->get('replenish_time:' . $userId)
             ->get('power_time')
-            ->hmget('user:' . $userId, $type, 'remain_power', 'power')
+            ->hmget('user:' . $userId, 'remain_power', 'power')
             ->execute();
 
         if (! $data[0]) {
@@ -34,7 +34,7 @@ class Prize
     public static function action($userId)
     {
         $data = Redis::pipeline()->get('free_shoe')
-            ->hmget('user:' . $id, $type, 'remain_action', 'action')
+            ->hmget('user:' . $userId, 'remain_action', 'action')
             ->execute();
 
         $freeShoe = json_decode($data[0]);
@@ -54,7 +54,7 @@ class Prize
                 }
 
                 Redis::hincrby('user:' . $userId, 'remain_action', $quantity);
-                User::where('id', $id)->increment('remain_action', $quantity);
+                User::where('id', $userId)->increment('remain_action', $quantity);
                 break;
             }
         }
