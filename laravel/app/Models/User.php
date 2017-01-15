@@ -370,6 +370,7 @@ class User extends Model
                 $type = 'remain_power';
                 break;
         }
+
         $user = Redis::hmget('user:'.$id, $type, 'remain_action', 'action');
 
         $consume = $quantity * $data->price;
@@ -462,6 +463,19 @@ class User extends Model
         Redis::hincrby('user:' . $id, 'gold', $gold);
 
         static::where('id', $id)->increment('gold', $gold);
+    }
+
+    public static function addPower($id, $power)
+    {
+        $user = Redis::hmget('user:'.$id, 'remain_power', 'power');
+
+        if ($user[0] + $power >= $user[1]) {
+            $power = $user[1] - $user[0];
+        }
+
+        Redis::hincrby('user:' . $id, 'remain_power', $power);
+
+        static::where('id', $id)->increment('remain_power', $power);
     }
 
     public static function bindUnionid($id, $unionid): bool
