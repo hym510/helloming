@@ -10,18 +10,6 @@ class Monster extends Model
         'id', 'name', 'level', 'hp',
     ];
 
-    public static function atk($id, $userId, $atk): bool
-    {
-        $hp = static::getValue($id, 'hp');
-        User::consumePower($userId, $atk);
-
-        if ($atk >= $hp) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function getTypeNameAttribute()
     {
         if ($this->type == 'boss') {
@@ -31,5 +19,20 @@ class Monster extends Model
         }
 
         return $type;
+    }
+
+    public static function atk($id, $userId, $atk): bool
+    {
+        $hp = static::getValue($id, 'hp');
+
+        if (! User::consumePower($userId, $atk)) {
+            return false;
+        }
+
+        if ($atk >= $hp) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
