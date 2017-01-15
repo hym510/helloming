@@ -241,9 +241,8 @@ class ReadFileUrl
 
             if ($data['id'] == 1) {
                 $datavalue = array_values(($data));
-                $jsonData = json_encode([$datavalue[1]]);
-                Redis::set('life_cycle', $jsonData);
-                Configure::create(['key' => 'life_cycle', 'value' => $jsonData]);
+                Redis::set('life_cycle', $datavalue[1]);
+                Configure::create(['key' => 'life_cycle', 'value' => $datavalue[1]]);
             } elseif ($data['id'] > 3) {
                 $datavalue = array_values(($data));
                 $all[] = $datavalue;
