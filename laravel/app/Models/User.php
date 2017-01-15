@@ -478,6 +478,19 @@ class User extends Model
         static::where('id', $id)->increment('remain_power', $power);
     }
 
+    public static function addAction($id, $action)
+    {
+        $user = Redis::hmget('user:'.$id, 'remain_action', 'action');
+
+        if ($user[0] + $action >= $user[1]) {
+            $action = $user[1] - $user[0];
+        }
+
+        Redis::hincrby('user:' . $id, 'remain_action', $action);
+
+        static::where('id', $id)->increment('remain_action', $action);
+    }
+
     public static function bindUnionid($id, $unionid): bool
     {
         if (Redis::hget('user:'.$id, 'union_id')) {
