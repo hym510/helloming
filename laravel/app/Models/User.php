@@ -146,16 +146,20 @@ class User extends Model
         }
     }
 
-    public static function consumePower($id, $power)
+    public static function consumePower($id, $power): bool
     {
         $remainPower = Redis::hget('user:'.$id, 'remain_power');
 
         if ($remainPower >= $power) {
             Redis::hincrby('user:'.$id, 'remain_power', -$power);
             static::where('id', $id)->decrement('remain_power', $power);
+
+            return true;
         } else {
             Redis::hset('user:'.$id, 'remain_power', 0);
             static::where('id', $id)->update(['remain_power' => 0]);
+
+            return false;
         }
     }
 
