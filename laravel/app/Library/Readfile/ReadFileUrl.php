@@ -7,7 +7,7 @@ use App\Models\{Equipment, Event, Item, Job, LevelAttr, Monster, Shop, StateAttr
 
 class ReadFileUrl
 {
-    public static function Fileload($filename)
+    public static function fileLoad($filename)
     {
         $url = XmlUrl::where('flag', 1)->first();
         $filedata = XmlManagement::where('xmlname', $filename)->first();
@@ -17,7 +17,7 @@ class ReadFileUrl
         file_put_contents('public/uploads/' . $file[0] . '_' . $filedata['version'] . '.xml', $xml);
     }
 
-    public static function FilePath($filename): array
+    public static function filePath($filename): array
     {
         $filedata = XmlManagement::where('xmlname', $filename)->where('mark', 1)->first();
         $file = explode('.', $filedata['xmlname']);
@@ -27,9 +27,9 @@ class ReadFileUrl
         return $readfile;
     }
 
-    public static function WriteItem($filename)
+    public static function writeItem($filename)
     {
-        $items = static::FilePath($filename);
+        $items = static::filePath($filename);
         Item::truncate();
 
         foreach ($items as $item) {
@@ -41,9 +41,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteEquipLevel($filename)
+    public static function writeEquipLevel($filename)
     {
-        $equiplevels = static::FilePath($filename);
+        $equiplevels = static::filePath($filename);
         Configure::where('key', 'equip_rate')->delete();
 
         foreach ($equiplevels as $equiplevel) {
@@ -58,9 +58,9 @@ class ReadFileUrl
         Configure::create(['key' => 'equip_rate', 'value' => $jsonData]);
     }
 
-    public static function WriteEquipment($filename)
+    public static function writeEquipment($filename)
     {
-        $equipments = static::FilePath($filename);
+        $equipments = static::filePath($filename);
         Equipment::truncate();
 
         foreach ($equipments as $equipment) {
@@ -79,9 +79,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteEvent($filename)
+    public static function writeEvent($filename)
     {
-        $events = static::FilePath($filename);
+        $events = static::filePath($filename);
         Event::truncate();
 
         foreach ($events as $event) {
@@ -110,9 +110,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteExpense($filename)
+    public static function writeExpense($filename)
     {
-        $expenses = static::FilePath($filename);
+        $expenses = static::filePath($filename);
         Configure::where('key', 'expense')->delete();
 
         foreach ($expenses as $expense){
@@ -129,9 +129,9 @@ class ReadFileUrl
         Configure::create(['key' => 'expense', 'value' => $jsonData]);
     }
 
-    public static function WriteJob($filename)
+    public static function writeJob($filename)
     {
-        $jobs = static::FilePath($filename);
+        $jobs = static::filePath($filename);
         Job::truncate();
 
         foreach ($jobs as $job) {
@@ -144,9 +144,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteLevel($filename)
+    public static function writeLevel($filename)
     {
-        $levels = static::FilePath($filename);
+        $levels = static::filePath($filename);
         levelAttr::truncate();
 
         foreach ($levels as $level) {
@@ -161,9 +161,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteMonster($filename)
+    public static function writeMonster($filename)
     {
-        $monsters = static::FilePath($filename);
+        $monsters = static::filePath($filename);
         Monster::truncate();
 
         foreach ($monsters as $monster) {
@@ -178,9 +178,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteShop($filename)
+    public static function writeShop($filename)
     {
-        $shops = static::FilePath($filename);
+        $shops = static::filePath($filename);
         Shop::truncate();
 
         foreach ($shops as $shop) {
@@ -195,9 +195,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteState($filename)
+    public static function writeState($filename)
     {
-        $states = static::FilePath($filename);
+        $states = static::filePath($filename);
         StateAttr::truncate();
 
         foreach ($states as $state) {
@@ -210,9 +210,9 @@ class ReadFileUrl
         }
     }
 
-    public static function WriteFreeShoe($filename)
+    public static function writeFreeShoe($filename)
     {
-        $freeshoes = static::FilePath($filename);
+        $freeshoes = static::filePath($filename);
         Configure::where('key', 'free_shoe')->delete();
 
         foreach ($freeshoes as $freeshoe) {
@@ -228,9 +228,9 @@ class ReadFileUrl
         Configure::create(['key' => 'free_shoe', 'value' => $jsonData]);
     }
 
-    public static function WriteLifeCycle($filename)
+    public static function writeLifeCycle($filename)
     {
-        $eventtimes = static::FilePath($filename);
+        $eventtimes = static::filePath($filename);
         Configure::whereIn('key', ['life_cycle', 'power_time'])->delete();
 
         foreach ($eventtimes as $eventtime) {
@@ -255,30 +255,30 @@ class ReadFileUrl
 
     public static function FileGroupLoad()
     {
-        static::Fileload('event.xml');
-        static::Fileload('item.xml');
-        static::Fileload('equipRating.xml');
-        static::Fileload('expense.xml');
-        static::Fileload('equip.xml');
-        static::Fileload('job.xml');
-        static::Fileload('userPropery.xml');
-        static::Fileload('monster.xml');
-        static::Fileload('shop.xml');
-        static::Fileload('userState.xml');
-        static::Fileload('freeShoe.xml');
-        static::Fileload('general.xml');
+        static::fileLoad('event.xml');
+        static::fileLoad('item.xml');
+        static::fileLoad('equipRating.xml');
+        static::fileLoad('expense.xml');
+        static::fileLoad('equip.xml');
+        static::fileLoad('job.xml');
+        static::fileLoad('userPropery.xml');
+        static::fileLoad('monster.xml');
+        static::fileLoad('shop.xml');
+        static::fileLoad('userState.xml');
+        static::fileLoad('freeShoe.xml');
+        static::fileLoad('general.xml');
 
-        static::WriteEvent('event.xml');
-        static::WriteItem('item.xml');
-        static::WriteEquipLevel('equipRating.xml');
-        static::WriteExpense('expense.xml');
-        static::WriteEquipment('equip.xml');
+        static::writeEvent('event.xml');
+        static::writeItem('item.xml');
+        static::writeEquipLevel('equipRating.xml');
+        static::writeExpense('expense.xml');
+        static::writeEquipment('equip.xml');
         static::WriteJob('job.xml');
-        static::WriteLevel('userPropery.xml');
-        static::WriteMonster('monster.xml');
-        static::WriteShop('shop.xml');
-        static::WriteState('userState.xml');
-        static::WriteFreeShoe('freeShoe.xml');
-        static::WriteLifeCycle('general.xml');
+        static::writeLevel('userPropery.xml');
+        static::writeMonster('monster.xml');
+        static::writeShop('shop.xml');
+        static::writeState('userState.xml');
+        static::writeFreeShoe('freeShoe.xml');
+        static::writeLifeCycle('general.xml');
     }
 }
