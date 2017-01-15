@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" readonly>
                                 <label>邮箱</label>
                                 <div class="help-block">登录帐号</div>
                             </div>
