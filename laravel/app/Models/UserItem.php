@@ -20,6 +20,10 @@ class UserItem extends Model
                 User::replenishGold($userId, $i[1]);
             } elseif ($i[0] == 10001) {
                 User::replenishDiamond($userId, $i[1]);
+            } elseif ($i[0] == 10002) {
+                User::addPower($userId, $i[1]);
+            } elseif ($i[0] == 10003) {
+                User::addAction($userId, $i[1]);
             } else {
                 $count = static::where('user_id', $userId)->where('item_id', $i[0])->count();
 
