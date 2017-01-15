@@ -43,10 +43,10 @@ class Prize
         $length = count($freeShoe);
 
         for ($i = 0; $i < $length; $i++) {
-            $startTime = strtotime($freeShoe[$i]->time[0] . ':' . $freeShoe[$i]->time[1]);
-            $endTime = $startTime + 1800;
+            $time = $freeShoe[$i]->time;
+            $startTime = strtotime($time[1].$time[2].':'.$time[4].$time[5]);
 
-            if ($now >= $startTime && $now <= $endTime) {
+            if ($now >= $startTime && $now <= $startTime + 1800) {
                 $quantity = $freeShoe[$i]->quantity;
                 $user = $data[1];
 
