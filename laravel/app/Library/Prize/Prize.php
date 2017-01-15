@@ -11,11 +11,11 @@ class Prize
     {
         $data = Redis::pipeline()->get('replenish_time:' . $userId)
             ->get('power_time')
-            ->hmget('user:' . $id, $type, 'remain_power', 'power')
+            ->hmget('user:' . $userId, $type, 'remain_power', 'power')
             ->execute();
 
         if (! $data[0]) {
-            Redis::set('replenish_time:' . $user->id, time());
+            Redis::set('replenish_time:' . $userId, time());
 
             return;
         }
@@ -28,7 +28,7 @@ class Prize
         }
 
         Redis::hincrby('user:' . $userId, 'remain_power', $quantity);
-        User::where('id', $id)->increment('remain_power', $quantity);
+        User::where('id', $userId)->increment('remain_power', $quantity);
     }
 
     public static function action($userId)
