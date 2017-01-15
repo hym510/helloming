@@ -20,7 +20,8 @@ class Prize
             return;
         }
 
-        $quantity = floor((time() - $data[0]) / $data[1][0]) * $data[1][1];
+        $powerTime = json_decode($data[1]);
+        $quantity = floor((time() - $data[0]) / $powerTime[0]) * $powerTime[1];
         $user = $data[2];
 
         if ($quantity + $user[0] >= $user[1]) {
