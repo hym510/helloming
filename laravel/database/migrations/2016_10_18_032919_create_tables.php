@@ -211,5 +211,15 @@ class CreateTables extends Migration
             $table->unsignedSmallInteger('quantity');
             $table->timestamp('consume_date');
         });
+
+        Schema::create('versions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('app_version');
+            $table->string('mark')->default(true);
+            $table->timestamp('created_at')
+                ->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')
+                ->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+        });
     }
 }

@@ -60,7 +60,7 @@
                     <li>
                         <a href="{{ action('Admin\XmlManagementController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-navicon"></i></div>
-                            <span class="title">版本管理</span>
+                            <span class="title">文件管理</span>
                         </a>
                     </li>
                     <li>
@@ -79,6 +79,12 @@
                             <li><a href="{{ action('Admin\OrdersController@getIndex') }}"><span class="title">钻石购买记录</span></a></li>
                             <li><a href="{{ action('Admin\ConsumeController@getIndex') }}"><span class="title">钻石消耗记录</span></a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="{{ action('Admin\VersionController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-archive"></i></div>
+                            <span class="title">版本管理</span>
+                        </a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\ItemsController@getIndex') }}">

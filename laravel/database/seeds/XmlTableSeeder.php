@@ -3,7 +3,7 @@
 use App\Models\XmlManagement;
 use Illuminate\Database\Seeder;
 use App\Library\Readfile\ReadFileUrl;
-use App\Models\XmlUrl;
+use App\Models\{XmlUrl, Version};
 
 class XmlTableSeeder extends Seeder
 {
@@ -59,6 +59,9 @@ class XmlTableSeeder extends Seeder
             'xmlname' => 'general.xml',
             'version' => '1.0.0',
         ]);
+        Version::insert([
+            'app_version' => '1.0.0',
+            ]);
 
         ReadFileUrl::FileGroupLoad();
     }

@@ -86,4 +86,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Xml'], function () {
         Route::get('xml/download/{file}', ['uses' => 'XmlController@getDownload']);
     });
+
+    Route::group(['namespace' => 'Version'], function () {
+        Route::get('app/version', ['uses' => 'VersionController@getVersion']);
+    });
 });

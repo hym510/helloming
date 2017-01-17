@@ -59,6 +59,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('consume', ['uses' => 'ConsumeController@getIndex']);
 
+    Route::get('version', ['uses' => 'VersionController@getIndex']);
+    Route::get('version/edit/{versionId}', ['uses' => 'VersionController@getEdit']);
+    Route::post('version/store/{versionId}', ['uses' => 'VersionController@postStore']);
+
     Route::get('diamond', ['uses' => 'DiamondController@getIndex']);
     Route::get('diamond/add', ['uses' => 'DiamondController@getAdd']);
     Route::get('diamond/edit/{diamondId}', ['uses' => 'DiamondController@getEdit']);
