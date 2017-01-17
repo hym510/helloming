@@ -110,6 +110,7 @@ class Event
     public static function delete($userId, $hostEventId)
     {
         HostEvent::where('id', $hostEventId)->delete();
+        User::freeSpace($userId);
 
         $events = json_decode(Redis::get('user_event:' . $userId));
         $lifeCycle = (int)ConfigRedis::get('life_cycle');

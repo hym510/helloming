@@ -6,9 +6,9 @@ use Carbon\Carbon;
 use App\Jobs\HostMining;
 use App\Library\Event\Prize;
 use App\Library\Redis\Redis;
-use App\Models\{HostEvent, User, Consume};
 use App\Models\Event as EventModel;
 use Illuminate\Contracts\Bus\Dispatcher;
+use App\Models\{HostEvent, User, Consume};
 
 class Mining
 {
