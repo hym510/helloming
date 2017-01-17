@@ -7,9 +7,9 @@ use App\Models\{Diamond, Order, User};
 
 class IAP
 {
-    public static function getReceiptData($receipt, $isSandbox = false): array
+    public static function getReceiptData($receipt): array
     {
-        if ($isSandbox) {
+        if (getenv('APP_DEBUG')) {
             $endPoint = 'https://sandbox.itunes.apple.com/verifyReceipt';
         } else {
             $endPoint = 'https://buy.itunes.apple.com/verifyReceipt';
