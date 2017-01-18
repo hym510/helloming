@@ -20,9 +20,16 @@ class Prize
             return;
         }
 
+        $user = $data[2];
+        Redis::set('replenish_time:' . $userId, time());
+
+        if ($user[0] >= $user[1]) {
+            return;
+        }
+
+
         $powerTime = json_decode($data[1]);
         $quantity = floor((time() - $data[0]) / $powerTime[0]) * $powerTime[1];
-        $user = $data[2];
 
         if ($quantity + $user[0] >= $user[1]) {
             $quantity = $user[1] - $user[0];
