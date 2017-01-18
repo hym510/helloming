@@ -327,11 +327,6 @@ class User extends Model
             return false;
         }
 
-        if ($user[1] + $quantity >= $user[2]) {
-            $quantity = $user[2] - $user[1];
-            $consume = $quantity * $data->price;
-        }
-
         Redis::hincrby('user:'.$id, $type, -$consume);
         static::where('id', $id)->decrement($type, $consume);
 
