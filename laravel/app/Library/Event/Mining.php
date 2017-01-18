@@ -23,7 +23,9 @@ class Mining
             return false;
         }
 
-        HostEvent::updateValue($hostEventId, ['created_at' => Carbon::now()]);
+        HostEvent::updateValue($hostEventId, [
+            'is_start' => 1, 'created_at' => Carbon::now()
+        ]);
 
         $time = EventModel::getValue($event['event_id'], 'time');
 
