@@ -236,6 +236,10 @@ class User extends Model
         $userAttr = $data[2];
         $userExp = $userAttr[1] + $exp;
 
+        if (! isset($levelAttr[$userAttr[0] - 1])) {
+            return;
+        }
+
         if ($userExp >= $levelAttr[$userAttr[0] - 1]->exp) {
             $power = $levelAttr[$userAttr[0] - 1]->power;
             $action = $levelAttr[$userAttr[0] - 1]->action;
