@@ -8,7 +8,10 @@ class Prize
 {
     public static function get($userId, $exp, $prize)
     {
-        User::addExp($userId, $exp);
+        if ($exp) {
+            User::addExp($userId, $exp);
+        }
+
         UserItem::getPrize($prize, $userId);
     }
 }
