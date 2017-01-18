@@ -52,7 +52,7 @@ class Chest
             }
         }
 
-        Prize::get($hostEventId, $userId, $chest['exp'], $chest['prize']);
+        Prize::get($userId, $chest['exp'], $chest['prize']);
 
         Event::delete($userId, $hostEventId);
 
