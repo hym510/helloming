@@ -147,6 +147,7 @@ class CreateTables extends Migration
             $table->unsignedInteger('event_id');
             $table->string('longitude', 64);
             $table->string('latitude', 64);
+            $table->unsignedTinyInteger('is_start')->default(0);
             $table->timestamp('created_at');
         });
 
