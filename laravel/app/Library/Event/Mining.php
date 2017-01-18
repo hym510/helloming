@@ -81,7 +81,7 @@ class Mining
             'content' => '挖矿事件',
         ]);
 
-        Prize::get($hostEventId, $userId, $mine['exp'], $mine['prize']);
+        Prize::get($userId, $mine['exp'], $mine['prize']);
 
         Event::delete($userId, $hostEventId);
 
