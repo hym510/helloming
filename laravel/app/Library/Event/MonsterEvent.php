@@ -35,7 +35,7 @@ class MonsterEvent
             return false;
         }
 
-        Prize::get($hostEventId, $userId, $monster['exp'], $monster['prize']);
+        Prize::get($userId, $monster['exp'], $monster['prize']);
 
         return true;
     }
