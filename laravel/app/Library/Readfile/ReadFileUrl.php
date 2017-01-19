@@ -246,6 +246,7 @@ class ReadFileUrl
             } elseif ($data['id'] > 3) {
                 $datavalue = array_values(($data));
                 $all[] = $datavalue;
+
                 if ($data['id'] == 5) {
                     $all = array_values($all);
                     $powerdata = array_collapse([[$all[0][1]], [$all[1][1]]]);
