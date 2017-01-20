@@ -11,7 +11,7 @@ class UrlTableSeeder extends Seeder
         XmlUrl::truncate();
 
         XmlUrl::insert([
-            'urlname' => '/Users/ganguo/Downloads/config/',
+            'urlname' => 'http://octhkzxil.bkt.clouddn.com/',
         ]);
     }
 }

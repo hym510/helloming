@@ -14,7 +14,7 @@ class ReadFileUrl
         $file = explode('.', $filedata['xmlname']);
         $path = rtrim($url->urlname . $file[0] . '_' . $filedata['version'] . '.xml');
         $xml = file_get_contents($path);
-        file_put_contents('public/uploads/' . $file[0] . '_' . $filedata['version'] . '.xml', $xml);
+        file_put_contents(public_path() . '/uploads/' . $file[0] . '_' . $filedata['version'] . '.xml', $xml);
     }
 
     public static function filePath($filename): array

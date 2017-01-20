@@ -84,8 +84,8 @@ class XmlManagementController extends Controller
     {
         XmlUrl::where('id', $xmlId)->update(['flag' => 0]);
         XmlUrl::create(['urlname' => $request->val]);
-        $filedatas = XmlManagement::get();
         ReadFileUrl::FileGroupLoad();
+
         return $this->backSuccessMsg('修改成功');
     }
 
