@@ -9,7 +9,7 @@ class VersionRequest extends Request
     public function rules()
     {
         return [
-
+            'app_version' => 'required',
         ];
     }
 }
