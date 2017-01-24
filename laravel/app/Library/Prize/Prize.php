@@ -3,25 +3,25 @@
 namespace App\Library\Prize;
 
 use App\Models\User;
-use App\Library\Redis\Redis;
+use App\Library\Redis\ConfigRedis;
 
 class Prize
 {
     public static function power($userId)
     {
-        $data = Redis::pipeline()->get('replenish_time:' . $userId)
+        $data = ConfigRedis::pipeline()->get('replenish_time:' . $userId)
             ->get('power_time')
             ->hmget('user:' . $userId, 'remain_power', 'power')
             ->execute();
 
         if (! $data[0]) {
-            Redis::set('replenish_time:' . $userId, time());
+            ConfigRedis::set('replenish_time:' . $userId, time());
 
             return;
         }
 
         $user = $data[2];
-        Redis::set('replenish_time:' . $userId, time());
+        ConfigRedis::set('replenish_time:' . $userId, time());
 
         if ($user[0] >= $user[1]) {
             return;
@@ -35,13 +35,13 @@ class Prize
             $quantity = $user[1] - $user[0];
         }
 
-        Redis::hincrby('user:' . $userId, 'remain_power', $quantity);
+        ConfigRedis::hincrby('user:' . $userId, 'remain_power', $quantity);
         User::where('id', $userId)->increment('remain_power', $quantity);
     }
 
     public static function action($userId)
     {
-        $data = Redis::pipeline()->get('free_shoe')
+        $data = ConfigRedis::pipeline()->get('free_shoe')
             ->hmget('user:' . $userId, 'remain_action', 'action')
             ->execute();
 
@@ -61,7 +61,7 @@ class Prize
                     $quantity = $user[1] - $user[0];
                 }
 
-                Redis::hincrby('user:' . $userId, 'remain_action', $quantity);
+                ConfigRedis::hincrby('user:' . $userId, 'remain_action', $quantity);
                 User::where('id', $userId)->increment('remain_action', $quantity);
                 break;
             }
