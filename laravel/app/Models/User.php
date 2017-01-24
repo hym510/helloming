@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Library\Redis\Redis;
 use App\Library\Token\AuthToken;
-use App\Models\Consume;
 
 class User extends Model
 {

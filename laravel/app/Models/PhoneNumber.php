@@ -8,6 +8,6 @@ class PhoneNumber
 {
     public static function isExist($phone): bool
     {
-        return Redis::sismember('phone_numbers', $phone);
+        return (Redis::sismember('phone_numbers', $phone) || User::isExist(['phone' => $phone]));
     }
 }
