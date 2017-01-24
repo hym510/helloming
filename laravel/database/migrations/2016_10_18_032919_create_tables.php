@@ -223,7 +223,7 @@ class CreateTables extends Migration
                 ->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('failed_jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('queue');
             $table->longText('payload');
