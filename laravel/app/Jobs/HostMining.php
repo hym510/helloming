@@ -38,7 +38,7 @@ class HostMining implements ShouldQueue
             ['exp', 'prize']
         );
 
-        Prize::get($this->hostEventId, $hostEvent['user_id'], $event['exp'], $event['prize']);
+        Prize::get($hostEvent['user_id'], $event['exp'], $event['prize']);
 
         Event::delete($hostEvent['user_id'], $this->hostEventId);
 
