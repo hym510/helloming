@@ -53,14 +53,9 @@ class Prize
             $time = $freeShoe[$i]->time;
             $startTime = strtotime($time[1].$time[2].':'.$time[4].$time[5]);
 
-            if ($now >= $startTime && $now <= $startTime + 1800) {
+            if ($now >= $startTime && $now <= ($startTime + 1800)) {
                 $quantity = $freeShoe[$i]->quantity;
                 $user = $data[1];
-
-                if ($quantity + $user[0] >= $user[1]) {
-                    $quantity = $user[1] - $user[0];
-                }
-
                 ConfigRedis::hincrby('user:' . $userId, 'remain_action', $quantity);
                 User::where('id', $userId)->increment('remain_action', $quantity);
                 break;
