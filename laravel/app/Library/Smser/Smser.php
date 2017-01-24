@@ -2,68 +2,68 @@
 
 namespace App\Library\Smser;
 
+use Log;
 use Config;
-use Exception;
+use GuzzleHttp\Client;
 use App\Contracts\Sms\Smser as SmserContract;
 
 class Smser implements SmserContract
 {
-    protected $url;
-
-    protected $headers = [];
+    private $url;
+    private $appId;
+    private $appKey;
+    private $masterKey;
+    private $client;
 
     public function __construct($master = false)
     {
-        $this->url = Config::get('leancloud.url');
+        $cfg = Config::get('leancloud');
+        $this->url = $cfg['url'];
+        $this->appId = $cfg['app_id'];
+        $this->appKey = $cfg['app_key'];
+        $this->masterKey = $cfg['master_key'];
 
-        if ($master) {
-            $appKey = Config::get('leancloud.master_key').',master';
-        } else {
-            $appKey = Config::get('leancloud.app_key');
+        $this->client = new Client([
+            'allow_redirects' => false,
+            'http_errors' => false,
+            'base_uri' => $this->url,
+            'headers' => [
+                'User-Agent' => 'Funshow (ganguo)',
+                'X-LC-Id' => $this->appId,
+                'X-LC-Key' => ($master && $this->masterKey) ? ($this->masterKey.',master') : $this->appKey,
+            ],
+            'timeout' => '60',
+        ]);
+    }
+
+    private function handleResponse($response)
+    {
+        if (substr($response->getStatusCode(), 0, 1) != 2) {
+            $message = (string) $response->getBody();
+            error_log($message);
+            Log::error($message);
+
+            return false;
         }
 
-        array_push($this->headers,
-            'Content-Type:application/json',
-            'X-LC-Id:'.Config::get('leancloud.app_id'),
-            'X-LC-Key:'.$appKey
-        );
+        return true;
     }
 
     public function requestSmsCode($phone): bool
     {
-        $data = json_encode(['mobilePhoneNumber' => $phone]);
+        $response = $this->client->post('/1.1/requestSmsCode', [
+            'json' => ['mobilePhoneNumber' => $phone],
+        ]);
 
-        $ch = curl_init($this->url.'/1.1/requestSmsCode');
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        try {
-            $result = curl_exec($ch);
-            curl_close($ch);
-        } catch (Exception $e) {
-            return false;
-        }
-
-        return empty(json_decode($result, true));
+        return $this->handleResponse($response);
     }
 
     public function verifySmsCode($phone, $code): bool
     {
-        $ch = curl_init($this->url.'/1.1/verifySmsCode/'.$code.'?mobilePhoneNumber='.$phone);
+        $response = $this->client->post('/1.1/verifySmsCode/'.$code.'?mobilePhoneNumber='.$phone, [
+            'headers' => ['Content-Type' => 'application/json'],
+        ]);
 
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        try {
-            $result = curl_exec($ch);
-            curl_close($ch);
-        } catch (Exception $e) {
-            return false;
-        }
-
-        return empty(json_decode($result, true));
+        return $this->handleResponse($response);
     }
 }

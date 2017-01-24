@@ -12,6 +12,7 @@
         "soloslee/print-sql-query": "^1.0",
         "laravelcollective/html": "5.3.*",
         "overtrue/wechat": "~3.1",
+        "guzzlehttp/guzzle": "~6.0",
         "qiniu/php-sdk": "^7.1"
     },
     "require-dev": {
