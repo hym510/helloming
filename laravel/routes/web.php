@@ -59,6 +59,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::get('consume', ['uses' => 'ConsumeController@getIndex']);
 
+    Route::get('conversion', ['uses' => 'ConversionController@getIndex']);
+    Route::post('conversion/update/{converisonId}', ['uses' => 'ConversionController@postUpdate']);
+
     Route::get('version', ['uses' => 'VersionController@getIndex']);
     Route::get('version/edit/{versionId}', ['uses' => 'VersionController@getEdit']);
     Route::post('version/store/{versionId}', ['uses' => 'VersionController@postStore']);

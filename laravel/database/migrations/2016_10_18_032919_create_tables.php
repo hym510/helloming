@@ -233,5 +233,10 @@ class CreateTables extends Migration
             $table->unsignedInteger('created_at');
             $table->index(['queue', 'reserved_at']);
         });
+
+        Schema::create('conversions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->boolean('exchange')->default(true);
+        });
     }
 }

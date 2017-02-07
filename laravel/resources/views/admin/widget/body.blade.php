@@ -135,6 +135,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ action('Admin\ConversionController@getIndex') }}">
+                            <div class="gui-icon"><i class="fa fa-cloud"></i></div>
+                            <span class="title">提现管理</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ action('Admin\ExchangeGoldController@getIndex') }}">
                             <div class="gui-icon"><i class="fa fa-filter"></i></div>
                             <span class="title">金币兑换人民币</span>

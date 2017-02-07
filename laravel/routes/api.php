@@ -90,4 +90,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Version'], function () {
         Route::get('app/version', ['uses' => 'VersionController@getVersion']);
     });
+
+    Route::group(['namespace' => 'Conversion'], function () {
+        Route::get('app/conversion', ['uses' => 'ConversionController@getConversion']);
+    });
 });

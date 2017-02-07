@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-use  App\Models\XmlUrl;
+use App\Models\XmlUrl;
+use App\Models\Conversion;
 
 class UrlTableSeeder extends Seeder
 {
@@ -13,5 +14,9 @@ class UrlTableSeeder extends Seeder
         XmlUrl::insert([
             'urlname' => 'http://octhkzxil.bkt.clouddn.com/',
         ]);
+
+        Conversion::insert([
+            'exchange' => '1',
+            ]);
     }
 }
