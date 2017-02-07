@@ -136,7 +136,7 @@
                     </li>
                     <li>
                         <a href="{{ action('Admin\ConversionController@getIndex') }}">
-                            <div class="gui-icon"><i class="fa fa-cloud"></i></div>
+                            <div class="gui-icon"><i class="fa fa-exchange"></i></div>
                             <span class="title">提现管理</span>
                         </a>
                     </li>
