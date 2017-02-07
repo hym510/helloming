@@ -10,6 +10,7 @@ class UrlTableSeeder extends Seeder
     public function run()
     {
         XmlUrl::truncate();
+        Conversion::truncate();
 
         XmlUrl::insert([
             'urlname' => 'http://octhkzxil.bkt.clouddn.com/',
