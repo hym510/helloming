@@ -12,12 +12,12 @@
                                 <h3 class="text-center">提现管理</h3>
                                 <div class="radio">
                                     <label class="radio-inline">
-                                        <input type="radio" name="exchange" value="1">隐藏提现
+                                        <input type="radio" name="exchange" value="1" @if ($conversion->exchange == 1)checked @endif>隐藏提现
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label class="radio-inline">
-                                        <input type="radio" name="exchange" value="0">取消隐藏
+                                        <input type="radio" name="exchange" value="0" @if ($conversion->exchange == 0)checked @endif>取消隐藏
                                     </label>
                                 </div>
                             <div class="card-actionbar">
