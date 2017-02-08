@@ -8,8 +8,8 @@ class ItemsController extends Controller
 {
     public function getIndex()
     {
-        $xmlitems = Item::paginate()->appends(request()->all());
-
-        return view('admin.items.index', compact('xmlitems'));
+        return view('admin.items.index', [
+            'xmlitems' => Item::paginate()->appends(request()->all())
+        ]);
     }
 }
