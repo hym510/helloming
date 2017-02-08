@@ -9,9 +9,9 @@ class ConversionController extends Controller
 {
     public function getIndex()
     {
-        $conversion = Conversion::where('id', '1')->first();
-
-        return view('admin.conversion.index', compact('conversion'));
+        return view('admin.conversion.index', [
+            'conversion' => Conversion::where('id', '1')->first()
+        ]);
     }
 
     public function postUpdate(ConversionRequest $request, $conversionId)
