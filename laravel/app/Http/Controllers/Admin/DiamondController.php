@@ -11,7 +11,9 @@ class DiamondController extends Controller
     {
         $diamonds = Diamond::paginate()->appends(request()->all());
 
-        return view('admin.diamond.index', compact('diamonds'));
+        return view('admin.diamond.index', [
+            'diamonds' => Diamond::paginate()->appends(request()->all())
+        ]);
     }
 
     public function getAdd()
