@@ -16,9 +16,9 @@ class ConversionController extends Controller
 
     public function postUpdate(ConversionRequest $request, $conversionId)
     {
-        $data = $request->inputData();
         $conversion = Conversion::findOrfail($conversionId);
-        switch ($data['exchange']) {
+
+        switch ($request->exchange) {
             case '1':
                 $conversion->update(['exchange' => 1]);
 
