@@ -8,8 +8,8 @@ class EquipmentsController extends Controller
 {
     public function getIndex()
     {
-        $equips = Equipment::paginate()->appends(request()->all());
-
-        return view('admin.equipments.index', compact('equips'));
+        return view('admin.equipments.index', [
+            'equips' => Equipment::paginate()->appends(request()->all())
+        ]);
     }
 }
