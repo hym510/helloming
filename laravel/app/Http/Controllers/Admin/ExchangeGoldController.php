@@ -15,11 +15,11 @@ class ExchangeGoldController extends Controller
 
     public function postStore(ExchangeGoldRequest $request)
     {
-        $data = $request->inputData();
         $key = 'gold_exchange';
-        $value = json_encode(['gold' => $data['gold'], 'money' => $data['money']]);
+        $value = json_encode(['gold' => $request->gold, 'money' => $request->money]);
         Redis::set($key, $value);
         $cfg = Configure::where('key', $key)->first();
+
         if ($cfg) {
             $cfg->update(['value' => $value]);
         } else {
