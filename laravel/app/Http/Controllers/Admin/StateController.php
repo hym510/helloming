@@ -16,9 +16,9 @@ class StateController extends Controller
 
     public function getIndex()
     {
-        $stateattrs = StateAttr::paginate()->appends(request()->all());
-
-        return view('admin.state.index', compact('stateattrs'));
+        return view('admin.state.index', [
+            'stateattrs' => StateAttr::paginate()->appends(request()->all())
+        ]);
     }
 
 }
