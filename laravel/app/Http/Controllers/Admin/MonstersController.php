@@ -8,6 +8,8 @@ class MonstersController extends Controller
 {
     public function getIndex()
     {
-        return view('admin.monsters.index', ['monsters' => Monster::paginate()]);
+        return view('admin.monsters.index', [
+            'monsters' => Monster::paginate()
+        ]);
     }
 }
