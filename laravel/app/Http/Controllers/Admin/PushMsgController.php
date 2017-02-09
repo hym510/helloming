@@ -17,12 +17,13 @@ class PushMsgController extends Controller
     public function postPushMsg(PushMsgRequest $request)
     {
         $data = $request->inputData();
-        $time = Carbon::createFromFormat('Y-m-d H:i:s', $data['time']);
-        $time = $time->setTimezone('UTC');
+        $time = Carbon::createFromFormat('Y-m-d H:i:s', $data['time'])
+            ->setTimezone('UTC')
+            ->format('Y-m-d\TH:i:s');
 
         Pusher::pushMany([
             'alert' => $data['message'],
-        ], $time->format('Y-m-d\TH:i:s').'.000Z');
+        ], $time . '.000Z');
 
         return $this->backSuccessMsg('推送成功');
     }
