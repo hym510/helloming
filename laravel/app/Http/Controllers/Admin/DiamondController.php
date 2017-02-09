@@ -35,8 +35,7 @@ class DiamondController extends Controller
 
     public function postUpdate(DiamondRequest $request, $diamondId)
     {
-        $diamond = Diamond::findOrFail($diamondId);
-        $diamond->update($request->inputData());
+        Diamond::findOrFail($diamondId)->update($request->inputData());
 
         return redirect()->action('Admin\DiamondController@getIndex');
     }
