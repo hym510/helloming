@@ -52,7 +52,7 @@ class IAP
         }
 
         if ($data->status == 21007) {
-            $data = json_decode(self::initCurl('https://buy.itunes.apple.com/verifyReceipt', $receipt));
+            $data = json_decode(self::initCurl('https://sandbox.itunes.apple.com/verifyReceipt', $receipt));
             $receipt = $data->receipt->in_app[0];
         }
 
