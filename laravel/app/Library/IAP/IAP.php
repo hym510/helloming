@@ -41,7 +41,6 @@ class IAP
         }
 
         $data = json_decode(self::initCurl($endPoint, $receipt));
-        $receipt = $data->receipt->in_app[0];
 
         if (! is_object($data)) {
             throw new Exception('Invalid response data');
@@ -53,6 +52,8 @@ class IAP
 
         if ($data->status == 21007) {
             $data = json_decode(self::initCurl('https://sandbox.itunes.apple.com/verifyReceipt', $receipt));
+            $receipt = $data->receipt->in_app[0];
+        } elseif ($data->status == 0) {
             $receipt = $data->receipt->in_app[0];
         }
 
