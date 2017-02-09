@@ -258,7 +258,7 @@ class ReadFileUrl
         }
     }
 
-    public static function FileGroupLoad()
+    public static function fileGroupLoad()
     {
         static::fileLoad('event.xml');
         static::fileLoad('item.xml');
