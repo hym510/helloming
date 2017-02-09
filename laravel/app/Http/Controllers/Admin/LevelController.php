@@ -8,8 +8,8 @@ class LevelController extends Controller
 {
     public function getIndex()
     {
-        return view('admin.levels.index',
-            ['levels' => LevelAttr::orderBy('level', 'asc')->get()]
-        );
+        return view('admin.levels.index', [
+            'levels' => LevelAttr::orderBy('level', 'asc')->get()
+        ]);
     }
 }
