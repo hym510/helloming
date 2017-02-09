@@ -9,8 +9,6 @@ class DiamondController extends Controller
 {
     public function getIndex()
     {
-        $diamonds = Diamond::paginate()->appends(request()->all());
-
         return view('admin.diamond.index', [
             'diamonds' => Diamond::paginate()->appends(request()->all())
         ]);
@@ -23,24 +21,22 @@ class DiamondController extends Controller
 
     public function getEdit($diamondId)
     {
-        $diamond = Diamond::findOrFail($diamondId);
-
-        return view('admin.diamond.edit', compact('diamond'));
+        return view('admin.diamond.edit', [
+            'diamond' => Diamond::findOrFail($diamondId)
+        ]);
     }
 
     public function postStore(DiamondRequest $request)
     {
-        $data = $request->inputData();
-        Diamond::create($data);
+        Diamond::create($request->inputData());
 
         return redirect()->action('Admin\DiamondController@getIndex');
     }
 
     public function postUpdate(DiamondRequest $request, $diamondId)
     {
-        $data = $request->inputData();
         $diamond = Diamond::findOrFail($diamondId);
-        $diamond->update($data);
+        $diamond->update($request->inputData());
 
         return redirect()->action('Admin\DiamondController@getIndex');
     }
