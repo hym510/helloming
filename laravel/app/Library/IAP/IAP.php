@@ -7,19 +7,13 @@ use App\Models\{Diamond, Order, User};
 
 class IAP
 {
-    public static function getReceiptData($receipt): array
+    public static function initCurl($url, $data)
     {
-        if (getenv('APP_DEBUG')) {
-            $endPoint = 'https://sandbox.itunes.apple.com/verifyReceipt';
-        } else {
-            $endPoint = 'https://buy.itunes.apple.com/verifyReceipt';
-        }
-
         $postData = json_encode(
-            array('receipt-data' => $receipt)
+            array('receipt-data' => $data)
         );
 
-        $ch = curl_init($endPoint);
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
@@ -35,14 +29,38 @@ class IAP
             throw new Exception($error, $errno);
         }
 
-        $data = json_decode($response);
+        return $response;
+    }
+
+    public static function getReceiptData($receipt): array
+    {
+        if (getenv('APP_DEBUG')) {
+            $endPoint = 'https://sandbox.itunes.apple.com/verifyReceipt';
+        } else {
+            $endPoint = 'https://buy.itunes.apple.com/verifyReceipt';
+        }
+
+        $data = json_decode(self::initCurl($endPoint, $receipt));
         $receipt = $data->receipt->in_app[0];
 
         if (! is_object($data)) {
             throw new Exception('Invalid response data');
         }
 
-        if (! isset($data->status) || $data->status != 0) {
+        if (! isset($data->status)) {
+            throw new Exception('Invalid receipt');
+        }
+
+        if ($data->status == 21007) {
+            $data = json_decode(self::initCurl('https://buy.itunes.apple.com/verifyReceipt', $receipt));
+            $receipt = $data->receipt->in_app[0];
+        }
+
+        if (! is_object($data)) {
+            throw new Exception('Invalid response data');
+        }
+
+        if ($data->status != 0) {
             throw new Exception('Invalid receipt');
         }
 
