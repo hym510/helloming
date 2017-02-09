@@ -11,9 +11,9 @@ class AdminController extends Controller
 {
     public function getIndex()
     {
-        return view('admin.adminer.index',
-            ['admins' => Admin::paginate()->appends(request()->all())]
-        );
+        return view('admin.adminer.index', [
+            'admins' => Admin::paginate()->appends(request()->all())
+        ]);
     }
 
     public function getAdd()
@@ -23,9 +23,9 @@ class AdminController extends Controller
 
     public function getEdit($adminId)
     {
-        return view('admin.adminer.edit',
-            ['admin' => Admin::findOrFail($adminId)]
-        );
+        return view('admin.adminer.edit', [
+            'admin' => Admin::findOrFail($adminId)
+        ]);
     }
 
     public function postStore(AdminRequest $request)
