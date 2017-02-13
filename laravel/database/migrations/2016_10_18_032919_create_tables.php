@@ -14,7 +14,7 @@ class CreateTables extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('avatar')->nullable();
             $table->string('phone', 11);
             $table->unsignedTinyInteger('level')->default(1);
@@ -52,14 +52,14 @@ class CreateTables extends Migration
         });
 
         Schema::connection('admin')->create('admins', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('email');
             $table->string('password');
             $table->rememberToken();
         });
 
         Schema::create('wechat', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('union_id', 64);
             $table->string('open_id', 64);
 
@@ -67,14 +67,14 @@ class CreateTables extends Migration
         });
 
         Schema::connection('log')->create('log', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('type', 16);
             $table->timestamp('time');
         });
 
         Schema::create('state_attributes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedTinyInteger('level');
             $table->unsignedSmallInteger('power');
 
@@ -82,7 +82,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('level_attributes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedTinyInteger('level');
             $table->unsignedMediumInteger('exp');
             $table->unsignedSmallInteger('power');
@@ -92,12 +92,12 @@ class CreateTables extends Migration
         });
 
         Schema::create('jobs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
         });
 
         Schema::create('equipment', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedSmallInteger('level');
             $table->boolean('max_level')->default(false);
@@ -108,25 +108,25 @@ class CreateTables extends Migration
         });
 
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
         });
 
         Schema::create('user_items', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('item_id');
             $table->unsignedSmallInteger('quantity')->default(1);
         });
 
         Schema::create('monsters', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedSmallInteger('level');
             $table->unsignedSmallInteger('hp');
         });
 
         Schema::create('events', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('type', 32);
             $table->unsignedTinyInteger('level');
             $table->unsignedInteger('type_id');
@@ -142,7 +142,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('host_events', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('event_id');
             $table->string('longitude', 64);
@@ -152,7 +152,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('shops', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('item_id')->nullable();
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('price');
@@ -160,7 +160,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedTinyInteger('quantity');
             $table->string('product_id', 64);
@@ -171,7 +171,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('diamonds', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('icon');
             $table->string('product_id');
             $table->unsignedSmallInteger('price');
@@ -179,7 +179,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('xml_managements', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('xmlname');
             $table->string('version');
             $table->boolean('mark')->default(true);
@@ -187,20 +187,20 @@ class CreateTables extends Migration
         });
 
         Schema::create('xml_urls', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('urlname');
             $table->string('flag')->default(true);
             $table->timestamps();
         });
 
         Schema::create('configure', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('key', 64);
             $table->json('value');
         });
 
         Schema::create('consumes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('content');
             $table->unsignedSmallInteger('quantity');
@@ -208,7 +208,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('versions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('app_version');
             $table->string('mark')->default(true);
             $table->timestamps();
@@ -226,7 +226,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('conversions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->boolean('exchange')->default(true);
         });
     }
