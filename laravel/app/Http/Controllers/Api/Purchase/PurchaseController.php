@@ -14,7 +14,7 @@ class PurchaseController extends Controller
     public function postVerify(Request $request)
     {
         try {
-            $data = IAP::getReceiptData($request->receipt, true);
+            $data = IAP::getReceiptData($request->receipt);
         } catch (Exception $e) {
             return Json::error('Invalid receipt.', 703);
         }
